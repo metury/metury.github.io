@@ -4,8 +4,6 @@ title: Krátký průvodce Tenerife
 permalink: /Tenerife/
 ---
 
-*Poznámka: Odkazy na gpx soubory nejsou zatím funkční.*
-
 # Jednoduchý průvodce na Tenerife
 
 - Pokusím se sepsat pár rad ohledně pobytu na Tenerife. Vše je myšleno jako doporučení a také některé informace nemusí být již aktuální.
@@ -14,7 +12,7 @@ permalink: /Tenerife/
 
 Tady jsem sepsal menší seznam věcí, které mi přijdou dobré vidět.
 
-Skoro všechno co řeknu je taky v `gpx` souboru ve kterém je seznam [bodů](/tmp/.mount_JoplinbFGB0l/resources/app.asar/resources/points.gpx "resources/points.gpx").
+Skoro všechno co řeknu je taky v `gpx` souboru ve kterém je seznam [bodů](/resources/points.gpx "resources/points.gpx").
 
 ## Příroda
 
@@ -22,10 +20,10 @@ Na celém ostrově je spoustu zajímavých přírodních úkazů. O tom svědč�
 
 - Parque National del Teide (Teide, Roques de Garcia). Tomuhle asi bude spíš těžší se vyhnout, než nevidět. Ale celá krajina okolo Teide je taky hezká vidět. Je tam třeba:
     - [Pico del Teide](https://goo.gl/maps/qYmkyHaMSfNSbAkY7), které nesmí chybě, ale pokud by se někdo chtěl dostat až na vrchol, tak je třeba si zajistit včas [permit](https://www.reservasparquesnacionales.es/real/ParquesNac/usu/html/listado-actividades-oapn.aspx?cen=2). A i tak to není zaručené kvůli počasí, protože nahoře můžou být klidně i závěje sněhu (málokdy i nejenom na úplném vrchu).
-    - [Roques de Garcia](https://goo.gl/maps/QTHVNU92jzp3gDeBA), což jsou skály uprostřed "pouště". Je tady jeden kratší [okruh](/tmp/.mount_JoplinbFGB0l/resources/app.asar/resources/garcia.gpx "resources/garcia.gpx"), který se dá jít, ale výrazně doporučuji jít daným směrem, kvůli výškovému profilu.
+    - [Roques de Garcia](https://goo.gl/maps/QTHVNU92jzp3gDeBA), což jsou skály uprostřed "pouště". Je tady jeden kratší [okruh](/resources/garcia.gpx "resources/garcia.gpx"), který se dá jít, ale výrazně doporučuji jít daným směrem, kvůli výškovému profilu.
 - Celý sever je také hodně hornatý. Pohoří se jmenuje [Anaga](https://goo.gl/maps/Y49XMutjRv124ZSr7). Tady se dají jít zajímavé trasy. Ale cesta autem už je dost záživnější, jak když polechtáš hada. A trasy už jsou také intenzivnější.
-- Jednou z nejvíce známých míst je nejvýše postavená vesnice [Masca](https://goo.gl/maps/byGNbp8r4mAbzukL8). Ve které je taky [trasa](/tmp/.mount_JoplinbFGB0l/resources/app.asar/resources/masca.gpx "resources/masca.gpx") údolím. Cesta autem bývá jedna z těch nejhorších a to ne kvůli serpentinám, ale protože tam je i celkem velký provoz. Ale nedávno probíhala dlouholetá úprava a pokud dobře vím tak cesta do údolí je již otevřená, ale detaily ohledně přístupnosti autem moc nevím. Dá se taky přijet přímo autobusem a to někdy bývá i větší zážitek než tam jet jen autem.
-- Jako další hodně známou věcí jsou skály tyčící se přímo z oceánu (technicky vzato je to oceán a ne moře). Nebo-li [Los Gigantes](https://goo.gl/maps/oQFcwSWWEjWE9V1k6). Pak zase záleží jak blízko chce člověk jít, protože se dá jít [trasa](/tmp/.mount_JoplinbFGB0l/resources/app.asar/resources/gigantes.gpx "resources/gigantes.gpx") "po" Los Gigantes, pak "toxickým" tunelem a přes údolí a jeden další tunel dále se postupně vrátíte. (To že jsou "toxické" je protože tam mají vystavené všechny možné cedule, ale počet lidí kolik jsme tam potkali nebyl nízký.)
+- Jednou z nejvíce známých míst je nejvýše postavená vesnice [Masca](https://goo.gl/maps/byGNbp8r4mAbzukL8). Ve které je taky [trasa](/resources/masca.gpx "resources/masca.gpx") údolím. Cesta autem bývá jedna z těch nejhorších a to ne kvůli serpentinám, ale protože tam je i celkem velký provoz. Ale nedávno probíhala dlouholetá úprava a pokud dobře vím tak cesta do údolí je již otevřená, ale detaily ohledně přístupnosti autem moc nevím. Dá se taky přijet přímo autobusem a to někdy bývá i větší zážitek než tam jet jen autem.
+- Jako další hodně známou věcí jsou skály tyčící se přímo z oceánu (technicky vzato je to oceán a ne moře). Nebo-li [Los Gigantes](https://goo.gl/maps/oQFcwSWWEjWE9V1k6). Pak zase záleží jak blízko chce člověk jít, protože se dá jít [trasa](/resources/gigantes.gpx "resources/gigantes.gpx") "po" Los Gigantes, pak "toxickým" tunelem a přes údolí a jeden další tunel dále se postupně vrátíte. (To že jsou "toxické" je protože tam mají vystavené všechny možné cedule, ale počet lidí kolik jsme tam potkali nebyl nízký.)
 - Další v pořadí je [Barranco del Infierno](https://www.barrancodelinfierno.es/en/). Jedná se o celkem pěkné údolí akorát kvůli ne zas tak dávné nehodě se vstup hodně hlídá a člověk je nucen koupit si vstup a jít tam z helmou. Řekl bych, že to není zas tak zajímavé. Ale přišlo mi blbé to aspoň neříct.
 - Co mě ještě napadlo jsou skály známé jako [Paisaje Lunar](https://goo.gl/maps/FZuzgERWUWpBjWQT7)("měsíční krajina"). Buď lze zastavit ve Vilafloru a jít celou trasu pěšky anebo se jde i více přiblížit autem, ale pokud dobře vím, tak tam není moc dobrá cesta vzhledem k povrchu.
 
@@ -88,17 +86,17 @@ Samozřejmě nesmí ani chybět pár známých pláží. Ale pláže jsou celkem
 
 ## Okolí Teide
 
-- Jedna kratší cesta poblíž výhledu [Samara](/tmp/.mount_JoplinbFGB0l/resources/app.asar/resources/Samara.gpx "resources/Samara.gpx").
-- Pak výlet na horu [Sombrero](/tmp/.mount_JoplinbFGB0l/resources/app.asar/resources/Sombrero.gpx "resources/Sombrero.gpx") ze které je výhled na park Teide.
-- Pak ještě [trasa](/tmp/.mount_JoplinbFGB0l/resources/app.asar/resources/teide-view.gpx "resources/teide-view.gpx") poblíž, ale z opačné strany poblíž Roques de Garcia.
+- Jedna kratší cesta poblíž výhledu [Samara](/resources/Samara.gpx "resources/Samara.gpx").
+- Pak výlet na horu [Sombrero](/resources/Sombrero.gpx "resources/Sombrero.gpx") ze které je výhled na park Teide.
+- Pak ještě [trasa](/resources/teide-view.gpx "resources/teide-view.gpx") poblíž, ale z opačné strany poblíž Roques de Garcia.
 
 ## Pohoří Anaga
 
-- Trasa okolo hory [Taborno](/tmp/.mount_JoplinbFGB0l/resources/app.asar/resources/Taborno.gpx "resources/Taborno.gpx").
+- Trasa okolo hory [Taborno](/resources/Taborno.gpx "resources/Taborno.gpx").
 
 ## Pohoří Teno
 
-- Tady je jedna pěkná [Where I Go](https://www.geocaching.com/geocache/GC65QKW) ohledně pána prstenů. Není potřeba přidat trasu ale popř. je to zhruba [tahle](/tmp/.mount_JoplinbFGB0l/resources/app.asar/resources/tlotr.gpx "resources/tlotr.gpx").
+- Tady je jedna pěkná [Where I Go](https://www.geocaching.com/geocache/GC65QKW) ohledně pána prstenů. Není potřeba přidat trasu ale popř. je to zhruba [tahle](/resources/tlotr.gpx "resources/tlotr.gpx").
 - Ještě je zajímavé jiné Where I Go také poblíž a to [reverzní keš](https://www.geocaching.com/geocache/GC8J7A3).
 
 # Okolí

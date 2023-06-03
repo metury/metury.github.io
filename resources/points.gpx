@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<gpx version="1.1" creator="OsmAnd+ 4.2.4" xmlns="http://www.topografix.com/GPX/1/1" xmlns:osmand="https://osmand.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>favourites</name>
+    <time>2022-06-21T19:20:00Z</time>
+  </metadata>
+  <wpt lat="28.5562692" lon="-16.3445367">
+    <ele>8.8</ele>
+    <time>2022-06-21T18:29:03Z</time>
+    <name>Bajamar</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Calle el Sol (San Luis Gonzaga), San Cristóbal de La Laguna</osmand:address>
+      <osmand:icon>sport_swimming</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.1288986" lon="-16.7202682">
+    <ele>382</ele>
+    <time>2022-06-21T18:24:06Z</time>
+    <name>Barranco del Infierno</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Barranco del Infierno</osmand:address>
+      <osmand:icon>wood</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.369756" lon="-16.8537408">
+    <ele>114.2</ele>
+    <time>2022-06-21T18:25:14Z</time>
+    <name>Buenovista del Norte</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Cruz de Toledo</osmand:address>
+      <osmand:icon>man_made_lighthouse</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.3553769" lon="-16.3698298">
+    <ele>4.2</ele>
+    <time>2022-06-21T18:21:34Z</time>
+    <name>Candelaria</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Avenida de la Constitucion, Candelaria</osmand:address>
+      <osmand:icon>building_type_church</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.3718408" lon="-16.7679743">
+    <ele>8</ele>
+    <time>2022-06-21T18:26:06Z</time>
+    <name>Garachico</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Avenida República de Venezuela, Garachico</osmand:address>
+      <osmand:icon>building_type_chapel</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.4866341" lon="-16.3122757">
+    <ele>544.2</ele>
+    <time>2022-06-21T18:22:26Z</time>
+    <name>La Laguna</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Calle Quinteras 1, San Cristóbal de La Laguna</osmand:address>
+      <osmand:icon>building_type_monastery</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.3923535" lon="-16.5256843">
+    <time>2022-06-21T18:27:10Z</time>
+    <name>La Orotava</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Calle Pilar Monteverde, La Orotava</osmand:address>
+      <osmand:icon>building_type_church</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.4082503" lon="-16.5649477">
+    <ele>31</ele>
+    <time>2022-06-21T18:27:57Z</time>
+    <name>Loro Parque</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Calle Bentor, Puerto de la Cruz</osmand:address>
+      <osmand:icon>reef</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.0516122" lon="-16.7230726">
+    <ele>11.8</ele>
+    <time>2022-06-21T18:30:30Z</time>
+    <name>Los Cristianos</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Paseo las Vistas, Los Cristianos</osmand:address>
+      <osmand:icon>beach</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.3053822" lon="-16.8398611">
+    <time>2022-06-21T18:17:18Z</time>
+    <name>Masca</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>TF-436</osmand:address>
+      <osmand:icon>wood</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.195914" lon="-16.6083962">
+    <ele>2071.2</ele>
+    <time>2022-06-21T18:20:43Z</time>
+    <name>Paisaje Lunar</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:icon>wood</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.2727551" lon="-16.6423613">
+    <ele>3525</ele>
+    <time>2022-06-21T18:13:11Z</time>
+    <name>Pico del Teide</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Near Ruta Mirador de la Fortaleza, La Orotava</osmand:address>
+      <osmand:icon>natural_peak</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.2297445" lon="-16.8408984">
+    <ele>12</ele>
+    <time>2022-06-21T18:31:25Z</time>
+    <name>Playa de la Arena</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Avenida Marítima Puerto de Santiago, El Varadero</osmand:address>
+      <osmand:icon>beach</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.0317102" lon="-16.5564312">
+    <ele>4</ele>
+    <time>2022-06-21T18:29:39Z</time>
+    <name>Playa de la Tejita</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Near Carretera Abrigos-Medano, TF-643</osmand:address>
+      <osmand:icon>island</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.0615617" lon="-16.7348009">
+    <ele>4.2</ele>
+    <time>2022-06-21T18:30:50Z</time>
+    <name>Playa de las Américas</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Paseo Francisco Andrade Fumero (Los Cristianos), Arona</osmand:address>
+      <osmand:icon>beach</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.5093528" lon="-16.1856229">
+    <ele>2.8</ele>
+    <time>2022-06-21T18:28:36Z</time>
+    <name>Playa de las Teresitas</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Playa de las Teresitas 5, Santa Cruz de Tenerife</osmand:address>
+      <osmand:icon>island</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.2234109" lon="-16.6347224">
+    <ele>2136</ele>
+    <time>2022-06-21T18:14:18Z</time>
+    <name>Ruques de Garcia</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Near Mirador de la Ruleta, La Orotava</osmand:address>
+      <osmand:icon>natural_peak</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <wpt lat="28.4545413" lon="-16.2552596">
+    <ele>11</ele>
+    <time>2022-06-21T18:22:55Z</time>
+    <name>Santa Cruz de Tenerife</name>
+    <type>Tenerife</type>
+    <extensions>
+      <osmand:address>Avenida de la Constitución (Los Llanos), Santa Cruz de Tenerife</osmand:address>
+      <osmand:icon>building_type_monastery</osmand:icon>
+      <osmand:background>circle</osmand:background>
+      <osmand:color>#eecc22</osmand:color>
+    </extensions>
+  </wpt>
+  <extensions>
+    <osmand:points_groups>
+      <group name="Tenerife" color="#eecc22" icon="sport_swimming" background="circle" />
+    </osmand:points_groups>
+  </extensions>
+</gpx>
