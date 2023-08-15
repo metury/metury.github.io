@@ -1,9 +1,3 @@
----
-layout: page
-title: Povídky
-permalink: /Povidky/kulka/
----
-
 # Kulka
 
 ## Pandemie
