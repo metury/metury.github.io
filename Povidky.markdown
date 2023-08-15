@@ -1,3 +1,15 @@
+---
+layout: page
+title: Povídky [CZ]
+permalink: /Povidky/
+---
+
+# První slovo
+
+Celé je to sbírká krátkých povídek, kterě se mi buď zdáli anebo jsem si je vymyslel. Pak bývá mezislova o tomto principu.
+
+* * *
+
 # Utlačená dimenze
 
 ## Začátek
@@ -89,4 +101,41 @@ Díky Wendrlachovi týden uplynul jako voda, sice nevím, jak voda plyne, když 
 
 Po několika týdnech diskuzí ohledně způsobu zahubení lidstva, které byli někdy až hodně divné, jsme se rozhodl, ne fakt tam má být rozhodl, že zničíme lidstvo raketou. Řekl bych, že je prostě odpojíme od jejich životů. Proč by měli dál žít, když takhle dehonestují naše jména, vlastně naše ne a vlastně tu nikdo jiný než lidstvo a Wendrlach není, kašlu na to, zpět k tématu. Kde jsem to byl. Jo. Takže je zahubíme pomalým a bolestivým způsobem. Nebo ne. Počkat raketa, tak to spíše půjde rychle. Plán byl na stole, po kterým běhal Wendrlach, jak je roztomilý. A my jsme měli v plánu vytvořit a poslat na planetu Zemi několik jaderných raket. Přesný počet ještě nevíme. Něco jako šest, spíš sto, to je lepší. Jako vždycky, pustili jsme se do práce. Ovšem během noci jsem nemohl usnout. A když už jsem usnul, tak jsem měl divný sny. Takový, který už jsem někdy zažil. Ale bylo to celé jako v mlze. Všude něco pípalo a byla hrozná tma. Občas na mě někdo sahal a já s tím nemohl nic udělat. To bylo fakt nechutný. Ostatním jsem to raději neříkal, ještě by měli blbý otázky. Lepší bude si to nechat jenom pro sebe a zůstat jen se svými myšlenkami. Ty mě přece nemohou zradit, he. Zpět k ději. Už jsme pár, zase to nebyly dvě, ale víc, raket měli. Blížili jsme se ke konci. Už jsme prakticky viděli až na konec. K lepším zítřkům a k zapomenutým včerejškům. Chtěli jsme to odpálit. Já jsem byl v čele a chtěl to růžové tlačítko zmáčknout jako první. Opravdu bylo růžové, červenou jsme nenašli, no a co, máte s tím snad problém. Ale co to najednou to nešlo, moje ruka se zastavila. Nešlo s ní pohnout ani dopředu, ani dozadu. Všechno se začalo zasekávat a co je horší, kde je druhá a třetí část.
 
+* * *
 
+# Zpět k tématu
+Teď mi to už pomalu začíná docházet. To byl jen hloupý sen. I když nevím jestli bych hned měl říct, že byl hloupý. Dobře zápletka moc nedávala smysl a celý děj nebyl nějak zajímavý. No a co. Na to, že to vymyslel můj mozek během spánku je vskutku zajímavé. A kdybyste byli v mé kůži, tak to v tom snu i prožíváte přímo jako ve virtuální realitě. Poslední dobou mi přijde, že to co dokážu vymyslet za blbosti a to počítám i to co se odehrává v mých snech je docela dost fascinující a taky někdy hodně divné. Tohle je takové mezislovo a pak už dále budu pokračovat s jiným příběhem, který se mi buď zdál anebo jsem si ho kompletně vymyslel. Je ještě nutné dodat, že je snad všm jasné, že si několik věcí musím domyslet během psaní, ale to už nechám na čtenáři aby zjistil co to jsou za blbosti.
+
+* * *
+
+# Kulka
+
+## Pandemie
+
+Je rok 2022 a zrovna začíná školní rok. To se mě už naštěstí netýká, protože už nějaký ten pátek (a podotkl bych, že nejenom pátek) nejsem ve škole. A raději se k tomuto systému už nikdy nepřiblížím. Možná si říkáte proč máš takový názor Emanueli. Tak zaprvé k tomu se dostanu a za druhé nejmenuji se Emanuel ale jen Em. Proč tak blbé jméno, no to je otázka ne úplně mířená na mě nemyslíte si? Už jsem se zase ztratil. Tedy proč nemám rád školu je celkem jednoduché. Ve škole jsem nikdy neměl problémy co se týče prospěchu, akorát moji spolužáci stáli za velké kulové. O tom bych raději už nechtěl nikdy mluvit. Doufám, že to dokážete pochopit. Jo a taky to je tím, že už jsem na škole strávil tolik času. To víte když studujete jako medik, tak na škole strávíte hodně let. Aspoň teď už to nemusím řešit. Ale jako medik jsem se pustil do zkoumání virů a hledání léků a vakcín. Bohužel poslední roky to bylo příšerné, jakmile z Číny přišel virus do celého světa. A pak to bylo samé “Rychle potřebujeme vakcínu!!” a takové kecy. Jakmile se nám to povedlo, tak to zase bylo zleva a zprava “To bylo moc rychlé. Já vám nevěřím!”. Tak víte co. Příště se na vás mohu vykašlat. No jo no. Ale pak mě to napadlo. Co takhle to pořádně vyzkoušet. A udělat nějaký pokus. Ale musím to pořádně promyslet aby to stálo za to. A taky abych neublížil moc lidem. Ale nemusíte se bát tohle je taková “hra”. I když asi to fakt nedopadne moc dobře. No snad lidi zjistí jak jsou hloupí ve správný čas. Jinak to bude ehm tragédie. Tedy teď si říkáte Eme proč chceš dělat pokusy na lidech? To se musím ohradit. Já dělám spíše pokus na společnost a komunitní hloupost než na samotných lidech.
+
+## Plán
+
+Teď jak na to? No je to prosté. Vezmeme si nějaký virus, který má fatální následky a předem najdeme vakcínu. Protože chceme udělat takový experiment, tak vakcínu pak pojmenujeme “Kulka”, aby to znělo strašidelně. Abych se pochlubil, tak na tomhle projektu pracujeme už delší dobu a dost věcí už máme předpřipravené. Jedná se o virus, který dokáže převzít moc nad člověkem. Je to vlastně takový parazit, který převezme celé tělo, respektive je to trochu komplikovanější, ale opustím od doktorské hantýrky, abyste tomu rozuměli. Už jsem slyšel spoustu divných názoru a ne není to žádné zombie. Jsme snad v nějakém béčkovém filmu. Na to nikdo nevěří. Souběžně jsme pracovali na vakcíně. Co je hodně zajímavé je, že vakcína funguje i jako lék a tedy co je člověk napaden, tak může být vyléčen i když byl dost hloupý na to nevzít si vakcínu. To teprve bude správná lekce. Nemyslíte si? Vše máme plně pod kontrolou a nemůže se určitě nic stát, no vlastně jenom lid nemáme pod kontrolou, ale ty chceme zkoumat. Teď je třeba najít pacienta nula u kterého začneme. Pak následně musíme rychle izolovat danou osobu a “hledat vakcínu”. Nicméně už bude vše hotové a v přímém přenose ukážeme jak funguje vakcína a vysvětlíme jak všechno funguje. Následně po tom co by se všichni naočkovali, nebo aspoň měli na to čas, tak virus kontrolovaně vypustíme a uvidíme co se následně bude dít. Jakmile vše v pořádku přejde, tak lidé začnou konečně důvěřovat ve věci, které jsou podpořené vědeckými podklady. Myslím, že to je dokonalý plán. Teď byste možná ještě chtěli vědět, jak nemoc probíhá. Ze začátku člověk začne mít bolesti hlavy a následně pak i zažívací problémy. Celá se většinou projeví až tak za měsíc až dva. Potom kognitivní část mozku odumírá a virus převládá moc nad tělem. Jo a málem bych zapomněl. To, že vakcína může být použita jako lék znamená, že to musí být dříve než se projeví poslední část nemoci, tedy převzetí kontroly nad tělem.
+
+## Začátek plánu
+
+Jak najít nějakého dobrovolníka? To byla naše otázka, na kterou jsme nemohli najít odpověď. Už jsme vyvěsili spousty plakátů a inzerátů, ale nikdo se nehlásí. Možná to je tím, jak jsme to tam napsali, ale proč by to snad někomu mělo vadit. Stojí tam "Cítíte se býti morčetem ve svém životě, tak pojďte aspoň podpořit vědu, aby na Vás byl veden důležitý výzkum." Pěkné, ne? Ale jak říkala moje sestra Karla, je to takové děsivé a možná i přidává na nedůvěře medicíně. To ale vlastně chceme vyzkoušet, takže to je vlastně dobře. Tak už vás nebudu trápit naším vlastně primitivním problémem. Jediné co stačilo přidat je, že je každý člověk získá peněžitou odměnu, ale nemyslete si, že to byla nějaká velká odměna spíše takové drobné na autobus, aby se sem vůbec dostali. Přeci jen ten lidský mozek často bývá dosti primitivní a můžeme očekávat, jak se budu v daných situacích chovat a tedy pokud nabídnete něco zadarmo, tak hned máte spoustu zákazníků. Tedy už nemáme žádného pacienta nula, ale rovnou celou skupinu zájemců. Je tedy pravdou, že půlka z nich vypadá jako lidé bez domova, kteří sem možná zabloudili, ale na to už se nemůžeme dívat a řešit to. Teď se vlastně nemoc bude šířit po různých *hordách* občanů a tak to můžeme hlídat. Pravděpodobně nechápete, proč to vím. Je to prosté, pořád jsem nevysvětlil každý aspekt nemoci a taky ani dané vakcíny. Nemoc se šíří relativně dost pomalu a pokud má člověk už nemoc, ale i vakcínu, tak je nadále šiřitelem a už se mu nic nemůže stát. Tak náš ďábelský plán může začít "Muhahaha", tedy já samozřejmě nejsem zlý, to byl jen vtip, opravdu. Začněme tedy náš experiment. Všechny občany z *hordy* nula naočkujeme a za měsíc jim dáme nákazu. Díky tomuto postupu se jim nic nemůže stát, ale budeme mít nemoc rozšiřující se společností.
+
+# Vakcinace
+
+## Světoví medici
+
+Jméno? "Buč, Buč Teodor". Datum narození? "14.05.1984" Tak tady vám předávám nemoc a následně i daný peněžitý obnos. "Děkuji, nashle." Neshledanou. Marku prosím tě, to už byl poslední? "Jo." Tak vidíte sami už první část proběhla. Teď si dáme týden pauzu a pak dáme rychle vědět všem osobnostem a to od politiků až po známé herce a novináře. Nemůžeme přece říct, že jsme našli virus hned, když se ani nerozvinul mezi občany. V tomhle týdnu aspoň budeme mít čas dále vytvářet naši vakcínu. Protože mezi první hordou byli i lidé majetní, kteří nejspíše budou cestovat, tak je třeba upozornit i další státy. No ale nemůžeme jim to říci dříve než nám, takže musíme nejdříve obvolat všechny lékařské asociace a předat jim dané informace o našem průzkumu a protože našim primárním plánem není zbohatnout, tak jim zašleme také jak vyrábět naši vakcínu, aby se také připravili na možnou pandemii. Již máme připraven seznam, komu všemu se ozveme, ale protože je nudné věše opakovat, tak spíše sjednáme hromadný hovor. Samozřejmě neleníme a už všichni mají elektronickou pozvánku k danému termínu sněmu, teda jestli to mohu označit sněmem, ale zní to dobře a profesionálně a to já samozřejmě taky jsem, takže je to sněm. Proč mi někdo klepe na dveře. Dále. "Eme, myslím, že tu máme menší problém." Jo jasně ty tvoje vtípky jsou fakt dobré Marku. Vždycky se rád zasměji, ale nemohlo by to počkat na apríla. "Bohužel Eme, ale ani to není vtip." Co? To mě velice znepokojuješ. Snad to není vážné, tak rychle, co to je? "Spousta lidí odmítlo pozvánku, protože nemají čas." Jak jako nemají čas, vždyť je to vážné! Přece jsem na tom dostatečně pracovali, aby pochopili, že to není sranda. Do prdele! Musíme jim to rychle oznámit. Tak se všemi, kdo může zařiďte hovor a musíme sepsat i návod na to, co se děje. Co když pak nebudou vakcíny a žádné informace. Celé se to může pokazit. Tak co tu furt stojíš Marku, dělej! "Jasný, už běžím."
+
+## Sněm
+
+* * *
+
+Celý příběh bude o nějakěm random týpkovi ale to nebude ten hlavní člověk. Částečně o hokeji.
+
+* * *
+
+# Pavouci
+### {Není}
+Končí v šichtě kopáčů. Pak už sen s pavouky a stolním fotbálku.

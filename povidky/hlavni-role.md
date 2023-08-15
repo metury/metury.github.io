@@ -1,1 +1,0 @@
-Celý příběh bude o nějakěm random týpkovi ale to nebude ten hlavní člověk. Částečně o hokeji.

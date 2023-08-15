@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Krátký průvodce Tenerife
+title: Tenerife [CZ]
 permalink: /Tenerife/
 ---
 
