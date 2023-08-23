@@ -28,12 +28,16 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  metury
 
 # Build settings
-theme: just-the-docs #minima
+theme: just-the-docs/just-the-docs #minima
 plugins:
   - jekyll-feed
   
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
+
+mermaid:
+  # Version of mermaid library
+  version: "9.1.6"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
