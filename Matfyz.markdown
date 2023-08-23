@@ -1,6 +1,6 @@
 ---
 layout: page
-title: mff [CZ]
+title: Mff [CZ]
 permalink: /mff/
 ---
 
@@ -8,5 +8,5 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 
 ## Zápisky
 
-- [Teorie množin](mff/teorie-mnozin.html), [PDF](mff/teorie-mnozin.pdf), [Markdonw](mff/teorie-mnozin.md)
-- [Pravděpodobnost a statistika II](mff/pravdepodobnost-a-statistika-ii.html), [PDF](mff/pravdepodobnost-a-statistika-ii.pdf), [Markdown](mff/pravdepodobnost-a-statistika-ii.md)
+- [Teorie množin](mff/teorie-mnozin.md), [PDF](mff/teorie-mnozin.pdf)
+- [Pravděpodobnost a statistika II](mff/pravdepodobnost-a-statistika-ii.md), [PDF](mff/pravdepodobnost-a-statistika-ii.pdf)
