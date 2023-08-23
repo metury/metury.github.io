@@ -169,7 +169,7 @@ author: Tomáš Turek
 - **Df:** Most je hrana, kterou kdyý odeberu, tak se mi zvýší počet komponenet souvislosti.
 - **Lemma:** Hrana e není most $<=>$ e leží na kružnici.
 - jelikož není příčná hrana, tak se musí najít jestli není zpětná hrana
-- **Df:** low(v):= min(in(y)| xy je zpětná hrana a x pod v).
+- **Df:** low(v):= min(in(y) | xy je zpětná hrana a x pod v).
 	- celkově je to minimum přes low(s) synů a in(y) vy je zpětná hrana
 - **Věta:** Algoritmus nalezne všechny mosty v čase a prostoru $\Theta(n+m)$.
 

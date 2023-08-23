@@ -9,7 +9,7 @@ permalink: /apps/
 Here is a list of some applications that I enjoy using and recomend anyone to use as well. For privacy centric users I recomend to take a look at a nice page [privacy tools](https://www.privacytools.io/).
 
 | Aplikace                                                               | Linux  | Windows | Android |
-|-:----------------------------------------------------------------------|-:-:----|-:-:-----|-:-:-----|
+|-:----------------------------------------------------------------------|:------:|:-------:|:-------:|
 | **Obecné**                                                             | \-\-\- | \-\-\-  | \-\-\-  |
 | [Firefox](https://www.mozilla.org/en-US/firefox/new/)                  | ✅      | ✅       | ✅       |
 | [Thunderbird](https://www.thunderbird.net/en-US/)                      | ✅      | ✅       | ✅       |

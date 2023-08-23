@@ -16,10 +16,9 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 " > $mff
 
 for file in $(ls *.md); do
-	#html=$( echo $file | sed 's/\.md/\.html/g' )
+	html=$( echo $file | sed 's/\.md/\.html/g' )
 	pdf=$( echo $file | sed 's/\.md/\.pdf/g')
-	#pandoc --katex $file -o $html
 	pandoc --katex $file -o $pdf
 	name=$(grep "title: " $file | sed 's/title: //g')
-	echo "- [$name]($pdf)" >> $mff
+	echo "- [$name]($html) a [PDF]($pdf)" >> $mff
 done
