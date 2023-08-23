@@ -2,6 +2,7 @@
 layout: page
 title: Hry [CZ]
 permalink: /hry/
+katex: true
 ---
 
 # Paralyzér
