@@ -1,6 +1,15 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: home
 ---
+
+# Welcome
+
+Welcome to my personal webpage. Here you may find:
+
+- List of my favourite [movies](/Movies/).
+- List of my favourite [apps](/apps/) that I enjoy using.
+- List of all [projects](/Projects/) that I have and also try to maintain.
+
+## [CZ]
+
+V českém jazyce pak zde mám pár dokumentů a nějaké menší projektíky.

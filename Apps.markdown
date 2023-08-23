@@ -4,7 +4,9 @@ title: Apps
 permalink: /apps/
 ---
 
-Here is a list of apps of my choice.
+# Applications
+
+Here is a list of some applications that I enjoy using and recomend anyone to use as well. For privacy centric users I recomend to take a look at a nice page [privacy tools](https://www.privacytools.io/).
 
 | Aplikace                                                               | Linux  | Windows | Android |
 |-:----------------------------------------------------------------------|-:-:----|-:-:-----|-:-:-----|
@@ -90,6 +92,8 @@ Here is a list of apps of my choice.
 
 ## Arch linux `yay`
 
+This is a script for downloading some of these applications on [arch linux](https://archlinux.org/).
+
 ```shell
 #!/bin/bash
 
@@ -103,6 +107,8 @@ yay -S firefox thunderbird filezilla keepassxc owncloud-client geany qt5 qt6 git
 ```
 
 ## Joplin
+
+Good application for notes in markdown one can use [Joplin](https://joplinapp.org/) which is recommended to download via [script](https://joplinapp.org/help/#desktop-applications).
 
 ```sh
 wget -O | https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
