@@ -2,9 +2,8 @@
 layout: page
 nav_exclude: true
 title: TeMno
+author: Tomáš Turek
 ---
-
-### Tomáš Turek
 
 *Poznámka: Následující text jsou moje osobní zápisky z Teorie množin z roku 2021-2022. V textu se můžou vyskytovat jak gramatické chyby, tak i technicé chyby (jako ne zcela správný důkaz apod.), tím pádem berte text jako doplňek přednášky.*
 

@@ -2,6 +2,7 @@
 layout: page
 nav_exclude: true
 title: PAST 2
+author: Tomáš Turek, Filip Mihaľ
 ---
 
 #### _INFO_
@@ -31,13 +32,11 @@ graph LR;
 
 Sequence of r.v. $X_{0},X_{1},X_{2},\dots$ is a **Markov chain** if:
 
-- $\exist$ countable $S : \text{Rng } X_{t} \subset S$  $\forall t$
+- $\exists$ countable $S : \text{Rng } X_{t} \subset S$  $\forall t$
 - $\forall t \in \mathbb{N}$ $\forall a_{0}, a_{1}, a_{2}, \dots , a_{t+1} \in S$
 
 $$
 \Pr[X_{t+1} = a_{t+1} \vert X_{0} = a_{0}, X_{1} = a_{1} , \dots ,X_{t} = a_{t}] = \Pr [X_{t+1} = a_{t+1} \vert X_{t} = a_{t}]
-
-
 $$
 
 This means that Markov chain has the property of being memory-less and this probability written above is called _transition probability_. We can map all elements from $S$ to a number from range $1,2,\dots ,n$ and then we can build **transition matrix**.
@@ -50,8 +49,6 @@ p_{21} & p_{22} &  \\
 p_{31} &  & \ddots \\
 \vdots
 \end{pmatrix}
-
-
 $$
 
 Where $p_{ij}$ means going from $i$ to $j$. All $p_{ij} \geq 0$ and the sum of each row is $1$. Also we can build **transition graph** representing this Markov chain. In that graph $V = S$ and arcs exists if $(ij) : p_{ij} > 0$.
@@ -62,8 +59,6 @@ Then we can see that $\pi^{(1)} = \pi^{(0)} P$ as multiplication by transition m
 
 $$
 \pi^{(k)} = \pi^{(k-1)} P
-
-
 $$
 
 ## Theorem:
@@ -76,8 +71,6 @@ _Proof will be by induction. So $\pi^{(k+1)} = \pi^{(k)} P = \pi^{(0)} P^{k} P =
 
 $$
 \Box
-
-
 $$
 
 ## Definition:
@@ -91,24 +84,18 @@ r_{ij}(k) & := & \Pr[\text{from }i \text{ to } j \text{ in } k \text{ steps}] \\
 & = & \Pr[X_{t+k} = j \vert X_{t} = i] \\
 r_{ij}(1) & = & p_{ij}
 \end{array}
-
-
 $$
 
 ## Observation
 
 $$
 r_{ij}(k) = \pi_{j}^{(k)} \text{ if } \pi^{0} = \left( 0, 0, \dots, 0, 1, 0 \dots, 0\right)
-
-
 $$
 
 Where $1$ is on $i$-th position. Also:
 
 $$
 \pi_{j}^{(k)} = (\pi^{0} P^{k})_{j} = \left( \left( 0, 0, \dots, 0, 1, 0 \dots, 0\right)P^{k}\right)_{j} = (P^{k})_{ij}
-
-
 $$
 
 ## Chapman-Kologorov formula
@@ -117,8 +104,6 @@ $$
 r_{ij}(k) = (P^{k})_{ij} \\
 r_{ij}(k+l) = \sum_{t=1}^{S} r_{it}(k)r_{tj}(l) \\
 r_{ij}(k+1) = \sum_{t=1}^{S} r_{it}(k) p_{tj}
-
-
 $$
 
 ## Definition:
@@ -128,14 +113,12 @@ $j$ is **accessible** from $i$ if
 $$
 (j \in A(i), i \to j) \\
 \Updownarrow \\
-\Pr[\exist k \geq 0 : X_{k} = j \vert X_{0} = i] > 0 \\
+\Pr[\exists k \geq 0 : X_{k} = j \vert X_{0} = i] > 0 \\
 \Updownarrow \\
 \sum_{k=0}^{\infty} r_{ij}(k) > 0 \\
 \Updownarrow \\
-\exist \text{ a discrete path from } i \text{ to } j \\
+\exists \text{ a discrete path from } i \text{ to } j \\
 \text{in the transition graph}
-
-
 $$
 
 ## Definition:
@@ -156,8 +139,6 @@ We need to show that it satisfies reflexivity, symmetry and transitivity.
 
 $$
 \Box
-
-
 $$
 
 ## Definition:
@@ -176,21 +157,19 @@ $i \in S$ is called **recurrent** if $\forall j \in A(i) : i \in A(j)$ and **tra
 
 ## Theorem:
 
-$i \in S$ we define $f_{ii} = \Pr[\exist t \geq 1 : X_{t} =i \vert X_{0} = i]$ or by words _"probability of going back to $i$"_. Then:
+$i \in S$ we define $f_{ii} = \Pr[\exists t \geq 1 : X_{t} =i \vert X_{0} = i]$ or by words _"probability of going back to $i$"_. Then:
 
 - $i$ is recurrent iff $f_{ii} = 1$
 - $i$ is transient iff $f_{ii} < 1$
 
 ### Proof:
 
-- $i$ is transient iff $\exist j \in A(i) : i \notin A(j)$
-- starting with $X_{0} = i$ the probability $\exists t \geq 1 : X_{t} = j$ is $p > 0$ and $\Pr[\text{going to } i \text{ from } j] = 0 \Rightarrow f_{ii} \leq 1 - p$
+- $i$ is transient iff $\exists j \in A(i) : i \notin A(j)$
+- starting with $X_{0} = i$ the probability $\exists t \geq 1 : X_{t} = j$ is $p > 0$ and $\Pr[\text{going to } i \text{ from } j] = 0 \mathbb{R}ightarrow f_{ii} \leq 1 - p$
 - And if $i$ is recurrent then $f_{ii} = 1$.
 
 $$
 \Box
-
-
 $$
 
 ## Definition:
@@ -200,8 +179,8 @@ $$
 
 ## Theorem
 
-- $i$ is recurrent $\Rightarrow \Pr[V_{i} = \infty | X_{0} = i] = 1$
-- $i$ is transient $\Rightarrow (V_{i} \vert X_{0}= i) \sim \text{Geom}(1 - f_{ii})$, where $(1-f_{ii})$ is called as _escape probability_.
+- $i$ is recurrent $\mathbb{R}ightarrow \Pr[V_{i} = \infty | X_{0} = i] = 1$
+- $i$ is transient $\mathbb{R}ightarrow (V_{i} \vert X_{0}= i) \sim \text{Geom}(1 - f_{ii})$, where $(1-f_{ii})$ is called as _escape probability_.
 
 # Steady State
 
@@ -215,12 +194,12 @@ If $\pi^{(0)} = \pi$ and $\pi$ is stationary then $\pi^{(1)} = \pi$ and $\forall
 
 ## Definition:
 
-- $s \in S$ is **periodic** if $\exists \Delta \geq 2$ integer such that $\Pr[X_{t} = s \vert X_{0} = s] > 0 \Rightarrow \Delta \vert t$.
+- $s \in S$ is **periodic** if $\exists \Delta \geq 2$ integer such that $\Pr[X_{t} = s \vert X_{0} = s] > 0 \mathbb{R}ightarrow \Delta \vert t$.
 - _MC_ is periodic if all its states are periodic, otherwise it is _aperiodic_.
 
 ## Theorem
 
-$(X_{t})_{t = 0}^{\infty}$ is a _MC_ that is _irreducible_, _aperiodic_ and $|S| < \infty$. Then $\exist \pi$ that is a stationary distribution and
+$(X_{t})_{t = 0}^{\infty}$ is a _MC_ that is _irreducible_, _aperiodic_ and $|S| < \infty$. Then $\exists \pi$ that is a stationary distribution and
 
 - $\forall j \forall i \lim_{k\to\infty}r_{ij}(k) = \pi_{j}$
 - $\pi$ is a unique solution to
@@ -230,8 +209,6 @@ $$
 \pi \mathbf{1} = 1
 % vector of 1s
 % TODO: I think this is wrong. Pi is a probability distribution, so if pi_j is 1, then all other indexes must be 0.
-
-
 $$
 
 # Absorption probability
@@ -245,9 +222,7 @@ Absorption states are such states, that the probability of staying in the same s
 Assume a _MC_ with absorbing state $0$ (and some move). Put
 
 $$
-a_{i} = \Pr[\exist t : X_{t} = 0 \vert X_{0} = i] \text{ for } i \in S
-
-
+a_{i} = \Pr[\exists t : X_{t} = 0 \vert X_{0} = i] \text{ for } i \in S
 $$
 
 Then $(a_{i})$ are the unique solution to:
@@ -258,8 +233,6 @@ a_{0} & = & 1 \\
 a_{i} & = & 0 &\text{ if } i \neq 0 \text{ and absorbing} \\
 a_{i} & = & \sum_{j \in S} p_{ij} a_{j} & \text{ for } i \text{ not absorbing}
 \end{array}
-
-
 $$
 
 ### Proof
@@ -268,13 +241,11 @@ $$
 - lets assume $i$ is not absorbing then
 
 $$
-a_{i} = \Pr[\exist t : X_{t} = 0 \vert X_{0} = i] = \\
-= \sum_{j \in S} \Pr[X_{1} = j \vert X_{0} = i] \cdot \Pr[\exist t : X_{t} = 0 \vert X_{0} = i, X_{1} = j] = \\
-= \sum_{j \in S} p_{ij} \Pr[\exist t : X_{t} = 0 \vert X_{0} = j] = \\
+a_{i} = \Pr[\exists t : X_{t} = 0 \vert X_{0} = i] = \\
+= \sum_{j \in S} \Pr[X_{1} = j \vert X_{0} = i] \cdot \Pr[\exists t : X_{t} = 0 \vert X_{0} = i, X_{1} = j] = \\
+= \sum_{j \in S} p_{ij} \Pr[\exists t : X_{t} = 0 \vert X_{0} = j] = \\
 =\sum_{j \in S} p_{ij} a_{j} \\
 \Box
-
-
 $$
 
 # Mean time to absorption
@@ -290,8 +261,6 @@ $$
 \text{if } i \in A & \mu_{i} & = & 0 \\
 \text{if } i \notin A & \mu_{i} & = &1 + \sum_{j \in S} p_{ij}\mu_{j}
 \end{array}
-
-
 $$
 
 # SAT
@@ -368,16 +337,12 @@ _Note: In Frequentist's approach $\Theta$ does not exist we have $\vartheta$ as 
 
 $$
 \Pr[B \vert A] = \frac{\Pr[B] \Pr[A \vert B]}{\Pr[A]}
-
-
 $$
 
 Where $\Pr[A], \Pr[B] > 0$. We will consider $B$ as $\Theta = \vartheta$ and $A$ as measurements $X = x$. Now we get:
 
 $$
 \Pr[\Theta = \vartheta \vert X = x] = \frac{\Pr[\Theta = \vartheta] \Pr[X = x \vert \Theta = \vartheta]}{\Pr[X = x]}
-
-
 $$
 
 Where $\Pr[\Theta = \vartheta \vert X = x]$ is called **posterior** and it is the probability after some measurements. $\Pr[\Theta = \vartheta]$ is called **prior** as an probability and $\Pr[X = x \vert \Theta = \vartheta]$ is our current model of the world (_likelihood_).
@@ -386,8 +351,6 @@ Where $\Pr[\Theta = \vartheta \vert X = x]$ is called **posterior** and it is th
 
 $$
 p_{\Theta\vert X} (\vartheta \vert x) = \frac{p_{\Theta}(\vartheta) p_{X\vert\Theta}(x \vert \vartheta)}{\sum_{\vartheta'} p_{\Theta}(\vartheta')p_{X\vert\Theta}(x \vert \vartheta')} = c p_{\Theta}(\vartheta) p_{X \vert \Theta}(x \vert \vartheta)
-
-
 $$
 
 For some konstant $c$.
@@ -406,8 +369,6 @@ For _point estimate_ we have two approaches.
 
 $$
 \hat{\vartheta} = \arg\max_{\vartheta} p_{\Theta \vert X} (\vartheta \vert x)
-
-
 $$
 
 If $X = x$ what is the most likely value?
@@ -419,8 +380,6 @@ $$
 \hat{\vartheta} & = & \arg\min_{\vartheta} \mathbb{E}[(\Theta - \vartheta)^{2} \vert X = x] \\
 & = & \arg\min_{\vartheta} \mathbb{E}[\Theta \vert X = x]
 \end{array}
-
-
 $$
 
 ## Naive Bayes
@@ -429,16 +388,12 @@ By the Bayesian statistics we get for $X_{1}$:
 
 $$
 p_{\Theta\vert X_{1}} (\vartheta \vert x_{1}) = \frac{p_{\Theta}(\vartheta) p_{X_{1} \vert\Theta}(x_{1} \vert \vartheta)}{\sum_{\vartheta'} p_{\Theta}(\vartheta')p_{X_{1}\vert\Theta}(x_{1} \vert \vartheta')}
-
-
 $$
 
 But what if we have $n$ measurements to consider. Then we have $\Pr[\Theta = \vartheta \vert X_{1} = x_{1}, X_{2} = x_{2}, \dots]$ which can be computed by naive Bayes as:
 
 $$
 = \frac{p_{\Theta}(\vartheta) \prod_{i=1}^{n}p_{X_{i}\vert \Theta} (x_{i} \vert \vartheta)}{\sum_{\vartheta'} p_{\Theta}(\vartheta')\prod_{i=1}^{n}p_{X_{i}\vert \Theta} (x_{i} \vert \vartheta')}
-
-
 $$
 
 Also $p_{X \vert \Theta}(x_{i}, \dots, x_{1} \vert \Theta = \vartheta)$ is _joint PMF_ and we assume conditional independence.
@@ -449,8 +404,6 @@ As for PMF we have Bayesian statistics for PDF.
 
 $$
 f_{\Theta \vert X}(\vartheta \vert x) = \frac{f_{\Theta}(\vartheta) f_{X \vert \Theta}(x \vert \vartheta)}{\int_{-\infty}^{\infty} f_{\Theta}(\vartheta') f_{X \vert \Theta} (x \vert \vartheta') \text{ d} \vartheta'}
-
-
 $$
 
 # Beta distribution
@@ -458,20 +411,16 @@ $$
 To see some nice properties of Bayesian theorem we will look into one new distribution. We will have $\alpha, \beta \geq 1$ and $\vartheta \in [0,1]$. Then
 
 $$
-f_{\Theta} (\vartheta) = \frac{\vartheta^{\alpha - 1} (1-\vartheta)^{\beta-1}}{\Beta(\alpha,\beta)}
-
-
+f_{\Theta} (\vartheta) = \frac{\vartheta^{\alpha - 1} (1-\vartheta)^{\beta - 1}}{B (\alpha,\beta)}
 $$
 
-Where $\Beta(\alpha, \beta)$ is called **beta function** and for all $\alpha, \beta$ it is a constant. For example the beta function for $\Beta(1,1)$ is equal to $1$ from $[0,1]$ and $0$ otherwise. And $\Beta(1,2) = \frac{1}{2}$. It serves as a normalizing constant for the beta distribution.
+Where $B(\alpha, \beta)$ is called **beta function** and for all $\alpha, \beta$ it is a constant. For example the beta function for $B(1,1)$ is equal to $1$ from $[0,1]$ and $0$ otherwise. And $B(1,2) = \frac{1}{2}$. It serves as a normalizing constant for the beta distribution.
 
 - Firstly the maximum is at $\frac{\alpha -1}{\alpha + \beta - 2}$ which is the **mode** (_cz: modus_).
 - Secondly
 
 $$
-\Beta(\alpha, \beta) = \frac{(\alpha - 1)! (\beta - 1)!}{(\alpha+\beta-2)!} = \frac{1}{\binom{\alpha + \beta - 2}{\alpha -1}}
-
-
+B(\alpha, \beta) = \frac{(\alpha - 1)! (\beta - 1)!}{(\alpha+\beta-2)!} = \frac{1}{\binom{\alpha + \beta - 2}{\alpha -1}}
 $$
 
 - Lastly $\mathbb{E} [\Theta] = \frac{\alpha}{\alpha + \beta}$ which is the **mean**.
@@ -480,22 +429,16 @@ Now we will look into the Bayesian theorem using Beta distribution as a prior an
 
 $$
 p_{X \vert \Theta}(k \vert \vartheta) = \binom{n}{k} \vartheta^{k} (1-\vartheta)^{n-k}
-
-
 $$
 
 $$
 f_{\Theta \vert X}(\vartheta \vert x) = c_{1} \vartheta^{\alpha - 1}(1 - \vartheta)^{\beta - 1} \cdot c_{2} \vartheta^{x} (1- \beta)^{1-x} \cdot c_{3} =
-
-
 $$
 
 Where $c_{1},c_{2},c_{3}$ do not depend on $\vartheta$ and are some constants.
 
 $$
 = c_{4} \vartheta^{\alpha + k -1}(1 - \vartheta)^{\beta + n - k -1}
-
-
 $$
 
 And that is some other Beta distribution with $\alpha' = \alpha + x$ and $\beta' = \beta + n - x$. And also we have these point estimates:
@@ -518,24 +461,18 @@ $$
 \mathbb{E}[Y \vert A] & = & \sum_{y \in \text{Img}(Y)}y \Pr[Y = y \vert A] \\ \\
 & = & \int_{-\infty}^{\infty} y f_{Y \vert A}(y) \text{ d}y
 \end{array}
-
-
 $$
 
 Now if we have $X,Y$ discrete random variables and $x \in \mathbb{R}$, then:
 
 $$
 \mathbb{E}[Y \vert X = x] =: g(x)
-
-
 $$
 
 So $g$ is a function $\mathbb{R} \to \mathbb{R}$. Then
 
 $$
 \mathbb{E} [Y \vert X] =: g(X)
-
-
 $$
 
 So we have two functions $\Omega \to^{X} \mathbb{R} \to^{g} \mathbb{R}$. Now we will show one property which is called **Law of Iterated Expectation**.
@@ -543,37 +480,28 @@ So we have two functions $\Omega \to^{X} \mathbb{R} \to^{g} \mathbb{R}$. Now we 
 $$
 \mathbb{E}[\mathbb{E}[Y \vert X]] =^{\text{DEF}} \mathbb{E}[g(X)] =^{\text{LOTUS}} \sum_{x \in \text{Img}(X)}g(x) \Pr[X = x] = \\
 =^{\text{DEF}} \sum_{x \in \text{Img}(X)}\Pr[X=x] \mathbb{E} [Y \vert X =x] = \mathbb{E}[Y]
-
-
 $$
 
 Where the last equivalence is by the Law of total Expectation. So by this we get $\mathbb{E}[\mathbb{E}[Y \vert X]] = \mathbb{E}[Y]$ if $\mathbb{E}[Y] < \infty$.
 
 Now, we will use a similar approach to find an alternative definition of variance.
 
-Let $Y = \hat{Y} - \tilde{Y} $ where $\hat{Y}$ and $\tilde{Y}$ are statistically independent and $var(\tilde{Y}) = \mathbb{E}[\tilde{Y}^2]$
+Let $Y = \hat{Y} - \tilde{Y}$ where $\hat{Y}$ and $\tilde{Y}$ are statistically independent and $var(\tilde{Y}) = \mathbb{E}[\tilde{Y}^2]$
 
 $$
-
 var(Y) = var(\hat{Y}) + var(\tilde{Y}) - 2cov(\hat{Y}, \tilde{Y})
-
-
 $$
 
 From the property of the statistical independence we get $cov(\hat{Y}, \tilde{Y}) = 0$.
 
 $$
 \mathbb{E} [(Y - E[Y\vert X])^2 \vert X] = var[Y \vert X] =: h(X)
-
-
 $$
 
 ### Law of iterated variance
 
 $$
 \text{var} [Y] = \mathbb{E}[\text{var}[Y \vert X]] + \text{var}[\mathbb{E}[Y \vert X]]
-
-
 $$
 
 Or it is called an **Eve's rule** (_as E for expected value and V for variance_). We may simulate it by saying that the first part of the sum is expected value of variance within one group and the second part is inter group variance. _This is also partly from the example that was sadly omitted._
@@ -582,9 +510,7 @@ Next we can show that Least Mean Square is iff condition expectation. That is fo
 
 $$
 \mathbb{E}[Y - y]^{2} = \mathbb{E}[Y^{2}] - 2y\mathbb{E}[Y] + y^{2} = f(y) \\
-f'(y) = - 2 \mathbb{E}[Y] + 2y = 0 \Rightarrow y = \mathbb{E}[Y]
-
-
+f'(y) = - 2 \mathbb{E}[Y] + 2y = 0 \mathbb{R}ightarrow y = \mathbb{E}[Y]
 $$
 
 Now we want for all $x$ find $y = y(x)$ such that $\mathbb{E}[(Y - y(x))^{2} \vert X = x]$ is minimized. We can show by similar calculation that $y(x) = \mathbb{E}[Y \vert X =x ]$. And our best (in the LMS sense) estimation is $\hat{Y} = \mathbb{E} [Y \vert X]$.
@@ -620,23 +546,17 @@ Other interesting variable is the $k$-th waiting time (inter arrival) and it wil
 
 $$
 L_{k} = T_{k} - T_{k-1} \text{ when we put } T_{0} = 0 \\
-L_{k} \sim L_{1} = T \Rightarrow L_{k} \sim \text{Geom}(p)
-
-
+L_{k} \sim L_{1} = T \mathbb{R}ightarrow L_{k} \sim \text{Geom}(p)
 $$
 
 And all $L_{i}$ are independent. From the other way we can define $T_{k}$ as the sum $\sum_{i=1}^{k} = L_{i}$. So we can then get expected value and variance.
 
 $$
 \mathbb{E}[T_{k}] = \mathbb{E}[L_{1}] + \mathbb{E}[L_{2}] + \dots + \mathbb{E}[L_{k}] = \frac{k}{p}
-
-
 $$
 
 $$
 \text{var}[T_{k}] = \text{var}[L_{1}] + \text{var}[L_{2}] + \dots + \text{var}[L_{k}] = k \cdot \frac{1-p}{p^{2}}
-
-
 $$
 
 How could we compute $\Pr[T_{k} = t] = ?$ Easily we can compute this by convolution formula $\binom{t-1}{k-1} p^{k}(1-p)^{t-k}$.
@@ -656,8 +576,6 @@ $$
 X_{1}, X_{2}, X_{3}, \dots & \text{Bp}(p) \\
 Y_{1}, Y_{2}, Y_{3}, \dots & \text{Bp}(q)
 \end{array}
-
-
 $$
 
 Then the merge is $Z_{i} = X_{i} \text{ or } Y_{i}$. Properly it is
@@ -666,8 +584,6 @@ $$
 \begin{array}{rl}
 Z_{1}, Z_{2}, Z_{3}, \dots & \text{Bp}(p + q - pq) = \text{Bp}(1 - (1-p)(1-q))
 \end{array}
-
-
 $$
 
 ### Splitting Bernoulli process
@@ -678,8 +594,6 @@ $$
 \begin{array}{rl}
 Z_{1}, Z_{2}, Z_{3}\dots & \text{Bp}(r)
 \end{array}
-
-
 $$
 
 If $Z_{i}=1$ then $X_{i} = 1$ with probability $\alpha$ and $0$ with probability $(1 - \alpha)$ and if $Z_{i} = 0$ then $X_{i}=0$. By this construction we get new Bernoulli process.
@@ -688,8 +602,6 @@ $$
 \begin{array}{rl}
 X_{1}, X_{2}, X_{3}, \dots & \text{Bp}(\alpha r)
 \end{array}
-
-
 $$
 
 ## Poisson process (_denoted as_ $\text{Pp}(\lambda)$)
@@ -715,11 +627,9 @@ We can show that by the following approximation:
 $$
 Pr[N_t = k] = P(k,t) \implies P(1, \frac{t}{l}) = \frac{\lambda t}{l} + o(1) \newline
 Pr[N_t = k] = P(k, t) \approx P[\text{there are K small intervals that has 1 arrival}] = Pr[Bin(l, \frac{\lambda t}{l}) = k] \newline \implies lim_{l \to \infty} Bin(l, \frac{\lambda t}{l}) \to Pois(\lambda  t)
-
-
 $$
 
-Then again $L_{k} = T_{k} - T_{k-1}$ so $\Pr[L_{k} \geq t] = \Pr[\text{no arrival in }[T_{k-1}, T_{k-1}+t]]$ and that is equal to $P(0,t) = e^{-\lambda t}$. Next $\Pr[L_{k} \leq t] = 1 - e^{-\lambda t} \Rightarrow L_{k} \sim \text{Exp}(\lambda)$.
+Then again $L_{k} = T_{k} - T_{k-1}$ so $\Pr[L_{k} \geq t] = \Pr[\text{no arrival in }[T_{k-1}, T_{k-1}+t]]$ and that is equal to $P(0,t) = e^{-\lambda t}$. Next $\Pr[L_{k} \leq t] = 1 - e^{-\lambda t} \mathbb{R}ightarrow L_{k} \sim \text{Exp}(\lambda)$.
 
 ### Alternative description
 
@@ -733,8 +643,6 @@ Again as in Bp we can see that expected value of $T_{k}$ and variance is the sum
 
 $$
 f_{T_{k}} (t) = \frac{\lambda^{k} t^{k-1}e^{-\lambda t}}{(k-1)!}
-
-
 $$
 
 ### Splitting of Pp
@@ -744,10 +652,7 @@ We have a $\text{Pp}(\lambda)$ and each one is split (1 or 0) with probability $
 <!-- TODO -->
 
 $$
-
 Pr[T_1 > t] = Pr[T>t \ \&  \ T' > t] =  \dots
-
-
 $$
 
 _Note:
@@ -766,26 +671,18 @@ This model is if we have $m$ balls and $n$ bins and for each ball we put it inde
 One well known problem is _Birthday paradox_ where we have $k$ people as balls and $365$ days as bins. Then we are asking what is the probability that one bin has at least 2 balls.
 
 $$
-
 Pr[\text{at least 2 balls in one bin}] = 1 - Pr[\text{max 1 ball in one bin}] = \\
 = 1 - \prod_{i=1}^{m-1} \frac{n-i}{n} \approx 1 - \prod_{i=1}^{m-1} e^{\frac{-i}{n}} = 1 - e^{\frac{-m(m-1)}{2n}}
-
-
 $$
 
 We also consider other properties, such as the expected number of empty bins:
 
 $$
 Pr[\text{bin } i \text{ is empty}] = (1 - \frac{1}{n})^{m} \approx e^{\frac{-m}{n}}
-
-
 $$
 
 $$
-
 \mathbb{E}[ \text{\# of empty bins}] = n (1- \frac{1}{n})^{m} \approx n e^{\frac{-m}{n}}
-
-
 $$
 
 ## Max Load Theorem
@@ -797,27 +694,18 @@ if $m=n$ and are big enough and $M = 3 \frac{ln(n)}{ln(ln(n))}$ then $Pr[\text{m
 <!-- TODO: I don't think this is right. The proba of the Bin distribution should be smaller not greater than >= M balls -->
 
 $$
-
 Pr[\text{bin } \#1 \text{ has} \geq M \text{ balls} ]  \leq Pr[Bin(n, \frac{1}{n}) = M] < \frac{1}{M!} < (\frac{e}{M})^M
 % The binomial distribution is wrong in this case
-
-
 $$
 
 $$
-
 Pr[\text{any bin has} \geq M \text{ balls} ] \leq Pr[\text{bin } \#1 \text{ has} \geq M \text{ balls} ] + \dots + Pr[\text{bin } \#n \text{ has} \geq M \text{ balls} ] \leq n (\frac{e}{M})^M
-
-
 $$
 
 Now we will show that this expression is smaller than $\frac{1}{n}$. In order to do that, we wil take the logarithm of both sides and we get:
 
 $$
-
 2ln(n) + M(1-ln(M)) < 0
-
-
 $$
 
 We will then substitute $M$ and show that the inequality holds.
@@ -842,12 +730,12 @@ We want to sort $n = 2^k$ numbers from range $[0, 2^l-1]$ where $l > k$. The num
 
 Parts 1 and 3 are linear in $n$
 
-For part 2, we will consider $X_i = \# \text{of inputs in the ith bucket} \sim Bin(n, \frac{1}{n}) $. Then $\mathbb{E} \text{ time} = \mathbb{E} \sum (c_iX_i^2)$
+For part 2, we will consider $X_i = \# \text{of inputs in the ith bucket} \sim Bin(n, \frac{1}{n})$. Then $\mathbb{E} \text{ time} = \mathbb{E} \sum (c_iX_i^2)$
 Finally, we will use the definition of variance to show that the expected time is $ < 2cn$. Hence the whole algorithm has linear expected time.
 
 ## Hash Collisions Application
 
-We want to store $n$ strings and search fast. Using the max load theorem, we will show that max running time with a big enough $n$ is $< 3 \frac{ln(n)}{ln(ln(n))} $
+We want to store $n$ strings and search fast. Using the max load theorem, we will show that max running time with a big enough $n$ is $< 3 \frac{ln(n)}{ln(ln(n))}$.
 
 ## Theorem
 
@@ -883,8 +771,6 @@ Alternatively we can use the two-sided test:
 
 $$
 T := \vert \bar{X}_m - \bar{Y}_n \vert
-
-
 $$
 
 We pick a paramater $\gamma$ and if $T \geq \gamma$ then we reject $H_0$. In order to decide $\gamma$, we want our test to be statistically significant. Hence the following must hold: $Pr[\text{wrong rejection} ] < \alpha = 0.05$
@@ -953,17 +839,14 @@ We can test this phenomenon by replacing $X_i$ by $X_i - \mu$ where $\mu$ is the
 
 ## Definition
 
-If $X$ is a random variable, $s \in \R$ then $M_X(s) = \mathbb{E}[e^{sX}]$ where $M_X$ is the moment generating function of $X$.
+If $X$ is a random variable, $s \in \mathbb{R}$ then $M_X(s) = \mathbb{E}[e^{sX}]$ where $M_X$ is the moment generating function of $X$.
 
 ## Theorem
 
 For all $s$ where $M_X(s)$ is defined and finite:
 
 $$
-
 M_X(s) = \sum_{k=0}^\infty \frac{1}{k!} \mathbb{E}[X^k] s^k
-
-
 $$
 
 ## Proof
@@ -973,36 +856,25 @@ $\mathbb{E}[X^k]$ is called the $k$-th moment.
 $\mathbb{E}[X^2] = var(X) + \mathbb{E}[X]^2$
 
 $$
-
 e^s = \sum_{k=0}^\infty \frac{s^k}{k!}
-
-
 $$
 
 $$
-\mathbb{E}[e^{sX}] = \mathbb{E}[\sum^{\infin}_{k=0} \frac{(sX)^k}{k!}] = \sum^{\infin}_{k=0} \frac{1}{k!} \mathbb{E}[X^k] s^k
-
+\mathbb{E}[e^{sX}] = \mathbb{E}[\sum^{\infty}_{k=0} \frac{(sX)^k}{k!}] = \sum^{\infty}_{k=0} \frac{1}{k!} \mathbb{E}[X^k] s^k
 \newline
 \Box
-
-
 $$
 
 For continuous distribution $Y$, we compute MGF with the help of LOTUS rule as follows:
 
 $$
 M_Y(s) = \int_{-\infty}^\infty e^{sy} f_Y(y) dy
-
-
 $$
 
 ## Theorem
 
 $$
-
 M_{aX+b}(s) = e^{bs}M_X(as)
-
-
 $$
 
 ## Theorem
@@ -1011,11 +883,11 @@ if $X$ and $Y$ are independent, then $M_{X+Y}(s) = M_X(s)M_Y(s)$
 
 ## Theorem
 
-$\exists \epsilon > 0 \forall s \in [-\epsilon, \epsilon]: M_X(s) = M_Y(s) \in \R \implies F_X = F_Y$
+$\exists \epsilon > 0 \forall s \in [-\epsilon, \epsilon]: M_X(s) = M_Y(s) \in \mathbb{R} \implies F_X = F_Y$
 
 ## Theorem
 
-$\exists \epsilon > 0 \forall s \in [-\epsilon, \epsilon]: M_{Y_n}(s) \rightarrow  M_Z(s) \in \R \ \&  \ F_Z \text{ is continuous } \implies F_{Y_n} \rightarrow F_Z$
+$\exists \epsilon > 0 \forall s \in [-\epsilon, \epsilon]: M_{Y_n}(s) \rightarrow  M_Z(s) \in \mathbb{R} \ \&  \ F_Z \text{ is continuous } \implies F_{Y_n} \rightarrow F_Z$
 
 In this case instead of two random variables, we have a sequence of random variables.
 
@@ -1045,7 +917,7 @@ Goal: find the most efficient encoding of the sequence.
 
 $X = (X_1, \dots, X_n)$
 
-$L(n \epsilon) = min \{ L : \exists C_n \sub A^n \ \  s.t. \ |C_n| < 2^l \ \& \ Pr[X \in C_n] \geq 1 -\epsilon \}$
+$L(n \epsilon) = min \{ L : \exists C_n \subset A^n \ \  s.t. \ |C_n| < 2^l \ \& \ Pr[X \in C_n] \geq 1 -\epsilon \}$
 
 ## Shannon's source coding theorem
 
