@@ -1,5 +1,7 @@
 ---
 layout: page
+nav_exclude: true
+title: PAST 2
 ---
 
 #### _INFO_

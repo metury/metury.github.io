@@ -1,6 +1,7 @@
 ---
 layout: page
-katex: True
+nav_exclude: true
+title: TeMno
 ---
 
 ### Tomáš Turek
