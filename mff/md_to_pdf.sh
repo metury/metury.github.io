@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ueo pipefail
+set -ue pipefail
 
 mff="../Matfyz.markdown"
 
@@ -22,6 +22,6 @@ for file in *; do
 		#pandoc --katex $file -o $html
 		pandoc --katex $file -o $pdf
 		name=$(grep "title: " $file | sed 's/title: //g')
-		echo "- [$name](mff/$pdf)" >> $mff
+		echo "- [$name]($pdf)" >> $mff
 	fi
 done
