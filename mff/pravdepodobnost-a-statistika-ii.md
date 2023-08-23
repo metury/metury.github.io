@@ -1,6 +1,5 @@
 ---
-layout: default
-title: PAST 2
+layout: page
 ---
 
 #### _INFO_

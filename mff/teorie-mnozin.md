@@ -1,6 +1,6 @@
 ---
-layout: default
-title: TeMno
+layout: page
+katex: True
 ---
 
 ### Tomáš Turek
