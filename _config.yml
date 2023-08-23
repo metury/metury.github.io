@@ -4,8 +4,5 @@ theme: just-the-docs
 
 url: https://metury.github.io/
 
-mermaid:
-  version: "9.1.6"
-
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
