@@ -1,3 +1,8 @@
+---
+layout: default
+title: PAST 2
+---
+
 #### _INFO_
 
 _This is shortened text from Probability and statistics 2. Almost all examples are omitted since this is just shortened version. Also you may find several notes of what was omitted and what is the reasoning behind that. Usually it is the lack of my time._
