@@ -11,6 +11,8 @@ permalink: /Movies/
 - [ ] Vesmírná odysea
 - [ ] Invalida
 - [ ] Sedm psychopatů
+- [ ] Velké nic
+- [ ] Český sen
 
 # Movies
 
