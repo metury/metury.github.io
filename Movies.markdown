@@ -93,7 +93,7 @@ permalink: /Movies/
 # Animated
 
 | Název                               | ČSFD                                                                                 | TMDB                                                                               |
-|-------------------------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+|-------------------------------------|:------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------:|
 | Puss in Boots: The Last Wish        | [ČSFD](https://www.csfd.cz/film/389064-kocour-v-botach-posledni-prani/prehled/){: .btn .btn-purple}      | [TMDB](https://www.themoviedb.org/movie/315162-puss-in-boots-the-last-wish){: .btn .btn-purple}        |
 | Shrek                               | [ČSFD](https://www.csfd.cz/film/14999-shrek/prehled/){: .btn .btn-purple}                                | [TMDB](https://www.themoviedb.org/movie/808-shrek){: .btn .btn-purple}                                 |
 | Shrek 2                             | [ČSFD](https://www.csfd.cz/film/15000-shrek-2/prehled/){: .btn .btn-purple}                              | [TMDB](https://www.themoviedb.org/movie/809-shrek-2){: .btn .btn-purple}                               |
@@ -106,7 +106,7 @@ permalink: /Movies/
 # Series
 
 | Název                        | ČSFD                                                                           | TMDB                                                                   |
-|------------------------------|--------------------------------------------------------------------------------|------------------------------------------------------------------------|
+|------------------------------|:------------------------------------------------------------------------------:|:----------------------------------------------------------------------:|
 | Red Dwarf                    | [ČSFD](https://www.csfd.cz/film/69516-cerveny-trpaslik/prehled/){: .btn .btn-purple}               | [TMDB](https://www.themoviedb.org/tv/326-red-dwarf){: .btn .btn-purple}                    |
 | The IT Crowd                 | [ČSFD](https://www.csfd.cz/film/224203-ajtaci/prehled/){: .btn .btn-purple}                        | [TMDB](https://www.themoviedb.org/tv/2490-the-it-crowd){: .btn .btn-purple}                |
 | Parks and Recreation         | [ČSFD](https://www.csfd.cz/film/257154-odbor-mestske-zelene/prehled/){: .btn .btn-purple}          | [TMDB](https://www.themoviedb.org/tv/8592-parks-and-recreation){: .btn .btn-purple}        |
