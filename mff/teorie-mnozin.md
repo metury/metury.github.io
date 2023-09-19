@@ -1,7 +1,7 @@
 ---
 layout: page
 nav_exclude: true
-title: TeMno
+title: Teorie množin
 author: Tomáš Turek
 ---
 

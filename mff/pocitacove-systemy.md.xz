@@ -1,0 +1,1398 @@
+---
+layout: page
+nav_exclude: true
+title: Počítačové systémy
+author: Tomáš Turek
+---
+
+*Přednáška 1*
+
+***
+
+## C/C++
+
+- procedurální programovací jazyk
+- strukturované a imperativní
+- statické typy
+- použití
+	- OS
+	- HPC (high performance computing)
+	- embedded systems (jako arduino)
+- velké malé písmenka a ignorace whitespaců
+- /* */ - komntář na víe řádků (// komentář)
+- #include <stdio.h> - textové vložení (C++20 už modul)
+- int x; (globální entita)
+- funkce má návratovou hodnotu a vstupní hodnotu je v {} (tělo funkce = blok)
+
+### Proměnné
+
+- čísla
+	- decimální (42)
+	- hexadecimální (0x7a)
+- float
+	- 1.234e-5
+- string
+	- "text"
+- char
+	- 'c'
+	- int - číslo znaku
+- escape sequence
+	- `\n` - LF
+	- `\r` - CR
+	- `\t` - TAB
+	- `\\` - \
+	- `\'` - '
+	- `\"` - "
+	- `\xab` - char 0xab
+- typy
+	- base
+		- char, int
+	- modifiers (dá se kombinovat)
+		- short, long
+		- signed, unsigned
+	- auxiliary
+		- size_t
+	- floating types
+		- flout, double (32, 64)
+	- další
+		- void, bool
+	- implicitní konverze
+		- převod menšího typu na větší
+
+### Příkazy
+
+- blok {}
+- expression statemenet ;
+- `if (expres) stmt else stmt`
+- return expr;
+```C++
+switch (expr) {
+	case 0: 
+		smth; 
+		break;
+	default: 
+		smth; 
+		break;
+	}
+```
+
+- cykly
+	- `while (expr) stmt`
+	- `do stmt while (expr);`
+	- `for (expri(inicializace); exprt(test); exprs(krok)) stmt`
+- jumps
+	- `break;`
+	- `continue;`
+
+*Přednáška 2*
+
+***
+
+- výrazy
+	- aritmetické `+ - / *`
+	- porovnávací `< > <= >= == !=`
+	- bitwaise `~ & | ^ << >>`
+	- logical `&& || !`
+	- ukazatele `& *`
+	- přiřazovací `= += -= *= /= &= |= ^=`
+	- velikost proměnné `(sizeof) = počet B`
+	- ternární `test ? e1 : e2`
+- proměnné
+	- uložené v paměti a musí být deklarovaná
+	- viditelnsot proměnných (kde se nachází)
+	- globální se nemusí inicializovat, ale lokální ano
+	- static globální je, že nelze vidět v použití modulu
+	- pokud je static lokální, tak existuje celou dobu, ale není viditelná od jinud
+- pole
+	- souvislý úsek paměti
+	- pevná velikost
+	- dvojrozměrný pole se definuje počet řádek a sloupců
+- struktura
+	- struct name {type name, type name, ..}
+	- vnitřní zarovnání
+		- offset je násobkem délky proměnné
+	- vnější zarovnání
+		- aby to bylo zarovnané na násobek největší proměnné
+	- kolekce jiných proměnných
+- konstanty
+	- starý v C je #define C 13
+	- constexpr int C = 13;
+- výčtový typ (enumerated)
+	- enum e {RED, BLUE, GREEN}
+- automatický typ
+	- auto a = 3 (samo pozná co asi to je)
+- import modulů
+	- #include <system.h>
+- startovací bod je funkce main
+	- vrací hodnotu jako exit code
+	- int main(int argc, char **argv //=pole řetězců) {}
+- ukazatelé
+	- každá proměnná je v paměti (pole s adresou)
+	- adresa je index první pozice kde je
+	- &v vezmi adresu proměnné v
+	- int *pv = &v; ukazatel na int
+	- *pv = 4 se dostanu na adresu co je v pv a tam uložím hodnotu 4
+	- v c se používají šipky a tečky
+- reference
+	- už je adresa pevně daná
+	- int &rv = v;
+	- rv = 4; je jako *rv = 4;
+
+### Třída
+
+- zapouzdření
+
+```C++
+class C{
+	public:
+		C(): sum (0) {}
+		void fnc (int a) {sum+=a;}
+		int get_sum() const { return sum;}
+	private:
+		int sum;
+};
+```
+
+*Přednáška 3*
+
+***
+
+### Abstraktní počítač
+
+- von Neumann architektura
+	- na sběrnici CPU tkay je paměť i I/O
+- harvardská architektura
+	- jinde je pamet instrukci a paměť dat
+	- používa se u mikrokontrolerů
+- novodobý
+	- Sandy bridge
+		- sběrnice většinou peer-to-peer
+		- také většinou sériové sběrnice (minimální přeslechy)
+		- už přímo GFX přpojené, spousta částí připojené přes South Bridge
+
+## **CPU**
+
+- architekrtura
+	- hardware (co vyjde z výroby)
+	- ISA instrukční sada
+		- jakéjsou tam registry a instrukce, které se používají
+- "jednoduchý" stroj
+	- vykonává instrukce (simple command)
+
+### Instrukce
+
+- třídy
+	- load instrukce
+	- store instrukce
+		- load a store by měly být jediné co pracují s pamětí
+	- move instrukce
+	- aritmetické a logické instrukce
+		- některé nemají např. násobení / přes shift a sčítání
+	- skoky / jumps
+		- unconditional (nepodmíněný) x conditional(podmíněné)
+			- třeba if else je podmíněný, ale na konci je taky nepodmíněný, dále i cykly
+		- direct 
+			- přímo napsaná adresa
+		- indirect
+			- v paměti je adresa kam se bude skákat
+		- relative
+			- skok relativně (jakoby posun od offsetu kde jsem)
+	- call, return
+		- volání funkcí a vracení hodnot
+		- většinou se ukládá na nějaký zásobník (nebo registr)
+
+### Registry
+
+- typy
+	- general (integer + branch + address + ..)
+	- integer
+	- floating point
+	- address
+		- adresace paměti
+	- branch
+		- jump, skokový
+	- flags (bool, true/false)
+		- používá se třeba u podmínek
+	- predicate (1b, if bit is 1 then do)
+		- každá instrukce má tento bit, jestli se provádí nebo ne
+		- lze se použít u if else
+	- application
+	- system
+		- vlastnosti systémů
+	- vector
+		- provádění instrukcí na více datech
+- pojmenování
+	- direct / přímý
+	- stack / zásobník
+- aliasing
+	- použití jiných označení
+	- třeba poloviční registr, tak má jiné jméno
+- ortogonální
+	- instrukce mohou používat jakékoliv registry
+	- pokud není, tak jsou registry určené pro jisté operace (x86)
+
+*Přednáška 4*
+
+***
+
+- ABI
+	- predpis jak se ma clovek chovat k registrum (k cemu jsou)
+	- někdo nadefinoval předem jaká je role registrů
+
+#### MIPS (spíše zajímavost)
+
+- registry
+	- značí se $r[0-31]
+	- registry mají aliasy a mají určené k čemu jsou
+	- preserve / not preserve
+		- jestli se má uchovávat po dokončení funkce
+- aritmetické operace:
+	- add $rd, $rs, $rt
+		- R[rd] = R[rs] + R[rt]
+	- addi $rd, $rs, imm16
+		- R[rd] = R[rs] + imm16
+	- sub $rd, $rs, $rt
+		- R[rd] = R[rs] - R[rt]
+	- subi $rd, $rs, imm16
+		- R[rd] = R[rs] + imm16
+- logické
+	- and/or/xor/nor $rd, $rs, $rt (neni no, místo toho nort)
+		- R[rd] = R[rs] and R[rt]
+	- andi/ori/xori/nori $rd, $rs, imm16
+- bit shift
+	- sll/slr $rd, $rs, shamt
+		- R[rd] = R[rs] >>/<< shamt
+	- sra $rd, $rs, shamt (aritmeticky)
+- memory
+	- lw (load word) \$rd, imm16 ($rs)
+		- R[rd] = M[R[rs] + imm16]
+	- sw (store) \$rt, imm16 ($rs)
+		- M[R[rs] + imm16] = R[rt]
+	- lb/lbu (load byte, rozšíření znaménková a bezzn)
+	- sb (store)
+- move
+	- li (load imidiate, načíst hodnotu)
+	- move (kopie z reg do reg)
+- jump
+	- j addr (skok na adresu)
+		- PC = addr
+	- jr $rs (skok na hodnotu v registru)
+		- PC = R[rs]
+	- jal addr (skok do podprogramu)
+		- R[31] = PC+4, PC = addr
+	- conditional jumps
+		- beq $rs, $rt, addr
+			- if R[rs] = R[rt] then PC = addr else PC = PC + 4
+		- bne $rs, $rt, addr
+			- podobné akorát nonequal
+- Testování
+	- slt $rd, $rs, $rt
+		- if R[rs] < R[rt] then R[rd] = 1 else R[rd] = 0
+	- sltu $rd, $rs, $rt
+		- unsigned verze
+	- slti $rd, $rs, imm16
+		- podobné akorát porovnání s hodnotou
+	- sltiu $rd, $rs, imm16
+		- unsigned předchozí
+
+#### Flags
+
+- speciální příznakové registry
+- je spousta flagů, které se po použití instrukce změní
+	- ani to není vždy konzistentní (x86)
+- zero flag
+	- jestli proběhlo v pořádku
+- sign flag
+	- nejvyšší bit
+- carry flag
+	- přetečení třeba při sčítání
+	- i na logické posuny
+- Typy flagů
+	- systémové
+		- lze jen přistoupit systémově
+	- aritmetické
+		- při používání aritmetiky
+
+### CPU
+
+- architektura
+	- ovladač paměti
+	- cache hierarchy
+	- jadro
+	- registry
+	- logický procesor
+		- hyper threading
+	- instrukce
+		- jednoduchy povel, musi byt zakodovane binarne
+		- assembler
+			- jakožto překladač do binární formy
+			- samotný zápis pomocí instrukcí
+		- ma operandy, proud instrukci (PC - program counter)
+		- jista implementace zasobniku (SP - stack pointer)
+
+### ISA
+
+- instruction set architecture
+	- abstraktni model CPU
+- klasifikace
+	- CISC (Complex Instruction Set Computer)
+		- komplexní instrukční sada
+		- spousta instrukcí
+	- RISC (reduced)
+		- redukovaný
+		- spoustu menších instrukcí, má menší počet tranzistorů
+	- VLIW (Very Long Instruction Word)
+		- dlouhý řetězec bitů, která určuje co se děje
+	- EPIC (Explicitly Parallel Instruction Computer)
+		- v dané instrukci je zakódováno co se dá provádět paralelně
+- ortogonalita
+	- je ortogonální, pokud se dají registry vyměnovat
+- Load-Execute-Store
+	- jen tři typy instrukcí
+	- load store pracuje s pamětí
+- Schéma CPU
+	- každé jádro má EU (výpočetní jednotka)
+	- každé jádro má své cache
+		- L1I - instrukční
+		- L1D - datové
+		- L2
+		- L3/LLC - sdílené pro jádra
+	- v jádře jsou také vlákna
+		- více vláken sdílí EU
+		- zrychlení o 20% - 50% (ze začátku to i zpomalovalo)
+
+*Přednáška 5*
+
+***
+
+### Pipeline
+
+- rozdělení na pipeliny
+- každá instrukce se dá rozdělit
+	- instruction fetch, decoding, execution, práce s pamětí, zapsaní výsledku
+- rozdeleni na jednodusi prace a provadet je zaroven
+	- v jeden moment se provádí všech 5 částí ale jiných instrukcí
+- začátek se nazývá náběh a konec je pak výběh
+- momentální CPU má 14-19 fází
+	- pokud mám třeba podmínku, tak se nemusí provést a potom je hodně volných fází
+- v CPU se snaží HW odhadnout podmíněné skoky
+- jednodušší a za jednotku času stihnu více věcí
+- někdy je třeba chvíli počkat, pokud něco chybí
+
+#### Superskalarita
+
+- provadeni vice pipeline zaroven
+- třeba zároveņ mám dvě instrukce zároveň
+- dnes jsou třeba 5 cestný asymetrické
+
+#### Out of order execution
+
+- instrukce se provádí v jiném pořadí, než ve kterém byly míněné
+- všechny instrukce padají do bazénku a čekají až se dostanou do správné jednotky
+	- jakmile se uvolní místo, tak se vykonná instrukce
+- pak to spadne do reorder buffer
+	- tam se zase instrukce přeskládají aby to bylo zase ve stejném pořadí
+
+## **Paměť**
+
+- jedna memory cell je bit
+- bity jsou fixní v jednom slovu (8-bit)
+- hardwarově se jedná o dvourozměrné pole
+	- po řádcích je pomalejší oproti tomu po sloupcíh je rychlejší
+- časování
+	- CAS - column acces strobe
+		- tohle je vlastně nejpodstatnější hodnota, čím menší tím lepší
+	- tRCD - row address to column address delay
+	- tRP - row precharge
+	- RAS - row active time
+- jak se ukládají dané typy (čísla, signed and unsigned and floating point)
+	- two's complement (asymetrické, jedna nula, aritmetika
+	- floating point (hidden bit, znaménko, exponent, mantisa)
+- endianita
+	- pořadí bytů v jakem je to organizované
+	- LE
+		- least significant byte first
+	- BE
+		- MSB first
+
+#### vycpávání dat prázdnými byty
+
+- inner & outer padding
+- vnitřní
+	- hodnota musí být na offsetu která je dělitelná svojí velikstí
+	- bráno s pohledu struct
+- vnější
+	- přímo v paměti musí být taky na násobku své velikosti těch typů
+- alokace paměti
+	- najít si volný kus paměti a tu zabrat
+	- životní cyklus
+		- alokace bloku, použití bloku a nakonec uvolnění bloku (explicitně, garbage collector)
+
+#### fragmentace
+
+- interní
+	- alokace více paměti než která je potřeba v bloku
+	- má přístup jen k tomu co chtěl, akorát daný blok je zabraný
+- externí
+	- promíchání volných a zabraných bloků
+	- celkově na paměti zabrané
+- dynamicka alokace paměti
+	- jak se eviduje volné bloky
+		- spojový seznam volných bloků
+		- bitmapa
+			- každý bit 1/0 zabrané/volné bloky
+- **algoritmy na alokaci paměti**
+	- first fit
+		- první volné místo od začátku které je dostatečně velké
+		- **+**
+			- rychlé a jednoduché
+		- **-**
+			- rozděluje dlouhé bloky
+	- next fit
+		- první volné místo od toho kde jsem zkončil
+		- **+**
+			- rychlé, nefragmentuje začátek
+	- best fit
+		- od začátku nalezne nejmenší dostatečné pole
+		- **+**
+			- nechává velké bloky
+		- **-**
+			- pomalejší, vytváří spoustu malých bloků
+	- worst fit
+		- od začátku akorat hledám největší pole
+		- **-**
+			- rozděluje velké bloky
+	- buddy memory alocation
+		- $2^N$ velikost
+			- i zarovnání bloků
+		- hledám nejmenší blok této velikosti zaokrouhlené na mocninu dvojky
+		- pokud nenaleznu, tak je rozdělim na dvě $2^{N-1}$
+		- adresu buddyho získáme XORem adresy a velikosti bloku
+		- spojení bloků pokud jsou buddies volné
+
+*Přednáška 6*
+
+***
+
+- Paměťová hierarchie (roste prostor a spomaluje se a zlevňuje)
+	- not persistant (potřeba napojení)
+		- registry
+			- nejrychlejší a taky nejméně prosotru
+			- 1 takt, stovky bytů
+		- cache
+			- hierarchie cache L1, L2, L3
+			- 4 takty - 16 taktu - 100 taktu
+			- desitky, stovky kB, v MB
+			- pro zmenseni velkeho rozdilu RAM a registru
+		- RAM
+			- adresovany prostor procesorem
+			- nekolikanasobne pomalejdsi pristup nez do registru
+			- 1_000 taktu
+	- persistant (i po vypnuti)
+		- persistance RAM
+			- jako RAM akorat se neztrati data
+			- je ovsem pomalejsi
+			- porad adresovane procesorem
+			- desítky GB
+		- SSD, flash disk
+			- uz pres sbernici a radic
+			- porad vysoka rychlost
+			- stovky GB až malé TB
+		- HDD
+			- vyrazne pomalejsi pristup
+		- pasky
+			- prevazne pouziti pro zalohu
+
+## Cache
+
+- HW i SW
+- "datova struktura"
+- omezeny pametovy prostor
+	- někdy se musí vybrat obět pro uvolnění místa
+- ukladani dat, ktere potrebujeme v prubehu, pokud pri pozadavku je v Cache, tak ho vezmu primo z ni
+- v HW  aby se zrichlil pristup do RAM
+- pokud se hodně používají dané data, tak je posouvám k bližším cachím, popř přesun do L3/LLC, pokud je potřebuje více jader
+- lokalkita pristupu
+	- vysoka pravdepodobnost, ze sahnu pobliz v paměti, kde jsou data
+- Cache line/entry
+	- nejmensi jednotka s kterou pracuje (vetsinou 64B)
+- Cache hit
+	- podari se mi najit data v cachi (okolo 97%)
+- Cache miss
+	- data nejsou v cachi
+	- nacte data z pameti a zapise je do prazdne pozice v cachi (nebo vyhodi oběť a zapsani do pameti)
+- Cache line state
+	- protokol MESI (modified, invalid, share, inclusive)
+	- udrzeni koherence
+
+## Asociativni pamet
+
+- pomoci klice uklada hodnotu
+- hledá se pomocí klíče (ne lineárně, v konstantním čase)
+- jako klíč se používá adresa v RAM (Cache line)
+- velmi rychla
+- pouziva se v cachi
+
+## NUMA
+
+- multiprocesory pocitac
+- SMP
+	- symetric multiprocessing
+	- vsechny procesory a RAM na jedne sbernice (max 8 potom uz spatny)
+- NUMA
+	- non uniform memory access
+	- kazdy procesor ma svoji cast RAMky
+	- ale adresuje se cely prostor RAMky
+	- bud lokalni a nebo posle zadost jinemu procesoru
+	- ruzne rychle pristupy do pameti
+	- NUMA uzel
+		- spojeni CPU a RAM
+	- NUMA faktor
+		- zpomaleni pristupu, když musíme do jiné RAM jiného CPU
+
+## **Programovaci jazyky**
+
+- prekladac
+	- naivní pohled, že dá se do krabice zdroják a dostanu buď chybu nebo program
+	- je to vlastně mapování
+- gramatika
+	- ma pravidla a klíčové slova
+- zdrojak $\to$ prepocessor (pridani napr #include, import) $\to$ compiler (textovy zapis do assembleru a přidání interfaců) $\to$ assembler (binarni podoba) $\to$ Linker (spoji vsechny soubory a knihovny) $\to$ executable
+- prekladac je vetsinou spojene prepocesor compiler a assembler dohromady
+	- někdy je dobré se podívat na mezivýsledky, jestli je to dobře přeložené
+	- binární soubory jsou závislé na OS
+
+*Přednáška 7*
+
+***
+
+- z programu se vyrobi proces
+- organizace pameti behem procesu
+	- kód
+		- občas i konstanty
+		- instrukce vyrobené překladačem
+		- neměnná
+	- staticka data
+		- da se zde zapisovat
+		- pro globalni promenne a data
+	- zasobnik
+		- volání funkcí abych věděl kam se vrátit
+		- ukládání lokálních proměnných
+	- halda
+		- alokace dat (C# new)
+- realne to je spise
+	- kod
+	- konstanty
+	- inicializovane staticke data
+	- neinicializovane staticke data
+		- dobré proto aby se nulovali hodnoty
+	- stack pro vlakna 1...n
+		- každé vlákno má vlastní zásobník
+		- může narazit na konec a přetéct do dalšího zásobníku
+	- halda
+		- sdílený pro všechny vlákna
+- Library
+	- kolekce uz napsane zkompilovanych modulu
+	- jak staticke
+		- jeden soubor a ten okopiruji
+	- tak i dynamicke
+		- rozhrani a implementace
+			- pri prekladu nekopiruju, ale oznacim, ze chci danou knihovnu pouzit
+- Linking
+	- spojeni vsech casti (přeložených kódů a knihoven) do jednoho spustitelneho souboru pro dane OS
+	- sekce se spoji dohromady, musi se zmenit offset, protoze se zmeni
+	- relokace
+	- přeložení a vzniku kódu, konstant a statických dat od všech částí
+		- potom se slepí segmenty kódu, konstant a statických dat (z knihovny jen to co je potřeba)
+		- musí se zpravit odkazování na adresy paměť (adresy jsou hned už relativní)
+		- je tam připravené místo, které se opraví vůči začátku segmentu
+	- vybírání z knihoven pomocí entry pointů
+- Loader
+	- cast OS
+	- nacte program do pameti
+	- relokace
+		- načtení programu do paměti na nějakou adresu (upravit adresu aby to sedělo)
+- Run-time
+	- Statika podpora jazyka
+		- compiler (překladač)
+		- library interface
+		- potřeba při překladu
+	- Dynamicka podpora jazyka
+		- organizace pameti
+		- jak se volaji funkce
+		- dynamicke knihovny
+	- volani funkce - aktivační záznam
+		- volajici funkce si pripravi parametry a pripravi navratovou hodnotu (kdyz je velka hodonta, popr. prida adresu teto hodnoty)
+		- skoci se na funkci, zapamatuji si adresu navratovou
+		- uchovat si adresu volajici funkce (adresa aktivacniho zaznamu)
+		- uchování registrů, které se musí uložit
+- volaci konvence
+	- dohoda o tom jaky je prubeh, kdyz jedna funkce vola druhou
+	- mandlovani jmena - zakodovani do funkce tridy atd.
+	- sekvence kdo za co bere zodpovednost (kdo co uklizi)
+	- jak se predavaji parametry a v jakem poradi se davaji na zasobnik
+	- navratova hodnota, pokud se nevraci standardni hodnota, tak se uz predem pripravi na zasobniku misto
+	- role registru
+		- jestli se maji zachovat a nebo ne - scratch/preserved
+		- většinou je to půl na půl
+- mangling
+	- "mandlovat" (preklad)
+	- jak se jmenuje funkce aby se s ni pracovalo
+
+*Přednáška 8*
+
+***
+
+- Call/return konvence
+	- volajici funkce zodpovida za parametry a navratove hodnoty
+	- take se stara o smazani parametru
+- Predavani parametru
+	- hodnotou
+		- jako mistni promenna, kterou jsem okopiroval
+	- referenci
+		- predavani adresy, kde je dana promenna
+		- pak už je přístup přímo k hodnotě, ale při změně se změní externě
+- Promenne
+	- pojmenovani pameti pro hodnotu
+	- vetsinou ma dany typ
+	- Pamet
+		- staticka
+		- heap
+		- zasobnik
+		- slovnik
+			- dynamická struktura
+			- používá se u Pythonu
+
+### Halda / heap
+
+- dynamicka pamet
+- alokace
+	- jak u dynamicke pameti predem
+- dealokace
+	- v nejakych jazycich je treba je dealokovat
+	- v novejsich se pouziva garbage collector
+
+### Garbage collection
+
+- automaticke mazani nepouzitich pametovych bloku
+- vyhody
+	- nejsou memory leak
+	- je jednodusi
+- nevyhody
+	- impact on performance
+	- neni jasny zivotni cyklus (nepredvidatelny)
+- strategie
+	- trasovani
+		- co je dosazitelny (ze zásobníku)  tak je oznacim jako zive
+		- co neni oznacene, tak zrusim
+	- pocitani referenci
+		- po prirazeni zvysim counter
+		- pri zanikani reference zase snizim
+		- pokud je counter 0, tak ho zabiju
+		- problem s cykly
+	- jsou i pokročilejší verze
+
+### Prenositelnost
+
+- prenositelnost kodu
+	- CPU architektura
+		- jine velikosti promennych (v nejakych jazycich jsou fixni)
+		- někdy se velikost bere z architektury CPU
+	- Prekladace
+		- ruzne jazykove "příchutě"
+		- snaha udrzeni normy a standardních přístupů
+	- OS
+		- jine systemove volani a knihovny
+		- kod se da rozdelit do jinych casti a prekladac pak jen prelozi co je na dany OS
+		- někdy to může být lehčí (BSD sokety)
+- prenositelnost VM (virtual machine)
+	- prelozeni do binarniho "mezikodu"
+	- abstraktni instrukce (C# CIL)
+- Rychlostni problemy
+	- JIT (just in time)
+		- prelozeni mezikodu do nativni na zavolani
+	- AOT (ahead of time)
+		- behem instalace
+
+*Přednáška 9*
+
+***
+
+## **Operacni systemy**
+
+- 2 role, ktere musi splnovat OS
+	- abstraktni stroj
+		- jadro (kernel) ma jiste rozhrani (API)
+			- systemova knihovna (systemove volani na jadre)
+		- schovani toho jak se pracuje s HW
+	- spravce prostredku (resource manager)
+		- veskery HW je spravovany OS
+		- sdílení HW pro aplikace
+
+### CPU rezimy
+
+- uzivatelsky rezim
+	- bezi normalni aplikace
+	- neni pristup k jistym rozhranim
+- kernel rezim
+	- bezi cely OS, nebo aspon cast
+	- ma plny pristup ke vsem prostredkum a i k sobe samemu
+- musi byt proveden nejaky prechod mezi danymi rezimy
+	- vetsinou specialni instrukce
+		- potom se už zavolá kód, kterou má definovanou adresu
+	- predavani paramtetru pres registry
+		- jsou přístupné i z uživatelského rozhraní
+	- mozna i dobre rizena chyba
+
+### OS architektury
+
+- monolithic
+	- cely je to jeden velky balik a cely bezi v privilegovanem rezimu
+	- "Early days", Linux
+	- jeden Entry point a pak se proswitchuju pro procedury
+	- **+**
+		- snadno se dostaneme ke vsem prostredkum
+		- nejrychlejsi
+	- **-**
+		- neda se schovat data mezi sebou
+		- velka bezpecnostni dira
+		- drive to slo hure rozsirovat (nyni lze nahrat dynamicky moduly)
+			- třeba pokud připojím USB bez ovladače
+- layerd
+	- evoluce monolithic
+	- udelat podobne akorat to rozdelit na vrstvy
+		- vrstva n+1 používá služby vrstvy n
+	- tezke navrhnout
+- microkernel
+	- v chranenem rezimu pobezi jen minimalni cast
+	- zajištění komunikace mezi aplikacemi
+		- pošle se zpráva jinému modulu a pak se pošle zpátky odpověď
+	- **+**
+		- bezpecne, rozsiritelne, spolehliva
+	- prakticky jen prehozeni od jedne aplikace do druhe
+	- posilani zprav je nahrada za volani funkce (stoji to vice casu)
+	- v jistem smyslu to je Windows
+
+## Zarizeni
+
+- vec pro jiste pouziti (definice)
+- radic zarizeni (controller)
+	- elektricky pripojit zarizeni
+	- pripojeni do topologie zarizenich
+- ovladac zarizeni (driver)
+	- softwarova cast
+	- v jake pameti lezi
+	- jak s nim komunikuji
+	- pri startu projde vsechny zarizeni a urci jim jejich pameti
+		- pote si data take ulozi do tabulky, kterou pouziji pri dalsim bootovani
+
+### Topologie zarizeni
+
+- DC (device controller)
+- BUS
+	- jedna sbernice
+	- na ni jsou zapojene vsechny zarizeni
+	- musi se urcovat kdo ridi komunikaci (radic)
+- STAR
+	- peer-to-peer
+	- nevyhodne pro radic, musi komunikovat se vsemi zaroven
+	- vice vyvodu do zarizeni (prave do jednoho)
+- RING
+	- orientovana kruznice
+	- od DC prochazi pres vsechny zarizeni
+	- preposilaji si data
+- TREE
+	- je mozne pripojit zarizeni k DC a nebo HUB pres ktery pripojim dalsi zarizeni
+	- USB
+	- je mozne vyresit k odpojovani a pripojovani novych zarizeni
+
+### Pracovani se zarizenim
+
+- uzivatelska I/O knihovna
+	- prevedeni na sys cally
+- kernel
+	- zjisti jakeho zarizeni se to tyka
+	- preposle to ovladaci daneho zarizeni
+- HW
+	- z ovladace to prejde do radice zarizeni a posle se to zarizeni
+- nakonec nazpatky vybublava odpoved, nebo se cyklí od driveru a controleru a zařízení
+
+### Komunikace se zarizenim
+
+- komunikace mezi radicem a ovladacem (zpetne volani)
+- Polling (ocuchavani)
+	- periodicky se diva na specificke misto v pameti, jestli se tam neco nezmenilo
+- Interrupt (preruseni)
+	- radic potrebuje neco poslat, tak da signal procesoru (IRQ interrup request)
+	- fyzicke pripojeni
+	- CPU prerusi svoji cinnost a vyvola se preruseni
+	- IRQ handling (co se jedna za vyruseni)
+*Přednáška 10* 4.5.2021
+
+
+***
+
+- DMA (direct memory acces)
+	- specialni radic navic
+	- po konci prace se sami prenesou na spravne misto (bez pouziti CPU)
+	- po dokopirovani dat prerusim CPU
+	- scatter operace
+		- rozstipani na mensi kousky
+		- (*priklad* TCP/IP)
+	- gather operace
+		- slepim vice dat do jednoho
+
+## Preruseni
+
+### typy
+
+- externi (vnejsi)
+	- pouzivani pinu IRQ
+	- da se zamaskovat preruseni
+		- pokud nechci aby nekdo rusil, tak ho zakazu
+		- pote se zase zapne
+- exception (vyjimka)
+	- najednou se zjisti, ze je nejaky necekany problem s instrukcemi
+	- vetsinou chyba nejake aplikace (ale nekdy to spatne byt nemusi)
+	- trap
+		- hlasi se az za instrukci
+	- fault
+		- nelze aby instrukce dobehla
+		- vse se vrati a preruseni se provede pred instrukci
+		- potom se da znovu zavolat (ale samozrejme se musi opravit)
+- software
+	- specialni instrukce
+
+### Prubeh
+
+- externi soucastka (IRQ controller), ktera ma vstupy na piny IRQ, jsou ocislovane
+- potom prerusi CPU a take mu posle to dane cislo preruseni
+- interrupt table (pole adres preruseni), popr. taky muze byt fixni
+- vetsinou mezi dvemi instrukcemi, preskoceni do modu jadra
+- musim si schovat stav CPU a pak se resi obsluha problemu
+- obnoveni stavu CPU
+
+## Processing
+
+- jak poustim programy
+
+### Program
+
+- to co jsem prelozil kompilatorem a nebo linkerem
+- pasivni seznam instrukci
+
+### Proces
+
+- zivy program
+- OS nacte data do pameti a spusti instanci programu
+- spravuje adresovy prostor ve kterem pobezi program
+- na konci OS odalokuje vsechny prostredky, ktere byli procesu predany
+
+### Thread (vlakno)
+
+*solaris OS*
+- vicero mist, kde se budou provadet instrukce
+- proces ze zacatku vytvori jedno vlakno
+- kazde vlakno si pamatuje kontext registru
+
+### Fiber
+
+- dalsi zpusob na planovani
+- podobne jako vlakno, ale vetsinou OS o tom nevi
+- lze kooperativne planovat
+
+### Scheduler (planovac)
+
+- modul (kus kodu), ktery pouziva planovaci algoritmi pro prirazovani vlakna procesum
+
+### Multitasking
+
+- pro spusteni vice procesu zaroven a to i na jednom jadru CPU
+
+### Multiprocessing
+
+- podobne jak multitasking
+- vicero CPU
+- slozitejsi pro scheduler
+- snaha udrzeni vlakna na jednom procesoru
+
+### Kontext
+
+- stav jednotky planovani (vlakno)
+- pro sundani vlakna z procesoru se ulozi stav CPU
+- pro obnovovani
+
+### Kontext switch
+
+- prehozovani kontextu stareho a noveho vlakna
+
+*Přednáška 11*
+
+***
+
+### Real-time scheduling
+
+- ma jisty startovaci cas a konocvy cas (deadline)
+- reakce na udalosti (release time - kdy se pusti proces, po tom co se neco stalo)
+- deadline
+	- do kdy musi skoncit
+	- hard
+		- nema dal smysl pocitat
+	- soft
+		- ma jeste cenu pokracovat
+
+## Jednotka planovani
+
+- vetsinou to je vlakno
+- stavy
+	- created
+		- vytvorene a ceka na spusteni
+	- terminated (zombie)
+		- ukonceni procesu
+		- ceka se az pro prevzati hodnot
+	- ready
+		- jednotka je schopna bezet ale nema k dispozici procesor
+	- running
+		- tady uz ma prirzeny procesor
+		- pokud procesor potrebujeme jinde, tak ho presune do ready
+	- blocked
+		- cekam pro prostredky
+
+### Multitasking
+
+- cooperative (kooperativni)
+	- OS neudela context switch
+	- vlakno se dobrovolne vzda procesoru
+	- pokud vsichni kooperuji, tak je jednodusi jak preemptive
+- preemptive (preemptivni)
+	- kazde jednotce pridam cas po kterem bude bezet (time-slice)
+	- musi byt jiste preruseni (nejaky timer)
+	- pokud za dobu time-slice jeste porad pocita, tak se vyvola preruseni
+	- prevedu z running to ready
+
+## Planovani (scheduling)
+
+### cile (objectives):
+- maximalizovat vytizeni procesoru
+- spravedlive prirazovani
+- maximalni propustnost
+	- co nejvic vypoctu se udela za casovou jednotku
+- minimalizace dokonceni (turnaround time)
+	- aby co nejrychleji dokoncil svoji praci a vypadnul ven
+- minimalizovani cekani
+	- omezeni casu kdy jsou v ready
+- minimalizace casu odezvy
+
+### Priority
+
+- prideleni procesum jistou prioritu (vyssi = vetsi)
+- pri planovani se uprednostnuji s vetsi prioritou
+- staticka priorita
+	- priradi na zacatku procesu
+	- uzivatelska hierarchie
+- dynamicka priorita
+	- pridani aby vsechny procesy meli ferove planovani
+	- nejdriv proces zacina s 0 a taky se resetuje potom co byla RUNNING
+	- jednou za cas jsem vsem READY prida dynamicka priorita
+- celkova priorita
+	- vypocita se souctem staticke a dynamicke priority
+
+### **Planovaci algoritmy**
+
+### Non-preemptive
+
+- **First come, first serve (FCFS)**
+	- jednoducha rada, procesor si voli ty co jsou na vrchu
+	- novy proces je na konci
+- **Shortest Job First**
+	- maximalizace throughout (kolik jobu udelam za jednotku casu)
+	- musi se znat odhad casu jak dlouho pobezi
+- **Longest Job First**
+	- opacna strategie
+
+### Preemptive
+
+- **Round Robin** (cz - psuedo *kruhova sykorka*)
+	- podoba se FCFS, obsahuje frontu
+	- kazda jednotka ma prirazeny time-slice
+	- pokud spotrebuje cely svuj time-slice tak prijde na konec (tail) fronty
+- **Multilevel feedback-queue**
+	- vicero front
+	- kazdy level ma vetsi time slice
+	- hlubsi ma delsi time-slice
+	- pokud jednotce nestacilo time-slice, tak se priradi do nizsi fronty (nejspise bude potrebovat vice casu)
+	- pokud je na zacatku fronty, tak prejde do predchozi fronty
+	- (*potreba lepe pochopit*)
+- **Completely fair scheduler (CFS)**
+	- je v jadre Linuxu
+	- procesy jsou v cerveno-cernem strome
+		- indexovane pomoci casu
+	- maximalni execution time
+		- time-slice pro kazdy proces
+	- planovaci algoritmus
+		- beru nejlevejsi koren (lowest execution time)
+		- pokud nestinhe provest behem sveho casu, tak se prida znovu do stromu s novou hodnotou
+
+## Soubor
+
+- kolekce informaci po hromade
+- abstraktni proud dat (OS nerozumi tem datum)
+- operace
+	- otevreni (open)
+		- nejdrive nalezne soubor
+		- prevest jmena souboru do binarni identifikace
+		- namapuje soubor s cislem (indexi otevrenych souboru)
+	- zavreni (close)
+		- odmapuje se index v danem procesu
+		- vsechny data co se jeste nedopsali do souboru, tak se musi dopsat
+	- cteni (read)
+		- prace se streamem
+		- abstraktni ukazatel (zacina na 0)
+	- psani (write)
+		- take prace se streamem
+		- take ukazatel
+	- nahlizeni (seek)
+		- presunuti ukazatele na offset od zacatku
+
+*Přednáška 12*
+
+***
+
+- pristup
+	- sekvencni
+		- cist data za sebou (bez seeku)
+	- random
+		- vyuzivani seek
+- typ
+	- pripona
+		- kazdy soubor ma jisou signaturu, ale hledat jaky to je soubor je narocne
+		- proto se pouziva pripona pro napovedu k OS jak s tim pracovat
+		- ale take se hodi k tomu aby to lepe poznal clovek
+- atributy
+	- jmeno souboru
+	- i pripona
+	- velikost souboru
+	- pristupove prava
+
+## Adresar (directory)
+
+- kolekce souboru
+	- efficiency - pro hledani souboru
+	- naming - lepsi navigace pro uzivatele
+	- grouping - logicke seskupovani souboru
+- jedna se o specialni soubor
+	- file system s tim umi pracovat
+- ulozene atributy souboru
+- jista hierarchie a truktura adresaru
+	- existuje adresar root (korenovy adresar)
+		- uplni prvni
+- operace
+	- create / delete / rename - file / subdirectory
+	- hledani jmena
+	- zobrazeni clenu (list members)
+
+## File system
+
+- **datova struktura** budovana na nejakem pametovem zarizenim
+- kontroluje jak a kde se ukladaji data
+- take vytvari abstrakci pro soubory a adresare
+- ukoly
+	- preklad jmen na binarni reprezentaci
+	- lokace dat souboru
+	- free block management
+		- bitmap, spojový seznam
+- lokalni file systemy
+	- na HDD, SSD, removable media
+	- FAT, NTFS, ext234, XFS, btrfs
+- network file system
+	- pristup k souborum pres sit
+	- NFS, CIFS/SMB(samba)
+
+### FAT
+
+- file allocation table
+- jednoduche, starsi, MS-DOS
+- jedna struktura pro management volnych bloku a lokace data souboru
+- adresar
+	- sekvence fixnich polozek a atributu
+		- jmeno, pripona, velikost, timestamps, attributes a starting cluster (cislo prvniho bloku)
+- organizace pomoci pole
+	- zacina se od 2
+	- 0 je prazdny, -1 je posledni a ostatni je cislo bloku
+- na danem disku
+	- boot record
+	- FAT1
+		- tady se delaji zmeny
+		- ma jasne danou velikost (s ohledem na zarizeni)
+	- FAT2
+		- pokud se povede udelat zmena na fat1, tak se tady udela kopie
+		- v pripadu nejake katasttrofy to spravim
+	- root directory
+	- DATA
+
+### ext2
+
+- second extended file system
+- jednoduche, starsi, Linux
+- Inode (index node)
+	- reprezentuje jeden soubor/adresar
+- adresar
+	- sekvence atributu s fixni strukturou
+	- inode, name
+- na disku
+	- boot record
+	- block group 0
+		- Superblock
+			- stejny pro vsechny, kde co je
+		- Descriptor
+			- popis
+		- Data bitmap
+			- kde je volno a kde je plno
+		- Inode bitmap
+			- kde je volno a plno v inode
+		- Inode table
+			- bloky, kde lezi inodes
+			- Info
+			- Block 0
+				- index na data
+				- Data block
+			- Block 1
+				- Data block
+			- ...
+			- Block 11
+			- Block 12 (I)
+				- neprimy odkaz
+				- vytvoreni dalsiho bloku indexu
+			- Block 13 (DI)
+				- dvojity neprimy odkaz
+			- Block 14 (TI)
+				- trojity neprimy odkaz
+		- Data block
+			- bloky, kde lezi data
+	- block group 1
+	- ...
+	- block group N
+
+## Hard disc mechanism
+
+- plotny, rameno s hlavami
+- rozdeleno na track a sector
+- block
+	- vysec na vsech poltnach (sector na vsech plotnach)
+- cluster
+	- stopa na vsech plotnach
+- flying height
+	- vzdalenost mezi halickou a plotnou (~5nm)
+	- jista stabilizace hlavicek
+- rotacni rychlost
+	- 5400, 7200, 10k, 15k rpm
+	- zavisi na velikostech ploten (a fyzice)
+- byvalo vzduchoprazdno, dnes je v HDD helium
+
+## Disk scheduling algorithms
+
+- planovani I/O pozadavku pro disk
+- originalne bylo reseno pomoci OS, ale uz je primo od disku
+- cas pristupu na disku =
+	- seek time +
+		- posun hrabicek (~ms)
+	- \+ rotational latency +
+		- rotace sectoru do pozice hlavicek
+	- \+ transfer time
+		- prenos dat
+
+### FCFS
+
+- first come first served
+- jaky pozadavek prijde, takovy se pouziva
+	- **+**
+		- ferovy sance pro pozadavky
+		- jednoduchy, dobry pro maly napor
+	- **-**
+		- neni optimalizace
+
+### SSTF
+
+- shortest seek time first
+- od aktualni pozice najdu nejblizsi
+	- **+**
+		- zmenseni casu pristupu
+		- zvetseni throughput
+	- **-**
+		- mozne hladoveni
+		- pokud se vzdy nalezne nejblizsi a na konec se nedostane
+
+### SCAN
+
+- elevator
+	- ma smer
+- beru jakoby SSTF, ale ve smeru
+	- **+**
+		- zvetseni throughput
+		- male rozdily v pristupu casu
+	- **-**
+		- dlouhe cekani pro nove requesty, ktere jsme prave navstivili
+
+### CSCAN
+
+- circular SCAN
+
+### LOOK/CLOOK
+
+- jako SCAN a CSCAN, ale nenavstevuji konce
+
+### FSCAN
+
+- dve fronty
+- vypocitany algoritmu pro prvni
+- nove pozadavky se davaji do druhe
+
+*Přednáška 13*
+
+***
+
+## Virtualni pamet (MMU)
+
+- vsechny ukazatele ukazuji do virtualniho adresoveho prostoru
+	- z pohledu programovani
+- operacni pamet ma fyzickou pamet
+	- fyzicky adresovy prostor
+- prekladani
+	- provadi se v HW
+	- prevadi virtualni adresy na fyzicke adresy
+	- jedna se o jiste zobrazeni (mapovani)
+	- ne vzdy mapovani existuje
+		- vyvolani vyjimky
+	- dva klasicke mechanismy
+		- segmentace (segmentation)
+		- strankovani (paging)
+
+### Duvod
+
+- virtualni prostor mohl byt vetsi nez fyzicky prostor
+- sekundarni pamet jako backup/swap
+	- tyto duvody uz nejous dnesnimi duvody
+- dnes je predevsim kvuli **bezpecnosti**
+	- dokazu oddelit adresove prostory (nelze delat zmeny druheho procesu)
+
+## Segmentace
+
+- koncept
+	- virtualni adreesove prostory oddelene do logickych bloku
+	- segmenty jsou ocislovane
+	- virtualni adresa ma dve casti
+		- [segemnt number, segmenrt offset]
+		- offset je 0 pro kazdy segment
+	- **segmentacni tabulka**
+		- v pameti pro kazdy proces
+		- primo indexovane cislem segmentu
+		- jsou zde uchovavany atributy, delka segemntu a zakladni adresa, kde zacina segment ve fyzicke pameti
+		- kdyz dojde misto, tak musim najit nejakou victim
+
+### Strankovani (Paging)
+
+- koncept
+	- useky stejne velikosti = stranka
+	- je zde $2^n$ stranek
+	- ve fyzicke jsou ramce (frames)
+		- maji stejnou velikost jako stranky
+	- page table
+		- datova struktura
+		- je v pameti a je pro kazdy proces
+		- pole indexovane cislem stranky
+			- rovnou uvedene cislo ramce
+- Prvni uroven
+	- problemy
+		- nutno pouzit hodne pameti pro strankovaci tabulky
+- Druha uroven
+
+*Přednáška 14*
+
+***
+
+### Preklad adresy strankovani
+
+- bity A a D
+	- D je dirty, kdyz se do ni zapisovalo
+	- A acces nekdo ho pouzil
+
+#### Page replacement algoritmy
+
+- kdyz je treba najit obet pro novou stranku
+- nalezeni optimalni stranky
+	- stranka, ktera se bude nejdele nepouzivat
+
+##### Clock
+
+- trideni do kruhu
+- rucicka ukazuje na dalsiho kandidata na vyhozeni
+- pokud ma A nenulove, tak ho vynuluju ale jdu dal
+- pokud je ale A nula, tak ho vyberu
+
+##### NRU
+
+- not recently used
+- bezi nejaky deamon a ten nuluje A periodicky
+- rozdeleni do skupin
+	- class 0
+		- A = 0, D = 0
+	- class 1
+		- A = 0, D = 1
+	- class 2
+		- A = 1, D = 0
+	- class 3
+		- A = 1, D = 1
+- potom se vybira ten z nejnizsi neprazdne skupiny
+
+##### LRU
+
+- least recently used
+- pouzivani minulosti jako predikci pro budoucnost
+- vyuziti hardwarove ale i softwarove
+	- SW
+		- zasobnik
+		- narocne a tak se pocita aproximace
+
+###### NFU
+
+- not frequently used
+- mam citace pro stranky
+- periodicky prochazim stranky a pokud je A==1, tak zvysim citac a vynuluji A
+- potom vybiram stranku s nejnizsim citacem
+	- pokud je ale nova stranka, tak se musi kontrolovat aby se hned neznicila
+	- taky pokud je stranka uz dlouho, ale byla hodne vyuzivana
+	- aging
+		- periodicky delim citac dvojkou
+
+### Advanced Paging
+
+#### Shared memory
+
+- cast virtualni pameti sdilena vicemi procesy
+- na ruzne mista se napamuji strankovaci tabulky, ze ukazuji na stejne ramce
+
+#### Pametove mapovane soubory
+
+### Virtualizace
+
+- v ramci jednoho OS dokazu vyrobit "vec", ktera umi spustit jiny OS
+- vypada to, ze ma pristup k hardwaru, ale tak to neni, protoze se jedna jen o iluzi
+- pokud se stane katastrofa ve VM, tak se nic jineho nestane a vsechno ostatni bezi vcetne realneho stroje
+- enkapsulace
+	- virtualka se uklada do souboru a potom lze VM kopirovat a nebo resetovat
+	- popripade se da udelat snapshot
+		- pak se da vratit do toho stavu
+- vytvari se virtualni HW
+
+### Kontejnery
+
+- virtualizace v ramci OS
+- existence vice uzivatelskych prostoru
+
+## Paralelni programovani a synchronizace
+
+- provadeni opravdu soubezne a ne jen simulace jako multitasking
+
+### Race condition
+
+- v dany moment bude na jednu cast sahat vice vlaken a tedy neni deterministicke jak to dopadne

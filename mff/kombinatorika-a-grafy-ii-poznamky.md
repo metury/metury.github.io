@@ -1,7 +1,7 @@
 ---
 layout: page
 nav_exclude: true
-title: Kombagra 2
+title: Kombinatorika a grafy 2
 author: Tomáš Turek
 ---
 

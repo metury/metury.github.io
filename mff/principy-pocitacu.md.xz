@@ -1,0 +1,769 @@
+---
+layout: page
+nav_exclude: true
+title: Principy počítačů
+author: Tomáš Turek
+---
+
+*Přednáška 1*
+
+***
+
+## Harvardský počítač
+
+- Procesor (CPU - central processing unit)
+	- programovatelná součástka, co dělá
+	- má nějaký vstup a výstup (periférie)
+- kódová paměť (code memory)
+	- kde se uchovává součásti kódu
+	- cpu umí číst ze paměti, nelze modifikovat paměť z procesoru
+- datová pamět (data memory)
+	- uložené proměnné
+	- CPU umí sem zapisovat údaje a naopak je z CPU číst
+
+## Charles Babbage
+
+- Analytical Engine (1837) - byl turning complete
+- Ada Lovelace - pomohla mu s počítačem, napsala manuál, kódování písmen jako čísla
+- Turing complete - PC umí zpracovat každý program
+	- informace umíme převést na čísla
+- reprezentace celých čísel
+	- pomocí napětí zcela nepraktické (analogový přenos)
+	- digitální přenos (0/1 - bit (binary digital))
+	- sériový přenos - více bitů
+- dva vodiče, kde na druhém se vysílá opačný)
+- diferenciální přenos
+	- měří se jaký je rozdíl mezi dvěmi daty
+	- více odolné vůči šumu
+- USB
+	- universal serial bus
+	- bus = sběrnice
+- přenos 0 a 1 je číslo ve dvojkové soustavě [1, 2, 4 ,8, 16, 32, 64, 128, 256, 512 1024, 2048, 4096, 8192, …,65536, 1000000 (milion), 16000000 (16 miliónů), 4200 000 000] - (užitečné mocniny dvojky)
+-	záleží na směru posílání dat (1011 != 1101)
+- první pozice je most significant bit (MSb) a poslední je least significant bit (LSb), abychom věděli co jsme chtěli poslat, dále záleží jesli budeme posílat MSb first anebo LSb first (bit order), musí být předem dojednané
+- jak se dá poznat jestli jsou za sebou dvě stejné bity a nebo jen jeden dlouhý signál, musí se udat pevná délka bitu (čas), spíše se používá transfer rate (přenosová rychlost) (b/s, baud - signals/s)
+- nejvhodnější je zaznamenávat signály uprostřed celého signálů, musí se sesynchronizovat hodiny	
+
+*Přednáška 2*
+
+***
+
+- Synchronizace hodin
+- Idle stav
+	- (floating state; Hi-Z)
+	- nedochází k přenosu dat
+	- není připojený ani na 1 ani na 0
+	- nebo jen 0 a 1, kde 0 je i idle a poté co bude rising edge (0->1) tak začíná přenos, pokračuje chvíli na 1 (startbit) a poté jsou už datové bity
+- Rs232
+	- v start condition se sesynchronizují hodiny, ovšem oboj hodiny nemusí běžet úplně stejně a proto se nastaví max N bitů po kterým se hodiny musí znovu synchronizovat (nejlepší je dané N předem definovat = 8) a to přes stop condition (do 0; stop bits, falling edge) následně start condition
+	- 8 bitů = 1 byte (B) = 1 octet (v minulosti ne vždy bylo 8 bitů 1 byte)
+	- vysoký overhead (přenáší se dost nepodstatných dat)
+	- 1 přenos je 10 bitů z toho 8 datových a 1 start a 1 stop bit
+	- 1000 baudů je vlastně 800bps (databits per seconds)
+	- overhead je tedy 20%
+	- dá se přidat třetí vodič (clock signal) který přenáší střídající 0 a 1 s tím, že má dvojnásobnou frekvenci
+	- může jeden posílat a druhý příjímat, nebo je externí zdroj a oba přijímají
+	- lepší je vnímat rostoucí hrany, popř. klesající hrany
+	- 0% overhead
+	- dále se může použít, že se budou detekovat obě hrady (hardwarová náročnost)
+- DDR (double data rate)
+	- I2C
+	- další možnost pokud se dostečně často mění 1 a 0, tak se můžeme dívat na hrany samotných datových bitů (clock recovery)
+	- budeme posílat 10b místo 8 a uděláme tabulku aby se často měnila 1 a 0
+	- 20% overhead
+	- USB
+- simplexní převod je pouze jedním směrem
+- duplexní oba směry
+	- halfduplex
+	- jeden vodič a oba směry
+	- full duplex
+	- 2 simplexní linky
+	- 1 GND a dva DATA kabbely
+- out of band
+	- mimořádný stav, tak vyšle signál
+- komunikační protokol
+	- jak vypadá jeden přenos (paket)
+- Řadič zařízení
+	- controler
+	- třeba když posíláme 7bitový bajt do 8bitového bajtu tak se uloží do paměti (registr) a přidá se jeden bit
+	- data registr (buffer)
+	- konfigurační registry
+	- pak se přepošle
+
+*Přednáška 3*
+
+***
+
+- RS232
+	- čtyři byty s tím, že první začíná 01... a ostatní jsou 00.. to je proto, aby se rozpoznal začátek
+	- s tím třeba můžeme rozlišovat různé vstupy podle toho jestli první bit je 1/0
+- blokující a neblokující funkce
+	- pokud máme nějakou podmíněnou funkci, tak teoreticky můžeme čekat do nekonečna
+	- nebo můžeme pomocí třeba timeoutu vypnout danou funkci
+- Šestnáctková soustava/hexadecimální/hexa/hex
+	- když je číslo v šestnáctkové soustavě, tak se píše před číslo dolar(pascal)/0x(C,C++,C#), nebo na konec h, 16, hex
+	- když máme číslo napsané v hexadecimální soustavě, tak je viditelné, kolik použijeme bitů na dvojkovou soustavu, protože na jednu pozici je třeba 4 bity ve dvojkové soustavě a implikačně dvě čísla jsou jedne byte
+
+### Bitové operace (bitwise operations)
+
+- a operace b = c
+- nepoužívá se pojem příkaz, ale bitová maska
+- AND (python se používá &)
+- oba musí být true (1) pak (1)
+- interpretace hodnota a příkaz - 1 tak zachovat hodnotu jinak přepiš na 0
+- OR (python se používá |)
+- aspoň jeden z nich musí být true aby výsledek byl (1)
+- interpretace může být jako hodnota a příkaz - když je v příkazu 0 tak má zachovat hodnotu a jinak to přepiš na 1
+- XOR (python se používá ^)
+- platí právě pouze jedna hodnot
+- implementace 0 zachovej hodnotu a 1 tak proveď bitovou negaci
+- NOT (~)
+- změna 0 na 1 a naopak
+- Defenzivní programování
+	- i když je jistý předpoklad, tak raději to opatříme jinak
+
+*Přednáška 4*
+
+***
+
+### Bitové posuny (bitwise shift)
+
+- posun doleva shift left (SHL) [značka <<]
+- a << x -(>b) posun bitů o x k MSB (most significant bit) s tím, že přebytečné se zahodí a prázdné se zaplní nulou
+- posun doprava shift right (SHR) [značka >>]
+- a >> x (->b) posun o x k LSB (least significant bit) funkčně obdobné jako SHL
+
+### Bitová rotace (bit rotation)
+
+- rotate left (ROL)
+- v podstatě stejné jako SHL, ale přebytečné se postupně dostanou na volné místa vzadu
+- rotate right (ROR)
+- obdobné
+
+### Kladné a záporné čísla
+
+- n-bit = n-bitová hodnota (unsigned integers)
+- reprezentace čistě čísla
+- n-bit = (n-1)-bitová hodnota
+- první bit (MSB) bude určovat znaménko (0 = +, 1 = -)
+- nefunkční aritmetické operace
+- jedničkový doplněk (one's complement)
+- pokud je záporné, tak se neguje absolutní hodnota(NOT(abs(x)))
+- problém se vyskytuje u 0 (+0 != -0)
+- dvojkový doplněk (two's complement)
+- záporná jsou NOT(abs(x))+1
+- Python si pamatuje celý byte (kolik je potřeba) včetně znaménkového bytu a k tomu jsou ještě zaznamenáván počet bitů aby bylo nalezeno správné číslo
+- Zero extension
+- pokud zvětšíme počet bitů, tak doplní nuly
+- sign extension
+- zkopíruje se první znaménkový bit a dá se na MSB a zkopíruje se na všechny nové pozice
+
+*Přednáška 5*
+
+***
+
+### Počítač
+
+- operační paměť (operating memory)
+- master x slave
+- zápis (write) směrem od masteru k slave a naopak je to čtení (read)
+- ovšem pozice m x s se mohou prohodit
+- point to point linka
+- dvě propojené zařízení, nepraktické vše připojit do CPU
+- multidrop linka (bus, sběrnice)
+- může i více, vedou do CPU a berou data z více zařízení
+- potřeba přidat jisté identifikátory zařízení (adresa, address) většinou se jedná o unsigned integer a je unikátní pro každé zařízení
+- adresový prostor (address space) n-bit
+- každé zařízení má transmitter a receiver (posílání a získávání dat)
+- Pull Up rezistor zajišťuje, že když nikdo nic nevysílá, tak se čte 1
+- pokud někdo bude vysílat 1, tak neudělá nic a když 0 tak se zapojí menší rezistor a bude 0V, s tím, že tenhle rezistor přebije 1
+
+### I2C (I2C)
+
+- inter integrated circuit, sběrnice i se sběrnicovou typologií
+- jeden halfduplex datový vodič, má pullup rezistory na obou linkách
+- SDA
+	- datový signál
+- SCL
+	- serial clock, další zapojená linka, tiká jen v během přenosu a ne v IDLE stavu (tzn. že je 1 díky pull up rezistoru), frekvence 100 kHz - 5 MHz
+- multimaster
+- více zařízení může fungovat jako master (popřípadě slave)
+- třeba USB je singlemaster
+- když neprobíhá komunikace (IDLE state), pak nějaké dvě zařízení začnou komunikaci a pak zase přejdou do IDLE stavu [REPEAT]
+- během komunikace nemůže začít někdo jiný a ten master co komunikuje tak posílá i clock signal
+- start condition
+- během IDLE stavu na datové lince se pošle najednou 0
+- stop condition
+- po posledním bitu to nechá na nule a pak přejde na 1
+- používá se 9-bit z toho pouze 8-data bit a 1-bit je řídící (potvrzovací, acknowledgement bit, ACK, popřípadě negativní NACK/NAK)
+- posílá se B1 A1 B2 A2 B3 A3 v případě, že se píše (write) tak Byte posílá master a ACK posílá slave, pokud se čte (read) tak nejdřív prvním byte pošle master a A pošle slave a pak už se obrátí a byte posílá slave (většinou pokud je byte poslední tak poslední A je NACK)
+- MSb - first, NACK - 1, ACK - 0 (obráceně než normálně)
+- už na úrovni I2C musí být daný komunikační protokol, takže ze začátku je nějaké I2C control (overhead, management data) a poté device specific (užitečná data, payload) a to je celý paket
+- I2C control nejdříve sedm bitů a poté R/ (1/0) a poslední je ACK (zda existuje slave s danou adresou)
+	- pokud slave nestíhá tak podrží hodinovou linku na nule (clock stretching, hold low), protože, jakmile jeden posílá 0 tak to nejde už přebít
+
+### Ambient light sensor (ALS)
+
+- detekce intenzity světla, připojení přes I2C sběrnice
+	- data sheet (jak funguje dané zařízení)
+		- senzor pak jistá logika a registr, který počítá (counter, ADC - analog digital converter) senzitivitu, ten je 2B a z toho 15-bit data (0-32000)
+		- při každém měření se začíná na nule a jistou dobu se měří, daná doba se dá ovládat
+		- start integration (0x08) a stop integration (0x30), příkazový registr, který je 1B
+		- bus interface je rozhraní ke sběrnici (má adresu 0x29, předem danou, tudíž nemohou být dva na jedné sběrnici)
+		- write only register W/0 příkazový registr, read only register R/0 počítací registr, (read and write R/W)
+		- Most significant byte first MSB (má v sobě MSb) a LSB first (LSb), BYTE order, tady je LSB
+
+*Přednáška 6*
+
+***
+
+### Paměť (PCF8570)
+
+- 256B a má svoji adresu a každý byte má taky svoji adresu (0-255)
+- paměťový adresový prostor 0 - (2n-1)
+- již nemá konstantní adresu 1 0 1 0 A2 A1 A0 R/W (Ai se nastaví připojením spoje
+- slave address word address and data
+- slovo (word)
+- 1 slovo = jednotka přenosu, n-bit slovo - n-bit paměť
+- double word (DWORD) 32-bit
+- quad word (QWORD) 64-bit, ale nemusí nutně být
+- autoincrement - automatický přičítání hodntoy adresy
+- burst přenos s autoincrementem
+
+### Převody
+
+- 1kB není vhodné dát 1000B kvůli tomu, že 2^10=1024 aby bylo plně využito
+- což vlastně nesedí fyzikálně, tak se zavedla jednotky KiB (kibi byte), MiB (mibi byte) GiB ovšem to už se vytvořilo pozdě a je zavedené kB MB
+- 1kB k adresování je třeba 10 bit a rostoucí pak stoupá o 10 bitů po každé
+- 16 bit adresový prostor a to je 10 + 6 takže 2^6 = 64kB
+
+### Řadič
+
+- může mít registr třeba o 8 bitech čili 8- 1 latch [0/1] (4-6 tranzistorů)
+
+### SRAM
+
+- RAM - random access memory
+- doba k dosažení na jistou adresu je vždy stejná
+- R/W
+- volatile - potom co vypneme zařízení, tak se vše zapomene
+- sekvenční rostoucí přidávání dat na adresy bytů
+- random je nejpomalejší
+- sekvenční klesající je něco mezi
+- kapacita je malá v rámci 1B - 1 kB a malých MB
+- přenosová rychlost 10 - 100 GB/s, access time <1 ns
+- (4-6 tranzistorů)
+- S = static
+
+### DRAM
+
+- přenosová rychlost řádově jednotky až desítky GB
+- rychlost 1 - 10 GB/s, access time <10 ns
+- 1 bit je uložený tranzistorem a kondenzátorem (0/1) tím, že se nabíjí kondenzátory, takže relativně pomalejší
+- D = dynamic, zapomíná se v rámci ms, refresh - vždy se přečte data a znovu zapíší, aby se kondenzátory “neztratili”, to ovšem někdo musí provádět (spoj s kódovou pamětí)
+
+*Přednáška 7*
+
+***
+
+### Instrukce (instructions)
+
+- instrukční sada (set)
+- posloupnost n bytů (strojový kód, machine code)
+- CPU má registry, aby se vědělo jaká instrukce se provádí
+- PC (program counter) / IP (instruction pointer)
+- bitů jako code memory
+- opcode (operační kód) - jaká operace se bude provádět
+- adresa proměnné v data memory se kterou provádíme operaci
+- (když je třeba ukázat na více bytů, tak se ukazuje na první)
+- v data memory jsou uložené proměnné a v code memory je uložený strojový kód programu, pokud máme svůj program tak je v rámci IDE buď překladač (C#) nebo interpret (python), v případě překladače (compiler) se přeloží z data memory do strojového kódu a pošle se to do code memory, pokud se jedná o interpreta (interpreter) tak se přímo provádí kód za běhu
+
+### endianita
+
+- little endian (LE)
+- ukládá se od LSB, větší část
+- big endian (BE)
+- MSB
+
+### von Neumann (von neumannovská architektura)
+
+- CPU a jedna operační paměť počítače (v části code memory a data memory)
+
+## Historie
+
+- UNIVAC (1951) ->
+- Altair 8800 (1974, intel 8080) + microsoft BASIC
+- Apple 1 (1976, MOS 6502) -> Apple 2 (1977) aplikace VisiCalc (Excel like)
+- Atari 2600 (1977) -> Atari 800 (1979, MOS 6502)
+- Commodore, ZX Spectrum, Tesla PMD 85
+- IBM PC (1981, Intel 8088)
+
+### 6502
+
+- 8-bit CPU (8 bitové slovo), von N. architektura
+- 16-bit adresový prostor (64 kB), LE
+
+### 8088
+
+- 16-bit CPU
+- 20-bit (1 MB), LE
+- potom x85 (32bit)
+- x64 (64 bit)
+
+### Basic instruction
+
+- None $EA, $90
+- Jump / branch instruction $4C xx0 xx1, $E9
+- load/store
+
+*Přednáška 8*
+
+***
+
+## Příznakový registr (flags registr)
+
+- 1 příznak (flag)	= 1 bit info
+	- zero
+	- ano - byla nula = 1
+	- ne nebyla nula = 0
+	- sign/negative
+	- ano byl záporný = 1
+	- nebyl = 0
+	- jako znaménkový (twos complement) copy MSb
+	- carry přenos
+	- clear
+		- clear carry CLC
+	- set
+			- set carry SEC
+	- bitové operace
+			- AND, OR, SHL, SHR, ROL, ROR
+	- sčítání
+			- ve dvojkové soustavě jako v desítkové pod sebou
+			- byte musí mí carry in a carry out (sčítání s přenose ADD with carry ADC)
+	- odečítání
+			- podobné jako sčítání, negace čísla a přičtení 1 a přičtení hodnoty od které odečítáme
+			- subtract with borrow - odčítání pod sebou
+			- subtract with carry (not borrow) negace carry, SEC
+	- side effects
+			- při jistých operacích se provádí i vedlejší (při load třeba zero a sign)
+
+### x86
+
+- LD, ST - MOV kam, co
+- ADC, ADD, SUB, SBC, NOT
+
+*Přednáška 9*
+
+***
+
+### Operace a předávání proměnných
+
+- CPU má x GHz - tik hodin (1 takt -> 1/x G s)
+- za 1 takt
+	- bitové operace
+	- sčítání a odčítání
+- slow load/store -> DRAM access
+- dočasný registr načte adresu (delší, protože načítá adresu)
+- čas sčítání je zavíslí na GHz CPU a jak jsou dlouhé proměnné, taky záleží na přepisu do počítačvého kódu
+- Python:
+	- int
+		- počet bajtů, hodnota, 32-bit číslo, kolik je využitých bitů v daném číslu
+		- normalizovat hodnoty, prodloužení na stejnou délku
+		- předpoklad, že jsou 32bit chlívečky (4B)
+		- pro uložení čísla 5
+			- Python má 4B a 4B = 8B, ale také je to jen ukazatel [pointer] (uložení adresy -> 4B - 32bit, 8B - 64bit) = 16B
+			- co je uložené - ID typu +4B
+			- garbage collection (každá proměnná má counter počtu ukazatelů - +4B) = 24B
+			- při sčítání se počítá jen se 4B, ale musí pracovat i s ostatními 20B (více práce navíc)
+		- vždy musí vytvořit novou hodnotu (existují předpřipravené hodnoty -5 - 256)
+- C/C#/C++
+	- musí se předem definovat co je to za proměnnou
+	- třeba pro číslo 5 je 4B narozdíl Python vysvětlený předem (až stokrát rychlejší)
+- aritmetic overflow/aritemetic underflow
+	- dostatečně velká přesnost, aby nepřetekla přesnost, problém se znaménkovou interpretací
+- slow operace
+	- násobení
+	- celočíselné dělení
+- pokud čísla jsou větší a nevejdou se do 4B, tak musí být dvakrá 4B a tedy dvakrát tolik operací
+- shift left n << - $*2^n$ (přesnost kolik je tam bitů modulo z)
+- shift right n >> - celočíselné dělení $2^n$
+	- tyto operace platí jen pro bezznaménková čísla
+	- chytrý překladač tímto způsobem hodně urychlíme chod
+- pro znaménková čísla
+	- SHL n - lze, ale může dojí k tomu, že se nepovede
+	- SHR n - NE!
+- logický posun SHL and SHR
+- **aritmetický posun doprava SAR**
+	- zkopíruje bit nejvyššího řádu na stejnou pozice a posune
+	- skoro celočíselné dělení, ale špatně se zaokrouhluje dolů
+- Python
+	- SHL >>
+	- SAR << SHR (není)
+- JAVA
+	- << SHL
+	- SAR >>
+	- SHR >>>
+- C like
+	- SHL <<
+	- SHR/SAR >> (záleží na tom, jestli je znaménkové SAR, nebo bezznaménkové SHR)
+- reálná čísla
+	- co jsou za desetinou čárkou jsou vlastně záporné mocniny $x*10^{-1}$
+	- stejné i ve dvojkové soustavě $2^{-1}$
+	- fixed point reprezentace
+		- 8-bit (5+3 = 5.3, může být i jinak, pouze příklad)
+		- sčítání funguje stále stejně (není třeba mít speciální operace procesoru, je to jako bezznaménková)
+
+*Přednáška 10*
+
+***
+
+### Reálná čísla
+
+- **fixed point reprezentace**
+	- pro většnu operací pořád jako s celými čísly
+	- které jsou mimo rozsah, tak jsou nepřesné (až moc)
+	- předpovídáme jak čílo bude velké, ale to nevíme (inspirace vědeckou notací $x*10^n$ )
+- (normalizovaný) - **floating point**
+	- první jednička (mantisa - i zbytek číla) a potom čárka a násobek (exponent) $2^n$
+	- několik bitů pro mantisu a pro exponent 8b -> 5b + 2b
+	- mantisa se ukládá většinou na LSb a potom exponent, speciální MSb
+	- **se skrytou jedna**
+		- pokaždé bude 1 na začátku (nemáme nuly) a tedy začneme psát až to další
+	- lepší zaokrouhlení
+	- exponent lze zapsat přes bias
+	- speciální bit na pozici MSb
+		- znaménkový bit (0 -> +, 1 -> -)
+	- SW float
+		- je to pomalé, závisí na exponentu
+		- pokud nenám velkou potřebu floating pointu, tak je lepší fixed point
+	- HW float
+		- procesor co má HW, je rychlé (stále není stejněrychlé jak celočíselný operace)
+		- ne všechnhy mají danou podporu
+- záleží na jazyku
+	- jestli má použít SW/HW float
+	- IEEE 754, jak mají vypadat float (single - 32bit (23mantisa + 8exponent + 1), double - 64bit (52 + 11 + 1))
+- **bias reprezentace** (s posunem + O KOLIK)
+	- nejmenší se posune na nulu a největší na maximum
+	- nula už není nula
+	- různá posunutí, podle toho, jak je to vhodné
+	- např.:
+		- 8bit - bias -127 (1 + 127 = 128 - co + posun = reprezentace)
+	- operace jsou pořád stejné
+- operace
+	- provést denormalizaci číel, aby byli biti na stejných pozicích
+	- ztráta při velkém rozdílu
+- Python
+	- float (double)
+	- numpy (float32 = single, float64 = double)
+- C like
+	- float (32bit), double (64bit)
+	- sice větší přesnost, ale více paměti
+- floating pointová čísla by se neměla porovnávat
+	- kvůli nepřesnosti se můžu přiblížit, ale nebude to rovno
+	- nastavení okolí $\epsilon$ abs(a-b)<= $\epsilon$
+- dá se i vypisovat float jako další hodnotu (např. v bankovnictví koruny a halíře)
+- pokud mám strašně malí exponent, tak ztratím přesnost
+	- denormalizovaný tvar
+- reprezentace nuly
+	- nejmenší exponent a mantisa jsou nuly
+	- jelikož jsem zvolili s posunem, tak exponent je taky samé nuly
+	- akorát pořád je kladná i záporná nula (tyhle jsou ekvivalentní)
+- nekonečno
+	- exponent vše jedna, mantisa nuly
+	- float("info")
+	- pokud třeba dělím float nulou, tak dostanu nekonečno
+		- vhodnépro dlouhé výpočty, kde nemusím pořád kontrolovat nulu, ale až na konci $\infty$
+	- nekonečno děleno nekonečnem je NaN (Not a Number) (exponent jedničky a mantisa jiná než nuly)
+	- v Pythonu je float division by zero (v numpy normnálně)
+- jednočipové počítače (microcontroler - $\mu C$ , MCN)
+	- code mem aby se po startu načetl
+		- non-volatile
+			- ROM (read-only-memory - 1 write, $\infty$ read)
+			- PROM (programable ROM - až doma co si koupím kus - všechny bity jedničky, do diody pošlu velké napětí a spálím ji a mám 0)
+			- EPROM (Ereasable PROM - $\infty$ write $\infty$ read)
+		- firmware počítače (nahraje se jednou v továrně)
+
+*Přednáška 11*
+
+***
+
+### Non-volatile paměti
+
+- ROM - 1 write, $\infty$ read
+- PROM - 1 write, $\infty$ read
+- EPROM - " $\infty$ " write, $\infty$ read
+	- UV zářením se smažou data (stačí slunce)
+- EEPROM (electribly EPROM)
+	- elektrický proudem čteme a zapisujeme
+	- SRAM >10GB/s <1ns, DRAM 1-10GB/s 1-10ns, EEPROM - 100-1000MB/s 100ns
+	- je omezený write (100 000 - 1 000 000 W)
+	- 0 je komora bez elekrtronu 1 je s elektrony
+	- adresované po bytech
+- flash
+	- 10 000 - 100 000 W
+	- "pole bytů" ale neumí vrátit byty -> rozdělené na bloky (relatovně velké)
+- flash i EEPROM se můžou pojmenovat NVRAM (non-volatile read a write)
+- pevný disk (hard disk drive HDD)
+	- forma magnetického ukládání
+	- čtecí/zapisovací hlava
+	- 1/0 jak je sever a jih
+	- data jsou na koncentrických kružnicích -> stopa (track)
+		- rozdělené na bloky (výseče = sektor) 512B -> advanced formát 4096B (4kB)
+	- to je na jednédesce, ale těch je tam více (plotna)
+	- každý povrch má svoji hlaviču (vrchní i spodní)
+	- hlavičky se posouvají v rámci stop
+	- v rámci sektorů se otáčí plotny
+	- očíslování C/H/S (cylindr, hlava, stopa)
+		- sektor
+		- stopy jsou číslované z vnějšu
+		- cylindr je na všech plotnách stejná stopa
+	- non volatile a neomezený počet zápisů, velké kapacity a levnější
+	- náchylné na mechanické poškození
+	- RPM - rotation per minute (5400 - 7200 -10000 - 15000), pořád se točí
+	- 100 MB/s (při sekvenčním přístupu)
+		- v 1 stopě (záleží jaký směr)
+	- náhodný přístup (1 stopa)
+		- technicky lepší nežsekvenční
+	- náhodná stopa
+		- 10ms = 10 000 000ns
+	- průměrně to je 0,5 MB/s
+	- ve všech stopách je stejný počet bitů
+		- zlepšení -> od nějaké stopy je dvojnásobek sektorů a takhle dále
+		- přenosová rychlost je na vnějších stopách rychlejší
+- CD/DVD/BLU-RAY
+	- optický zápis a čtení - jestli odráží nebo neodráží paprsek
+	- má tendenci se vracet do původního stavu
+	- jedna spirální stopa (rozdělená na sektory 2048B = 2kB)
+		- číslování od vnitřku ven (LBA - linear block adressing)
+		- aby šlo udělat menší disk
+	- rychlost 10 MB/s
+	- přístupová doba 100 ms
+
+### micro controller
+
+- ADC analogový digitální převodník
+- DAC dialogový analogový převoddník
+- 1 bitovývstupy a výtupy
+	- řadič GPIO (general purpose input output)
+		- každá může být vstupní i výstupní
+- permanentní datové úložiště (storage device)
+	- non volatile
+	- EPROM
+
+### desktop
+
+- operační pameť
+	- kód i proměnné
+- permanentní datové úložiště
+	- přes řadič na cd mechaniku (adresový registr -w - LBA, command registr -w - write/read, buffer - 1 sektor, data registr, info registr - počet sektorů + velikost sektoru)
+	- řadič pro HDD mechaniku
+		- zlepšení -> využití řadiče CD mechaniky pro HDD (převod C/H/S -> LSB, sektory S, pak povrchy H, pak stopy C)
+	- řadič pro práci s flash pamětí (lze aby se to tvářilo jako HDD -> SSD)
+	- offset - posunutí v bytech od začátku sektoru
+	- base adress (bázová) - kam se nakopíruje
+	- bázová adresa + offset je adresa uložení
+	- Python
+		- bytes - pole bytů (pozice v [x])
+
+### data
+
+- určitý sektor zabírající nějaké pozice = soubor
+- potřeba uložiit metadata = informace o tom souboru (čísla sektorů - kde jsou + mohou být fragmentované, jméno souoboru, velikost souboru v B - v sektoru jen jeden soubor, + datum a čas, oprávnění ..)
+	- v čáti disku budou uložena metadata
+- file system (souborový systém) - musí zjistit hierarchii souborů
+- v metadatech jsou i informace o prázdných sektorech
+- musíbýt uložen "operační systém"
+	- kód programu, prog. jazyk
+- f = open() + readline + close - otevírá funkci v operačním systému
+	- otevřený nacacheuje a uloží data o filu aby se s tím lépe pracovalo
+	- z operačního systému vracídata jako byty až v jazyce se dostavá k interpretaci
+	- f = open(neco, rb/wb) - otevírá binárně - vrací jako bytes
+	- otevřený file si také pamatuje offset na kterém se nachází
+- seek - najití metadat
+- f.seek - nastavit nocý offset
+
+### Reprezentace souboru
+
+- podívat se na binární soubor
+- hexview
+	- není explicitně řečene, že jsou v šestnáctkové soustavě, ale je to třeba znát
+	- po řáccích jsou napsané postupně bajty (jeden řádek většinou šestnáct bajtů)
+	- i textová reprezentace na konci řádku (znak pro jeden byte)
+	- nalevo je napsaný v hex offset řádku
+- formát souboru
+	- podle metadat v souboru
+	- většinou je hlavička souboru na začátku a potom už jsou data
+	- v metadatech offset, kde jsou data
+- příklad: BMP (bitmap)
+	- magic (signuter) number
+		- posloupnost počátečních bytů (jaký to je soubor) (BMP - je BM)
+	- tento formát je LE (little endian)
+
+*Přednáška 12*
+
+***
+
+## Reprezentace obrazu
+
+- obdélník s obrázkem
+- rozdělení na pixely, kterou mají jistou hodnotu
+- očíslování pixelů
+	- osa x zleva doprava
+	- osa y shora dolů
+	- lineární uložení -> po řádcích
+
+### data v pixelu
+
+- oko
+	- tyčnky - intenzita světla
+	- čípky - frekvence světla
+		- tři druhy čípků (R G B)
+- grayscale
+	- teoreticky by bylo třeba nekonečno na to jak je obraz světlý
+	- mohl by být 1bit pokud překročí jistou hranici, tak bude 1
+	- bit depth (bpp)
+	- další možnost mít 8bit (unsigned 0 - 256)
+	- jisté hranice (lepší aspoň trochu posunout od 0 a taky od $\infty$ )
+- barva
+	- zaznamenávání i frekvence fotonů a nejenom kolik fotonů dopadne
+	- teoreticky 0 až $\infty$ Hz, ale máme jen Hz, které jsou viditelné
+	- pamatovat si intenzitu R/G/B - tří kanálový obraz
+	- dalo by se 1bit pro každou barvu (3bit - nesoudělné s 8)
+		- 4bit - ještě intenzita barvy
+	- 2B px -> 16 bitů (5R+5G+5B +1 prázdný)
+		- 5R+6G+5B (protože oko má nejlepší zelenou)
+	- 3B - 8bit pro barvu = true color (24bit depth) ($2^24$ = 16 miliónů barev)
+		- uložení do 32bit proměnných (8bit nepoužtých)
+		- + A (alpha channel - průhlednost pixelu) - čím vyšší, tak méně průhledné
+- rastrový obrázek - matice je rastr (bitmap)
+- obrazová data, metadata a bitmap jsou data souboru
+	- metadata - bitová hloubka, šířka v px, výška v px
+	- RGB (B LSB, R/A MSB) - little endian (většinou)
+	- většinou bývá aligned, aby to bylo na stejných řádcích (kdyžtak se dodápadding)
+
+### Reprezentace textu
+
+- posloupnost znaků (= textový řetězec =string)
+- znak - pímeno, číslice, spec, bílý znak (mezera, ..)
+- musí být zavedeno kódování
+	- mapa - 1 znak = 1 kód
+	- mapa kódu - bin repre
+		- pevná délka
+		- proměnná délka
+	- celý text je v jednom kódováním
+- grafém je jak vypadá znak
+	- rasterizace textu (převést kódy na obrázky)
+- ukládání big endian (respektive je to tak jak se čte)
+- typy kódování
+	- ASCII (ascii table)
+		- 7bit (0-127)
+		- písmenka americké abecedy (A,B,C,..a,b,c...0,1,9..)
+		- A = x -> B = x+1 .. a = y -> b = y+1 ..
+		- ukládáme do 8bit (tedy 127 není využito)
+			- rozšíření (code page)
+	- EU je rozdělené na West, Middle, East
+	- ISO 8859-2 ([iso]latin-2)
+		- standard (používá se linuxem)
+		- windows to jmenuje ISO 28592
+	- DOS 852 ([dos]latin-2)
+		- MS dos, nebylo dobré
+	- Win 1250
+	- Unicode
+		- 0 - $10FFFF
+		- neudělali jak se to bude ukládat (bin reprezentace)
+		- UTF-32 používá 4B pro každý znak
+		- 0-127 odpovídá jako ascii
+		- existuje LE i BE (běžnější LE)
+- obvykle v textových datech nejsou metadata o kódování
+
+### Kódování textu
+
+- Unicode
+	- 0-127 ascii, 128 - 0xFFFF běžné znaky, 0x10000 - 0x10FFFF neběžné znaky
+	- 0xD800 - 0xDFFF nepoužívá se
+	- LE i BE
+	- UTF-32
+	- UCS-2 (Unicode, ale jen 2B) -> přestalo se to používat
+	- UTF-16
+		- běžné znaky jsou kódovány 2B, neběžné 4B (jak to poznat)
+		- 4B jsou vlastně dvě 2B sekvence (surrogate)
+		- použití 0xD8800 - 0xDFFFF pro rozpoznání 4B
+	- UTF-8
+		- 1B x 2B x 3B x 4B
+		- pro ascii je první nula a potom 7bitů pro ascii code
+		- náledné jsou vždy tolik jedniček kolik částí (110xxxxx, 1110xxxx, 11110xxx) a následující jsou 10xxxxxx
+		- už není LE i BE
+		- nativní pro internet
+	- LS (line separator), PS (paragraph separator) - snaha zlepšení od CRLF
+- rasterizace text
+	- str v kódování a udělat z toho obrázky (písmena a znaky)
+	- příkaz nového řádku (CR -13 -cariiage return -0x0D, LF -10 -line feed -0x0A)
+		- windows mají obojí CR LF
+		- Unix/Linux jen LF
+		- MAC jen CR (přesuin na LF)
+	- (záměrnéšpatné rozložení klávesnice pro pomalejší psaní na psacím strojix)
+	- na tisk textu se využívá to o jaký OS se jedná
+
+### Binární soubor
+
+- uložené různé data (nějaké info 2B, text, další číslo)
+- dobrémít uložené data o tom, jak je dlouhý text 4B
+- v Pythonu je tobytes() (přesněji v numpy)
+- str.encode("") bytes (zakodovany string v daném kódování)
+	- bytes.decode("") = string (opačný postup)
+- frombuffer(bytes, dtype) (z knihovny numpy)
+- bytes jsou imutable (neměnné)
+	- bytearray a to je mutable, lze modifikovat jako pole
+
+
+*Přednáška 13*
+
+***
+
+### Von Neumann architektura
+
+- bridge (HBA - host bus adaptor)
+	- adaptér spřístupňuje jinou sběrnici
+- CPU
+- memory bus
+	- připojení s pamětí (většinou DRAM)
+	- přes memory controller (řadič paměti)
+		- lze přidat víe pamětí (vypadá jako jedna paměť)\
+		- stará se o to s jakou pamětí pracuje
+		- vypadá to jako jedna kontinuální paměť
+		- musí být schopno si to oadresovat
+		- HCI host controller interface
+			- komunikační protokol
+	- dá se napojit nonvolatile pro firmware
+		- CPU startup vector
+
+### Registry a práce s nimi
+
+- př. $I^2C$ proximity senzor
+	- na vzdálenost
+	- je tam spousta registrů
+	- 8bit registrový adresový prostor (0x00 - 0xFF)
+- systémová sběrnice
+	- př. PCI express (PCIe)
+	- paměťový zápis (MRw - write)
+		- cílová adresa
+		- všichni mají přístup a jen reagují pokud je potřebuje
+	- paměťový čtení (MRd - read)
+		- cílová adresa
+		- completion with data (CpID)
+	- memory map I/O
+
+### Firmware
+
+- load and config HW
+	- plug & play
+- najít užitečný SW
+	- bootování
+- zákl funkce:
+	- read sector
+	- read
+- boot sector v paměti
+	- boot operačního systému (kernel)
+	- device driver
+- shell
+	- říkat kernelu pro spuštění programu

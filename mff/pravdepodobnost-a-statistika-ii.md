@@ -1,8 +1,8 @@
 ---
 layout: page
 nav_exclude: true
-title: PAST 2
-author: Tomáš Turek, Filip Mihaľ
+title: Pravděpodobnost a statistika 2
+author: Tomáš Turek, Filip Miháľ
 ---
 
 #### _INFO_

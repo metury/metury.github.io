@@ -12,6 +12,8 @@ permalink: /mff/
 
 Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak se tady budou nacházet.
 
+*Upozorění:* V poznámkách mohou být chyby.
+
 ## Zápisky
 " > $mff
 

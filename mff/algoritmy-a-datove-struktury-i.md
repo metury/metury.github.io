@@ -1,7 +1,7 @@
 ---
 layout: page
 nav_exclude: true
-title: ADS
+title: Algoritmy a datové struktury 1
 author: Tomáš Turek
 ---
 

@@ -1,0 +1,607 @@
+---
+layout: page
+nav_exclude: true
+title: Programování
+author: Tomáš Turek
+---
+
+==programovani i==
+
+*Přednáška 1*
+
+***
+
+## Úvod
+
+- Programování je způsob jak ovládat počítač a dávat mu instrukce. Řešení problémů.
+- Program je zapsaný algoritmus. Algoritmus je několik elementárních kroků po sobě k řešení daného typu úloh.  Je jistý konečný počet kroků.
+- Programovací jazyk je hlavně pro komunikaci (zapsání algoritmu) člověka s počítačem. Ovšem ne pro počítače jako takové.
+- Překladač překládá jazyk na program. Interpret hned provádí zapsaný program.
+
+### Python
+
+- už 30 let, open source, více OS
+Tři prvky
+- výstup
+   - výsledek
+- dosazení
+   - zapamatovat hodnotu
+- vstup
+   - vstup od uživatele
+
+#### Řízení běhu příkazu
+
+- příkaz skoku
+   - mění pořadí provádění příkazů, špatný
+- strukturované programování
+   - složitý příkazy z jednodušších, (if, else, elif, while)
+   - v pythonu se řeší odsazením, nikoli závorkama (tab i mezery, nemíchat)
+Hodnoty a proměnné
+- hodnoty
+   - různé typy
+      - celá čísla (int)
+         - sčítání,odčítání, dělení (float), {celočíselné dělení //, zbytek po dělení %,}umocňování \*\*, porovnání
+      - desetinná čísla (float) - mohou být nepřesné
+         - 10E60
+         - 20.3
+- funkce (pro int a float)
+   - int()
+   - abs()
+   - import math
+      - další možnosti
+- proměnná
+   - není místo v paměti, ale odkaz na hodnotu (v pythonu)
+   - mohou dvě ukazovat na jednu!
+
+*Přednáška 2*
+
+***
+
+Složitější proměnné
+- objekt
+   - v pythonu je skoro vše objekt
+- string
+   - textový řetězec
+   - je neměnný
+   - do uvozovek nebo apostrofů
+   - tři uvozovky je víceřádkový
+   - unicode
+   - pokud má být uvozovky v textu tak před tím zpětné lomítko
+   - pokud nové proměnné přiřadíme starší tak pouze ukazuje na tu proměnnou
+   - výřez (slice) řetězec [odkud:pokud] -poslední už není
+      - dají se použít i záporné indexy (zezadu), pokud se vynechá tak se jde až do konce
+   - krok řetězec a[odkud:pokud:2] - každý druhý znak
+   - kód znaku ord("znak") chr(int)
+   - porovnávání
+      - bylo dané pořádí (abeceda a čísla) ovšem mezinárodní ne
+   - .split() rozdělení na části
+- tuple
+   - n-tice
+- list [1,2,3,5,6,4,1]
+   - seznam hodnot, zachovává pořadí
+   - může být více typů
+   - .apend(co) - přidání hodnoty
+   - .insert(kam,co)
+   - .extend(seznam)
+   - je měnitelný - !chyby na ukazování!
+   - když se dá string tak se bere každý znak zvlášť
+   - násobení seznamu se zkopírují tolikrát hodnoty
+   - seznam v seznamu (pak se ptá a [0] [1])
+   - pomocí funkce in se ptám, zda-li je prvek v seznamu (popřípadě ve stringu)
+   - funkce .count() kolikrát je daný znak v seznamu
+   - .index() na jakém místě je
+   - .remove() smaže dané hodnoty
+   - del a[:2] - vymaž vše z a až do třetího prvku
+- set {1,2,3,45,98,4}
+   - množina
+- dictionary {1:"a"..
+   - slovník klíč a hodnota
+
+#### Cykly
+
+- for
+   - for i in [1,2,3,4,5]:\print i
+   - prochází po jedno prvku
+funkce range(1,5)
+- nevytváří celý seznam akorát je postupně vrací
+- for i in range (1,100)
+- pokud začínáme od nuly tak stačí jen range(4)
+
+*Přednáška 3*
+
+***
+
+## Funkce
+
+- definování je pomocí def funkce(vstupní hodnoty):
+- vracení hodnot se nakonec těla funkce musí napsat return hodnota
+- pokud chceme prázdnou funkci tak můžeme napsat pass
+- print ("%3d" %i, end ="") vytiskni 3 místa s % a na konci nech jen mezeru
+- "oddělení co dělá a jak dělá program věci"
+- při volání funkce můžeme popsat parametry a tak tam vložit dané hodnoty f(b=1, a=2) i když je f(a,b)
+- předávání parametr hodnotou
+- globální proměnná - global L (globální proměnná L)
+- nelokální - ukazovat na danou proměnnou o jednu funkci výše
+- lokální proměnná - pouze v dané funkci
+- vnitřní funkce vidí proměnné těch funkcí nad sebou
+- Pravidlo LEGB - local, enclosed, global, built-in (pořadí jak se hledá daná proměnná)
+- funkce se musí psát předem, ovšem tělo funkce se nečte, až pokud se používá
+
+*Přednáška 4*
+
+***
+
+List má funkci .pop(pozice) a to přečte hodnotu a pak ji odhodí.
+
+##### Dynamické proměnné
+
+- vznikají a zanikají během chodu
+- ukládají se v haldě (halda)
+- garbage collector nepotřebné proměnné se uklízejí
+
+##### Objekt
+
+- obsahuje data a funkce
+- skoro vše v pythonu je objekt
+- rozdělení programu na části (CO x JAK to dělá)
+- ne vše, co obsahuje, je veřejné
+
+##### Třída
+
+- datový typ
+- forma podle které se vytváří objekty
+- instance třídy je poté objekt
+- class jmenotridy:
+- instance je pote k = jmenotridy()
+- při přidání funkce je povinný první parametr self = tenhle objekt
+- "self je podobné jako this."
+
+##### konstruktor
+
+- `def __init__` povinný první parametr self
+- pro vytváření instancí
+
+##### Lineární spojový seznam
+
+- složený z prvků
+- každý obrázek obsahuje hodnotu a ukazatel na další prvek
+Cvičení 4
+funkce se dají použít jako objekt
+Cvičení 5
+množina (set)
+- nemají indexy, každý prvek je jen jednou
+- funkce .add() .remove() .intersection() .union
+slovník (dict)
+- obsahuje klíč a hodnotu {“klíč”:hodnota,...}
+- jako klíč se dá použít to co je immutable (neměnné), prakticky jako index
+- .keys() .values() .items() [obojí klíč i hodnota]
+- from collections import defaultdict a = defaultdict(int)
+list má funkci .sort(key=len) a také sorted(pole, reverse =True)
+lambda funkce, pouze jednoduchá funkce lambda vstup: (výstup)
+práce se soubory
+- f = open(“test.txt”, “w”/”r”/”a”/”r+”/”a+”) - write, read, append
+- f.close() f.write() f.read() f.readlines() f.writelines(lines)
+- with open… as f:
+Přednáška 5
+Funkční dekompozice
+- rozdělení práce pomocí funkcí
+- programování shora dolů
+   - rozklad na podúlohy
+   - vyuzivani neexistujici podprogramy
+- programování zdola nahoru
+   - nejdříve vypsání podúlohy
+- ladění shora
+   - testovací podprogramy
+- ladění zdola
+   - náhradní obsah podprogramů
+Objektová dekompozice
+- rozdělení práce na funkce a objekty s funkcemi
+Cvičení 6
+Radix sort
+Přednáška 6
+Tuple (n-tice)
+- neměnitelná, má indexy t = (10, 20)
+Slovník (=asociativní pole)
+- dva prvky klíč:hodnota, každý klíč nejvýše jednou
+- nejsou indexy místo toho klíče
+- klíč je neměnitelná hodnota
+- oproti listu se dá použít in nebo find() pro jednoduché nalezení
+- vyhledává se pomocí hashování a to je rychlejší
+Textový řetězec
+- neměnitelný (immutable), pokud chceme změnit, tak vyrobit nový
+- obsah + délka: pamatovat si délku/ukončovací znak
+- funkce .find() .join() .replace() .format()/f”{a}”
+Textový soubor
+- Posloupnost znaků, na konci řádků je ODDĚLOVAČ ŘÁDEK a na konci souboru UKONČOVACÍ ZNAK SOUBORU tyto znaky nepatří do char()
+- (carriage return CR chr(13), line feed LF ch(10)/EOF chr(26))
+- f = open(“vstup.txt”,”r”) pro čtení
+   - f.write() f.writelines()
+- g = open(“vystup.txt”,”w”) pro zápis
+   - g.read(), g.readline()
+- f.close()
+
+*Přednáška 7*
+
+***
+
+## Objekty a třídy
+
+- Dědičnost
+   - dědí vlastnosti třídy předchozí class test1(test0):
+   - pokud změníme funkci, lze volat předchozí přes super().fce()
+   - násobná dědičnost - v pár jazycích lze dědit více funkcí a proměnných z více předků (diamond problem)
+   - interface - rozhraní, nějaký “slib” vlastností
+- Polymorfismus
+   - může být více tříd který dědí z jedné třídy
+   - díky tomu, že názvy metod jsou stejné se dá obecně zavolat pro všechny
+- Abstraktní třída
+   - nechceme její instance, jen použití jako předek
+- Duck typing
+   - když chodí, plave a kváká jako kachna - tak je to kachna!
+- kontrola typu
+   - type(7) == int
+   - isinstance(instance třídy, class)
+- Zapouzdření
+   - k čemu se lze dostat z vnější, nebo ne (konzistence)
+   - v Pythonu není, místo toho konvence _fce taky __jméno
+
+## Funkce
+
+- proměnná patřící instanci
+- Statická metoda/funkce
+   - @staticmethod \n def sedm(): \n return 7
+   - patří třídě a ne objektu
+- Metoda třídy
+   - patří třídě ne objektu
+   - @classmethod \n def Metodatřídy(cls): \n cls.pocet += 1 (print(cls.pocet))
+   - #parametr cls
+Proměnná
+- proměnná patřící instnani
+- proměnná patřící instanci
+
+*Přednáška 8*
+
+***
+
+## Chyby
+
+1. syntaktické chyby
+   - hlásí překladač
+2. běhové chyby
+   - při běhu
+3. sémantické chyby
+   - neohlásí nikdo
+vyjímka
+- zpráva o běhové chybě
+- je to objekt a má různé typy
+- try: \n except errorname:
+- může být except errorname ss vyjímka: a následně pracovat s objektem
+finally
+- try: finally:
+- místo toho aby se hned program vypne, tak se provede finally
+vyvolání výjimky
+- raise ValueError (“něco se pokazilo”)
+- výjimky jsou odvozeny od BaseException
+výjimky vs. návratové chyby        
+Assert
+- assert 1<2, “Něco je v nepořádku”
+Defenzivní programování
+- cokoliv se může pokazit
+- ověřovat vstup a výstup; nízká tolerance; situace, které nemohou nastat
+List comprehension
+- [x+x for x in range(10)]
+- lze i pro množinu {x for x in range (10)}
+- analogicky i pro dictionary {x: x-x for x in range (10)}
+
+*Přednáška 9*
+
+***
+
+## Testovat
+
+- testovací funkce
+- jednotkové testy / unit testy (funkce, třída)
+- integrační testy
+- regresní testy
+
+## Moduly
+
+- jmenný prostor
+- import math, import math as mm, from math import sqrt
+- lze vytvořit uložením s prvním znakem písmenem
+- the python standard library
+- balíček více souborů ale jeden musí být __init__.py
+- unittest
+- test driven development
+   - nejdříve napsat testy, musí selhat na začátku
+
+*Přednáška 10*
+
+***
+
+- dlohá čísla, vlastní reprezentce čísel
+- spoustu vlastností: záporná/nezáporná, celá/desetinná čísla, pole/spojový seznam/ string, odpředu/odzadu, obsah jednoho prvku, délka
+- různé operace na daných číslech (které potřebuji)
+- moduly matplotlib (2D grafy - pyplot)
+
+*Přednáška 11*
+
+***
+
+- lambda funkce
+- funkce jsou v pythonu objekty, lze je uložit do proměnné
+- closure = vrací se funkce
+- model NumPy = pro počítání
+- memoizace
+
+*Přednáška 12*
+
+***
+
+- Událostmi řízené programování
+- tkinter (tool kit interface)
+- formulářové aplikace
+
+==programovani ii==
+
+*Přednáška 1*
+
+***
+
+## C#
+
+- vše je objekt a nebo třída
+- statická funkce main vykonává vše
+- předchůdce C a z něho plyne spoustu
+- case sensitive (velká malá písmena)
+
+### Proměnné
+
+- je třeba definovat
+- kde existuje
+- jaký má typ
+	- void (nic)
+	- char (jeden byte)
+	- short, int, long (celočíselná proměnná)
+	- float, double (desetinné číslo)
+	- string
+- modifikátor je cnost
+
+### Operátory
+
+- `+, -, *, /`
+- přiřazení `=, +=, -=, *=, /=. &=`
+- `==, <=, >=, <, >, !=`
+- `&&, ||, ! (not), & (and), | (or), ^ (xor)`
+- `a++, ++a` (co se bere dčíve, buď nejdřív vezme a a přidá +1 anebo naopak) i minus
+
+### Komentáře
+
+- `/**/, //, ///`
+
+*Přednáška 2*
+
+***
+
+- Cyklus
+	- while cyklus
+		- pokud neco, tak udelej
+		- `while (a++<10) makeitrain();`
+	- for cyklus
+		- `for (int i = 0, i < length, ++i) makeitrain();`
+		- kodove snippety (dvakrat tabulator)
+		- v zavorce je index, podminka a autoinkrementace
+	- do while cyklus
+		- `do makeitrain(); while(a++<10);`
+- konstrukce switch
+
+```
+switch (a)
+{
+	case 3:
+	case 4:
+		makeitrain();
+		break:
+		//pokud je to 3 nebo 4
+	case 5:
+		makeitrain();
+		break;
+	default:
+		break;
+}
+```
+
+- konvertovat string do intu
+	- `int.Parse()`
+	- `Convert.ToInt32()`
+- predavani
+	- ref - reference
+	- out -jako reference, ale nejsou inicializovane
+
+*Přednáška 3*
+
+***
+
+- třída a objekty
+	- class nazev
+	- promenne a funkce jsou
+		- private - skryté (v základu)
+		- public - dostupné
+		- protected - k ni muzou i dedicove
+	- novy objekt se vytvori pomoci slova new
+	- specifická proměnná pro objekt se referuje přes this
+- konstruktor
+	- public name_of_class(){}
+	- nema nazev, jen navratovou hodnotu
+- lze pretezovat funkce (vic se stejnym nazvem a jinymi parametry)
+- dedictnost
+	- `class rectangle : square{}`
+	- lze udelat objekt, ale vytvorit dedice
+		- `rectangle A = new square();`
+	- aby zdedene mely svoje funkce, tak se udela specialni syntax
+	- `public virtual void makeitrain() {}` - otec
+	- `public override void makeitrain() {}` - syn
+	- vzdy se vola konstruktor bez parametru
+		- bud se napise samotny
+		- nebo se napise
+		- `public const(smth):base(smth){}`
+
+*Přednáška 4*
+
+***
+
+- čtení a zapisování do hodnot tříd
+
+```
+public type NameOfVariable
+{
+	get
+	{
+		return nameOfvariable;
+	}
+	set
+	{
+		this.nameOfVariable = value;
+	}
+}
+```
+
+- `sealed class ..`
+	- nelze dedit
+- pole
+- System.IO
+	- streamreader a streamwriter
+	- pro cteni a psani do souboru
+- `public static ClassName operator +()`
+	- jak funguje scitani pro danou tridu
+
+*Přednáška 5*
+
+***
+
+- tezsi problemy prevest na model
+
+## Simulace
+
+- spojita
+	- porad se neco deje
+- diskretni
+	- pokud se nic nedeje, tak se to neresi
+- udalost, kalendar udalosti, proces
+
+*Přednáška 6*
+
+***
+
+## Programovani rizene udalostmi
+
+- ceka se na udalost a potom se na ni zareaguje
+
+
+*Přednáška 7*
+
+***
+
+## Grafika v C#
+
+- drawline
+- drawrectangle
+- fillrectangle
+- distribuce chyby
+
+*Přednáška 8*
+
+***
+
+- System.Collections.Generic
+	- `List<>`
+- Vyjimky
+	- postupne propadava nahoru a ukoncuje funkce
+	- `try{}catch(Exception){}`
+- Hygiena programovani
+	- objektovy navrh
+		- UML diagramy
+		- Data flow diagramy
+	- zdravotni
+	- vykonnostni
+
+*Přednáška 9*
+
+***
+
+### Editacni vzdalenost
+
+- porovnavani retezcu kolik musim vymazat a pridat znaku
+- podobne uloze najit spolecny nejdelsi podretezec
+
+### Kombinatoricke problemy
+
+- Zobecneni ulohy
+- Trivialni pripady
+- Urcit rekurentni vzorec
+
+### Minimalni nasobeni matic
+
+- dosti podobne
+
+## Dynamicke programovani
+
+- reseni tezsich uloh lehcimi a pamatujeme si mezivysledky
+
+### Memoizace
+
+- pamatovani si predchozich vysledku
+
+*Přednáška 10*
+
+***
+
+## Grafove algoritmy
+
+### Reprezentace grafu
+
+- matice sousednosti
+	- vrcholy a vrcholy
+- matice incidence
+	- vrcholy a hrany
+	- vynasobenim sebe sama transponovane vznikne matice sousednosti
+- seznam vrcholu a k ni jeho sousedy
+- seznam vrcholu a k nim jeho hrany, na kterych se nachazi
+
+*Přednáška 11*
+
+***
+
+### Grafove algoritmy
+
+- Dijkstruv algoritmus
+	- pouziti prioritni fronty
+	- podobne diskretni simulaci
+- Floyd-Warshalluv algoritmus
+	- hledani nejkratsi az a dlouhe cesty vsech dvojic vrcholu
+- Kruskaluv algoritmus nejmensi kostry
+	- da se udelat jako hledani komponent, jen budu hrany pridavat v jistem poradi
+	- v poradi jako u Kruskalova algoritmu
+
+### Delegaty
+
+`delegate bool JeVetsi (object co, object nezco)`
+`JeVetsi IntPor = PorovnaniIntegeru;`
+- prirazovani funkci jako promenne
+- da se delat anonymni funkcea
+
+### Vlakna
+
+`Thread t = new Thread();`
+
+*Přednáška 12*
+
+***
+
+## Testovani
+
+### Unit testy
+
+- testuje se jenom casti
+- lze pridat novy projekt (treba xUnit test)
+- potom v zalozce test je spustit

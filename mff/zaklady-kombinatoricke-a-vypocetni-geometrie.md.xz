@@ -1,0 +1,907 @@
+---
+layout: page
+nav_exclude: true
+title: Základy kombinatorické a výpočetní geometrie
+author: Tomáš Turek
+---
+
+# Introduction
+
+We will be working in $d$-dimensional space (noted as $\mathbb{R}^d$) which is a set of all ordered $d$-tuples of reals.
+
+## Definition:
+
+**Hyperplane** (*nadrovina*) is:
+
+$$
+\{ x \in \mathbb{R}^d:\langle a,x \rangle = b \}, b \in \mathbb{R}, a \in \mathbb{R}^d \setminus \{\mathcal{o}\}
+
+$$
+
+$$
+\langle a,x \rangle := a_{1}x_{1} + a_{2}x_{2} + \dots a_{d}x_{d}
+
+$$
+
+Which are the coordinates of $a$ and $x$. Also $\mathcal{o}$ is marked as the beginning (*počátek*).
+
+## Definition:
+
+**Closed half-space** (*uzavřený poloprostor*).
+
+$$
+\{ x \in \mathbb{R}^d : \langle a,x \rangle \leq b\}
+
+$$
+
+# Convexity
+
+## Definition:
+
+$C \subseteq \mathcal{R}^d, C$ is **convex**: $x,y \in C \Rightarrow \text{ segment xy } \subseteq C$. Or you may say:
+
+$$
+tx + (1-t)y \in C, \forall t \in [0,1]
+
+$$
+
+### Observation
+
+The intersection of any set of convex sets is a convex set.
+
+#### Proof:
+
+We get this from the definition.
+
+$$
+\Box
+
+$$
+
+## Definition:
+
+$\text{conv}(X)$ is a **convex hull** of $X$ (*konvexní obal*) is the intersection of all convex sets containing $X$.
+
+### Claim:
+
+$$
+x \in \text{conv}(X) \Leftrightarrow \exists x_{1}, \dots x_{n} \in X, \exists t_{1}, \dots, t_{n} \in \mathbb{R}, t_{i} \geq 0, \sum_{i}^{n} t_{i} = 1: x= \sum_{i=1}^{n}t_{i}x_{i}
+
+$$
+
+That means the $x$ is a convex combination of the points $x_{i}$.
+
+#### Proof
+
+$$
+Y := \left\{ \sum_{i=1}^{n} t_{i}x_{i} : x_{1}, \dots, x_{n} \in X, t_{i} \geq 0, \sum_{i=1}^{n} t_{i} = 1 \right\}
+
+$$
+
+- Now we will be proving that $Y = \text{conv}(X)$. Firstly we will start with $Y \subseteq \text{conv}(X)$ by proving that $\sum_{i=1}^{n} t_{i}x_{i} \in \text{conv}(X)$. We will do it by induction by $n$.
+- For $n=1$ and $n=2$ we know this from definition. Then $x := \sum t_{i} x_{i}$ and *wlog* (without loss of generality) $t_{1} > 0$. Then we have $x = t_{1}x_{1} + (1 - t_{1}) \sum_{i=2}^{n} \frac{t_{i}}{1-t_{1}}x_{1}$ which shows by induction that $x$ is in $\text{conv}(X)$, because $x_{1}$ is in convex hull and the second one is by induction in convex hull as well and then we have convex combination of two points.
+- Secondly we need to show that $\text{conv}(X) \subseteq Y$ but this suffices to prove $Y \supseteq X$ and that $Y$ is convex. First part we get by the definition of $Y$.
+- Now we need to show convexity of $Y$. So we have two points $x = \sum_{i=1}^{n} t_{i}x_{i}$ and $x' = \sum_{i=1}^{n} t'_{i}x_{i}$. The combination is as follows:
+
+$$
+tx + (1-t)x' = \sum_{i=1}^{n} \left( tt_{i} + (1-t)t'\right) x_{i}
+
+$$
+
+- We can easily see that $Y$ is convex and then we get $\text{conv}(X) \subseteq Y$ thus we know $Y = \text{conv}(X)$.
+
+$$
+\Box
+
+$$
+
+## Carrathéodory theorem
+
+Let $X \subseteq \mathbb{R}^{d}, x \in \text{conv}(X)$. Then $x$ is a convex combination of $\leq d+1$ points of $X$.
+
+### Proof
+
+Will be on tutorial. ==Maybe I will add it in here.==
+
+$$
+\Box
+
+$$
+
+## Separation theorem *(věta o oddělování nadrovinou)*
+
+$C, D \subseteq \mathbb{R}^{d}$ convex and $C \cap D = \emptyset$. Then exist a hyperplane such that $C$ lies in one of the closed halfspaces and $D$ in the other one. *Alternatively:*
+
+$$
+\exists a \in \mathbb{R}^{d} \setminus \{o\}, b \in \mathbb{R}: \left<a,x\right> \leq b \forall x \in C \\
+\exists a \in \mathbb{R}^{d} \setminus \{o\}, b \in \mathbb{R}: \left<a,x\right> \geq b \forall x \in D
+
+$$
+
+### Remark 1
+
+This is not true for open halfspaces.
+
+### Remark 2
+
+True for open halfspaces provided that $C$ is closed and $D$ is compact.
+
+### Sketch of proof
+
+#### case 1
+
+$C$ is closed and $D$ is compact then exists $p \in C$ and $q \in D$ such that the distance is minimal. Then we put the hyperplane perpendicular to the segment $pq$ in the middle. Then it is separated strictly. If it was false there would exist $p'$ which is closer to $q$ than $p$ which cannot be.
+
+#### case 2
+
+$C,D$ arbitrary and $u \in C, v \in D$ arbitrary . For $n \in \mathbb{N}: C_{n} := (1- \frac{1}{n})(C - u) + u$ and $D_{n} := (1- \frac{1}{n})(D - v) + v$. *Note this is shrinking the set around the center in $u$ or $v$*. Then we define $D_{n}' = D_{n} \cap B(v,n)$ where $B$ is ball with big radius. Then $\forall n D \supseteq \overline{D_{n}'}$ and $\overline{D_{n}'}$ is compact and the closure of $D_{n}'$. Same for $C$ we have $C \supseteq \overline{C_{n}}$ and this is closed. Both $\overline{D_{n}'}$ and $\overline{C_{n}'}$ can be separated by a hyperplane $h/n$ due to case 1.
+
+$$
+h/n = \{x \in \mathbb{R}^{d} : \left< a_{n}, x\right> = b_{n}\}
+
+$$
+
+# Affine subspaces, affine dependence
+
+## Affine subspace
+
+This is linear subspace shifted by some vector.
+
+## Affine hull
+
+of a set $X \subseteq \mathbb{R}^{d} = \text{aff}(X)$ is the smallest affine subspace containing $X$.
+
+## Affine combination
+
+of points $a_{1}, \dots, a_{n} \in \mathbb{R}^{d}$ is
+
+$$
+\sum_{i = 1}^{n} \alpha_{i} a_{i} \in \mathbb{R}^{d} \\
+\forall i : \alpha_{i} \in \mathbb{R}, \sum_{i=1}^{n} \alpha_{i} = 1
+
+$$
+
+### Claim
+
+$\text{aff}(X)$ is the set of all affine combinations of points from $X$.
+
+## Definition
+
+$a_{1}, \dots, a_{n} \in \mathbb{R}^{d}$ are **affine dependent** if $\exist k:a_{k}$ is an affine combination of $a_{1}, \dots, a_{k-1}, a_{k+1}, \dots, a_{n}$.
+
+$$
+\Updownarrow
+
+$$
+
+$\exist \alpha_{1}, \dots, \alpha_{n} \in \mathbb{R}: \sum_{i=1}^{n} \alpha_{i}a_{i} = 0$ if $(\alpha_{1}, \dots, \alpha_{n}) \neq (0, \dots, 0)$ and $\sum_{i = 1}^{n} \alpha_{i} = 0$
+
+Otherwise $a_{1}, \dots, a_{n}$ are **affine dependent**.
+
+### Observation
+
+1.  $a_{1}, \dots, a_{n}$ are affine dependent iff $a_{2}-a_{1}, a_{3} - a_{1}, \dots, a_{n}-a_{1}$ are linear independent. ==Maybe this should be both independent or dependent.==
+2.  Max number of affine independent points in $\mathbb{R}^{d}$ is $d+1$.
+3.  Affine hull of $k$ affine independent points has dimension $k-1$.
+
+## Radon’s theorem
+
+$A$ is a set od $d+2$ points in $\mathbb{R}^{d}$ then $\exist A_{1}, A_{2} \subseteq A : A_{1} \cap A_{2} = \emptyset$ and $\text{conv}(A_{1}) \cap \text{conv}(A_{2}) \neq \emptyset$.
+
+### Proof
+
+- $A = \{a_{1}, \dots, a_{d+2}\}$ are affine dependents points.
+- There $\exist (\alpha_{1}, \dots, \alpha_{d+2}) \neq (0, \dots, 0), \sum_{i = 1}^{d+2} \alpha_{i} = 0$ and also $\sum_{i= 1}^{d+2}\alpha_{i} a_{i} = 0$.
+- Then we put $A_{1} = \{a_{i} : \alpha_{i} > 0\} \neq \emptyset$ and $A_{2} = \{a_{i} : \alpha_{i} < 0\} \neq \emptyset$.
+- $A_{1} \ni \sum_{\alpha_{i}>0} a_{i} = \sum_{\alpha_{i} < 0} ( - \alpha_{i})a_{i} \in A_{2}$
+- $S := \sum_{\alpha_{i}} \alpha_{i} = \sum_{\alpha_{i} < 0} \alpha_{i}$. And together we have.
+
+$$
+x = \sum_{\alpha_{i} > 0} \left(\frac{\alpha_{i}}{S}\right)a_{i} = \sum_{\alpha_{i} < 0} \left(\frac{-\alpha_{i}}{S}\right)a_{i}
+
+$$
+
+- So we have that $x \in \text{conv}(A_{1}) \land x \in \text{conv}(A_{2})$. And $x$ is called *Radon’s point*.
+
+$$
+\Box
+
+$$
+
+## Helly’s theorem
+
+$C_{1}, C_{2}, \dots ,C_{n}$ are convex sets in $\mathbb{R}^{d}$ where $n \geq d+1$. The intersection of any $d+1$ sets $C_{i}$ be non-empty. Then $\bigcap_{i=1}^{n} C_{i} \neq \emptyset$.
+
+### Proof
+
+We will proof this by induction on $n$ and $d$ is fixed.
+
+1.  $n = d+1$ is obvious
+2.  suppose $n \geq d+2$
+
+$$
+\forall j : \bigcap_{i \neq j} C_{i} \neq \emptyset \text{ , then fix any } a_{j} \in \bigcap_{i \neq j}C_{i}
+
+$$
+
+- We use Radon’s theorem for $a_{1}, \dots, a_{d+2}$ so there $\exist I_{1}, I_{2} \subseteq \{1,\dots,d+2\}$ disjoint sets such that the $x \in \text{conv}(\{a_{j} : j \in I_{1}\}) \cap \text{conv}(\{a_{j} : j \in I_{2}\}) \neq \emptyset$.
+
+1.  $i \in \{1, \dots, n\} \setminus I_{1}$ then $\forall j \in I_{1}: a_{j} \in C_{i}, x\in C_{i}$.
+2.  $i \in \{1, \dots, n\} \setminus I_{2}$ is with the same way so $x \in C_{i}$.
+
+- So $x \in C_{i} \forall i$.
+
+$$
+\Box
+
+$$
+
+## Infinite version of Helly’s theorem
+
+$C$ is an infinite set of convex compact sets in $\mathbb{R}^{d}$ such that the intersection of any $d+1$ of them is non-empty. Then $\bigcap C \neq \emptyset$.
+
+### Proof
+
+By the finite Helly’s theorem the intersection of a finite collection of sets from $C$ is non-empty. By the compactness we get $\bigcap C \neq \emptyset$.
+
+$$
+\Box
+
+$$
+
+## Definition
+
+Let $X$ be an $n$-point set in $\mathbb{R}^{d}$. Then **centerpoint** of $X$ is any point $c \in \mathbb{R}^{d}$ such that every closed half space containing $c$ contains at least $\frac{n}{d+1}$ points of $X$.
+
+## Centerpoint theorem *(věta o centru)*
+
+$\forall$ finite $X \subseteq \mathbb{R}^{d}$ $X$ has a centerpoint.
+
+### Proof
+
+- Firstly we will show an observation that $c$ is a centerpoint iff $c$ lies in each open half-space $\mu$ such that $| X \cap \mu | > \frac{d}{d+1} | X |$. Wich implies that the intersection of any $d+1$ such half-spaces contains at least 1 point of $X$.
+- $C = \{ \text{conv}(X \cap \mu) : \mu \text{ open half-space, } | X \cap \mu | > \frac{d}{d+1} |X|\}$ which is a finite set of compact sets.
+- Now we got that every $d+1$ sets of $C$ have a non-empty intersection.
+- So we will apply Helly’s theorem and we get that $\bigcap C \neq \emptyset$.
+- Thus any $c \in \bigcap C$ is a centerpoint of $X$.
+
+$$
+\Box
+
+$$
+
+## Definition
+
+A hyperplane $h \in \mathbb{R}^{d}$ **bisects** a finite set $A \subset \mathbb{R}^{d}$ if each open halfspace defined by $h$ contains $\leq \lfloor \frac{|A|}{2} \rfloor$ points of $A$.
+
+## Ham-sandwich theorem
+
+Every $d$ finite sets in $\mathbb{R}^{d}$ can be simultaneously bisected by a hyperplane.
+
+### Proof
+
+*This is not trivial so we won’t be showing this proof.*
+
+### Remark
+
+There are recursions for probability measures.
+
+## Center-Transversal theorem
+
+$1 \leq k \leq d, A_{1}, \dots, A_{k}$ finite sets in $\mathbb{R}^{d}$ implies $\exist (k-1)$ dimensional affine subspace $f$ of $\mathbb{R}^{d}$ such that for every hyperplane $h$ containing $f$ each closed half-space defined by $H$ contains $\geq \frac{1}{d-k+2}|A_{i}|$ points of $A_{i}$ for every $i = 1, \dots, k$.
+
+*Note: If $k=d$ then it is the Ham-Sandwich theorem. And if $k = 1$ it is the centerpoint theorem.*
+
+### Proof
+
+*This won’t be proved.*
+
+# Incidence problems
+
+## Szeméredi-Trotter theorem
+
+$\forall m,n \geq 1$ the number of point-line incidences between $n$ points and $m$ lines in $\mathbb{R}^{2}$ is at most $O(m^{2/3} n^{2/3} + m + n)$. This bound is asymptotically tight.
+
+For the proof we will need several definitions and lemmas.
+
+## Definition
+
+**Geometric graph** is $G = (V,E)$, where $V$ is set of points in general position in $\mathbb{R}^{2}$ and $E$ are straight line segments connecting (some) points of $V$.
+
+## Definition
+
+$\text{cr}(G)$ is **crossing number** *(průsečíkové číslo)* of $G$ and it is the number of pairs of crossing edges.
+
+## Crossing lemma
+
+For every geometric graph $G =(V,E)$ the crossing number is $\text{cr}(G) \geq \frac{1}{64} \frac{|E|^{3}}{|V|^{2}}$, but only if $|E| \geq 4 |V|$. This is asymptotically tight.
+
+### Observation
+
+$G=(V,E)$ is geometric graph, then $\text{cr}(G) \geq |E| - 3 |V|$.
+
+#### Proof
+
+Induction on $|E| - 3|V|$.
+
+1.  $|E| - 3|V| \leq 0$ trivial
+2.  $|E| - 3 |V| = k \geq 0$ then $G$ is non-planer which means there exist crossing and this implies that exist $e \in E$ participating in at least one crossing. So we define $G' = G - e$.
+
+$$
+|E'| - 3 |V| = k-1 \Rightarrow \text{cr}(G') \geq |E'| - 3 |V'| \\
+\Downarrow \\
+\text{cr}(G) \geq \text{cr}(G') + 1 \geq |E| - 3|V| \\
+\Box
+
+$$
+
+### Proof of crossing lemma
+
+- $G = (V,E)$ geometric graph.
+- Let $p \in [0,1]$ to be fixed later.
+- $G"$ is graph obtained from $G$ by removing each vertex with probability $(1-p)$ independently.
+- $G' = (V',E')$
+- $\mathbb{E}(|V'|) = |V| \cdot p$
+- $\mathbb{E}(|E'|) = p^{2} \cdot |E|$
+- $\mathbb{E}(\text{cr}(G')) = p^{4} \cdot \text{cr}(G)$ which are quite easy to see.
+- $\text{cr}(G') \geq |E'| - 3|V'|$
+- $\mathbb{E}(\text{cr}(G')) \geq \mathbb{E}(|E'|) - 3\mathbb{E}(|V'|)$
+- $p^{4} \text{cr}(G) \geq p^{2}|E| - 3p|V|$
+- $\text{cr}(G) \geq \frac{p|E| - e|V|}{p^{3}}$ and we put $p := \frac{4|V|}{|E|} \leq 1$
+- $\text{cr}(G) \geq \frac{1}{64} \frac{|E|^{3}}{|V|^{2}}$
+
+$$
+\Box
+
+$$
+
+### Proof of Szeméredi-Trotter theorem
+
+- Let $P$ be set of $m$ points and $L$ set of $n$ lines. We will construct geometric graph $G= (V,E)$ where $V = P$ and $E$ are segments connecting neighboring points along each line.
+- WLOG every line contains at least 1 point. $|E| = (\text{\# point-line incidences}) - n$.
+- Every two-line cross is at max 1 so $\text{cr}(G) \leq \binom{n}{2}$.
+- Now we have two possibilities $(A) \ \text{cr}(G) \geq \frac{1}{64} \frac{|E|^{3}}{|V|^{2}}$ or $(B) \ |E| < 4 |V|$.
+
+$$
+\begin{array}{lc}
+(A) & \binom{n}{2} \geq \text{cr}(G) \geq \frac{1}{64} \frac{|E|^{3}}{|V|^{2}} \\
+ & \binom{n}{2} \geq \frac{1}{64} \frac{((\text{\# point-line incidences}) - n)^{3}}{m^{2}} \\
+ & ((\text{\# point-line incidences}) - n)^{3} \leq m^{2} 64 \binom{n}{2} \\
+ & (\text{\# point-line incidences}) \leq (32 m^{2} n^{2})^{1/3} + n \\
+ & \text{Done} \\
+ (B) & (\text{\# point-line incidences}) - n < 4m \\
+ & (\text{\# point-line incidences}) < 4m +n \\
+ & \text{Done}
+\end{array} \\
+\Box
+
+$$
+
+### Remark
+
+Crossing lemma holds also for graphs drawn by curves (or so called topological graphs).
+
+### Lower bound in Szeméredi-Trotter theorem
+
+There exists many constructions. For example where $n \approx m$. We will build $\sqrt{m} \times \sqrt{m}$ grid and then connect all the lines with the largest number of points.
+
+### Remark
+
+The crossing lemma can be also used to prove following theorem.
+
+## Theorem
+
+$n$ points in $\mathbb{R}^{2}$ there exists $O(n^{4/3})$ unit *(length 1)* segments determined by pairs of these points.
+
+### Idea of proof
+
+We will construct *unit circles* around points which will construct topological graph.
+
+## Minkowsky theorem
+
+$C \subseteq \mathbb{R}^{d}$ symmetric around $o$ which means $( C = -C)$ and is convex and bounded. $\text{vol}(C) > 2^{d}$. Then $C$ contains at least 1 lattice point different from $o$.
+
+### Proof
+
+- Let $C' = \frac{1}{2}C$ and $\text{vol}(C') > 1$.
+- Then we have this claim: $\exist v \in \mathbb{Z}^{d} \setminus \{o\}$ such that $C' \cap (C'+v) \neq \emptyset$.
+    - Proof of claim: $R > 0$ integer.
+
+$$
+X = \{C' + v : v \in [-R,R]^{d} \cap \mathbb{Z}^{d}\} \\
+\bigcup X \subseteq K := [-R -D, R +D]^{d} \\
+\text{where } D \text{ is diameter of C'} \\
+\text{vol}(K) = (2R+2D)^{d} \\
+\text{vol}(K) \geq |X| \text{vol}(C') \text{ or two bodies in } X \text{ intersect} \\
+\text{vol}(C') \leq \left(1 + \frac{2D - 1}{2R - 1} \right)^{d} \to 1 \text{ as } R \to \infty \\
+|X| = (2R+1)^{d} \\
+\text{vol}(C') > 1 \\
+\Box
+
+$$
+
+- $x \in C' \cap (C' + v)$, $x - v \in C' \Rightarrow v - x \in C'$, $C'$ is convex $\frac{1}{2}x + \frac{1}{2}(v-x) \in C'$, $\frac{1}{2}v \in C' \Rightarrow v \in C$
+
+$$
+\Box
+
+$$
+
+# Applications
+
+## Forest
+
+Looking out of a regular forest (in each lattice point which is not origin we plant a tree with a radius $\epsilon > 0$).
+
+## Fractions
+
+Approximation an irrational number by a fraction $\alpha \in (0,1)$ real number. $N \in \mathbb{N}$ Then $\exist m,n \in \mathbb{N}$ such that $n \leq N$ and
+
+$$
+\left| \alpha - \frac{m}{n} \right| < \frac{1}{nN} \leq \left( \frac{1}{n^{2}}\right)
+
+$$
+
+### Remark
+
+It follows $\forall \alpha \in (0,1) \exist$ infinetely many pairs $m,n \in \mathbb{N}$ with $\left| \alpha - \frac{m}{n} \right| < \frac{1}{n^{2}}$.
+
+==The proof was omitted.==
+
+## General lattice
+
+$z_{1}, \dots, z_{d}$ $d$ linear independent in $|mathbb{R}^{d}$ lattice with basis $\{z_{1}, \dots, z_{d}\}$.
+
+$$
+\Lambda = \Lambda (z_{1}, \dots, z_{n}) := \{i_{1}z_{1} + i_{2}z_{2} + \dots + i_{d}z_{d}: (i_{1}, \dots, i_{d}) \in \mathbb{Z}^{d}\}
+
+$$
+
+## Theorem (*Minkowski’s theorem for general lattices*)
+
+$\Lambda$ is general lattice in $\mathbb{R}^{d}$, $C$ is symmetric convex set with $\text{vol}(C) > 2^{d} \det(\Lambda)$. Then $C$ contains a point of $\Lambda$ differeent from $o$. Where
+
+$$
+\det(\Lambda) = \det
+\begin{pmatrix}
+\vdots & \vdots & & \vdots \\
+z_{1} & z_{2} & \dots & z_{d} \\
+\vdots & \vdots & & \vdots \\
+\end{pmatrix}
+
+$$
+
+### Idea of proof
+
+Simply apply Minkowski theorem.
+
+## Primes
+
+Each prime $p \equiv 1 \mod 4$ cam be written as $p = a^{2} + b^{2}, a,b \in \mathbb{Z}$.
+
+# Convex polytopes *(mnohostěny)*
+
+## Geometric duality
+
+## Definition
+
+Geometric duality transform
+
+$$
+a \in \mathbb{R}^{d} \setminus \{o\} : D_{o}(a) = \{x \in \mathbb{R}^{d} : \left< a, x\right> = 1\} \\
+h = \{x \in \mathbb{R}^{d} : \left< a, x \right> = 1\} : D_{o}(h) = a \in \mathbb{R}^{d} \setminus \{o\}
+
+$$
+
+## Definition
+
+$$
+h = \{a \in \mathbb{R}^{d} : \left<a, x\right> = 1\}\text{, then} \\
+h^{-} = \{x \in \mathbb{R}^{d}: \left<a, x\right> \leq 1\}
+
+$$
+
+## Lemma
+
+$\forall$ point $p \in \mathbb{R}^{d}$ , hyperplane $h \in \mathbb{R}^{d}$.
+
+1.  $p \in h \Leftrightarrow D_{o}(h) \in D_{o}(p)$
+2.  $p \in h^{-} \Leftrightarrow D_{o}(h) \in D_{o}(p)^{-}$
+
+### Proof
+
+1.  $p \in h \Leftrightarrow \left< a, p \right> = 1$ and $D_{o}(h) = a$, $D_{o}(p) = \{a \in \mathbb{R}^{d}: \left< y, p \right> = 1\} \Leftrightarrow D_{0}(h) \in D_{o}(p)$
+2.  $p \in h^{-} \Leftrightarrow \left< a, p \right> \leq 1$ and $D_{o}(h) = a$, $D_{o}(p)^{-} = \{a \in \mathbb{R}^{d}: \left< y, p \right> = 1\} \Leftrightarrow D_{0}(h) \in D_{o}(p)^{-}$
+
+$$
+\Box
+
+$$
+
+## Definition
+
+$X \subseteq \mathbb{R}^{d}$ then the **set dual to $X$** is
+
+$$
+X^{\ast} := \{ y \in \mathbb{R}^{d} : \left< x, y \right> \leq 1, \forall x \in X\}
+
+$$
+
+## Definition
+
+- **$H$-polyhedron** is the intersection of finitely many closed half spaces.
+- **$H$-polytope** is bounded $H$-polyhedron.
+- **$V$-polytope** is the convex hull of a finite point set in $\mathbb{R}^{d}$.
+- $\dim(P) := \dim(\text{aff}(P))$
+
+### Basic examples
+
+- **$d$-dimensional cube**: $[-1,1]^{d}$
+- **cross polytope**: $\text{conv} \{e_{1}, -e_{1}, \dots, e_{d}, -e_{d}\}$
+- **simplex**: the convex hull of affinly independent point set in $\mathbb{R}^{d}$.
+
+## Definition
+
+*Another duality* $h$ non-vertical hyperplane.
+
+$$
+h = \{x \in \mathbb{R}^{d}, x_{d} = a_{1}x_{1}+a_{2}x_{2} + \dots + a_{d-1}x_{d-1} - a_{d}\} \\
+D(h) = (a_{1}, a_{2}, \dots, a_{d}) = a \ D(a) = h
+
+$$
+
+## Lemma
+
+$p$ lies above $h \Leftrightarrow D(h)$ lies above $D(p)$.
+
+## Theorem
+
+Every $H$-polytope is a $V$-polytope. And the other way around.
+
+### Proof
+
+- By induction on $d$. When $d = 1$ it is easily true.
+- ==Rest is omitted (30)==
+- The other way around is by duality. ==Also omitted==
+
+## Definition
+
+**Face** of a convex polytope $P$ is
+
+1.  $P$ itself
+2.  $h \cap P$ where $h$ is a hyperplane such that $P$ is contained in one of the closed half-spaces determined by $h$.
+
+## Observation
+
+Every face of a polytope is a convex polytope.
+
+## Definition
+
+- $\dim(\emptyset) = -1$
+- Face of dimension $d-1$ is called **facet**.
+- Face of dimension $1$ is called **edge**.
+- Face of dimension $0$ is called **vertex**.
+
+## Definition
+
+**Extermal point** $x$ of set $X \subseteq \mathbb{R}^{d}: x \notin \text{conv}(X \setminus \{x\})$.
+
+## Proposition
+
+Let $P$ be a polytope.
+
+1.  Extermal points of $P$ are exactly the vertices of $P$.
+2.  $P$ is a convex hull of its vertices.
+3.  “Face of a face is a face” - The vertices of a face $F$ of $P$ are exactly those vertices of $P$ that lie in $F$.
+
+### Proof
+
+==Omitted 34==
+
+## Definition
+
+**Graph** of a polytope $P$ denoted as $G = (V,E)$ where $V$ are vertices of $P$ and $E$ is the set of pairs vertices in the same edge of $P$.
+
+## Observation
+
+The graph of $e$-dimensional convex polytope is planar.
+
+### Proof
+
+*We project the polytope by a center to sufficiently large ball.*
+
+$$
+\Box
+$$
+
+## Baluskis’s theorem
+
+The graph of a $d$-dimensional convex polytope is $d$-connected.
+
+### *Without proof*
+
+## Steinitz theorem
+
+A finite graph isisomorphic to a graph of a $3$-dimensional polytope iff it is planar an $3$-connected.
+
+### *Without proof*
+
+## Euler’s formula
+
+$$
+|V| + F = |E| + 2
+$$
+
+For graph of $3$-dimensional polytopes. For plane drawings of connected planar graphs.
+
+## Definition
+
+**Face-lattice** of a convex polytope $P$ is $\mathcal{F}(P) :=$ set of all faces of $P$ $(\mathcal{F}(P), \subseteq)$.
+
+- Convex polytopes are **combinatorially equivalent** if $(\mathcal{F}(P), \subseteq) \cong (\mathcal{F}(Q), \subseteq)$
+
+### Properties (*No proofs*)
+
+- $\forall F,G$ faces of $P : F \cap G$ is a face of $P$
+- $\forall F,G$ faces of $P$ there exist $J \in \mathcal{F}(P)$ (**join** of $F$ and $G$) such that $F,G \subseteq J$ and if $F,G \subseteq H$ then $J \subseteq H$
+- Every maximal chain in $(\mathcal{F}(P), \subseteq)$ has the same length $\dim(P) +2$ so they can be called **graded**.
+- Every face is the join of its vertices.
+- Every face is the intersection of all the facets containing it.
+
+### Collary
+
+The combinational type of a convex polytope is determined by its vertex-facets incidences.
+
+## Definition
+
+$P$ convex polytope containing the origin (in the interior). Then $P^{\ast}$ is the **dual polytope**.
+
+### Proposition (*No proof*)
+
+$(\mathcal{F}(P), \subseteq)$ is "$(\mathcal{F}(P), \subseteq)$ upside down". In particulary $j$-dimensional faces of $P^{\ast}$ correspond to $d-1-j$ dimensional faces of $P$.
+
+### Remark
+
+Let $P$ be a $3$-dimensional convex polytope with graph $G$ and then $P^{\ast}$ is dual polytope so $G^{\ast}$ is **dual graph of $G$**.
+
+## Definition
+
+A convex polytope $P$ is called **simplicial** if each of its facets is a simplex. (Then all $\leq d - 1$ dimensional faces are simplices.)
+
+Then it is called **simple** if each of its vertices is contained in exactly $d$ facets.
+
+## Observation
+
+The dual of simplicial polytope is simple and vice versa.
+
+## Definition
+
+Let $P$ be a $d$-dimensional polytope and $f_{j} = f_{j}(P)$ is the number of $j$-faces of $P$. The vector $(f_{0}, f_{1}, \dots. f_{d})$ is the **$f$-vector** of $P$.
+
+## Definition
+
+- The curve $\gamma = \{(t,t^{2},t^{3}, \dots, t^{d}), t \in \mathbb{R}\}$ is called the **moment curve**.
+- The convex hull of a finite set of points on $\gamma$ is called a **cyclic polytope**.
+
+## Lemma
+
+Any hyperplane $h$ intersects $\gamma$ in at most $d$ points. If $| h \cap \gamma| = d$ then $h$ is not tangent.
+
+### Proof
+
+$$
+h := \{x, \left< x, a \right> = b\} \dots a_{1}x_{1} + a_{2}x_{2}+\dots, a \neq 0 \\
+a_{d}x_{d} - b = 0
+
+$$
+
+- $x \in h \cap \gamma$
+- $x = (t, t^{2}, t^{3}, \dots, t^{d})$
+- ==Not complete==
+
+## Corollary
+
+Any finite subset of $\gamma$ is in general position. So the cyclic polytope is simplicial.
+
+## Proposition *(Gale’s evenness criteria)*
+
+Let $V$ be the set of vertices of a cyclic polytope, $V = \{v_{1}, v_{2}, \dots, v_{n}\}$ numbered along $\gamma$ if $v_{i} = (t_{i}, t_{i}^{2}, t_{i}^{3}, \dots, t_{i}^{d})$. Then $t_{1} < t_{2} < \dots < t_{n}$. Let $W = \{v_{i1}, v_{i2}, \dots, v_{id}\} \subseteq V, i1 < i2 < \dots < id$. Then $W$ determines a facet iff $\forall v_{i}, v_{j} \subseteq V \setminus W$. The number of vertices $v_{ik}$ with $i < ik < j$ is **even**.
+
+### Proof
+
+- $h_{W}$ hyperplane and $h_{W} \cap P = \text{conv}(W)$
+- $W$ determines a facet $\Leftrightarrow P$is in one half-space determined by $h_{W}$
+
+## Theorem
+
+The number of facets of a $d$-dimensional cyclic polytope with $n \geq d+1$ vertices is
+
+$$
+\left\{
+\begin{array}{ll}
+\binom{n - \left\lfloor \frac{d}{2} \right\rfloor}{\left\lfloor \frac{d}{2} \right\rfloor} + \binom{n - \left\lfloor \frac{d}{2} \right\rfloor - 1}{\left\lfloor \frac{d}{2} \right\rfloor - 1} & \text{for } d \text{ even} \\
+2 \cdot \binom{n - \left\lfloor \frac{d}{2} \right\rfloor - 1}{\left\lfloor \frac{d}{2} \right\rfloor} & \text{for } d \text{ odd}
+\end{array}
+\right.
+
+$$
+
+### Proof
+
+If $d$ is even we have two possibilities either each couples are grouped or one is at the beginning and one at the end. First part is $d = 2k$ so $n-2k \cdot \binom{n-k}{k}$ and otherwise is $k-1$ which gives $n-2k \cdot \binom{n-k-1}{k-1}$. For odd number is similar. ==Not precise==
+
+## The upper bound theorem
+
+Among all $d$-dimensional convex polytopes with $n$ vertices, the cyclic polytope maximizes the number of faces of each dimension.
+
+### *Without proof*
+
+## Upper bound theorem, asymptotic version
+
+A $d$-dimensional convex polytope with $n$ vertices has at most $2 \binom{n}{\lfloor \frac{d}{2}\rfloor}$ facets and at most $2^{d+1} \binom{n}{\lfloor \frac{d}{2}\rfloor}$ faces in total.
+
+### Proof
+
+==Not in notes==
+
+# ==Voronoi diagrams==
+
+# Power diagrams
+
+This is a generalization of Voronoi diagrams.
+
+- $P$ set od points with weights or alternatively set of spheres $S_{i}$ with center $z_{i}$ and radius $r_{i}$.
+- $x \in \text{reg}(S_{i})$ if $\text{pow}(x, S_{i}) \leq \text{pow}(x, S_{j})$ for $j \neq i$, where $\text{pow}(x, S_{i}) = (\text{dist}(x,z_{i}))^{2} - r_{i}^{2}$.
+- Boundary between regions $S_{i}$ and $S_{j}$ is a hyperplane.
+
+## Theorem
+
+Power diagrams $\leftrightarrow$ projections of $d+1$ dimensional polyhedra $\leftrightarrow$ hyperplane section of Voronoi diagrams.
+
+- For example power diagrams are used to prove *“Spicy chicken theorem”*.
+
+# Arrangements
+
+## Arrangements of hyperplanes in $\mathbb{R}^{d}$
+
+We have $\mathcal{H}$ set of hyperplanes. Then **cells** are components of $\mathbb{R}^{d} \setminus \bigcup \mathcal{H}$. **Faces** are relatively open components of $\bigcap \mathcal{H}' \setminus \bigcup (\mathcal{H} \setminus \mathcal{H}')$ for all $\mathcal{H}' \subseteq \mathcal{H}$. **Arrangement** is the set of all faces of all dimensions, formulating a partition of $\mathbb{R}^{d}$. (*Face of dimension $1$ is called edge and of dimension $0$ is vertex.*)
+
+- Every face is the interior of a convex polyhedron.
+- Arrangement of $\mathcal{H} \sim$ dual of a finite point set.
+
+### Number of cells
+
+- In simple arrangements hyperplanes are in **general position** $: k \in \{1 , \dots, d+2\} \forall H_{1}, H_{2}, \dots , H_{k}$ $\bigcap_{i = 1}^{k} H_{i}$ is $d-k$ dimensional. If $|\mathcal{H}| \geq d + 1$ it is sufficient for $k = d$ and $k = d+1$.
+- Combinational abstraction are oriented matroids.
+
+#### Fact
+
+Simple arrangements maximize the number of cells.
+
+### Proposition
+
+The number of cells in a simple arrangement of $n$ hyperplanes in $\mathbb{R}^{d}$ is exactly
+
+$$
+\Phi_{d}(n) = \binom{n}{0} +\binom{n}{1} + \dots + \binom{n}{d}
+
+$$
+
+#### Proof
+
+- Double inductions on both $n$ and $d$.
+- In $d+1$ we have $n+1$ cells which is exactly $\binom{n}{0} + \binom{n}{1}$.
+- If we have $d \geq 2$ and $n = 0$ is 1 cell (the whole space) and $1 = \binom{n}{0}$ also we can see for $n=1$ that $2 = \binom{1}{0} + \binom{1}{1} = 1 + 1$
+- If we have $n \geq 1$ we have $n$ hyperplanes and we can remove one of them and then we get arrangement of $n-1$ hyperplanes denoted as $h_{n}$. So $\Phi_{d}(n-1)$ cells.
+- $h_{n}$ splits $\Phi_{d-1}(n-1)$ cells in 2 parts so together
+
+$$
+\Phi_{d}(n) = \Phi_{d}(n-1) + \Phi_{d-1}(n-1) = 2 \binom{n-1}{0} +2 \binom{n-1}{1} + \dots + \binom{n-1}{d} =
+
+$$
+
+$$
+= \binom{n-1}{0} +\left( \binom{n-1}{0} + \binom{n-1}{1} \right) + \dots +\left( \binom{n-1}{d-1} + \binom{n-1}{d}\right) =
+$$
+
+$$
+= \binom{n}{0} + \binom{n}{1} + \dots + \binom{n}{d}
+$$
+
+$$
+\Box
+$$
+
+## Arrangements of other objects
+
+- For example segments.
+    - Complexity of $1$ cell. $\Theta(n \cdot \alpha(n))$, where $\alpha$ is inverse ackermann function.
+
+## Arrangements of arbitrary sets
+
+$A_{1}, \dots, A_{n} \subseteq \mathbb{R}^{d}$ quite similar to venn diagrams.
+
+- Equivalence relation $\sim$ on $\mathbb{R}^{d}$ that $x \sim y \Leftrightarrow (\forall i \in [n]) ( x \in A_{i} \leftrightarrow y \in A_{i})$.
+- Equivalence classes $\forall I \subseteq [n] \{x \in \mathbb{R}^{d}, x \ in A_{i} \Leftrightarrow i \in I \} = \bigcap_{i \in I}A_{i} \setminus \bigcup_{i \neq j}A_{j}$.
+- Face of the arrangement is connected component of an equivalence class.
+
+## Arrangements of algebraic surfaces
+
+$P_{1}, \dots P_{n} \in \mathbb{R}[x_{1}, \dots, x_{d}]$
+
+- **Zero set** of $P_{i}$ denoted as $Z(P_{i}) = \{ x \in \mathbb{R}^{d}, P_{i}(x) = 0\}$.
+- Assume that $\deg P_{i} \leq D$ and degree is obtained by multiplying all degrees example $x^{15}y^{2}$ has degree $30$.
+
+### Milnor theorem
+
+If $D, d$ are constants, the maximum number of faces of the arrangements of $Z(P_{1}), Z(P_{2}), \dots, Z(P_{n})$ is $O(n^{d})$.
+
+### Definition
+
+A vector $\sigma = (\sigma_{1}, \sigma_{2}, \dots, \sigma_{n}) \in \{-1,0,1\}^{n}$ is called **sign pattern** of $P_{1}, \dots, P_{n}$ if there exists $x \in \mathbb{R}^{d}$ such that the sign of $P_{i}(x)$ is $\sigma_{i}$.
+
+- Number of sign patterns is at most as the number of faces. Also is at most $3^n$.
+
+### Theorem
+
+$P_{1}, \dots, P_{n} \in \mathbb{R}[x_{1}, \dots, x_{d}]$ polynomials of maximum degree $D$, then the number of faces of the arrangements of $Z(P_{1}), Z(P_{2}), \dots , Z(P_{n})$ (and the number of the sign patterns) is at most $2 (2D)^{d} \sum_{i=1}^{d}2^{i}\binom{4n+1}{i}$ for $n \geq d \geq 2$ this is at most $\left(\frac{50 D n}{d}\right)^{d}$.
+
+#### *Without proof*
+
+## Arrangements of pseudolines
+
+### Definition
+
+A collection of pseudolines $p_{1}, \dots, p_{n}$ is if
+
+1.  each $p_{i}$ is an two way unbounded simple curve
+2.  $\forall i \neq j$ $p_{i}$ and $p_{j}$ cross exactly once (and $|p_{i} \cap p_{j}| = 1$)
+
+Arrangement of pseudolines is **simple** if no $3$ cross at the same point.
+
+### Wiring diagram
+
+```mermaid
+graph LR;
+    id1(1) --> id11(" ");
+    id2(2) --> id22(" ");
+    id22 --> id12(" ");
+    id11 --> id12;
+    id12 --> id13(" ");
+    id12 --> id23(" ");
+
+```
+
+==this part is missing==
+
+## Levels in arrangements of hyperplanes
+
+$H$ is set of $n$ hyperplanes in $\mathbb{R}^{d}$ none of them vertical.
+
+### Definition
+
+Level of vertex $x$ in $H$ is equal to the number of hyperplanes strictly underneath $x$.
+
+### Clarkson’s level theorem
+
+The number of vertices with level at most $k$ in arrangement $H$ is at most $O_{d}(n^{\lfloor d/2 \rfloor}(k+1)^{\lceil d/2 \rceil})$.
+
+#### Note
+
+It is asymptotically tight.
+
+#### Proof
+
+==omitted==
+
+### Definition
+
+**Zone** of hyperplane $g$ is set of faces of arrangement hyperplanes $H$, which “sees” a part of $G$.
+
+### Zone theorem
+
+$H$ is set of $n$ hyperplanes in $\mathbb{R}^{d}$ and $g$ is a hyperplane. The number of faces in zone $g$ of arrangements $H$ is at most $O(n^{d-1})$.
+
+#### Proof
+
+==was not completed, so it is omitted==
