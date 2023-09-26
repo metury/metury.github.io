@@ -13,9 +13,9 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 > The table will be changed to list and when the app is for separated by the color of the link. [Android](){: .btn .btn-green} [Windows](){: .btn .btn-blue}  [Linux](){: .btn .btn-purple} and [multiple](){: .btn}.
 -->
 
-| Aplikace                                                               | Linux  | Windows | Android |
-|:-----------------------------------------------------------------------|:------:|:-------:|:-------:|
-| **Obecné**                                                             | \-\-\- | \-\-\-  | \-\-\-  |
+| Aplikace                                                                                 | Linux  | Windows | Android |
+|:----------------------------------------------------------------------------------------:|:------:|:-------:|:-------:|
+| **Obecné**                                                                               | \-\-\- | \-\-\-  | \-\-\-  |
 | [Firefox](https://www.mozilla.org/en-US/firefox/new/){: .btn .btn-blue}                  | ✅      | ✅       | ✅       |
 | [Thunderbird](https://www.thunderbird.net/en-US/){: .btn .btn-blue}                      | ✅      | ✅       | ✅       |
 | [Filezilla](https://filezilla-project.org/){: .btn .btn-blue}                            | ✅      | ✅       | ❌       |
@@ -94,27 +94,6 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 | **Mapy**                                                               | \-\-\- | \-\-\-  | \-\-\-  |
 | [OsmAnd Plus](https://osmand.net/){: .btn .btn-blue}                                     | ❌      | ❌       | ✅       |
 
-
-## Arch linux `yay`
-
-This is a script for downloading some of these applications on [arch linux](https://archlinux.org/).
-
-```shell
-#!/bin/bash
-
-tmp=$(mktemp)
-
-git clone https://aur.archlinux.org/yay.git $tmp
-cd $tmp
-makepkg -si
-
-yay -S firefox thunderbird filezilla keepassxc owncloud-client geany qt5 qt6 git libreoffice texstudio diffpdf pandoc discord telegram-desktop signal-desktop vlc gimp inkscape steam texlive-most mullvad-vpn zoom obs-studio atril vim cmake doxygen cryptomator shotcut audacity peazib-qt-bin ocrmypdf pdfmixtool verapdf
-```
-
 ## Joplin
 
 Good application for notes in markdown one can use [Joplin](https://joplinapp.org/) which is recommended to download via [script](https://joplinapp.org/help/#desktop-applications).
-
-```sh
-wget -O | https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
-```
