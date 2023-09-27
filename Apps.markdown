@@ -8,46 +8,86 @@ permalink: /apps/
 
 Here is a list of some applications that I enjoy using and recomend anyone to use as well. For privacy centric users I recomend to take a look at a nice page [privacy tools](https://www.privacytools.io/).
 
-<!--
-{: .note }
-> The table will be changed to list and when the app is for separated by the color of the link. [Android](){: .btn .btn-green} [Windows](){: .btn .btn-blue}  [Linux](){: .btn .btn-purple} and [multiple](){: .btn}.
--->
+- The list somewhat separated to which OS can be used for the app.
+	- [Android](){: .btn .btn-green} 
+	- [Windows](){: .btn .btn-blue}
+	- [Linux](){: .btn .btn-purple}
+	- [multiple](){: .btn}
+	
+## General
+
+### Day to day use
+
+- [Firefox](https://www.mozilla.org/en-US/firefox/new/){: .btn}
+- [Thunderbird](https://www.thunderbird.net/en-US/){: .btn}
+- [Joplin](https://joplinapp.org/){: .btn}
+- [Simple apps](https://www.simplemobiletools.com/){: .btn .btn-green}
+
+### Sync and file system
+
+- [Filezilla](https://filezilla-project.org/){: .btn}
+- [FreeFileSync](https://freefilesync.org/){: .btn}
+- [Owncloud](https://owncloud.com/){: .btn}
+- [Davx5](https://www.davx5.com/){: .btn .btn-green}
+- [ICSx5](https://icsx5.bitfire.at/){: .btn .btn-green}
+- [PeaZip](https://peazip.github.io/){: .btn .btn-blue}
+- [Material Files](https://github.com/zhanghai/MaterialFiles){: .btn .btn-green}
+- [Total Commander](https://www.ghisler.com/){: .btn .btn-blue}
+- [qBittorent](https://www.qbittorrent.org/){: .btn}
+- [Libretorrent](https://gitlab.com/proninyaroslav/libretorrent){: .btn .btn-green}
+- [SD Maid](https://sdmaid.darken.eu/){: .btn .btn-green}
+- [BleachBit](https://www.bleachbit.org/){: .btn}
+
+### News
+
+- [Feeder](https://gitlab.com/spacecowboy/Feeder){: .btn .btn-green}
+- [Geometric weather](https://github.com/WangDaYeeeeee/GeometricWeather){: .btn .btn-green}
+
+### Maps
+
+- [OsmAnd Plus](https://osmand.net/){: .btn .btn-green}
+
+## Security
+
+### Disk encryption
+
+- [Cryptomator](https://cryptomator.org/){: .btn}
+- [Veracrypt](https://www.veracrypt.fr/en/Home.html){: .btn}
+
+### Password managers
+
+- [Bitwarden](https://bitwarden.com/){: .btn}
+- [KeepassXC](https://keepassxc.org/){: .btn}
+- [KeepassDX](https://www.keepassdx.com/){: .btn .btn-green}
+- [keepass2android](https://github.com/PhilippC/keepass2android){: .btn .btn-green}
+
+### 2FA
+
+- [Aegis](https://getaegis.app/){: .btn .btn-green}
+- [2FAS](https://2fas.com/){: .btn .btn-green}
+
+
+## Development
+
+## Communication
+
+- [Zoom](https://zoom.us/){: .btn}
+- [Discord](https://discord.com/){: .btn}
+- [Telegram](https://telegram.org/){: .btn}
+- [Signal](https://www.signal.org/){: .btn}
+
+## Media
+
+## Games
+
+- [Shuttered Dungeon](https://shatteredpixel.com/shatteredpd/){: .btn}
+- [Steam](https://store.steampowered.com/){: .btn}
+
 
 | Aplikace                                                                                 | Linux  | Windows | Android |
 |:----------------------------------------------------------------------------------------:|:------:|:-------:|:-------:|
-| **Obecné**                                                                               | \-\-\- | \-\-\-  | \-\-\-  |
-| [Firefox](https://www.mozilla.org/en-US/firefox/new/){: .btn .btn-blue}                  | ✅      | ✅       | ✅       |
-| [Thunderbird](https://www.thunderbird.net/en-US/){: .btn .btn-blue}                      | ✅      | ✅       | ✅       |
-| [Filezilla](https://filezilla-project.org/){: .btn .btn-blue}                            | ✅      | ✅       | ❌       |
-| [Joplin](https://joplinapp.org/){: .btn .btn-blue}                                       | ✅      | ✅       | ✅       |
-| [FreeFileSync](https://freefilesync.org/){: .btn .btn-blue}                              | ✅      | ✅       | ❌       |
 | [Catima](https://catima.app/){: .btn .btn-blue}                                          | ❌      | ❌       | ✅       |
-| **Sync**                                                               | \-\-\- | \-\-\-  | \-\-\-  |
-| [Owncloud](https://owncloud.com/){: .btn .btn-blue}                                      | ✅      | ✅       | ✅       |
-| [Davx5](https://www.davx5.com/){: .btn .btn-blue}                                        | ❌      | ❌       | ✅       |
-| [ICSx5](https://icsx5.bitfire.at/){: .btn .btn-blue}                                     | ❌      | ❌       | ✅       |
-| **Utility**                                                            | \-\-\- | \-\-\-  | \-\-\-  |
-| [PeaZip](https://peazip.github.io/){: .btn .btn-blue}                                    | ✅      | ✅       | ❌       |
-| [Material Files](https://github.com/zhanghai/MaterialFiles){: .btn .btn-blue}            | ❌      | ❌       | ✅       |
-| [Total Commander](https://www.ghisler.com/){: .btn .btn-blue}                            | ❌      | ✅       | ❌       |
-| [qBittorent](https://www.qbittorrent.org/){: .btn .btn-blue}                             | ✅      | ✅       | ❌       |
-| [Libretorrent](https://gitlab.com/proninyaroslav/libretorrent){: .btn .btn-blue}         | ❌      | ❌       | ✅       |
-| [SD Maid](https://sdmaid.darken.eu/){: .btn .btn-blue}                                   | ❌      | ❌       | ✅       |
-| [BleachBit](https://www.bleachbit.org/){: .btn .btn-blue}                                | ✅      | ✅       | ❌       |
-| [Simple apps](https://www.simplemobiletools.com/){: .btn .btn-blue}                      | ❌      | ❌       | ✅       |
-| [MuPDF](https://mupdf.com){: .btn .btn-blue}                                             | ✅      | ✅       | ✅       |
-| [Vera PDF](https://verapdf.org/software/){: .btn .btn-blue}                              | ✅      | ✅       | ❌       |
 | [AngryIP](https://angryip.org/){: .btn .btn-blue}                                        | ✅      | ✅       | ❌       |
-| **News**                                                               | \-\-\- | \-\-\-  | \-\-\-  |
-| [Feeder](https://gitlab.com/spacecowboy/Feeder){: .btn .btn-blue}                        | ❌      | ❌       | ✅       |
-| [Geometric weather](https://github.com/WangDaYeeeeee/GeometricWeather){: .btn .btn-blue} | ❌      | ❌       | ✅       |
-| **Security**                                                           | \-\-\- | \-\-\-  | \-\-\-  |
-| [Cryptomator](https://cryptomator.org/){: .btn .btn-blue}                                | ✅      | ✅       | ✅       |
-| [KeepassXC](https://keepassxc.org/){: .btn .btn-blue}                                    | ✅      | ✅       | ❌       |
-| [KeepassDX](https://www.keepassdx.com/){: .btn .btn-blue}                                | ❌      | ❌       | ✅       |
-| [Aegis](https://getaegis.app/){: .btn .btn-blue}                                         | ❌      | ❌       | ✅       |
-| [Mullvapd VPN](https://mullvad.net/en/){: .btn .btn-blue}                                | ✅      | ✅       | ✅       |
-| [Tor Browser](https://www.torproject.org/){: .btn .btn-blue}                             | ✅      | ✅       | ✅       |
 | **Development**                                                        | \-\-\- | \-\-\-  | \-\-\-  |
 | [Code::Blocks](https://www.codeblocks.org/){: .btn .btn-blue}                            | ✅      | ✅       | ❌       |
 | [Valgrind](https://valgrind.org/){: .btn .btn-blue}                                      | ✅      | ✅       | ❌       |
@@ -70,11 +110,6 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 | [Pandoc](https://pandoc.org/){: .btn .btn-blue}                                          | ✅      | ❌       | ❌       |
 | [Xournal++](https://xournalpp.github.io/){: .btn .btn-blue}                              | ✅      | ✅       | ✅       |
 | [PDF Mix Tool](https://scarpetta.eu/pdfmixtool/){: .btn .btn-blue}                       | ✅      | ❌       | ❌       |
-| **Komunikace**                                                         | \-\-\- | \-\-\-  | \-\-\-  |
-| [Zoom](https://zoom.us/){: .btn .btn-blue}                                               | ✅      | ✅       | ✅       |
-| [Discord](https://discord.com/){: .btn .btn-blue}                                        | ✅      | ✅       | ✅       |
-| [Telegram](https://telegram.org/){: .btn .btn-blue}                                      | ✅      | ✅       | ✅       |
-| [Signal](https://www.signal.org/){: .btn .btn-blue}                                      | ✅      | ✅       | ✅       |
 | **Média**                                                              | \-\-\- | \-\-\-  | \-\-\-  |
 | [VLC](https://www.videolan.org/vlc/){: .btn .btn-blue}                                   | ✅      | ✅       | ✅       |
 | EasyTag                                                                | ✅      | ❌       | ❌       |
@@ -88,12 +123,3 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 | [Librera PRO](https://librera.mobi/){: .btn .btn-blue}                                   | ❌      | ❌       | ✅       |
 | [Gifcurry](https://lettier.github.io/gifcurry/){: .btn .btn-blue}                        | ✅      | ✅       | ❌       |
 | [Audacity](https://www.audacityteam.org/){: .btn .btn-blue}                              | ✅      | ✅       | ❌       |
-| **Hry**                                                                | \-\-\- | \-\-\-  | \-\-\-  |
-| [Steam](https://store.steampowered.com/){: .btn .btn-blue}                               | ✅      | ✅       | ❌       |
-| [Shuttered Dungeon](https://shatteredpixel.com/shatteredpd/){: .btn .btn-blue}           | ✅      | ✅       | ✅       |
-| **Mapy**                                                               | \-\-\- | \-\-\-  | \-\-\-  |
-| [OsmAnd Plus](https://osmand.net/){: .btn .btn-blue}                                     | ❌      | ❌       | ✅       |
-
-## Joplin
-
-Good application for notes in markdown one can use [Joplin](https://joplinapp.org/) which is recommended to download via [script](https://joplinapp.org/help/#desktop-applications).
