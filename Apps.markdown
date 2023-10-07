@@ -30,7 +30,7 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 - [Owncloud](https://owncloud.com/){: .btn}
 - [Davx5](https://www.davx5.com/){: .btn .btn-green}
 - [ICSx5](https://icsx5.bitfire.at/){: .btn .btn-green}
-- [PeaZip](https://peazip.github.io/){: .btn .btn-blue}
+- [PeaZip](https://peazip.github.io/){: .btn .btn}
 - [Material Files](https://github.com/zhanghai/MaterialFiles){: .btn .btn-green}
 - [Total Commander](https://www.ghisler.com/){: .btn .btn-blue}
 - [qBittorent](https://www.qbittorrent.org/){: .btn}
@@ -46,6 +46,20 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 ### Maps
 
 - [OsmAnd Plus](https://osmand.net/){: .btn .btn-green}
+
+### Office
+
+- [Libre Office](https://www.libreoffice.org/){: .btn}
+- [TexStudio](https://www.texstudio.org/){: .btn}
+- [MikTex](https://miktex.org/){: .btn .btn-blue}
+- [Marp](https://marp.app/){: .btn}
+- [Pandoc](https://pandoc.org/){: .btn .btn-purple}
+- [Xournal++](https://xournalpp.github.io/){: .btn}
+- [PDF Mix Tool](https://scarpetta.eu/pdfmixtool/){: .btn}
+
+### Misc
+
+- [Catima](https://catima.app/){: .btn .btn-green}
 
 ## Security
 
@@ -69,6 +83,26 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 
 ## Development
 
+### Editors
+
+- [Code::Blocks](https://www.codeblocks.org/){: .btn}
+- [Geany](https://www.geany.org/){: .btn}
+- [DBeaver](https://dbeaver.io/){: .btn}
+- [notepad++](https://notepad-plus-plus.org/){: .btn .btn-blue}
+
+### Tools
+
+- [Valgrind](https://valgrind.org/){: .btn}
+- [CppCheck](http://cppcheck.net/){: .btn}
+- [Cccc](https://sarnold.github.io/cccc/){: .btn}
+- [Meld](https://meldmerge.org/){: .btn}
+- [Qt](https://www.qt.io/){: .btn}
+- [Git](https://git-scm.com/){: .btn}
+- [TortoiseGit](https://tortoisegit.org/){: .btn .btn-blue}
+- [Putty](https://putty.org/){: .btn .btn-blue}
+- [Draw.io](https://www.drawio.com/){: .btn}
+- [AngryIP](https://angryip.org/){: .btn}
+
 ## Communication
 
 - [Zoom](https://zoom.us/){: .btn}
@@ -78,48 +112,25 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 
 ## Media
 
+### Players and readers
+
+- [VLC](https://www.videolan.org/vlc/){: .btn}
+- [Antenapod](https://antennapod.org/){: .btn .btn-green}
+- [Librera PRO](https://librera.mobi/){: .btn .btn-green}
+
+### Editors
+
+- [Gimp](https://www.gimp.org/){: .btn}
+- [Inkscape](https://inkscape.org/){: .btn}
+- [Shotcut](https://www.shotcut.org/){: .btn}
+- [Darktable](https://www.darktable.org/){: .btn}
+- [Gifcurry](https://lettier.github.io/gifcurry/){: .btn}
+- [Audacity](https://www.audacityteam.org/){: .btn}
+- [OBS](https://obsproject.com/){: .btn}
+- EasyTag
+- Asunder
+
 ## Games
 
 - [Shuttered Dungeon](https://shatteredpixel.com/shatteredpd/){: .btn}
 - [Steam](https://store.steampowered.com/){: .btn}
-
-
-| Aplikace                                                                                 | Linux  | Windows | Android |
-|:----------------------------------------------------------------------------------------:|:------:|:-------:|:-------:|
-| [Catima](https://catima.app/){: .btn .btn-blue}                                          | ❌      | ❌       | ✅       |
-| [AngryIP](https://angryip.org/){: .btn .btn-blue}                                        | ✅      | ✅       | ❌       |
-| **Development**                                                        | \-\-\- | \-\-\-  | \-\-\-  |
-| [Code::Blocks](https://www.codeblocks.org/){: .btn .btn-blue}                            | ✅      | ✅       | ❌       |
-| [Valgrind](https://valgrind.org/){: .btn .btn-blue}                                      | ✅      | ✅       | ❌       |
-| [CppCheck](http://cppcheck.net/){: .btn .btn-blue}                                       | ✅      | ✅       | ❌       |
-| [Cccc](https://sarnold.github.io/cccc/){: .btn .btn-blue}                                | ✅      | ✅       | ❌       |
-| [Geany](https://www.geany.org/){: .btn .btn-blue}                                        | ✅      | ✅       | ❌       |
-| [Meld](https://meldmerge.org/){: .btn .btn-blue}                                         | ✅      | ✅       | ❌       |
-| [Qt](https://www.qt.io/){: .btn .btn-blue}                                               | ✅      | ✅       | ❌       |
-| [Git](https://git-scm.com/){: .btn .btn-blue}                                            | ✅      | ✅       | ❌       |
-| [TortoiseGit](https://tortoisegit.org/){: .btn .btn-blue}                                | ❌      | ✅       | ❌       |
-| [Putty](https://putty.org/){: .btn .btn-blue}                                            | ❌      | ✅       | ❌       |
-| [DBeaver](https://dbeaver.io/){: .btn .btn-blue}                                         | ✅      | ✅       | ❌       |
-| [Draw.io](https://www.drawio.com/){: .btn .btn-blue}                                     | ✅      | ✅       | ❌       |
-| [notepad++](https://notepad-plus-plus.org/){: .btn .btn-blue}                            | ❌      | ✅       | ❌       |
-| **Office**                                                             | \-\-\- | \-\-\-  | \-\-\-  |
-| [Libre Office](https://www.libreoffice.org/){: .btn .btn-blue}                           | ✅      | ✅       | ❌       |
-| [TexStudio](https://www.texstudio.org/){: .btn .btn-blue}                                | ✅      | ✅       | ❌       |
-| [MikTex](https://miktex.org/){: .btn .btn-blue}                                          | ❌      | ✅       | ❌       |
-| [Marp](https://marp.app/){: .btn .btn-blue}                                              | ✅      | ❌       | ❌       |
-| [Pandoc](https://pandoc.org/){: .btn .btn-blue}                                          | ✅      | ❌       | ❌       |
-| [Xournal++](https://xournalpp.github.io/){: .btn .btn-blue}                              | ✅      | ✅       | ✅       |
-| [PDF Mix Tool](https://scarpetta.eu/pdfmixtool/){: .btn .btn-blue}                       | ✅      | ❌       | ❌       |
-| **Média**                                                              | \-\-\- | \-\-\-  | \-\-\-  |
-| [VLC](https://www.videolan.org/vlc/){: .btn .btn-blue}                                   | ✅      | ✅       | ✅       |
-| EasyTag                                                                | ✅      | ❌       | ❌       |
-| Asunder                                                                | ✅      | ❌       | ❌       |
-| [Gimp](https://www.gimp.org/){: .btn .btn-blue}                                          | ✅      | ✅       | ❌       |
-| [Inkscape](https://inkscape.org/){: .btn .btn-blue}                                      | ✅      | ✅       | ❌       |
-| [Darktable](https://www.darktable.org/){: .btn .btn-blue}                                | ✅      | ✅       | ❌       |
-| [OBS](https://obsproject.com/){: .btn .btn-blue}                                         | ✅      | ✅       | ❌       |
-| [Shotcut](https://www.shotcut.org/){: .btn .btn-blue}                                    | ✅      | ✅       | ❌       |
-| [Antenapod](https://antennapod.org/){: .btn .btn-blue}                                   | ❌      | ❌       | ✅       |
-| [Librera PRO](https://librera.mobi/){: .btn .btn-blue}                                   | ❌      | ❌       | ✅       |
-| [Gifcurry](https://lettier.github.io/gifcurry/){: .btn .btn-blue}                        | ✅      | ✅       | ❌       |
-| [Audacity](https://www.audacityteam.org/){: .btn .btn-blue}                              | ✅      | ✅       | ❌       |
