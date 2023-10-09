@@ -20,4 +20,4 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 - [Teorie množin](teorie-mnozin.pdf)
 - [Flows, paths and cuts](flows-paths-cuts.pdf)
 
-# [Nyni](now.md)
+# [Nyni](now)
