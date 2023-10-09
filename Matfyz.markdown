@@ -19,3 +19,5 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 - [Pokročilé programování v c++](programovani-cpp-pokrocile.pdf)
 - [Teorie množin](teorie-mnozin.pdf)
 - [Flows, paths and cuts](flows-paths-cuts.pdf)
+
+# [Nyni](now.md)
