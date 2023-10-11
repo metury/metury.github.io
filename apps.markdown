@@ -13,7 +13,7 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 	- [Windows](){: .btn .btn-blue}
 	- [Linux](){: .btn .btn-purple}
 	- [multiple](){: .btn}
-	
+
 ## General
 
 ### Day to day use

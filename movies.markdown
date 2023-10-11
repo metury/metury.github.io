@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Movies
-permalink: /Movies/
+permalink: /movies/
 ---
 
 ### To watch

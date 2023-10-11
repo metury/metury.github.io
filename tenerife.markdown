@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Tenerife [CZ]
-permalink: /Tenerife/
+permalink: /tenerife/
 ---
 
 # Jednoduchý průvodce na Tenerife

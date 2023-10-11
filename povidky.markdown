@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Povídky [CZ]
-permalink: /Povidky/
+permalink: /povidky/
 ---
 
 # První slovo

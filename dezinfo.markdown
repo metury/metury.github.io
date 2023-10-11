@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Dezinformace [CZ]
-permalink: /dezinfo/
+permalink: /dezinformace/
 ---
 
 Tady je můj menší seznam stránek a zdrojů, které slouží proti šíření dezinformací.
