@@ -59,4 +59,6 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 
 ## Další linky
 
+- [Průvodce labyrintem algoritmů](https://pruvodce.ucw.cz/)
+
 *Dodatečně přidám.*
