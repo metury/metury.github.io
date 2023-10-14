@@ -78,6 +78,7 @@ permalink: /movies/
 | CHIPs                                          | [ČSFD](https://www.csfd.cz/film/238136-chips-blazniva-hlidka/prehled/){: .btn .btn-purple}                  | [TMDB](https://www.themoviedb.org/movie/417644-chips){: .btn .btn-purple}                                       |
 | Dark Star                                      | [ČSFD](https://www.csfd.cz/film/1316-temna-hvezda/prehled/){: .btn .btn-purple}                             | [TMDB](https://www.themoviedb.org/movie/1410-dark-star){: .btn .btn-purple}                                     |
 | The Interview                                  | [ČSFD](https://www.csfd.cz/film/357422-interview/prehled/){: .btn .btn-purple}                              | [TMDB](https://www.themoviedb.org/movie/228967-the-interview){: .btn .btn-purple}                               |
+| Idiocracy                                      | [ČSFD](https://www.csfd.cz/film/185578-absurdistan/prehled/){:.btn .btn-purple}                             | [TMDB](https://www.themoviedb.org/movie/7512-idiocracy){: .btn .btn-purple}                                     |
 
 ## České filmy
 
@@ -88,7 +89,8 @@ permalink: /movies/
 | Samotáři                 | [ČSFD](https://www.csfd.cz/film/7064-samotari/prehled/){: .btn .btn-purple}                   |
 | Případ mrtvého nebožtíka | [ČSFD](https://www.csfd.cz/film/752094-pripad-mrtveho-neboztika/prehled/){: .btn .btn-purple} |
 | Kouř                     | [ČSFD](https://www.csfd.cz/film/9401-kour/prehled/){: .btn .btn-purple}                       |
-| Wilsonov                  | [ČSFD](https://www.csfd.cz/film/363910-wilsonov/prehled/){: .btn .btn-purple}                   |
+| Wilsonov                 | [ČSFD](https://www.csfd.cz/film/363910-wilsonov/prehled/){: .btn .btn-purple}                 |
+| Bod obnovy               | [ČSFD](https://www.csfd.cz/film/1242515-bod-obnovy/prehled/){: .btn .btn-purple}              |
 
 # Animated
 
