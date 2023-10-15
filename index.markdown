@@ -7,9 +7,9 @@ Title: Home
 
 Welcome to my personal webpage. Here you may find:
 
-- List of my favourite [movies](/Movies/).
+- List of my favourite [movies](/movies/).
 - List of my favourite [apps](/apps/) that I enjoy using.
-- List of all [projects](/Projects/) that I have and also try to maintain.
+- List of all [projects](/projects/) that I have and also try to maintain.
 
 ## [CZ]
 
