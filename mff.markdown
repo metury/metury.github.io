@@ -13,7 +13,6 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 ## Zápisky
 
 - [Kombinatorika a grafy](kg.pdf)
-	- [Kombinatorika a grafy 1](kombinatorika-a-grafy-i-poznamky.pdf)
 	- [Kombinatorika a grafy 2](kombinatorika-a-grafy-ii-poznamky.pdf)
 - [Pravděpodobnost a statistika 2](past-ii.pdf)
 - [Teorie množin](temno.pdf)
