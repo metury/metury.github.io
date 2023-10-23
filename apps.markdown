@@ -9,7 +9,7 @@ permalink: /apps/
 Here is a list of some applications that I enjoy using and recomend anyone to use as well. For privacy centric users I recomend to take a look at a nice page [privacy tools](https://www.privacytools.io/).
 
 - The list somewhat separated to which OS can be used for the app.
-	- [Android](){: .btn .btn-green} 
+	- [Android](){: .btn .btn-green}
 	- [Windows](){: .btn .btn-blue}
 	- [Linux](){: .btn .btn-purple}
 	- [multiple](){: .btn}
@@ -37,6 +37,7 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 - [Libretorrent](https://gitlab.com/proninyaroslav/libretorrent){: .btn .btn-green}
 - [SD Maid](https://sdmaid.darken.eu/){: .btn .btn-green}
 - [BleachBit](https://www.bleachbit.org/){: .btn}
+- [Local Send](https://localsend.org/#/){: .btn}
 
 ### News
 
@@ -80,6 +81,9 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 - [Aegis](https://getaegis.app/){: .btn .btn-green}
 - [2FAS](https://2fas.com/){: .btn .btn-green}
 
+### Science
+
+- [Gnuplot](http://www.gnuplot.info/){: .btn .btn-purple}
 
 ## Development
 
