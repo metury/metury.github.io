@@ -12,10 +12,13 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 
 ## Zápisky
 
-- [Kombinatorika a grafy](kg.pdf)
-- [Pravděpodobnost a statistika 2](past-ii.pdf)
-- [Teorie množin](temno.pdf)
-- [Flows, paths and cuts](flows-paths-cuts.pdf)
+[Kombinatorika a grafy](kg.pdf){: .btn .btn-blue}
+
+[Pravděpodobnost a statistika 2](past-ii.pdf){: .btn .btn-blue}
+
+[Teorie množin](temno.pdf){: .btn .btn-blue}
+
+[Flows, paths and cuts](flows-paths-cuts.pdf){: .btn .btn-blue}
 
 ## 2023/24
 
