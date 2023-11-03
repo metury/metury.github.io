@@ -1,3 +1,9 @@
+---
+title: Music
+permalink: /music/
+layout: page
+---
+
 # Music
 
 As a somewhat musician myself music is one of my hobbies I have. Now it is mainly listening.
