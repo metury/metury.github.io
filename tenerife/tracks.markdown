@@ -15,9 +15,9 @@ permalink: /tenerife/trasy/
 
 ## Okolí Teide
 
-- Jedna kratší cesta poblíž výhledu [Samara](../resources/Samara.gpx "resources/Samara.gpx").
-- Pak výlet na horu [Sombrero](../resources/Sombrero.gpx "resources/Sombrero.gpx") ze které je výhled na park Teide.
-- Pak ještě [trasa](../resources/teide-view.gpx "resources/teide-view.gpx") poblíž, ale z opačné strany poblíž Roques de Garcia.
+- Jedna kratší cesta poblíž výhledu [Samara](../../resources/Samara.gpx "resources/Samara.gpx").
+- Pak výlet na horu [Sombrero](../../resources/Sombrero.gpx "resources/Sombrero.gpx") ze které je výhled na park Teide.
+- Pak ještě [trasa](../../resources/teide-view.gpx "resources/teide-view.gpx") poblíž, ale z opačné strany poblíž Roques de Garcia.
 
 ## Pohoří Anaga
 
@@ -25,5 +25,5 @@ permalink: /tenerife/trasy/
 
 ## Pohoří Teno
 
-- Tady je jedna pěkná [Where I Go](https://www.geocaching.com/geocache/GC65QKW) ohledně pána prstenů. Není potřeba přidat trasu ale popř. je to zhruba [tahle](../resources/tlotr.gpx "resources/tlotr.gpx").
+- Tady je jedna pěkná [Where I Go](https://www.geocaching.com/geocache/GC65QKW) ohledně pána prstenů. Není potřeba přidat trasu ale popř. je to zhruba [tahle](../../resources/tlotr.gpx "resources/tlotr.gpx").
 - Ještě je zajímavé jiné Where I Go také poblíž a to [reverzní keš](https://www.geocaching.com/geocache/GC8J7A3).

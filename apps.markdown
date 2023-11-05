@@ -25,6 +25,8 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 - [Thunderbird](https://www.thunderbird.net/en-US/){: .btn}
 - [Joplin](https://joplinapp.org/){: .btn}
 - [Simple apps](https://www.simplemobiletools.com/){: .btn .btn-green}
+- [Notally](https://github.com/OmGodse/Notally){: .btn .btn-green}
+- [Etar](https://github.com/Etar-Group/Etar-Calendar){: .btn .btn-green}
 
 ### Sync and file system
 
@@ -49,6 +51,7 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 
 ### Maps
 
+- [Organic maps](https://organicmaps.app/){: .btn .btn-green}
 - [OsmAnd Plus](https://osmand.net/){: .btn .btn-green}
 
 ### Office
