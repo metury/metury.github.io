@@ -16,6 +16,9 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 
 ## General
 
+<!--Label
+{: .label}-->
+
 ### Day to day use
 
 - [Firefox](https://www.mozilla.org/en-US/firefox/new/){: .btn}

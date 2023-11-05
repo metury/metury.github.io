@@ -7,3 +7,10 @@ url: https://metury.github.io/
 
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
+
+mermaid:
+  version: "9.1.3"
+
+aux_links:
+  "GitHub":
+    - "https://github.com/metury/metury.github.io"
