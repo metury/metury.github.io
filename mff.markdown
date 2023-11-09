@@ -14,7 +14,7 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 
 [Kombinatorika a grafy](kg.pdf){: .btn .btn-blue}
 
-[Pravděpodobnost a statistika 2](past-ii.pdf){: .btn .btn-blue}
+[Probability and statistics 2](past-ii.pdf){: .btn .btn-blue}
 
 [Teorie množin](temno.pdf){: .btn .btn-blue}
 
