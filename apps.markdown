@@ -89,6 +89,7 @@ Here is a list of some applications that I enjoy using and recomend anyone to us
 
 ### Science
 
+- [GNU Octave](https://octave.org/){: .btn .btn-purple}
 - [Gnuplot](http://www.gnuplot.info/){: .btn .btn-purple}
 
 ## Development
