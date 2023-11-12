@@ -6,21 +6,25 @@ permalink: /mff/
 
 # Matfyz
 
+Tady je menší rozcestník pro matfyzácké věci. Jak už moje zápisky nebo odkazy na předměty, které mám zapsané.
+
+## Zápisky
 Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak se tady budou nacházet.
 
 *Upozorění:* V poznámkách mohou být chyby.
+{: .label .label-red}
 
-## Zápisky
+- [Kombinatorika a grafy](kg.pdf)
+- [Probability and statistics 2](past-ii.pdf)
+- [Teorie množin](temno.pdf)
+- [Flows, paths and cuts](flows-paths-cuts.pdf)
 
-[Kombinatorika a grafy](kg.pdf){: .btn .btn-blue}
+## Odkazy na předměty
 
-[Probability and statistics 2](past-ii.pdf){: .btn .btn-blue}
-
-[Teorie množin](temno.pdf){: .btn .btn-blue}
-
-[Flows, paths and cuts](flows-paths-cuts.pdf){: .btn .btn-blue}
-
-## 2023/24
+2023/24
+{: .label .label-red}
+zima
+{: .label .label-blue}
 
 ### [Pravděpodobnostní techniky](https://kam.mff.cuni.cz/~tyomkyn/teaching/PT/PT.html)
 
@@ -58,3 +62,5 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 ## Další linky
 
 - [Průvodce labyrintem algoritmů](https://pruvodce.ucw.cz/)
+- Dobré poznámky má také [Tomáš Sláma](https://slama.dev/)
+- Některé odkazy lze najít na [Matfyzácké wiki](https://wiki.matfyz.cz/Home)

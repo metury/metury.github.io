@@ -15,3 +15,4 @@ Thus I have listed my favorites bands and musicians I listen to.
 - [Gorillaz](https://www.gorillaz.com/)
 - [Nothing But Thieves](https://www.nbthieves.com/)
 - [The Black Keys](https://theblackkeys.com/)
+- [Royal Blood](https://www.royalbloodband.com/)
