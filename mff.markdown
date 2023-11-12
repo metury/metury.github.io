@@ -37,12 +37,12 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 
 - [Web](https://mj.ucw.cz/vyuka/2324/ds1/)
 
-### Základy složitosti a vyčíslitelnosti
+### [Základy složitosti a vyčíslitelnosti](https://ktiml.mff.cuni.cz/~kucerap/NTIN090/NTIN090-poznamky.pdf)
 
 - Prezentace jsou na [Moodlu](https://dl1.cuni.cz/course/view.php?id=10131). Obsahuje i skripta.
 - Zápočet a úkoly od [Vladana](https://kti.mff.cuni.cz/~maj/).
 
-### [Grafové algoritmy](https://mj.ucw.cz/vyuka/ga/ga-final.pdf)
+### [Grafové algoritmy](https://mj.ucw.cz/vyuka/ga/ga.pdf)
 
 - [Web](https://mj.ucw.cz/vyuka/2324/ga/)
 
@@ -58,5 +58,3 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 ## Další linky
 
 - [Průvodce labyrintem algoritmů](https://pruvodce.ucw.cz/)
-
-*Dodatečně přidám.*
