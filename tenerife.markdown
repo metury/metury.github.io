@@ -7,5 +7,8 @@ has_children: true
 
 # Jednoduchý průvodce na Tenerife
 
-- Pokusím se sepsat pár rad ohledně pobytu na Tenerife. Vše je myšleno jako doporučení a také některé informace nemusí být již aktuální.
-- Díky tomu, jak je tahle stránka funkční se informace mohou aktualizovat.
+Zde můžete najít pár typů a rad ohledně návštěvy Tenerife. Mimo smaotné cesty můžete zde najít pár zajímavých míst a taky pár konkrétních tras, které lze jít.
+
+Vše berte trochu s ohledem. Ne všechny trasy jsou vhodné pro každého a také se v průběhu času mohou měnit konkrétní podmínky a situace. Samozřejmě tuto stránku občas aktualizuji, ale i tak to nemusí být aktuální.
+
+Všechny typy a rady jsou na Vaše vlastní nebezpečí a tímto nijak neodpovídám, že případné potíže.
