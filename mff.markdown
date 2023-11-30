@@ -14,6 +14,9 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 *Upozorění:* V poznámkách mohou být chyby.
 {: .label .label-red}
 
+*Nově* [otevřený repositář](https://github.com/metury/notes)
+{: .label .label-green}
+
 - [Kombinatorika a grafy](kg.pdf)
 - [Probability and statistics 2](past-ii.pdf)
 - [Teorie množin](temno.pdf)
