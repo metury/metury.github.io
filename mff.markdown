@@ -9,12 +9,11 @@ permalink: /mff/
 Tady je menší rozcestník pro matfyzácké věci. Jak už moje zápisky nebo odkazy na předměty, které mám zapsané.
 
 ## Zápisky
-Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak se tady budou nacházet.
+Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak se tady budou nacházet. Veškeré texty lze najív v repozitáři na [GitHubu](https://github.com/metury/notes).
 
-*Upozorění:* V poznámkách mohou být chyby.
+*Upozorění:* **V poznámkách mohou být chyby.**
 {: .label .label-red}
-
-*Nově* [otevřený repositář](https://github.com/metury/notes)
+*Nově* na **GitHubu**
 {: .label .label-green}
 
 - [Kombinatorika a grafy](kg.pdf)
