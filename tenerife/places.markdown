@@ -9,9 +9,9 @@ permalink: /tenerife/mista/
 
 Na následujících mapkách lze vidět přehledově, jak je Tenerife rozložené a abyste věděli terminologii.
 
-![overview map](map.png)
+![overview map](../map.png)
 
-![north and south map](S_J.png)
+![north and south map](../S_J.png)
 
 Také přidám **GPX** soubor s konkrétními místy, které budu v textu zmiňovat.
 
