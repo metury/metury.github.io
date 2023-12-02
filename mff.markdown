@@ -11,15 +11,15 @@ Tady je menší rozcestník pro matfyzácké věci. Jak už moje zápisky nebo o
 ## Zápisky
 Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak se tady budou nacházet. Veškeré texty lze najív v repozitáři na [GitHubu](https://github.com/metury/notes).
 
-*Upozorění:* **V poznámkách mohou být chyby.**
+Upozorění: V poznámkách mohou být chyby.
 {: .label .label-red}
-*Nově* na **GitHubu**
+Nově na GitHubu
 {: .label .label-green}
 
+- [Flows, paths and cuts](flows-paths-cuts.pdf)
 - [Kombinatorika a grafy](kg.pdf)
 - [Probability and statistics 2](past-ii.pdf)
 - [Teorie množin](temno.pdf)
-- [Flows, paths and cuts](flows-paths-cuts.pdf)
 
 ## Odkazy na předměty
 

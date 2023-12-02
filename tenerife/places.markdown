@@ -11,6 +11,8 @@ Na následujících mapkách lze vidět přehledově, jak je Tenerife rozložen�
 
 ![overview map](../map.png)
 
+Co zhruba beru jako Jih a Sever ostrova.
+
 ![north and south map](../S_J.png)
 
 Také přidám **GPX** soubor s konkrétními místy, které budu v textu zmiňovat.
@@ -20,9 +22,12 @@ Také přidám **GPX** soubor s konkrétními místy, které budu v textu zmiňo
 
 ## Jak se pohybovat po ostrově
 
-- Buď se dá půjčit auto. Proto jsou dobré půjčovny jako [AutoReisen](https://autoreisen.com/car-hire/car-hire.php) anebo také [Cicar](https://www.cicar.com/EN). Ve většině pronajímají auto lidem až od 23 let, ale v Cicar i tomu kdo má 21 let a 2 roky řidičák.
-- Jako další možnost je používat místní autobusy. Autobusy nemají až tak přísný řád, ale jezdí docela dost dobře. Pro ně je lepší si zařídit jejich kartičku [TenMas](https://tenmas.es/). Kartička se dá pořídit hned na letišti. Pak je většinou lepší si ji dát jako kreditní (*purse*) a nabýt si ji. Hlavní výhoda je, že pokud přestupujete, tak cena je o hodně levnější, protože se vlastně počítá celá cesta dohromady a ne dvě separátní cesty. Použití této karty je hodně jednoduché. Při vstupu si pípnete a **PŘI VÝCHODU TAKY** (na to se celkem často zapomíná, potom se bere jako cena až do konečné stanice). Pokud na kartu jede více lidí, tak je třeba předem říct řidiči kolik vás je a kam jedete.
-- Následně pro hledání spojů se dá vyhledat přes *google maps* anebo použít jejich aplikaci [Guaguas](https://play.google.com/store/apps/details?id=com.diodev.guaguas&gl=US) ale nehledal jsem jestli existuje i verze na iOS.
+Buď se dá půjčit auto. Proto jsou dobré půjčovny jako:
+
+- [AutoReisen](https://autoreisen.com/car-hire/car-hire.php)
+- [Cicar](https://www.cicar.com/EN). - Zde lze už 21 let půjčit auto.
+
+Jako další možnost je používat místní autobusy. Autobusy nemají až tak přísný řád, ale jezdí docela dost dobře. Pro ně je lepší si zařídit jejich kartičku [TenMas](https://tenmas.es/). Kartička se dá pořídit hned na letišti. Pak je většinou lepší si ji dát jako kreditní (*purse*) a nabýt si ji. Hlavní výhoda je, že pokud přestupujete, tak cena je o hodně levnější, protože se vlastně počítá celá cesta dohromady a ne dvě separátní cesty. Použití této karty je hodně jednoduché. Při vstupu si pípnete a **PŘI VÝCHODU TAKY** (na to se celkem často zapomíná, potom se bere jako cena až do konečné stanice). Pokud na kartu jede více lidí, tak je třeba předem říct řidiči kolik vás je a kam jedete. Následně pro hledání spojů se dá vyhledat přes *google maps* anebo použít jejich aplikaci [Guaguas](https://play.google.com/store/apps/details?id=com.diodev.guaguas&gl=US) ale nehledal jsem jestli existuje i verze na iOS.
 
 ## Příroda
 
@@ -43,7 +48,6 @@ Celý sever je také hodně hornatý. Pohoří se jmenuje [Anaga](https://goo.gl
 Dalším pohořím je Teno ve kterém se mimo jiné nachází nejvýše postavená vesnice [Masca](https://goo.gl/maps/byGNbp8r4mAbzukL8). Ve které je taky [trasa](../../resources/masca.gpx "resources/masca.gpx") údolím. Cesta autem bývá jedna z těch nejhorších a to ne kvůli serpentinám, ale protože tam je velký provoz. Lze zvolit autobus a to někdy bývá i větší zážitek než cesta autem.
 
 Součástí pohoří Teno jsou skály vysoce se tyčící přímo z oceánu  [Los Gigantes](https://goo.gl/maps/oQFcwSWWEjWE9V1k6). Pak zase záleží jak blízko chce člověk jít, protože se dá jít [trasa](../../resources/gigantes.gpx "resources/gigantes.gpx") po Los Gigantes.
-
 
 ### Další
 
@@ -76,7 +80,6 @@ Nesmí chybět ani [La Laguna](https://goo.gl/maps/xEwbv2aDbRi3DyDT6), které je
 ### Buenavista del Norte
 
 Jako poslední bych dodal asi [Buenovista del Norte](https://goo.gl/maps/aKKuDLBAECqJuccF8) ani ne tím, že by to bylo pěkné město, ale vede odsuď cesta na severní cíp ostrova. To se musí ale už busem.
-
 
 ## Pláže
 
