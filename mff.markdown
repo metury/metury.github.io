@@ -17,6 +17,7 @@ Nově na GitHubu
 {: .label .label-green}
 
 - [Flows, paths and cuts](flows-paths-cuts.pdf)
+- [Geometrická reprezentace grafů](grg.pdf)
 - [Kombinatorika a grafy](kg.pdf)
 - [Probability and statistics 2](past-ii.pdf)
 - [Teorie množin](temno.pdf)
