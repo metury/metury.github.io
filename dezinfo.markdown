@@ -15,3 +15,9 @@ Tady je můj menší seznam stránek a zdrojů, které slouží proti šíření
 Dále také doporučuji si poslechnout [Kanárky v síti](https://www.kanarci.online/).
 
 Dodatečně se zatím jen podporuje a vytváří [nový projekt](https://www.donio.cz/neskakej-jim-na-spek).
+
+# Satira, sarkasmus a ironie
+
+Pokudněkoho baví používá sarkasmus a satiru, tak si můžete přečíst paper na [fialovou](../resources/fialova.pdf) barvu.
+
+Popřípadě doporučuji [paralelní listy](https://paralelnilisty.cz/).
