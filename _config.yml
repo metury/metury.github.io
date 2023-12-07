@@ -1,6 +1,6 @@
 title: Personal page
 description: My own personal page.
-theme: just-the-docs
+remote theme: just-the-docs
 color_scheme: dark
 
 url: https://metury.github.io/
