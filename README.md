@@ -1,3 +1,3 @@
-# Personal blog
+# My page
 
-My own personal blog and page in one. Which is made by [Jekyll](https://jekyllrb.com/) and [GitHub pages](https://pages.github.com/).
+This is a source of my web page using jekyll and minima theme. To mention [Jekyll](https://jekyllrb.com/) and [GitHub pages](https://pages.github.com/).

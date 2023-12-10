@@ -5,8 +5,6 @@ parent: Tenerife [CZ]
 permalink: /tenerife/okoli/
 ---
 
-# Okolí Costa del Silencio
-
 Tady sepíšu to co je v okolí Costa del Silencio a Las Galletas, která se pár čtenářům může hodit.
 
 ## Restaurace:

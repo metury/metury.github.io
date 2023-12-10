@@ -5,8 +5,6 @@ parent: Tenerife [CZ]
 permalink: /tenerife/cesta/
 ---
 
-# Cesta
-
 ## Cesta letadlem
 
 - Přijde mi, že ne všichni mají nějaké nedávné zkušenosti s létáním. Pokud ale jo, tak tohle číst nemusíte.

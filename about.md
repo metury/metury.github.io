@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: about
 permalink: /about/
 ---
 
@@ -14,3 +14,5 @@ I am a student at Charles University studying computer science. My CV can be fou
 
 - [Životopis](/CV/CV_cs.pdf)
 - [Resumé](/CV/CV_en.pdf)
+
+Also I am great fan of [Advent of Code](/aoc/) and I have all my (partial) solutions listed here.

@@ -5,8 +5,6 @@ parent: Tenerife [CZ]
 permalink: /tenerife/trasy/
 ---
 
-# Trasy
-
 - Pár tras už jsem dal do toho co navštívit, ale je možné, že tady taky nějaké přidám. Jako hlavní zdroj doporučuji pro různé trasy pomocí [Geocaching](https://www.geocaching.com/) a taky i někdy přímo [WhereIGo](https://wherigo.com/),ale to je vlastně spojené s Geocachingem také.
 - Takové doporučení jak si naplánovat den je, že ráno se vyjede někam na výlet a odpoledne se zajede na nějakou blízkou pláž a tam si člověk hodně odpočine.
 - Samozřejmě je potřeba nepřecenit svoje možnosti a taky nejlépe nejít sám a nepodcenit pitný režim. Možná bych ještě doporučil pokrývku hlavy. A taky v nějakých oblastech už není moc dobrý signál. Neznamená to, že máte mít satelitní telefon, ale nespoléhat se na připojení k internetu.

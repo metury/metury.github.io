@@ -5,8 +5,11 @@ permalink: /aoc/
 has_children: true
 ---
 
-# [Advent of code](https://adventofcode.com/)
-
-They are my solutions to advent of code tasks. There are separated to each year and day. All of this can be found on [GitHub](https://github.com/metury/advent-of-code), also with the script that generates these pages.
+They are my solutions to [advent of code](https://adventofcode.com/) tasks. There are separated to each year and day. All of this can be found on [GitHub](https://github.com/metury/advent-of-code), also with the script that generates these pages.
 
 Plus you may also play a small [Bingo](https://aoc-bingo.fly.dev/) that someone made. :D
+
+
+- [Year 2021](/aoc/2021)
+- [Year 2022](/aoc/2022)
+- [Year 2023](/aoc/2023)

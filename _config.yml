@@ -1,16 +1,77 @@
-title: Personal page
-description: My own personal page.
-theme: just-the-docs
-color_scheme: dark
+title: tury_page
+author:
+  name: Tomáš Turek
+#  email:
 
-url: https://metury.github.io/
+# The `>` after `description:` means to ignore line-breaks until next key.
+# If you want to omit the line-break after the end of text, use `>-` instead.
+description: >
+  This is my personal page for all sort of things.
 
-aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+# Build settings
 
-mermaid:
-  version: "9.1.3"
+# If you clone the Minima repo and build locally, use this setting.
+theme: minima
 
-aux_links:
-  "GitHub":
-    - "https://github.com/metury/metury.github.io"
+# As of November 2023, GitHub Pages still uses Minima 2.5.1 (https://pages.github.com/versions/). 
+# If you want to use the latest Minima version on GitHub Pages, use the following setting and 
+# add a line comment on "theme: minima" above.
+#remote_theme: jekyll/minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Theme-specific settings
+
+# If you want to link only specific pages in your header, use this and add the path to the pages
+# in order as they should show up.
+header_pages:
+  - mff.md
+  - tenerife.md
+  - misc.md
+  - about.md
+
+# Set to `true` to show excerpts on the homepage.
+#show_excerpts: false
+
+minima:
+  skin: auto
+  
+  # Minima date format.
+  # The default value is "%b %d, %Y" (e.g. Nov 14, 2023) 
+  # Refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this.
+  #date_format: "%b-%d-%Y"
+
+  # Generate social links in footer.
+  social_links:
+  #  - { platform: devto,          user_url: "https://dev.to/jekyll" }
+  #  - { platform: dribbble,       user_url: "https://dribbble.com/jekyll" }
+  #  - { platform: facebook,       user_url: "https://www.facebook.com/jekyll" }
+  #  - { platform: flickr,         user_url: "https://www.flickr.com/photos/jekyll" }
+     - { platform: github,         user_url: "https://github.com/metury" }
+  #  - { platform: google_scholar, user_url: "https://scholar.google.com/citations?user=qc6CJjYAAAAJ" }
+  #  - { platform: instagram,      user_url: "https://www.instagram.com/jekyll" }
+  #  - { platform: keybase,        user_url: "https://keybase.io/jekyll" }
+  #  - { platform: linkedin,       user_url: "https://www.linkedin.com/in/jekyll" }
+  #  - { platform: microdotblog,   user_url: "https://micro.blog/jekyll" }
+  #  - { platform: pinterest,      user_url: "https://www.pinterest.com/jekyll" }
+     - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/20530573/tury" }
+  #  - { platform: telegram,       user_url: "https://t.me/jekyll" }
+  #  - { platform: twitter,        user_url: "https://twitter.com/jekyllrb" }
+  #  - { platform: x,              user_url: "https://x.com/jekyllrb" }
+  #  - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
+
+# _config.yml
+
+# MathJax
+mathjax:
+  enable: true
+  cdn: "https://polyfill.io/v3/polyfill.min.js?features=es6"
+  inline: "<script id='MathJax-script' async src='https://polyfill.io/v3/polyfill.min.js?features=es6'></script><script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>"
+
+# _config.yml
+
+markdown: kramdown
+kramdown:
+  math_engine: mathjax

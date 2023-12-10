@@ -1,10 +1,8 @@
 ---
 layout: page
-title: Mff [CZ]
+title: matfyz
 permalink: /mff/
 ---
-
-# Matfyz
 
 Tady je menší rozcestník pro matfyzácké věci. Jak už moje zápisky nebo odkazy na předměty, které mám zapsané.
 
