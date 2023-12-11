@@ -5,8 +5,6 @@ parent: Movies
 permalink: /movies/comedy/
 ---
 
-# Comedy
-
 | Název                                          | ČSFD                                                                                                        | TMDB                                                                                                            |
 |:-----------------------------------------------|:-----------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|
 | Top Secret!                                    | [ČSFD](https://www.csfd.cz/film/8-prisne-tajne/prehled/){: .btn .btn-purple}                                | [TMDB](https://www.themoviedb.org/movie/8764-top-secret){: .btn .btn-purple}                                    |

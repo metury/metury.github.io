@@ -1,10 +1,8 @@
 ---
 layout: page
-title: Apps
+title: Applications
 permalink: /apps/
 ---
-
-# Applications
 
 Here is a list of some applications that I enjoy using and recomend anyone to use as well. For privacy centric users I recomend to take a look at a nice page [privacy tools](https://www.privacytools.io/).
 

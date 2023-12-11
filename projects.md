@@ -1,8 +1,7 @@
 ---
 layout: page
-title: Projects
+title: projects
 permalink: /projects/
-mermaid: true
 ---
 
 ## xtodo

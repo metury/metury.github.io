@@ -5,8 +5,6 @@ parent: Movies
 permalink: /movies/series/
 ---
 
-# Series
-
 | Název                        | ČSFD                                                                                               | TMDB                                                                                       |
 |------------------------------|:--------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------:|
 | Red Dwarf                    | [ČSFD](https://www.csfd.cz/film/69516-cerveny-trpaslik/prehled/){: .btn .btn-purple}               | [TMDB](https://www.themoviedb.org/tv/326-red-dwarf){: .btn .btn-purple}                    |

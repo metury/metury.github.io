@@ -5,8 +5,6 @@ parent: Movies
 permalink: /movies/animated/
 ---
 
-# Animated
-
 | Název                               | ČSFD                                                                                                     | TMDB                                                                                                   |
 |-------------------------------------|:--------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:|
 | Puss in Boots: The Last Wish        | [ČSFD](https://www.csfd.cz/film/389064-kocour-v-botach-posledni-prani/prehled/){: .btn .btn-purple}      | [TMDB](https://www.themoviedb.org/movie/315162-puss-in-boots-the-last-wish){: .btn .btn-purple}        |

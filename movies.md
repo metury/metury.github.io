@@ -8,7 +8,7 @@ has_children: true
 There is a list of my favourite movies split to categories. Beside its name you may find link to [ČSFD](https://www.csfd.cz/) and [TMDB](https://www.themoviedb.org/) as for english and czech version.
 
 - [Animated films](animated)
-- [České filmy](ceske)
+- [České filmy](cz)
 - [Comedy movies](comedy)
 - [Movies](movies)
 - [Series](series)

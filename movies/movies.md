@@ -5,8 +5,6 @@ parent: Movies
 permalink: /movies/movies/
 ---
 
-# Movies
-
 | Název                                  | ČSFD                                                                                                  | TMDB                                                                                               |
 |:---------------------------------------|:-----------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
 | The Grand Budapest Hotel               | [ČSFD](https://www.csfd.cz/film/321916-grandhotel-budapest/prehled/){: .btn .btn-purple}              | [TMDB](https://www.themoviedb.org/movie/120467-the-grand-budapest-hotel){: .btn .btn-purple}       |

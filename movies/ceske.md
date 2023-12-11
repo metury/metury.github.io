@@ -5,9 +5,6 @@ parent: Movies
 permalink: /movies/cz/
 ---
 
-
-## České filmy
-
 | Název                    | ČSFD                                                                                          |
 |:-------------------------|:---------------------------------------------------------------------------------------------:|
 | Jedna ruka netleská      | [ČSFD](https://www.csfd.cz/film/88028-jedna-ruka-netleska/prehled/){: .btn .btn-purple}       |
