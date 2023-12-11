@@ -4,10 +4,10 @@ title: misc
 permalink: /misc/
 ---
 
+There are some other pages that are not that important.
+
 # English pages
 
-- [Advent of code](/aoc/)
-- [List of projects](/projects/)
 - [List of favourite movies & series](/movies/)
 - [List of my favourite apps](/apps/)
 - [List of music I like to listen to](/music/)
