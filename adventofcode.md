@@ -12,6 +12,7 @@ Plus you may also play a small [Bingo](https://aoc-bingo.fly.dev/) that someone 
 
 - [Year 2015](/aoc/2015)
 - [Year 2016](/aoc/2016)
+- [Year 2017](/aoc/2017)
 - [Year 2021](/aoc/2021)
 - [Year 2022](/aoc/2022)
 - [Year 2023](/aoc/2023)
