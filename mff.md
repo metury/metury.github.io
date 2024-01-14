@@ -22,43 +22,18 @@ Nově na GitHubu
 
 ## Odkazy na předměty
 
-2023/24
-{: .label .label-red}
-zima
-{: .label .label-blue}
+| Předmět                              | Web                                                                        | Skripta                                                                                                                                             | Cvičení                                                            | Další                                                  |
+|--------------------------------------|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|--------------------------------------------------------|
+| **2324Z**                            | --                                                                         | --                                                                                                                                                  | --                                                                 | --                                                     |
+| Pravděpodobnostní techniky           | [Web](https://kam.mff.cuni.cz/~tyomkyn/teaching/PT/PT.html)                | [Skripta](https://www.cs.cmu.edu/~15850/handouts/matousek-vondrak-prob-ln.pdf)                                                                      | [Úkoly](https://kam.mff.cuni.cz/~dbulavka/teaching/ws2324/pt.html) | --                                                     |
+| Barevnost grafů                      | [Web](https://iuuk.mff.cuni.cz/~rakdver/index.php?which=uceni&subject=bar) | --                                                                                                                                                  | --                                                                 | --                                                     |
+| Geometrická reprezentace grafů       | --                                                                         | [Zápisky na SISu](https://is.cuni.cz/studium/predmety/index.php?id=b1110fec60a34e4c9eff4fbd6f73920d&tid=&do=predmet&kod=NDMI037&skr=2023&fak=11320) | --                                                                 | --                                                     |
+| Datove struktury                     | [Web](https://mj.ucw.cz/vyuka/2324/ds1/)                                   | [Skripta](https://mj.ucw.cz/vyuka/dsnotes/ds.pdf)                                                                                                   | --                                                                 | --                                                     |
+| Základy složitosti a vyčíslitelnosti | --                                                                         | [Skripta](https://ktiml.mff.cuni.cz/~kucerap/NTIN090/NTIN090-poznamky.pdf)                                                                          | [Cvičení](https://kti.mff.cuni.cz/~maj/)                           | [Moodle](https://dl1.cuni.cz/course/view.php?id=10131) |
+| Grafové algoritmy                    | [Web](https://mj.ucw.cz/vyuka/2324/ga/)                                    | [Skripta](https://mj.ucw.cz/vyuka/ga/ga.pdf)                                                                                                        | --                                                                 | --                                                     |
+| Kombinatorika a grafy 3              | [Web](https://iuuk.mff.cuni.cz/~rakdver/index.php?which=uceni&subject=kg3) | --                                                                                                                                                  | [úkoly](http://gaubian.xyz/)                                       | --                                                     |
+| Intervalove metody                   | [Stránka](https://kam.mff.cuni.cz/~hladik/IA/)                             | [Skripta](https://kam.mff.cuni.cz/~hladik/IA/text_ia.pdf)                                                                                           | [Úkoly](https://elif.cz/IM_2324)                                   | --                                                     |
 
-### [Pravděpodobnostní techniky](https://kam.mff.cuni.cz/~tyomkyn/teaching/PT/PT.html)
-
-- [Skripta](https://www.cs.cmu.edu/~15850/handouts/matousek-vondrak-prob-ln.pdf)
-- [Úkoly](https://kam.mff.cuni.cz/~dbulavka/teaching/ws2324/pt.html)
-
-### [Barevnost grafů](https://iuuk.mff.cuni.cz/~rakdver/index.php?which=uceni&subject=bar)
-
-### Geometrická reprezentace grafů
-
-- Zápisky na [SISu](https://is.cuni.cz/studium/predmety/index.php?id=b1110fec60a34e4c9eff4fbd6f73920d&tid=&do=predmet&kod=NDMI037&skr=2023&fak=11320)
-
-### [Datove struktury](https://mj.ucw.cz/vyuka/dsnotes/ds.pdf)
-
-- [Web](https://mj.ucw.cz/vyuka/2324/ds1/)
-
-### [Základy složitosti a vyčíslitelnosti](https://ktiml.mff.cuni.cz/~kucerap/NTIN090/NTIN090-poznamky.pdf)
-
-- Prezentace jsou na [Moodlu](https://dl1.cuni.cz/course/view.php?id=10131). Obsahuje i skripta.
-- Zápočet a úkoly od [Vladana](https://kti.mff.cuni.cz/~maj/).
-
-### [Grafové algoritmy](https://mj.ucw.cz/vyuka/ga/ga.pdf)
-
-- [Web](https://mj.ucw.cz/vyuka/2324/ga/)
-
-### [Kombinatorika a grafy 3](https://iuuk.mff.cuni.cz/~rakdver/index.php?which=uceni&subject=kg3)
-
-- Zápočet a [úkoly](http://gaubian.xyz/)
-
-### [Intervalove metody](https://kam.mff.cuni.cz/~hladik/IA/text_ia.pdf)
-
-- [Stránka](https://kam.mff.cuni.cz/~hladik/IA/)
-- [Úkoly](https://elif.cz/IM_2324)
 
 ## Další linky
 
