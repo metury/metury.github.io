@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Dezinformace [CZ]
+title: Dezinformace
 permalink: /dezinformace/
 ---
 

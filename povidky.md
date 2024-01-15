@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Povídky [CZ]
+title: Povídky
 permalink: /povidky/
 ---
 

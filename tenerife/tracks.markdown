@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Turistické trasy	
-parent: Tenerife [CZ]
+title: Turistické trasy
+parent: Tenerife
 permalink: /tenerife/trasy/
 ---
 

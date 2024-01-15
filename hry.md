@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Hry [CZ]
+title: Hry
 permalink: /hry/
 mathjax: true
 ---

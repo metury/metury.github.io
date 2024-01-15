@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Okolí Costa del Silencio
-parent: Tenerife [CZ]
+parent: Tenerife
 permalink: /tenerife/okoli/
 ---
 

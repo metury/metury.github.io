@@ -1,6 +1,6 @@
 ---
 layout: page
-title: matfyz
+title: Matfyz
 permalink: /mff/
 ---
 
@@ -9,10 +9,7 @@ Tady je menší rozcestník pro matfyzácké věci. Jak už moje zápisky nebo o
 ## Zápisky
 Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak se tady budou nacházet. Veškeré texty lze najív v repozitáři na [GitHubu](https://github.com/metury/notes).
 
-Upozorění: V poznámkách mohou být chyby.
-{: .label .label-red}
-Nově na GitHubu
-{: .label .label-green}
+Upozorění: *V poznámkách mohou být chyby*. **Nově na GitHubu.**
 
 - [Flows, paths and cuts](fpc.pdf)
 - [Geometrická reprezentace grafů](grg.pdf)

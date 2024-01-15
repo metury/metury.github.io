@@ -1,6 +1,6 @@
 ---
 layout: page
-title: tenerife
+title: Tenerife
 permalink: /tenerife/
 has_children: true
 ---

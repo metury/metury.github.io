@@ -1,6 +1,6 @@
 ---
 layout: page
-title: advent of code
+title: Advent of Code
 permalink: /aoc/
 has_children: true
 ---

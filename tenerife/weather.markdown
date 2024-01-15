@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Počasí
-parent: Tenerife [CZ]
+parent: Tenerife
 permalink: /tenerife/pocasi/
 ---
 

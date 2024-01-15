@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Místa na Tenerife
-parent: Tenerife [CZ]
+parent: Tenerife
 permalink: /tenerife/mista/
 ---
 

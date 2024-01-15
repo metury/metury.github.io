@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Cesta na Tenerife
-parent: Tenerife [CZ]
+parent: Tenerife
 permalink: /tenerife/cesta/
 ---
 
