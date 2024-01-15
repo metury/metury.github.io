@@ -14,7 +14,7 @@ Upozorění: V poznámkách mohou být chyby.
 Nově na GitHubu
 {: .label .label-green}
 
-- [Flows, paths and cuts](flows-paths-cuts.pdf)
+- [Flows, paths and cuts](fpc.pdf)
 - [Geometrická reprezentace grafů](grg.pdf)
 - [Kombinatorika a grafy](kg.pdf)
 - [Probability and statistics 2](past-ii.pdf)
