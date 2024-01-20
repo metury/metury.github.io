@@ -14,3 +14,4 @@ permalink: /movies/cz/
 | Kouř                     | [ČSFD](https://www.csfd.cz/film/9401-kour/prehled/)                       |
 | Wilsonov                 | [ČSFD](https://www.csfd.cz/film/363910-wilsonov/prehled/)                 |
 | Bod obnovy               | [ČSFD](https://www.csfd.cz/film/1242515-bod-obnovy/prehled/)              |
+| Rozpuštěný a vypuštěný   | [ČSFD](https://www.csfd.cz/film/8544-rozpusteny-a-vypusteny/prehled/)     |
