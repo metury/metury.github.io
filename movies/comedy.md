@@ -36,3 +36,4 @@ permalink: /movies/comedy/
 | Dark Star                                      | [ČSFD](https://www.csfd.cz/film/1316-temna-hvezda/prehled/)                             | [TMDB](https://www.themoviedb.org/movie/1410-dark-star)                                     |
 | The Interview                                  | [ČSFD](https://www.csfd.cz/film/357422-interview/prehled/)                              | [TMDB](https://www.themoviedb.org/movie/228967-the-interview)                               |
 | Idiocracy                                      | [ČSFD](https://www.csfd.cz/film/185578-absurdistan/prehled/)                            | [TMDB](https://www.themoviedb.org/movie/7512-idiocracy)                                     |
+| A Million Ways to Die in the West              | [ČSFD](https://www.csfd.cz/film/334972-vsechny-cesty-vedou-do-hrobu/prehled/)           | [TMDB](https://www.themoviedb.org/movie/188161-a-million-ways-to-die-in-the-west)           |
