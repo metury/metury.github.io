@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Share
-permalink: /sahre/
+permalink: /share/
 ---
 
 If you want to share this page to someone you may use this QR code.
