@@ -1,0 +1,6 @@
+[book]
+authors = ["Tomáš Turek"]
+language = "cs"
+multilingual = false
+src = "src"
+title = "Tenerife - Jednoduchý průvodce"
