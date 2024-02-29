@@ -13,7 +13,7 @@ Upozorění: *V poznámkách mohou být chyby*. **Nově na GitHubu.**
 
 - [Barevnost grafů a kombinaturických struktur 🚧](barevnost.pdf)
 - [Flows, paths and cuts](fpc.pdf)
-- [Geometrická reprezentace grafů 🚧](grg.pdf)
+- [Geometric Representations of Graphs 🚧](grg.pdf)
 - [Kombinatorika a grafy](kg.pdf)
 - [Matroid Theory 🚧](matroids.pdf)
 - [Probability and statistics 2](past-ii.pdf)
