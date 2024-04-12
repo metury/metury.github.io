@@ -17,6 +17,7 @@ Upozorění: *V poznámkách mohou být chyby*. **Nově na GitHubu.**
 - [Kombinatorika a grafy](kg.pdf)
 - [Matroid Theory 🚧](matroids.pdf)
 - [Probability and statistics 2](past-ii.pdf)
+- [Polyhedral combinatorics 🚧](polyhedra.pdf)
 - [Teorie množin](temno.pdf)
 
 ## Odkazy na předměty
