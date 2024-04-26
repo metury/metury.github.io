@@ -1,66 +1,93 @@
 \documentclass{article}
 
 \usepackage{geometry}
-\geometry{a4paper,total={170mm,257mm},left=20mm,top=20mm}
+\geometry{a4paper,total={190mm,257mm},left=10mm,top=15mm}
 
 \usepackage{hyperref}
 \usepackage{xcolor}
 \hypersetup{colorlinks=true,urlcolor=blue}
+\usepackage{tablefootnote}
 
 \pagestyle{empty}
 
 \begin{document}
-
+	
 \begin{center}
-\section*{Curriculum vitae}
+	\section*{{\huge Curriculum vitae}}
 \end{center}
 
-\subsection*{General information}
+\hfill
 
-\begin{itemize}
-	\item Name: \textit{Tomáš Turek}
-	\item Date of birth: \textit{24.03.2001}
-	\item Place of birth: \textit{Olomouc, Česká republika}
-	\item Mail: \href{mailto:tom.turek@atlas.cz}{tom.turek@atlas.cz}
-	\item Github: \href{https://github.com/metury}{metury}
-\end{itemize}
+\begin{minipage}[c]{.45\textwidth}
+	\subsection*{Personal information}
+	\begin{itemize}
+		\item Name: \textit{Tomáš Turek}
+		\item Date of birth: \textit{24.03.2001}
+		\item Origin: \textit{Olomouc, Česká republika}
+		\item Mail: \href{mailto:tom.turek@atlas.cz}{\textit{tom.turek@atlas.cz}}
+		\item Github: \href{https://github.com/metury}{\textit{metury}}
+		\item Drivers license: \textit{B}.
+	\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.5\textwidth}
+	\subsection*{Technology and programming languages}
+	\begin{itemize}
+		\item Advanced knowledge: \textit{C++} and \textit{Qt}.
+		\item Average knowledge: \textit{Java}, \textit{Python} and \textit{Rust}.
+		\item Basic knowledge: \textit{C\#}, \textit{Haskell} and \textit{Perl}.
+	\end{itemize}
+	
+	\subsection*{Languages}
+	\begin{itemize}
+		\item Advanced knowledge: \textit{Czech}, \textit{English}.
+		\item Basic knowledge: \textit{German}.
+	\end{itemize}
+\end{minipage}
 
 \subsection*{Previous studies}
 
-\begin{itemize}
-	\item 2023-now: Master studies in Discrete models and algorithms -- \href{https://www.mff.cuni.cz/}{Univerzita Karlova, Matematicko-Fyzikální fakulta}
-	\item 2020-2023: Bachelors studies in Computer science -- \href{https://www.mff.cuni.cz/}{Univerzita Karlova, Matematicko-Fyzikální fakulta}
-	\item 2012-2020: High school (eight years with a finished diploma) -- \href{https://www.gytool.cz/}{Gymnázium Olomouc-Hejčín}
-	\item 2007-2012: Primary school -- \href{https://zsstupkova.cz/}{ZŠ Stupkova, Olomouc}
-\end{itemize}
+\begin{table}[!ht]\centering
+	\begin{tabular}{p{20mm} p{50mm} p{80mm} p{20mm}}
+		\textit{Years} & \textit{Type} & \textit{School} & \textit{Ended with} \\
+		2023-2025\tablefootnote{Expected end of studies.} & Discrete models and algorithms & \href{https://www.mff.cuni.cz/}{Univerzita Karlova, Matematicko-Fyzikální fakulta} & -- \\
+		2020-2023 & Computer science & \href{https://www.mff.cuni.cz/}{Univerzita Karlova, Matematicko-Fyzikální fakulta} & Bc. title \\
+		2012-2020 & High school & \href{https://www.gytool.cz/}{Gymnázium Olomouc-Hejčín} & Graduation \\
+		2007-2012 & Primary school & \href{https://zsstupkova.cz/}{ZŠ Stupkova, Olomouc} & \\
+	\end{tabular}
+\end{table}
 
-\subsection*{Previous experiences}
-
-\begin{itemize}
-	\item Manual side job in Denmark. - This job was not one of the most important for progtramming job, but it may be useful to mention it anyway since it means I had to live and work in other state for some time.
-\end{itemize}
-
-\subsection*{Personal characteristics}
-
-I am fluent in Czech. Then I have a solid knowledge of \textbf{English} and some basic or so called beginner-level knowledge of \textbf{German}.
-
-Speaking of languages I will mention programming languages:
+\subsection*{Projects I have worked on}
 
 \begin{itemize}
-	\item Advanced knowledge of \textbf{C++}.
-	\item Standard knowledge of \textbf{Java}, \textbf{Python} and \textbf{Rust}.
-	\item Basic knowledge of \textbf{C\#}, \textbf{Haskell} and \textbf{Perl}.
+	\item Application \href{https://rodoc-app.github.io/}{rodoc} for organizing family trees, written in \texttt{C++} with usage of \texttt{Qt}. This was part of my bachelors thesis.
+	\item Another smaller project is my solutions for \href{https://adventofcode.com/}{advent of code}, which also has a script written in \texttt{Perl} for automatic projects and page generations -- \href{https://github.com/metury/advent-of-code}{github repository}.
 \end{itemize}
 
-But I would state that I think of separate languages as a "dialects" and thus the theoretical knowledge of computer science and mathematics in general is far more important than learning specific languages which also change during the time.
+\subsection*{Previous work experiences}
 
-Among my strengths I would put hardworking and also helpfulness and willingness to help others. Likewise, I don't shy away from personal contacts and I like to communicate and solve problems. Next in order is my punctuality.
+\begin{table}[!ht]\centering
+	\begin{tabular}{p{20mm} p{150mm}}
+		\textit{Years} & \textit{Work} \\
+		2019 \& 2020 & Summer manual job in Denmark -- sorting and preparing of packages in a logistic company Prime Cargo.
+	\end{tabular}
+\end{table}
 
-No one is perfect and of course that means I have my flaws. One of them is that if I think and believe I'm right, I don't want to end the debate by disagreeing (but if the other side gives good counter-arguments, I am quickly able to acknowledge that I was wrong). I'm sure I have multiple flaws, but I either deliberately overlook them or try to eliminate them.
+\subsection*{Personal characteristics} \textcolor{red}{[TODO]}
 
-\subsection*{Interests and preferences}
+%\begin{itemize}
+%	\item Mile rád se naučím používat nové technologie a postupy, protože ve světě IT není nic stálé.
+%	\item Vymýšlení řešení problémů, které se vyskytují na denní bázi, ať už v práci nebo v životě.
+%	\item Považuji se za pracovitého člověka, který je ochotný a rád pomůže ostatním.
+%	\item Mimo to se rád pohybuji ve společnosti dalších lidí. A také si potrpím na dochvilnosti.
+%	\item Jelikož nikdo není dokonalý, tak i já mám nevýhody, jako je třeba občasná tvrdohlavost.
+%\end{itemize}
 
-Personally, I prefer to work on devices running \textbf{Linux}, but I can't avoid working on computers running \textbf{Windows}. Linux is also linked to the fact that I am a fan of the open-source application philosophy.
+\subsection*{Free time hobbies} \textcolor{red}{[TODO]}
 
-I prefer to solve problems and design solutions rather than "date" them into the computer. This is why I chose Matfyz, unlike other Czech universities that can "generate" better developers, but do not have such a great knowledge of mathematics and computer theory.
+%\begin{itemize}
+%	\item Několik let (zhruba 8) jsem hrál závodně florbal a i nadále, když se vyskytne příležitost, tak si zahraji.
+%	\item Hra na příčnou flétnu. Naučil jsem se při navštěvování \href{https://www.zus-zerotin.cz/}{ZUŠ Žerotín}, kde jsem mimo sólovou hru hrál i v komorních uskupeních a také sborech, s kterými jsme mimo jiné soutěžili v zahraničích přehlídkách.
+%\end{itemize}
+
 \end{document}
