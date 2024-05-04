@@ -55,3 +55,11 @@ Upozorění: *V poznámkách mohou být chyby*. **Nově na GitHubu.**
 ## Thesis
 
 - [Connected cuts](connected-cuts.pdf)
+
+### Links
+
+- [Max cut](https://dl.acm.org/doi/pdf/10.1145/195058.195216)
+- [Min max and small set expansion](https://arxiv.org/abs/1110.4319) a [PDF](https://arxiv.org/pdf/1110.4319)
+- [$s-t$ cuts](https://www.researchgate.net/publication/2513735_Multicommodity_Flows_and_Approximation_Algorithms)
+- [$k$ cuts](https://arxiv.org/abs/1807.07143v2) a [PDF](https://arxiv.org/pdf/1807.07143v2)
+- [Petr Kolman STC](https://kam.mff.cuni.cz/~kolman/papers/STC-2024.pdf)
