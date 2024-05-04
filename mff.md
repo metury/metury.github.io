@@ -50,3 +50,8 @@ Upozorění: *V poznámkách mohou být chyby*. **Nově na GitHubu.**
 - Některé odkazy lze najít na [Matfyzácké wiki](https://wiki.matfyz.cz/Home)
 
 <!-- ❄️ ☀️ -->
+
+
+## Thesis
+
+- [Connected cuts](connected-cuts.pdf)
