@@ -43,6 +43,8 @@ Upozorění: *V poznámkách mohou být chyby*. **Nově na GitHubu.**
 | Intervalove metody                                   | [Stránka](https://kam.mff.cuni.cz/~hladik/IA/)                             | [Skripta](https://kam.mff.cuni.cz/~hladik/IA/text_ia.pdf)                                                                                           | [Úkoly](https://elif.cz/IM_2324)                                       | --                                                                |
 | Toky, cesty a řezy                                   | [Stránka](https://kam.mff.cuni.cz/~kolman/tokyrezy23.html)                 | --                                                                                                                                                  | --                                                                     | --                                                                |
 
+- [Linear-Time Pointer-Machine Algorithms ](http://adambuchsbaum.com/papers/ptrs-stoc98.pdf)
+
 ## Další linky
 
 - [Průvodce labyrintem algoritmů](https://pruvodce.ucw.cz/)
