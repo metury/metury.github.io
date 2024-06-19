@@ -11,7 +11,6 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí za to, tak 
 
 Upozorění: *V poznámkách mohou být chyby*. **Nově na GitHubu.**
 
-- [Barevnost grafů a kombinaturických struktur 🚧](barevnost.pdf)
 - [Flows, paths and cuts](fpc.pdf)
 - [Geometric Representations of Graphs](grg.pdf)
 - [Kombinatorika a grafy](kg.pdf)
