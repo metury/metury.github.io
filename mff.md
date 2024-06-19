@@ -15,7 +15,6 @@ Upozorění: *V poznámkách mohou být chyby*. **Nově na GitHubu.**
 - [Flows, paths and cuts](fpc.pdf)
 - [Geometric Representations of Graphs](grg.pdf)
 - [Kombinatorika a grafy](kg.pdf)
-- [Matroid Theory 🚧](matroids.pdf)
 - [Probability and statistics 2](past-ii.pdf)
 - [Polyhedral combinatorics 🚧](polyhedra.pdf)
 - [Teorie množin](temno.pdf)
