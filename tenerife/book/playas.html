@@ -177,7 +177,7 @@
 <p>Samozřejmě nesmí ani chybět pár známých pláží.</p>
 <h3 id="severní-pobřeží"><a class="header" href="#severní-pobřeží">Severní pobřeží</a></h3>
 <p>Na severnějším pobřežím pláže spíš bývají kamenité a také více divoké, za to nabízejí pěkné pohledy.</p>
-<p>Nebo také se zde občas vyskytují &quot;přírodní&quot; bazénky např. <a href="https://goo.gl/maps/SQPZC5LWMhPEGWzk9">Bajamar</a> anebo v jak jsem říkal i v Garachicu.</p>
+<p>Nebo také se zde občas vyskytují "přírodní" bazénky např. <a href="https://goo.gl/maps/SQPZC5LWMhPEGWzk9">Bajamar</a> anebo v jak jsem říkal i v Garachicu.</p>
 <h3 id="jižní-pobřeží"><a class="header" href="#jižní-pobřeží">Jižní pobřeží</a></h3>
 <p>Pláže nacházející se na jižním pobřeží bývají spíše písečné a jsou spíše zaměřené pro turisty.</p>
 <p>Za hlavním městem je <a href="https://goo.gl/maps/UnD8CAmhuvKnnt7u9">Playa de las Teresitas</a> která je asi největší pláž, nicméně je uměle vytvořená z písku ze Sahary.</p>
@@ -215,6 +215,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

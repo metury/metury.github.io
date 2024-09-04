@@ -174,10 +174,10 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="příroda"><a class="header" href="#příroda">Příroda</a></h2>
-<p>Na celém ostrově je spoustu zajímavých přírodních úkazů. Při výběru berte v potaz to, jestli se bojíte výšek (nebo dokonce máte závratě). Většinu tras jsem osobně zvládl, ale každý má jiné hranice.</p>
+<p>Na celém ostrově je spoustu zajímavých přírodních úkazů. Při výběru berte v potaz to, jestli se bojíte výšek (nebo dokonce máte závratě). Většinu tras jsem osobně zvládl, ale každý má jiné hranice.\</p>
 <h3 id="parque-national-del-teide"><a class="header" href="#parque-national-del-teide">Parque National del Teide</a></h3>
 <p>Samozřejmostí je středobod Tenerife <a href="https://goo.gl/maps/qYmkyHaMSfNSbAkY7">Pico del Teide</a>. Pokud by se někdo chtěl dostat až na vrchol, tak je třeba si zajistit včas <a href="https://www.reservasparquesnacionales.es/real/ParquesNac/usu/html/listado-actividades-oapn.aspx?cen=2">permit</a>. A i tak to není zaručené kvůli počasí, protože nahoře můžou být klidně i závěje sněhu. Na samotný vrchol jezdí lanovka, ale lze zvolit i cestu po svých.</p>
-<p>Dalším místem je <a href="https://goo.gl/maps/QTHVNU92jzp3gDeBA">Roques de Garcia</a>, což jsou skály uprostřed &quot;pouště&quot;. Je tady jeden kratší <a href="../../resources/garcia.gpx" title="resources/garcia.gpx">okruh</a>, který se dá jít, ale výrazně doporučuji jít daným směrem, kvůli výškovému profilu.</p>
+<p>Dalším místem je <a href="https://goo.gl/maps/QTHVNU92jzp3gDeBA">Roques de Garcia</a>, což jsou skály uprostřed "pouště". Je tady jeden kratší <a href="../../resources/garcia.gpx" title="resources/garcia.gpx">okruh</a>, který se dá jít, ale výrazně doporučuji jít daným směrem, kvůli výškovému profilu.</p>
 <h3 id="anaga"><a class="header" href="#anaga">Anaga</a></h3>
 <p>Celý sever je také hodně hornatý. Pohoří se jmenuje <a href="https://goo.gl/maps/Y49XMutjRv124ZSr7">Anaga</a>. Tady se dají najít zajímavé trasy. Ale cesta autem už je dost záživnější (jak když polechtáš hada #snake). A trasy už jsou také intenzivnější, ale s pěknými výhledy.</p>
 <h3 id="teno"><a class="header" href="#teno">Teno</a></h3>
@@ -185,7 +185,7 @@
 <p>Součástí pohoří Teno jsou skály vysoce se tyčící přímo z oceánu  <a href="https://goo.gl/maps/oQFcwSWWEjWE9V1k6">Los Gigantes</a>. Pak zase záleží jak blízko chce člověk jít, protože se dá jít <a href="../../resources/gigantes.gpx" title="resources/gigantes.gpx">trasa</a> po Los Gigantes.</p>
 <h3 id="další"><a class="header" href="#další">Další</a></h3>
 <p>Další v pořadí je <a href="https://www.barrancodelinfierno.es/en/">Barranco del Infierno</a>. Jedná se o celkem pěkné údolí akorát kvůli ne zas tak dávné nehodě se vstup hodně hlídá a člověk je nucen koupit si vstup a jít tam z helmou. Řekl bych, že to není zas tak zajímavé. Ale přišlo mi blbé to aspoň neříct.</p>
-<p>Co mě ještě napadlo jsou skály známé jako <a href="https://goo.gl/maps/FZuzgERWUWpBjWQT7">Paisaje Lunar</a>(&quot;měsíční krajina&quot;). Buď lze zastavit ve Vilafloru a jít celou trasu pěšky anebo se jde i více přiblížit autem, ale pokud dobře vím, tak tam není moc dobrá cesta vzhledem k povrchu.</p>
+<p>Co mě ještě napadlo jsou skály známé jako <a href="https://goo.gl/maps/FZuzgERWUWpBjWQT7">Paisaje Lunar</a>("měsíční krajina"). Buď lze zastavit ve Vilafloru a jít celou trasu pěšky anebo se jde i více přiblížit autem, ale pokud dobře vím, tak tam není moc dobrá cesta vzhledem k povrchu.</p>
 
                     </main>
 
@@ -216,6 +216,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

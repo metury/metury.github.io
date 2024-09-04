@@ -188,7 +188,7 @@
 <li>Podstatný další místo je <a href="https://goo.gl/maps/TH3TqrZP95npKrZW7">rybí market</a>, kde skoro každý ráno mají čerstvé ryby.</li>
 <li>Také v centru Las Galletas je místní obchod s ovocem a zeleninou, kde mají místní věci. Přesnou ulici si nepamatuji, ale aspoň si člověk může projít ne tak velké centrum.</li>
 <li>Kdo by chtěl spíše obchod, který zná tak i v dojezdové vzdálenosti je <a href="https://goo.gl/maps/ZwaZ35cjsRfCVap1A">Lidl</a>.</li>
-<li>Pak ještě na odlet většinou aerolinky vyžadují mít vytištěné letenky. Sice to většinou není zcela třeba, ale jsou zde místa podobné &quot;internetovým kavárnám&quot; kde mají i tiskárny. Jedna je poblíž <a href="https://goo.gl/maps/HvZCsYA1RXkQ9Twm9">tohoto místa</a> a jiná je taky v centrum Las Galletas. (Ani já už si nepamatuji v jaké ulici to přímo je.</li>
+<li>Pak ještě na odlet většinou aerolinky vyžadují mít vytištěné letenky. Sice to většinou není zcela třeba, ale jsou zde místa podobné "internetovým kavárnám" kde mají i tiskárny. Jedna je poblíž <a href="https://goo.gl/maps/HvZCsYA1RXkQ9Twm9">tohoto místa</a> a jiná je taky v centrum Las Galletas. (Ani já už si nepamatuji v jaké ulici to přímo je.</li>
 </ul>
 
                     </main>
@@ -214,6 +214,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

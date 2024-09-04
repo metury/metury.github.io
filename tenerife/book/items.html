@@ -177,7 +177,7 @@
 <p>Koneckonců přesný seznam závisí na potřebách každého z Vás. Nicméně i tak dodám nějaké doporučení, které mi přijde užitečné.</p>
 <p>Pokud si budete brát velký kufr, tak tohle není moc potřeba, ale právě, že většinou stačí jen příruční zavazadlo. Ty jsou většinou rozměrů batohu, do kterého se vejde dost potřebných věcí.</p>
 <p>Díky dobrému počasí toho člověk zas tak moc nepotřebuje. Jako boty stačí jen nějaké <strong>botasky</strong> na normální chození a pak se hodí nějaké <strong>pořádnější boty</strong> do hor. Do hor se taky málokdy hodí i teplejší oblečení, ale většinou to nebývá třeba (je třeba dodat, že moc na ostrově zima nebývá). Proto pokud letíte někdy v zimních termínech, tak se do letadla oblečte v dlouhém oblečení a jděte v pořádnějších botách a díky tomu věci, které zabírají nejvíce místa nemusíte mít v batohu.</p>
-<p>Pak nějaké základní věci jako ručníky bývávají na ubytování (ale záleží dle jste ubytováni). Pak už snad jen plavky a normální oblečení do tepla. Popřípadě se vše dá dokoupit v místních obchodech, které poslední dobou bývají snad i levnější než v Česku.</p>
+<p>Pak nějaké základní věci jako ručníky bývávají na ubytování (ale záleží kde jste ubytováni). Pak už snad jen plavky a normální oblečení do tepla. Popřípadě se vše dá dokoupit v místních obchodech, které poslední dobou bývají snad i levnější než v Česku.</p>
 <p>Detaily psát nechci, jednak bych na něco určitě zapomněl a taky každý chce s sebou něco jiného, takže mi to nedává smysl.</p>
 
                     </main>
@@ -209,6 +209,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

@@ -178,7 +178,7 @@
 <h3 id="garachico"><a class="header" href="#garachico">Garachico</a></h3>
 <p>Městečko <a href="https://goo.gl/maps/mHCb6RYfBmf5BGFE7">Garachico</a> které kdysi bylo zalité lávou. Také zde jezdíme na <a href="https://goo.gl/maps/Xfbu3stRrEJknuax7">jídlo</a> (králík naložený v místní omáčce) a pak tu jsou přírodní bazénky, ale tam se mockrát nedá plavat, protože to tam je spíše jako v pračce. Pokud si náhodou někdy pamatuje, jak bývalo ve zprávách, že na Tenerife se kvůli bouři ničí baráky z přívalových vln, tak to bylo v těchto oblastech.</p>
 <h3 id="candelarioa"><a class="header" href="#candelarioa">Candelarioa</a></h3>
-<p>Další město je <a href="https://goo.gl/maps/6e3SA1BZ9FwFJ6JN6">Candelaria</a>. Tady je to hlavně známé svojí katedrálou (nebo co to je) a pokud si to správně pamatuji tak v ní je &quot;černá Madonna&quot;.</p>
+<p>Další město je <a href="https://goo.gl/maps/6e3SA1BZ9FwFJ6JN6">Candelaria</a>. Tady je to hlavně známé svojí katedrálou (nebo co to je) a pokud si to správně pamatuji tak v ní je "černá Madonna".</p>
 <h3 id="la-orotava"><a class="header" href="#la-orotava">La Orotava</a></h3>
 <p>Dále bych řekl <a href="https://goo.gl/maps/T3zynzWUvovTTgLBA">La Orotava</a>, které je také dost pěkné a to svými parky.</p>
 <h3 id="la-laguna"><a class="header" href="#la-laguna">La Laguna</a></h3>
@@ -216,6 +216,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
