@@ -16,7 +16,7 @@ apt install firefox-esr thunderbird vlc freefilesync filezilla vim gimp inkscape
 ## Programming languages
 
 ```sh
-apt install sagemath cpp octave jupyter default-jre default-jdk perl golang git python3 ruby jekyll ghc ghc-prof ghc-doc doxygen polymake
+apt install sagemath cpp octave jupyter default-jre default-jdk perl golang git python3 ruby jekyll ghc ghc-prof ghc-doc doxygen polymake meson cmake make
 ```
 
 ## Office
