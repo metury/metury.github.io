@@ -3,32 +3,32 @@
 Update and upgrade repos.
 
 ```sh
-\# apt update
-\# apt upgrade
+apt update
+apt upgrade
 ```
 
 ## Common apps
 
 ```sh
-\# apt install firefox-esr thunderbird vlc freefilesync filezilla vim gimp inkscape handbrake easytag asunder openshot-qt obs-studio telegram-desktop
+apt install firefox-esr thunderbird vlc freefilesync filezilla vim gimp inkscape handbrake easytag asunder openshot-qt obs-studio telegram-desktop
 ```
 
 ## Programming languages
 
 ```sh
-\# apt install sagemath cpp octave jupyter default-jre default-jdk perl golang git python3 ruby jekyll ghc ghc-prof ghc-doc doxygen polymake
+apt install sagemath cpp octave jupyter default-jre default-jdk perl golang git python3 ruby jekyll ghc ghc-prof ghc-doc doxygen polymake
 ```
 
 ## Office
 
 ```sh
-\# apt install texstudio libreoffice meld texlive-full pandoc
+apt install texstudio libreoffice meld texlive-full pandoc
 ```
 
 ## Terminal apps
 
 ```sh
-\# apt install neofetch htop tree curl
+apt install neofetch htop tree curl
 ```
 
 ## Rust and apps with `cargo`
