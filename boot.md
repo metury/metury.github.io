@@ -53,7 +53,6 @@ cargo install juliaup
 cargo install mdbook
 ```
 
-
 # My bashrc
 
 ```txt
@@ -88,3 +87,7 @@ alias rustinstall="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | s
 #export PATH="${PATH}:${GUROBI_HOME}/bin"
 #export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
 ```
+
+# CZ programming keyboard
+
+If you are missing CZ programming keyboard then use this [repo](https://github.com/sedlons/czech-programmer-keyboard-layout-xkb).
