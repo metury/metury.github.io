@@ -28,7 +28,7 @@ apt install texstudio libreoffice meld texlive-full pandoc
 ## Terminal apps
 
 ```sh
-apt install neofetch htop tree curl
+apt install neofetch htop tree curl nnn exiftool
 ```
 
 ## Rust and apps with `cargo`
