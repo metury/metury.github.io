@@ -88,10 +88,6 @@ alias removejoplin='rm -fr $(find ~ -regex .*local.*joplin.*) && rm -fr ~/.jopli
 
 # Update and install Rust language.
 alias rustinstall="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
-
-#export GUROBI_HOME="/opt/gurobi1101/linux64"
-#export PATH="${PATH}:${GUROBI_HOME}/bin"
-#export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
 ```
 
 # CZ programming keyboard

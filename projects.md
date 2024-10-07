@@ -4,7 +4,7 @@ title: Projects
 permalink: /projects/
 ---
 
-## xtodo
+## xtodo - *this is in progress of developing new version*
 
 Desktop app written in `C++` that is for organizing your to-dos in `todo.txt` format. It is divided into `xtodo-cli` and `xtodo`.
 
@@ -26,4 +26,4 @@ Library for graphs that is written in `Java`. There are some basic algorithms im
 
 My own bachelors project that is for organizing your own family tree.
 
-[GitHub](https://github.com/rodoc-app/rodoc-app) and [Page](https://rodoc-app.github.io/)
+[GitHub](https://github.com/rodoc-app/rodoc-app) and [Page](https://rodoc-app.github.io/) for more information.

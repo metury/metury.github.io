@@ -8,12 +8,10 @@ If you want to share this page to someone you may use this QR code.
 
 ![QR code](../resources/qr.png)
 
-## CV
-
-### cs 
+### CV - cs
 
 ![CVcs QR code](../resources/CV_cs-qr.png)
 
-### en
+### CV - en
 
 ![CVen QR code](../resources/CV_en-qr.png)

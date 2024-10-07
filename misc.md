@@ -1,11 +1,13 @@
 ---
 layout: page
-title: Misc
+title: Miscellaneous
 permalink: /misc/
 ---
 
-# České stránky
+There are some other pages which are not that particulary interesting.
 
-- [Dezinformace](/dezinformace/)
-- [Hry](/hry/)
-- [Povídky](/povidky/)
+- [QR code for sharing](share)
+- [Boot](boot)
+- [Dezinformace](dezinformace)
+- [Hry](hry)
+- [Povídky](povidky)
