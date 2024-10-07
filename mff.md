@@ -60,6 +60,13 @@ Upozorění: *V poznámkách mohou být chyby*. **Nově na GitHubu.**
 
 <!-- ❄️ ☀️ -->
 
+## CVRP
+
+- [Presentation](cvrp/cvrp-presentaion.pdf)
+- [Text](cvrp/cvrp.pdf)
+- [Rust parser](cvrp/main.rs)
+- [Shell script](cvrp/solver.sh)
+- [Puython checker](cvrp/checker.py)
 
 ## Thesis
 

@@ -1,3 +1,9 @@
+---
+layout: page
+title: Boot
+permalink: /boot/
+---
+
 # Fresh instalation of Debian computer.
 
 Update and upgrade repos.
