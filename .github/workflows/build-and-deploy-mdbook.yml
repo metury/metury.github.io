@@ -1,0 +1,27 @@
+name: Build and Deploy mdBook
+
+on:
+  push:
+    branches: [ main ]  # Replace with your desired deployment branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # Or another preferred runner
+
+    steps:
+      - uses: actions/checkout@v3  # Checkout your repository code
+
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v2  # Use the mdBook Action
+        with:
+          mdbook-version: 'latest'  # Or a specific version (e.g., '0.4.10')
+
+      - name: Build mdBook
+        run: mdbook build
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-gh-pages@v4  # Use the deploy-gh-pages Action
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages  # Replace with your mdBook output branch
+          publish_dir: ./book  # Replace with your mdBook output directory
