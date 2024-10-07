@@ -1,0 +1,29 @@
+name: Deploy mdbook Website
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          rust: 1.81.0
+
+      - name: Install mdbook
+        run: cargo install mdbook
+
+      - name: Build the website
+        run: mdbook build
+
+      - name: Deploy to GitHub Pages
+        uses: actions-gh-pages/deploy@v3
+        with:
+          repository_name: ${{ github.repository }}
+          branch: gh-pages
+          folder: docs

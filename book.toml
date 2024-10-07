@@ -1,0 +1,6 @@
+[book]
+authors = ["Tomáš Turek"]
+language = "en"
+multilingual = true
+src = "src"
+title = "Personal page"
