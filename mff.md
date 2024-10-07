@@ -1,8 +1,4 @@
----
-layout: page
-title: Matfyz
-permalink: /mff/
----
+# Matfyz
 
 Tady je menší rozcestník pro matfyzácké věci. Jak už moje zápisky nebo odkazy na předměty, které mám zapsané.
 
@@ -10,17 +6,17 @@ Tady je menší rozcestník pro matfyzácké věci. Jak už moje zápisky nebo o
 
 Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň trochu) za to, tak se tady budou nacházet. Veškeré texty lze najív v repozitáři na [GitHubu](https://github.com/metury/notes).
 
-- [Flows, paths and cuts](fpc.pdf)
-- [Geometric Representations of Graphs](grg.pdf)
-- [Kombinatorika a grafy](kg.pdf)
-- [Probability and statistics 2](past-ii.pdf)
-- [Polyhedral combinatorics](polyhedra.pdf)
-- [Teorie množin](temno.pdf)
+- [Flows, paths and cuts](./mff/fpc.pdf)
+- [Geometric Representations of Graphs](./mff/grg.pdf)
+- [Kombinatorika a grafy](./mff/kg.pdf)
+- [Probability and statistics 2](./mff/past-ii.pdf)
+- [Polyhedral combinatorics](./mff/polyhedra.pdf)
+- [Teorie množin](./mff/temno.pdf)
 
 ## Odkazy na předměty
 
 | Předmět                                              | Odkazy |
-|------------------------------------------------------|--------|
+|:----------------------------------------------------:|:------:|
 | **2425 - Zimní semestr**                             | **--** |
 | Constraint programming                               | [Web](https://ktiml.mff.cuni.cz/~bartak/podminky/) [Cvičení](https://jbulin.github.io/teaching/fall/nopt042/) |
 | Introduction to Parameterized Algorithms             | [Web](https://research.koutecky.name/db/teaching:intro_par_alg2324) [Kniha](https://www.mimuw.edu.pl/~malcin/book/parameterized-algorithms.pdf) [Cvičení](https://iuuk.mff.cuni.cz/~tung/teaching/fpt-ws2324/) |
@@ -52,15 +48,15 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 
 ## CVRP
 
-- [Presentation](cvrp/cvrp-presentation.pdf)
-- [Text](cvrp/cvrp.pdf)
-- [Rust parser](cvrp/main.rs)
-- [Shell script](cvrp/solver.sh)
-- [Python checker](cvrp/checker.py)
+- [Presentation](./mff/cvrp/cvrp-presentation.pdf)
+- [Text](./mff/cvrp/cvrp.pdf)
+- [Rust parser](./mff/cvrp/main.rs)
+- [Shell script](./mff/cvrp/solver.sh)
+- [Python checker](./mff/cvrp/checker.py)
 
 ## Thesis links
 
-- [My notes on connected cuts](connected-cuts.pdf)
+- [My notes on connected cuts](./mff/connected-cuts.pdf)
 - [Max cut](https://dl.acm.org/doi/pdf/10.1145/195058.195216)
 - [Min max and small set expansion](https://epubs.siam.org/doi/abs/10.1137/120873996)
 - [$s-t$ connected cuts](https://www.researchgate.net/publication/2513735_Multicommodity_Flows_and_Approximation_Algorithms)

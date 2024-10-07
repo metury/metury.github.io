@@ -1,10 +1,3 @@
----
-layout: page
-title: Tenerife
-permalink: /tenerife/
-has_children: true
----
+# Jednoduchý průvodce po Tenerife
 
 Zde je jen proklik na novějšího průvodce.
-
-[Tenerife - Jednoduchý průvodce](./book/index.html)
