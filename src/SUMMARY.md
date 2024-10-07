@@ -1,5 +1,7 @@
 # Summary
 
+[Welcome page](./index.md)
+
 [About](./about.md)
 
 [Matfyz](./mff.md)
