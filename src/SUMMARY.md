@@ -25,6 +25,7 @@
 # Miscellaneous
 
 - [Boot](./boot.md)
+- [Dezinformace](./dezinfo.md)
 
 # Advent of code
 

@@ -1,8 +1,4 @@
----
-layout: page
-title: Dezinformace
-permalink: /dezinformace/
----
+# Dezinformace
 
 Tady je můj menší seznam stránek a zdrojů, které slouží proti šíření dezinformací.
 
@@ -18,6 +14,6 @@ Dodatečně se zatím jen podporuje a vytváří [nový projekt](https://www.don
 
 # Satira, sarkasmus a ironie
 
-Pokudněkoho baví používá sarkasmus a satiru, tak si můžete přečíst paper na [fialovou](../resources/fialova.pdf) barvu.
+Pokudněkoho baví používá sarkasmus a satiru, tak si můžete přečíst paper na [fialovou](./resources/fialova.pdf) barvu.
 
 Popřípadě doporučuji [paralelní listy](https://paralelnilisty.cz/).
