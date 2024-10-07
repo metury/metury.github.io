@@ -24,6 +24,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: actions-gh-pages/deploy@v3
         with:
-          repository_name: ${{ github.repository }}
+          repository_name: ${{ steps.deployment.outputs.page_url}}
           branch: gh-pages
-          folder: docs
