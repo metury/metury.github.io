@@ -8,6 +8,10 @@
 
 [Projects](./projects.md)
 
+# Programming exercises
+
+- [Exercises](./exercises.md)
+
 # Tenerife
 
 - [Tenerife](./tenerife.md)
