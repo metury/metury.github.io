@@ -77,3 +77,5 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 - [\\(k\\) cuts](https://arxiv.org/abs/1807.07143v2) a [PDF](https://arxiv.org/pdf/1807.07143v2)
 - [Petr Kolman STC](https://kam.mff.cuni.cz/~kolman/papers/STC-2024.pdf)
 - [Petr Kolman - other aproximation](https://kam.mff.cuni.cz/~kolman/papers/stc-ext-arx.pdf)
+- [Maximum connected cut](https://sites.cs.ucsb.edu/~daniello/papers/maximum_minimal_cut__Journal.pdf)
+- [Discrete mathematics](https://link.springer.com/chapter/10.1007/978-3-030-61115-6_14)
