@@ -10,6 +10,7 @@
 
 # Programming exercises
 
+- [Programming](./programming.md)
 - [Exercises](./exercises.md)
 
 # Tenerife
