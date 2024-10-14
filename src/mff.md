@@ -71,6 +71,7 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 ## Thesis links
 
 - [My notes on connected cuts](./mff/connected-cuts.pdf)
+- [My notes on absorptive flow](./mff/absorptive-flow.pdf)
 - [Max cut](https://dl.acm.org/doi/pdf/10.1145/195058.195216)
 - [Min max and small set expansion](https://epubs.siam.org/doi/abs/10.1137/120873996)
 - [\\(s-t\\) connected cuts](https://www.researchgate.net/publication/2513735_Multicommodity_Flows_and_Approximation_Algorithms)
