@@ -21,6 +21,9 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 | Constraint programming                               | [Web](https://ktiml.mff.cuni.cz/~bartak/podminky/) [Cvičení](https://jbulin.github.io/teaching/fall/nopt042/) |
 | Introduction to Parameterized Algorithms             | [Web](https://research.koutecky.name/db/teaching:intro_par_alg2324) [Kniha](https://www.mimuw.edu.pl/~malcin/book/parameterized-algorithms.pdf) [Cvičení](https://iuuk.mff.cuni.cz/~tung/teaching/fpt-ws2324/) |
 | Programování v jazyce Rust                           | [Web](https://d3s.mff.cuni.cz/teaching/nprg082/) |
+| Vybrané kapitoly z kombinatoriky 1                   |        |
+| Základy teorie kategorií                             |        |
+| úvod do teorie čísel                                 | [Web](https://kam.mff.cuni.cz/~klazar/UTC24.html) |
 | **2324 - Letní semestr**                             | **--** |
 | Teorie Matroidů                                      | [Web](https://iuuk.mff.cuni.cz/~pangrac/vyuka/) [Cviceni](https://kam.mff.cuni.cz/~cerny/teach/23-24/matroids.html) |
 | Datove struktury 2                                   | [Web](https://mj.ucw.cz/vyuka/2324/ds2/) [Skripta](https://mj.ucw.cz/vyuka/dsnotes/ds.pdf) |
