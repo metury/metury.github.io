@@ -16,7 +16,7 @@ apt upgrade
 ## Common apps
 
 ```sh
-apt install firefox-esr thunderbird vlc freefilesync filezilla vim gimp inkscape handbrake easytag asunder openshot-qt obs-studio telegram-desktop
+apt install firefox-esr thunderbird vlc freefilesync filezilla vim gimp inkscape handbrake easytag asunder openshot-qt obs-studio telegram-desktop k3b kdenlive
 ```
 
 ## Programming languages
@@ -34,7 +34,7 @@ apt install texstudio libreoffice meld texlive-full pandoc
 ## Terminal apps
 
 ```sh
-apt install neofetch htop tree curl nnn exiftool
+apt install neofetch htop tree curl nnn exiftool nvim
 ```
 
 ## Rust and apps with `cargo`
@@ -62,8 +62,8 @@ cargo install mdbook
 # My bashrc
 
 ```txt
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # Git aliases
 alias gtpl='git pull'
