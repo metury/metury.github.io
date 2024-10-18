@@ -54,22 +54,8 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 - [Presentation](./mff/cvrp/cvrp-presentation.pdf)
 - [Text](./mff/cvrp/cvrp.pdf)
 - [Rust parser](./mff/cvrp/main.rs)
-
-```rust
-{{#include ./mff/cvrp/main.rs:225:295}}
-```
-
 - [Shell script](./mff/cvrp/solver.sh)
-
-```sh
-{{#include ./mff/cvrp/solver.sh:52:112}}
-```
-
 - [Python checker](./mff/cvrp/checker.py)
-
-```python
-{{#include ./mff/cvrp/checker.py:48:55}}
-```
 
 ## Thesis links
 
