@@ -2,21 +2,20 @@
 
 [Welcome page](./index.md)
 
-[About](./about.md)
+# Main pages
 
-[Matfyz](./mff.md)
-
-[Projects](./projects.md)
+- [About](./about.md)
+- [Matfyz](./mff.md)
+- [Projects](./projects.md)
 
 # Programming exercises
 
-- [Programming](./programming.md)
+- [Sandbox](./programming.md)
 - [Exercises](./exercises.md)
 
 # Tenerife
 
 - [Tenerife](./tenerife.md)
-    - [Úvod](./tenerife/tenerife.md)
     - [Cesta](./tenerife/travel.md)
         - [Věci s sebou](./tenerife/items.md)
         - [Let](./tenerife/flight.md)
@@ -32,7 +31,7 @@
 # Miscellaneous
 
 - [Boot](./boot.md)
-- [Dezinformace](./dezinfo.md)
+- [(Dez)Informace](./dezinfo.md)
 
 # Advent of code
 

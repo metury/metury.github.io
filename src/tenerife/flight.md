@@ -14,6 +14,8 @@ Nějaké konkrétní tipy na aerolinky:
 
 ## Cesta na letiště
 
+### Katowice
+
 Klasicky se na letiště lze dostat autem, nicméně to je třeba pak zaparkovat. Například v Katowicích ve vedlejší vesnici *Pyrzowice* je spoustu domů, které mají místo zahrady parkoviště.
 
 Alternativně se lze dopravit pomocí autobusů a vlaků. Myslím, že na letiště ve Vídní jezdí už přímo linky (minimálně z Brna) ale na letiště do Katowic už moc ne, ale tam jezdí místní [MHD](https://rj.metropoliaztm.pl/rozklady/1-ap/76430/1/162106/) z hlavního nádraží na letiště. Lístky se dají koupit (i kartou, ale ne vždy) na nádraží.
@@ -22,11 +24,17 @@ Alternativně se lze dopravit pomocí autobusů a vlaků. Myslím, že na letiš
 - [Student agency](https://www.studentagency.cz/)
 - [Gepard express](https://www.gepard.com/)
 
+### Vídeň
+
+V případě vídně je lepší použít hromadné dopravy, které jsem již dříve zmínil. Pokud byste chtěli jet autem, tak lze použít oficiální parkoviště, nicméně to bývá dražší. Dostal jsem doporučení na jedno parkoviště, které je celkem blízko a mělo by být levnější.
+
+- [Mazur parking](https://www.mazur-parken.at/en)
+
 ## Samotný let
 
 Na co je dobré upozornit (z vlastní zkušenosti) je lepší si vzít nějaké jídlo a pak buď na letišti (za kontrolou!) koupit pití anebo si vzít láhev a pak si ji naplnit. Popřípadě si lze občerstvení zakoupit v letadle, ale to si opět připlatíte.
 
-Tohle snad nebude potřeba dodávat, ale na cestu letadlem si s sebou nesmíte do příručního zavazadle brát ostré nebo nebezpečné předměty a také nesmíte brát tekutiny. V případě tekutin je omezení myslím do 100 ml. Takže bacha třeba na kosmetiku.
+Tohle snad nebude potřeba dodávat, ale na cestu letadlem si s sebou nesmíte do příručního zavazadla brát ostré nebo nebezpečné předměty a také nesmíte brát tekutiny. V případě tekutin je omezení myslím do 100 ml. Takže bacha třeba na kosmetiku.
 
 Potom také v případě odbaveného zavazadla nesmí obsahovat baterie. Ty pak musí být v příručním zavazadle. Mimo jiné existuje i celkové omezení na velikost baterií, ale ty snad nikdo nepřesáhne.
 

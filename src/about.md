@@ -1,6 +1,6 @@
 ## About this page
 
-This is my own personal page that is also a blog which I may sometime use. Some pages are in English and some only in Czech.
+This is my own personal page. Feel free to see the pages.
 
 ## About me
 

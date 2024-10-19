@@ -1,4 +1,4 @@
-# Dezinformace
+# Boj proti dezinformacím
 
 Tady je můj menší seznam stránek a zdrojů, které slouží proti šíření dezinformací.
 

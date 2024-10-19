@@ -1,10 +1,4 @@
----
-layout: page
-title: Boot
-permalink: /boot/
----
-
-# Fresh instalation of Debian computer.
+# Fresh instalation of [Debian](https://www.debian.org) computer.
 
 Update and upgrade repos.
 

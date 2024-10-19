@@ -52,10 +52,8 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 ## CVRP
 
 - [Presentation](./mff/cvrp/cvrp-presentation.pdf)
-- [Text](./mff/cvrp/cvrp.pdf)
-- [Rust parser](./mff/cvrp/main.rs)
-- [Shell script](./mff/cvrp/solver.sh)
-- [Python checker](./mff/cvrp/checker.py)
+- [Text describing the solution](./mff/cvrp/cvrp.pdf)
+- [Created solver](./mff/cvrp/solver.zip)
 
 ## Thesis links
 
