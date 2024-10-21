@@ -58,11 +58,15 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 ## Thesis links
 
 - [My notes on connected cuts](./mff/connected-cuts.pdf)
-- [Max cut](https://dl.acm.org/doi/pdf/10.1145/195058.195216)
+- [On the minimum \\(s-t\\) cut problem with budget constraints](https://link.springer.com/article/10.1007/s10107-023-01987-9)
 - [Min max and small set expansion](https://epubs.siam.org/doi/abs/10.1137/120873996)
+- [Balanced Crown Decomposition for Connectivity Constraints](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ESA.2021.26)
+
+### Other links
+
+- [Max cut](https://dl.acm.org/doi/pdf/10.1145/195058.195216)
 - [\\(s-t\\) connected cuts](https://www.researchgate.net/publication/2513735_Multicommodity_Flows_and_Approximation_Algorithms)
 - [\\(k\\) cuts](https://arxiv.org/abs/1807.07143v2) a [PDF](https://arxiv.org/pdf/1807.07143v2)
 - [Petr Kolman STC](https://kam.mff.cuni.cz/~kolman/papers/STC-2024.pdf)
 - [Petr Kolman - other aproximation](https://kam.mff.cuni.cz/~kolman/papers/stc-ext-arx.pdf)
 - [Maximum connected cut](https://sites.cs.ucsb.edu/~daniello/papers/maximum_minimal_cut__Journal.pdf)
-- [Discrete mathematics](https://link.springer.com/chapter/10.1007/978-3-030-61115-6_14)
