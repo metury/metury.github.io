@@ -22,7 +22,7 @@ apt install sagemath cpp octave jupyter default-jre default-jdk perl golang git 
 ## Office
 
 ```sh
-apt install texstudio libreoffice meld texlive-full pandoc
+apt install texstudio libreoffice meld texlive-full pandoc ipe
 ```
 
 ## Terminal apps
