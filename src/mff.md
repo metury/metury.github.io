@@ -24,7 +24,7 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 | Programování v jazyce Rust                           | [Web](https://d3s.mff.cuni.cz/teaching/nprg082/) |
 | Vybrané kapitoly z kombinatoriky 1                   |        |
 | Základy teorie kategorií                             |        |
-| úvod do teorie čísel                                 | [Web](https://kam.mff.cuni.cz/~klazar/UTC24.html) |
+| Úvod do teorie čísel                                 | [Web](https://kam.mff.cuni.cz/~klazar/UTC24.html) |
 | **2324 - Letní semestr**                             | **--** |
 | Teorie Matroidů                                      | [Web](https://iuuk.mff.cuni.cz/~pangrac/vyuka/) [Cviceni](https://kam.mff.cuni.cz/~cerny/teach/23-24/matroids.html) |
 | Datove struktury 2                                   | [Web](https://mj.ucw.cz/vyuka/2324/ds2/) [Skripta](https://mj.ucw.cz/vyuka/dsnotes/ds.pdf) |
