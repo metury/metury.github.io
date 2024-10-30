@@ -19,3 +19,5 @@ Dodatečně se zatím jen podporuje a vytváří [nový projekt](https://www.don
 Pokudněkoho baví používá sarkasmus a satiru, tak si můžete přečíst paper na [fialovou](./resources/fialova.pdf) barvu.
 
 Popřípadě doporučuji [paralelní listy](https://paralelnilisty.cz/).
+
+Nebo oproti standardní [Wikipedii](https://en.wikipedia.org/wiki/Main_Page) se můžete podívat na informace z [Necyklopedie](https://necyklopedie.org/).
