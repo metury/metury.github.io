@@ -19,7 +19,7 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 | Předmět                                              | Odkazy |
 |:----------------------------------------------------:|:------:|
 | **2425 - Zimní semestr**                             | **--** |
-| Constraint programming                               | [Web](https://ktiml.mff.cuni.cz/~bartak/podminky/) [Cvičení](https://jbulin.github.io/teaching/fall/nopt042/) |
+| Constraint programming                               | [Web](https://ktiml.mff.cuni.cz/~bartak/podminky/) [Cvičení](https://jbulin.github.io/teaching/fall/nopt042/) [Picat Docs](https://picat-lang.org/download/picat_guide.pdf) |
 | Introduction to Parameterized Algorithms             | [Web](https://research.koutecky.name/db/teaching:intro_par_alg2324) [Kniha](https://www.mimuw.edu.pl/~malcin/book/parameterized-algorithms.pdf) [Cvičení](https://iuuk.mff.cuni.cz/~tung/teaching/fpt-ws2324/) |
 | Programování v jazyce Rust                           | [Web](https://d3s.mff.cuni.cz/teaching/nprg082/) |
 | Vybrané kapitoly z kombinatoriky 1                   |        |
