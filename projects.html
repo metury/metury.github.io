@@ -32,15 +32,17 @@
 
         <!-- MathJax -->
         <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    </head>
-    <body>
-    <div id="body-container">
+
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
-
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
@@ -87,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <!-- populated by js -->
-            <div class="sidebar-scrollbox"></div>
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
                 <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
             </noscript>
@@ -95,8 +97,6 @@
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
-
-        <script async src="toc.js"></script>
 
         <div id="page-wrapper" class="page-wrapper">
 
@@ -156,6 +156,12 @@
                     <main>
                         <h1 id="project"><a class="header" href="#project">Project</a></h1>
 <p>There is a small list of my projects.</p>
+<h2 id="rodoc"><a class="header" href="#rodoc"><a href="https://github.com/rodoc-app">rodoc</a></a></h2>
+<p>My own bachelors project that is for organizing your own family tree.</p>
+<p><a href="https://github.com/rodoc-app/rodoc-app">GitHub</a> and <a href="https://rodoc-app.github.io/">Page</a> for more information.</p>
+<h2 id="graphs"><a class="header" href="#graphs">graphs</a></h2>
+<p>Library for graphs that is written in <code>Java</code>. There are some basic algorithms implemented as well.</p>
+<p><a href="https://github.com/metury/graphs">GitHub</a> and <a href="../resources/docs/graphs/index.html">Documentation</a></p>
 <h2 id="xtodo---this-is-in-progress-of-developing-new-version"><a class="header" href="#xtodo---this-is-in-progress-of-developing-new-version">xtodo - <em>this is in progress of developing new version</em></a></h2>
 <p>Desktop app written in <code>C++</code> that is for organizing your to-dos in <code>todo.txt</code> format. It is divided into <code>xtodo-cli</code> and <code>xtodo</code>.</p>
 <p><a href="https://github.com/metury/xtodo">GitHub</a> and <a href="../resources/docs/xtodo/index.html">Documentation</a></p>
@@ -163,12 +169,6 @@
 5.11.2023 Add documentation @xtodo
 5.11.2023 6.11.2023 Update the page @page
 </code></pre>
-<h2 id="graphs"><a class="header" href="#graphs">graphs</a></h2>
-<p>Library for graphs that is written in <code>Java</code>. There are some basic algorithms implemented as well.</p>
-<p><a href="https://github.com/metury/graphs">GitHub</a> and <a href="../resources/docs/graphs/index.html">Documentation</a></p>
-<h2 id="rodoc"><a class="header" href="#rodoc">rodoc</a></h2>
-<p>My own bachelors project that is for organizing your own family tree.</p>
-<p><a href="https://github.com/rodoc-app/rodoc-app">GitHub</a> and <a href="https://rodoc-app.github.io/">Page</a> for more information.</p>
 
                     </main>
 
