@@ -2,8 +2,6 @@
 # Welcome, to my personal page.
 
 ```rust
-#use std::vec;
-#
 #fn main() {
     let mut interests : Vec<&str> = vec!["Computer science",
                                          "Travel",
