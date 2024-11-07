@@ -59,9 +59,13 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 ## Thesis links
 
 - [My notes on connected cuts](./mff/connected-cuts.pdf)
-- [On the minimum \\(s-t\\) cut problem with budget constraints](https://link.springer.com/article/10.1007/s10107-023-01987-9)
-- [Min max and small set expansion](https://epubs.siam.org/doi/abs/10.1137/120873996)
-- [Balanced Crown Decomposition for Connectivity Constraints](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ESA.2021.26)
+
+1. [Minimum bisection](https://www.khoury.northeastern.edu/home/austin/papers/bisection.pdf)
+2. [Min max and small set expansion](https://epubs.siam.org/doi/abs/10.1137/120873996)
+3. [Approximation algorithms for maximally balanced connected graph partition](https://link.springer.com/article/10.1007/s00453-021-00870-3)
+4. [On size-constrained minimum s–t cut problems and size-constrained dense subgraph problems](https://www.sciencedirect.com/science/article/pii/S0304397515009378)
+5. [On the minimum \\(s-t\\) cut problem with budget constraints](https://link.springer.com/article/10.1007/s10107-023-01987-9)
+6. [Balanced Crown Decomposition for Connectivity Constraints](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ESA.2021.26)
 
 ### Other links
 
