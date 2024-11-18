@@ -24,3 +24,9 @@ Here are some usefull links:
 Here are some links:
 
 - [Cpp reference](https://en.cppreference.com)
+
+
+## Elixir
+
+- [Webpage](https://elixir-lang.org/)
+- [Docs](https://hexdocs.pm/elixir)
