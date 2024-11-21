@@ -2,7 +2,7 @@
 
 [Welcome page](./index.md)
 
-[TBA]()
+<!-- [🎄🦌☃️]() -->
 
 # Main pages
 
