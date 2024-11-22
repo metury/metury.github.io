@@ -12,7 +12,7 @@ Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň tro
 - [Probability and statistics 2](./mff/past-ii.pdf)
 - [Polyhedral combinatorics](./mff/polyhedra.pdf)
 - [Teorie množin](./mff/temno.pdf)
-- [Selected chapters from kombinatorics (not finished yet)](./mff/selected-chapters-kg.pdf)
+- [Selected chapters from kombinatorics (not finished yet)](./mff/selected-chapters-kg.pdf) and [dark version](./mff/selected-chapters-kg-dark.pdf)
 
 ## Odkazy na předměty
 
