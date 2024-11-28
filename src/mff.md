@@ -6,13 +6,13 @@ Tady je menší rozcestník pro matfyzácké věci. Jak už moje zápisky nebo o
 
 Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň trochu) za to, tak se tady budou nacházet. Veškeré texty lze najív v repozitáři na [GitHubu](https://github.com/metury/notes).
 
-- Flows, paths and cuts - [[light](./mff/fpc.pdf)|[dark](./mff/fpc-dark.pdf)]
+- [Flows, paths and cuts](./mff/fpc.pdf)
 - [Geometric Representations of Graphs](./mff/grg.pdf)
 - [Kombinatorika a grafy](./mff/kg.pdf)
 - [Probability and statistics 2](./mff/past-ii.pdf)
 - [Polyhedral combinatorics](./mff/polyhedra.pdf)
 - [Teorie množin](./mff/temno.pdf)
-- Selected chapters from kombinatorics- [[light](./mff/selected-chapters-kg.pdf)|[dark](./mff/selected-chapters-kg-dark.pdf)]
+- [Selected chapters from kombinatorics](./mff/selected-chapters-kg.pdf)
 
 ## Odkazy na předměty
 
