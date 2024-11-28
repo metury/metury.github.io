@@ -160,61 +160,83 @@
 <h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use regex::Regex;
+<pre><code class="language-rs">use regex::Regex;
+use std::fs;
 
 struct Triangle {
-  a: i64,
-  b: i64,
-  c: i64,
+    a: i64,
+    b: i64,
+    c: i64,
 }
 
 impl Triangle {
-  fn new(a: i64, b: i64, c: i64) -&gt; Self {
-    Triangle {a: a, b: b, c: c}
-  }
-  fn is_valid(&amp;self) -&gt; bool {
-    (self.a + self.b &gt; self.c) &amp;&amp; (self.b + self.c &gt; self.a) &amp;&amp; (self.c + self.a &gt; self.b)
-  }
+    fn new(a: i64, b: i64, c: i64) -&gt; Self {
+        Triangle { a: a, b: b, c: c }
+    }
+    fn is_valid(&amp;self) -&gt; bool {
+        (self.a + self.b &gt; self.c) &amp;&amp; (self.b + self.c &gt; self.a) &amp;&amp; (self.c + self.a &gt; self.b)
+    }
 }
 
 fn read_file(filepath: &amp;str) -&gt; Vec&lt;Triangle&gt; {
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let re = Regex::new(r"([0-9]+)\s+([0-9]+)\s+([0-9]+)").unwrap();
-  let mut triangles: Vec&lt;Triangle&gt; = vec!();
-  for (_, [a, b, c]) in re.captures_iter(&amp;binding).map(|c| c.extract()) {
-    triangles.push(Triangle::new(a.parse().unwrap(), b.parse().unwrap(), c.parse().unwrap()));
-  }
-  triangles
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let re = Regex::new(r"([0-9]+)\s+([0-9]+)\s+([0-9]+)").unwrap();
+    let mut triangles: Vec&lt;Triangle&gt; = vec![];
+    for (_, [a, b, c]) in re.captures_iter(&amp;binding).map(|c| c.extract()) {
+        triangles.push(Triangle::new(
+            a.parse().unwrap(),
+            b.parse().unwrap(),
+            c.parse().unwrap(),
+        ));
+    }
+    triangles
 }
 
 fn convert_triangles(triangles: &amp;Vec&lt;Triangle&gt;) -&gt; Vec&lt;Triangle&gt; {
-  let mut column_triangles: Vec&lt;Triangle&gt; = vec!();
-  for (i,_) in triangles.iter().enumerate().step_by(3) {
-    column_triangles.push(Triangle::new(triangles[i].a, triangles[i + 1].a, triangles[i + 2].a));
-    column_triangles.push(Triangle::new(triangles[i].b, triangles[i + 1].b, triangles[i + 2].b));
-    column_triangles.push(Triangle::new(triangles[i].c, triangles[i + 1].c, triangles[i + 2].c));
-  }
-  column_triangles
+    let mut column_triangles: Vec&lt;Triangle&gt; = vec![];
+    for (i, _) in triangles.iter().enumerate().step_by(3) {
+        column_triangles.push(Triangle::new(
+            triangles[i].a,
+            triangles[i + 1].a,
+            triangles[i + 2].a,
+        ));
+        column_triangles.push(Triangle::new(
+            triangles[i].b,
+            triangles[i + 1].b,
+            triangles[i + 2].b,
+        ));
+        column_triangles.push(Triangle::new(
+            triangles[i].c,
+            triangles[i + 1].c,
+            triangles[i + 2].c,
+        ));
+    }
+    column_triangles
 }
 
 fn part1() {
-  let triangles = read_file("INPUT");
-  let res = triangles.into_iter().map(|t| if t.is_valid() {1} else {0}).sum::&lt;i64&gt;();
-  println!("Part 1: {}", res);
+    let triangles = read_file("INPUT");
+    let res = triangles
+        .into_iter()
+        .map(|t| if t.is_valid() { 1 } else { 0 })
+        .sum::&lt;i64&gt;();
+    println!("Part 1: {}", res);
 }
 
 fn part2() {
-  let triangles = convert_triangles(&amp;read_file("INPUT"));
-  let res = triangles.into_iter().map(|t| if t.is_valid() {1} else {0}).sum::&lt;i64&gt;();
-  println!("Part 2: {}", res);
+    let triangles = convert_triangles(&amp;read_file("INPUT"));
+    let res = triangles
+        .into_iter()
+        .map(|t| if t.is_valid() { 1 } else { 0 })
+        .sum::&lt;i64&gt;();
+    println!("Part 2: {}", res);
 }
 
 fn main() {
-  println!("Year 2016 day 3 - Squares With Three Sides");
-  part1();
-  part2();
+    println!("Year 2016 day 3 - Squares With Three Sides");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -222,11 +244,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2016-4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2016-2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2016-2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2016-4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -236,11 +258,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2016-4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2016-2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2016-2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2016-4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

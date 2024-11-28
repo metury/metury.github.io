@@ -162,78 +162,82 @@
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>In the second part we compute the maximums.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use regex::Regex;
+<pre><code class="language-rs">use regex::Regex;
 use std::cmp::max;
+use std::fs;
 
 type Colors = (i64, i64, i64);
 
 fn read_file(filepath: &amp;str) -&gt; Vec&lt;String&gt; {
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let lines: Vec&lt;String&gt; = binding.split('\n')
-    .filter(|c| c.len() &gt; 0)
-    .map(|c| c.to_string()).collect();
-  lines
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let lines: Vec&lt;String&gt; = binding
+        .split('\n')
+        .filter(|c| c.len() &gt; 0)
+        .map(|c| c.to_string())
+        .collect();
+    lines
 }
 
 fn get_colors(line: &amp;str) -&gt; (i64, Vec&lt;Colors&gt;) {
-  let re_game = Regex::new(r"Game ([0-9]+)").unwrap();
-  let game = re_game.captures(line).unwrap()[1].parse::&lt;i64&gt;().unwrap();
-  let mut colors: Vec&lt;Colors&gt; = vec!();
-  let re_red = Regex::new(r"([0-9]+) red").unwrap();
-  let re_blue = Regex::new(r"([0-9]+) blue").unwrap();
-  let re_green = Regex::new(r"([0-9]+) green").unwrap();
-  for part in line.split(';') {
-    let mut red = 0_i64;
-    for (_, [number]) in re_red.captures_iter(part).map(|c| c.extract()) {
-      red += number.parse::&lt;i64&gt;().unwrap();
+    let re_game = Regex::new(r"Game ([0-9]+)").unwrap();
+    let game = re_game.captures(line).unwrap()[1].parse::&lt;i64&gt;().unwrap();
+    let mut colors: Vec&lt;Colors&gt; = vec![];
+    let re_red = Regex::new(r"([0-9]+) red").unwrap();
+    let re_blue = Regex::new(r"([0-9]+) blue").unwrap();
+    let re_green = Regex::new(r"([0-9]+) green").unwrap();
+    for part in line.split(';') {
+        let mut red = 0_i64;
+        for (_, [number]) in re_red.captures_iter(part).map(|c| c.extract()) {
+            red += number.parse::&lt;i64&gt;().unwrap();
+        }
+        let mut blue = 0_i64;
+        for (_, [number]) in re_blue.captures_iter(part).map(|c| c.extract()) {
+            blue += number.parse::&lt;i64&gt;().unwrap();
+        }
+        let mut green = 0_i64;
+        for (_, [number]) in re_green.captures_iter(part).map(|c| c.extract()) {
+            green += number.parse::&lt;i64&gt;().unwrap();
+        }
+        colors.push((red, green, blue));
     }
-    let mut blue = 0_i64;
-    for (_, [number]) in re_blue.captures_iter(part).map(|c| c.extract()) {
-      blue += number.parse::&lt;i64&gt;().unwrap();
-    }
-    let mut green = 0_i64;
-    for (_, [number]) in re_green.captures_iter(part).map(|c| c.extract()) {
-      green += number.parse::&lt;i64&gt;().unwrap();
-    }
-    colors.push((red, green, blue));
-  }
-  (game, colors)
+    (game, colors)
 }
 
 fn part1() {
-  let lines = read_file("INPUT");
-  let limits: [i64; 3] = [12, 13, 14];
-  let mut total: i64 = 0;
-  for line in lines {
-    let (game, colors) = get_colors(&amp;line);
-    let feasible: bool = colors.into_iter()
-        .map(|(r, g, b)| r &lt;= limits[0] &amp;&amp; g &lt;= limits[1] &amp;&amp; b &lt;= limits[2])
-        .fold(true, |acc, x| acc &amp;&amp; x);
-    if feasible {
-      total += game;
+    let lines = read_file("INPUT");
+    let limits: [i64; 3] = [12, 13, 14];
+    let mut total: i64 = 0;
+    for line in lines {
+        let (game, colors) = get_colors(&amp;line);
+        let feasible: bool = colors
+            .into_iter()
+            .map(|(r, g, b)| r &lt;= limits[0] &amp;&amp; g &lt;= limits[1] &amp;&amp; b &lt;= limits[2])
+            .fold(true, |acc, x| acc &amp;&amp; x);
+        if feasible {
+            total += game;
+        }
     }
-  }
-  println!("Part 1: {}", total);
+    println!("Part 1: {}", total);
 }
 
 fn part2() {
-  let lines = read_file("INPUT");
-  let mut total: i64 = 0;
-  for line in lines {
-    let (_game, colors) = get_colors(&amp;line);
-    let maxes = colors.into_iter()
-      .fold((0,0,0), |acc, (r, g, b)| (max(acc.0, r), max(acc.1, g), max(acc.2, b)));
-    total += maxes.0 * maxes.1 * maxes.2;
-  }
-  println!("Part 2: {}", total);
+    let lines = read_file("INPUT");
+    let mut total: i64 = 0;
+    for line in lines {
+        let (_game, colors) = get_colors(&amp;line);
+        let maxes = colors.into_iter().fold((0, 0, 0), |acc, (r, g, b)| {
+            (max(acc.0, r), max(acc.1, g), max(acc.2, b))
+        });
+        total += maxes.0 * maxes.1 * maxes.2;
+    }
+    println!("Part 2: {}", total);
 }
 
 fn main() {
-  println!("Year 2023 day 2 - Cube Conundrum");
-  part1();
-  part2();
+    println!("Year 2023 day 2 - Cube Conundrum");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -241,11 +245,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2023-3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2023-1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2023-1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023-3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -255,11 +259,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2023-3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2023-1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2023-1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023-3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

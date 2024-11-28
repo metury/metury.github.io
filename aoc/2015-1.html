@@ -164,47 +164,49 @@
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
 
-fn read_file(filepath: &amp;str) -&gt; String{
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let mut lines = binding.split('\n');
-  return lines.next().unwrap().to_string();
+fn read_file(filepath: &amp;str) -&gt; String {
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let mut lines = binding.split('\n');
+    return lines.next().unwrap().to_string();
 }
 
 fn basement(string: &amp;str) -&gt; i64 {
-  let mut floor: i64 = 0;
-  let mut i: i64 = 0;
-  for c in string.chars() {
-    i += 1;
-    match c {
-      '(' =&gt; floor += 1,
-      ')' =&gt; floor -= 1,
-      _   =&gt; floor = floor,
+    let mut floor: i64 = 0;
+    let mut i: i64 = 0;
+    for c in string.chars() {
+        i += 1;
+        match c {
+            '(' =&gt; floor += 1,
+            ')' =&gt; floor -= 1,
+            _ =&gt; floor = floor,
+        }
+        if floor &lt; 0 {
+            return i;
+        }
     }
-    if floor &lt; 0 {
-      return i;
-    }
-  }
-  -1
+    -1
 }
 
-fn part1(){
-  let line = read_file("INPUT");
-  let total: i64 = line.chars().into_iter()
-      .map(|c| if c == '(' { 1 } else { -1 })
-      .sum();
-  println!("Part 1: {}", total);
+fn part1() {
+    let line = read_file("INPUT");
+    let total: i64 = line
+        .chars()
+        .into_iter()
+        .map(|c| if c == '(' { 1 } else { -1 })
+        .sum();
+    println!("Part 1: {}", total);
 }
 
-fn part2(){
-  let line = read_file("INPUT");
-  println!("Part 2: {}", basement(&amp;line));
+fn part2() {
+    let line = read_file("INPUT");
+    println!("Part 2: {}", basement(&amp;line));
 }
 
 fn main() {
-  println!("Year 2015 day 01 - Not Quite Lisp");
-  part1();
-  part2();
+    println!("Year 2015 day 01 - Not Quite Lisp");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -212,10 +214,13 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2015-2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2015.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../aoc/2015-2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -223,10 +228,13 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2015-2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2015.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../aoc/2015-2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>

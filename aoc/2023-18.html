@@ -162,87 +162,90 @@
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>Again we use <a href="https://en.wikipedia.org/wiki/Pick%27s_theorem">Pick's Theorem</a>. And <a href="https://docs.rs/geo/latest/geo/">geo</a> library to create a polygon from the instruction set and compute the area using the library. Then we procede with the use of the theoem.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use geo::{Coord, Polygon, Area, coord, LineString};
+<pre><code class="language-rs">use geo::{coord, Area, Coord, LineString, Polygon};
+use std::fs;
 
-type Point&lt;T&gt; = (T,T);
+type Point&lt;T&gt; = (T, T);
 type Instruction = (char, i32);
 
 fn read_file(filepath: &amp;str) -&gt; (Vec&lt;Instruction&gt;, Vec&lt;String&gt;) {
-  let mut instructions: Vec&lt;Instruction&gt; = vec!();
-  let mut strings: Vec&lt;String&gt; = vec!();
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let lines = binding.split('\n');
-  for line in lines {
-    if line != "" {
-      let mut parts = line.split(' ');
-      let instruction = (parts.next().unwrap().chars().nth(0).unwrap(),
-                 parts.next().unwrap().parse::&lt;i32&gt;().unwrap());
-      instructions.push(instruction);
-      strings.push(parts.next().unwrap().to_string());
+    let mut instructions: Vec&lt;Instruction&gt; = vec![];
+    let mut strings: Vec&lt;String&gt; = vec![];
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let lines = binding.split('\n');
+    for line in lines {
+        if line != "" {
+            let mut parts = line.split(' ');
+            let instruction = (
+                parts.next().unwrap().chars().nth(0).unwrap(),
+                parts.next().unwrap().parse::&lt;i32&gt;().unwrap(),
+            );
+            instructions.push(instruction);
+            strings.push(parts.next().unwrap().to_string());
+        }
     }
-  }
-  return (instructions, strings);
+    return (instructions, strings);
 }
 
 fn step(instruction: &amp;Instruction, point: &amp;Point&lt;i32&gt;) -&gt; Point&lt;i32&gt; {
-  match instruction.0 {
-    '0' | 'R' =&gt; (point.0, point.1 + instruction.1),
-    '1' | 'D' =&gt; (point.0 + instruction.1, point.1),
-    '2' |'L' =&gt; (point.0, point.1 - instruction.1),
-    '3' | 'U' =&gt; (point.0 - instruction.1, point.1),
-    _   =&gt; (point.0, point.1),
-  }
+    match instruction.0 {
+        '0' | 'R' =&gt; (point.0, point.1 + instruction.1),
+        '1' | 'D' =&gt; (point.0 + instruction.1, point.1),
+        '2' | 'L' =&gt; (point.0, point.1 - instruction.1),
+        '3' | 'U' =&gt; (point.0 - instruction.1, point.1),
+        _ =&gt; (point.0, point.1),
+    }
 }
 
 fn calculate_area(points: &amp;Vec&lt;Point&lt;i32&gt;&gt;) -&gt; f64 {
-  let mut coordinates: Vec&lt;Coord&gt; = vec!();
-  for point in points {
-    coordinates.push(coord! {x: point.0 as f64, y: point.1 as f64 });
-  }
-  let line_string = LineString::new(coordinates);
-  let polygon = Polygon::new(line_string, Vec::new());
-  polygon.unsigned_area()
+    let mut coordinates: Vec&lt;Coord&gt; = vec![];
+    for point in points {
+        coordinates.push(coord! {x: point.0 as f64, y: point.1 as f64 });
+    }
+    let line_string = LineString::new(coordinates);
+    let polygon = Polygon::new(line_string, Vec::new());
+    polygon.unsigned_area()
 }
 
 fn compute_from_instructions(instructions: &amp;Vec&lt;Instruction&gt;) -&gt; i64 {
-  let mut points: Vec&lt;Point&lt;i32&gt;&gt; = vec!();
-  let mut point: Point&lt;i32&gt; = (0,0);
-  let mut b: i64 = 0;
-  for instruction in instructions {
-    points.push(point);
-    point = step(instruction, &amp;mut point);
-    b += instruction.1 as i64;
-  }
-  let area = calculate_area(&amp;points) as i64;
-  2 + b + (area - b/2 - 1)
+    let mut points: Vec&lt;Point&lt;i32&gt;&gt; = vec![];
+    let mut point: Point&lt;i32&gt; = (0, 0);
+    let mut b: i64 = 0;
+    for instruction in instructions {
+        points.push(point);
+        point = step(instruction, &amp;mut point);
+        b += instruction.1 as i64;
+    }
+    let area = calculate_area(&amp;points) as i64;
+    2 + b + (area - b / 2 - 1)
 }
 
 fn parse_string(string: &amp;str) -&gt; Instruction {
-  let len: usize = string.len() - 2;
-  let hex_string = &amp;string[2 .. len];
-  let num = i32::from_str_radix(&amp;hex_string, 16).unwrap();
-  (string.chars().nth(len).unwrap(), num)
+    let len: usize = string.len() - 2;
+    let hex_string = &amp;string[2..len];
+    let num = i32::from_str_radix(&amp;hex_string, 16).unwrap();
+    (string.chars().nth(len).unwrap(), num)
 }
 
 fn part1() {
-  let (instructions, _) = read_file("INPUT");
-  println!("Part 1: {}", compute_from_instructions(&amp;instructions));
+    let (instructions, _) = read_file("INPUT");
+    println!("Part 1: {}", compute_from_instructions(&amp;instructions));
 }
 
 fn part2() {
-  let (_, strings) = read_file("INPUT");
-  let instructions: Vec&lt;Instruction&gt; = strings.into_iter()
-                                              .map(|string| { parse_string(&amp;string) })
-                                              .collect();
-  println!("Part 2: {}", compute_from_instructions(&amp;instructions));
+    let (_, strings) = read_file("INPUT");
+    let instructions: Vec&lt;Instruction&gt; = strings
+        .into_iter()
+        .map(|string| parse_string(&amp;string))
+        .collect();
+    println!("Part 2: {}", compute_from_instructions(&amp;instructions));
 }
 
 fn main() {
-  println!("Year 2023 day 18 - Lavaduct Lagoon");
-  part1();
-  part2();
+    println!("Year 2023 day 18 - Lavaduct Lagoon");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -250,11 +253,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2023-19.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2023-17.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2023-17.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023-19.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -264,11 +267,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2023-19.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2023-17.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2023-17.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023-19.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

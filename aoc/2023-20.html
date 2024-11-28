@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Year 2023 day 25 - Personal page</title>
+        <title>Year 2023 day 20 - Personal page</title>
 
 
         <!-- Custom HTML head -->
@@ -154,66 +154,159 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="advent-of-code---year-2023-day-25"><a class="header" href="#advent-of-code---year-2023-day-25">Advent of code - Year 2023 Day 25</a></h1>
-<p>This is a solution of the <a href="https://adventofcode.com/2023/day/25">day 25</a>. Go back to year <a href="2023.html">2023</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
+                        <h1 id="advent-of-code---year-2023-day-20"><a class="header" href="#advent-of-code---year-2023-day-20">Advent of code - Year 2023 Day 20</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2023/day/20">day 20</a>. Go back to year <a href="2023.html">2023</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
 <h3 id="info"><a class="header" href="#info">Info</a></h3>
 <h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
-<p>The first part is done by <a href="https://graphviz.org/doc/info/lang.html">graphviz dot language</a>. So the code creates a file <code>graph.dot</code> than you run <code>dot -Kneato -Tsvg graph.dot -o graph.svg</code>. You find the three pairs forming the min cut and manually insert it into the code. Then you ran the code again.</p>
-<p>The alternate algorithm is to use <a href="https://en.wikipedia.org/wiki/Karger%27s_algorithm">Karger-Steins</a> approximation algorithm. This I didn't make.</p>
+<p>In the first part you run the bfs to firstly find predecessors. Then you have the whole graph represented. After you run once again bfs with some different cases for the logic to work.</p>
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
-<p><strong>PUSH THE RED BUTTON.</strong></p>
+<p>The second part is easier to solve by hand. You may create a <code>graph.dot</code> in <a href="https://graphviz.org/doc/info/lang.html">graphviz dot language</a> and then by running <code>dot -Kdot -Tsvg graph.dot -o graph.svg</code> create a picture of the graph. There are 4 modules that behave like a binary counters. For each you represent it by a binary number; 1 if the edge goes to the conjection and 0 otherwise. After you represent it you use LCM for them and that is the answer.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::collections::{HashSet, VecDeque};
+<pre><code class="language-rs">use std::collections::{HashMap, HashSet, VecDeque};
 use std::fs;
 use std::io::Write;
 
-struct Wire {
-    start: String,
-    ends: Vec&lt;String&gt;,
+const BROADCASTER: &amp;str = "broadcaster";
+const RX: &amp;str = "rx";
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+enum NodeType {
+    FlipFlop,
+    Conjuction,
+    Broadcast,
 }
 
-fn parse_wire(line: &amp;str) -&gt; Wire {
-    let from_to: Vec&lt;&amp;str&gt; = line.split(": ").collect();
-    let mut wire = Wire {
-        start: from_to[0].to_string(),
-        ends: vec![],
-    };
-    let parts: Vec&lt;&amp;str&gt; = from_to[1].split(' ').collect();
-    for p in parts {
-        wire.ends.push(p.to_string());
+#[derive(Debug, Clone, PartialEq, Eq)]
+enum Pulse {
+    Low,
+    High,
+}
+
+#[derive(Debug, Clone)]
+struct Node {
+    name: String,
+    node_type: NodeType,
+    on: bool,
+    next_nodes: Vec&lt;String&gt;,
+    predecessors: HashMap&lt;String, Pulse&gt;,
+}
+
+fn parse_node(line: &amp;str) -&gt; Node {
+    let parts: Vec&lt;&amp;str&gt; = line.split(" -&gt; ").collect();
+    let node_type: NodeType;
+    match parts[0].chars().nth(0).unwrap() {
+        '%' =&gt; node_type = NodeType::FlipFlop,
+        '&amp;' =&gt; node_type = NodeType::Conjuction,
+        _ =&gt; node_type = NodeType::Broadcast,
     }
-    wire
+    let name: String;
+    if node_type != NodeType::Broadcast {
+        name = parts[0][1..].to_string();
+    } else {
+        name = parts[0].to_string();
+    }
+    let next_nodes: Vec&lt;String&gt; = parts[1].split(", ").map(|n| n.to_string()).collect();
+    Node {
+        name: name,
+        node_type: node_type,
+        on: false,
+        next_nodes: next_nodes,
+        predecessors: HashMap::new(),
+    }
 }
 
-fn read_file(filepath: &amp;str) -&gt; Vec&lt;Wire&gt; {
+fn read_file(filepath: &amp;str) -&gt; HashMap&lt;String, Node&gt; {
+    let mut hash_map: HashMap&lt;String, Node&gt; = HashMap::new();
     let contents = fs::read_to_string(filepath);
-    let mut wires: Vec&lt;Wire&gt; = vec![];
     let binding = contents.expect("REASON");
     let lines = binding.split('\n');
     for line in lines {
         if line != "" {
-            wires.push(parse_wire(line));
+            let node = parse_node(line);
+            let name = &amp;node.name;
+            hash_map.insert(name.to_string(), node);
         }
     }
-    wires
+    hash_map.insert(
+        RX.to_string(),
+        Node {
+            name: RX.to_string(),
+            node_type: NodeType::Broadcast,
+            on: false,
+            next_nodes: vec![],
+            predecessors: HashMap::new(),
+        },
+    );
+    return hash_map;
 }
 
-fn create_graphviz(filepath: &amp;str, wires: &amp;Vec&lt;Wire&gt;) {
+fn find_predecessors(hash_map: &amp;mut HashMap&lt;String, Node&gt;) {
+    let mut name = BROADCASTER.to_string();
+    let mut set: HashSet&lt;String&gt; = HashSet::new();
+    let mut queue: VecDeque&lt;String&gt; = VecDeque::new();
+    queue.push_back(name.clone());
+    while !queue.is_empty() {
+        name = queue.pop_front().unwrap().to_string();
+        if set.contains(&amp;name) {
+            continue;
+        }
+        set.insert(name.clone());
+        let next_nodes = &amp;hash_map[&amp;name].next_nodes.clone();
+        for n in next_nodes {
+            if let Some(new_node) = hash_map.get_mut(n) {
+                new_node.predecessors.insert(name.clone(), Pulse::Low);
+                queue.push_back(n.clone());
+            }
+        }
+    }
+}
+
+fn create_graphviz(hash_map: &amp;HashMap&lt;String, Node&gt;, filepath: &amp;str) {
     let file = fs::File::create(filepath);
-    match writeln!(file.as_ref().expect("REASON"), "{}", "graph AOC25 {") {
+    match writeln!(file.as_ref().expect("REASON"), "{}", "digraph AOC {") {
         Ok(()) =&gt; {}
         Err(..) =&gt; return,
     }
-    for wire in wires {
-        for end in &amp;wire.ends {
+    for n in hash_map {
+        let mut color: &amp;str;
+        match n.1.node_type {
+            NodeType::Broadcast =&gt; color = "red",
+            NodeType::Conjuction =&gt; color = "blue",
+            NodeType::FlipFlop =&gt; color = "green",
+        }
+        if n.1.name == RX {
+            color = "orange";
+        }
+        match writeln!(
+            file.as_ref().expect("REASON"),
+            "{}",
+            format!("  {} [color={}]", n.1.name, color)
+        ) {
+            Ok(()) =&gt; {}
+            Err(..) =&gt; return,
+        }
+    }
+    let mut name = BROADCASTER.to_string();
+    let mut set: HashSet&lt;String&gt; = HashSet::new();
+    let mut queue: VecDeque&lt;String&gt; = VecDeque::new();
+    queue.push_back(name.clone());
+    while !queue.is_empty() {
+        name = queue.pop_front().unwrap().to_string();
+        if set.contains(&amp;name) {
+            continue;
+        }
+        set.insert(name.clone());
+        let next_nodes = &amp;hash_map[&amp;name].next_nodes.clone();
+        for n in next_nodes {
             match writeln!(
                 file.as_ref().expect("REASON"),
                 "{}",
-                format!("  {} -- {};", wire.start, end)
+                format!("  {} -&gt; {};", name, n)
             ) {
                 Ok(()) =&gt; {}
                 Err(..) =&gt; return,
             }
+            queue.push_back(n.clone());
         }
     }
     match writeln!(file.as_ref().expect("REASON"), "{}", "}") {
@@ -222,68 +315,109 @@ fn create_graphviz(filepath: &amp;str, wires: &amp;Vec&lt;Wire&gt;) {
     }
 }
 
-fn is_forb(w1: &amp;str, w2: &amp;str, forb: &amp;[(&amp;str, &amp;str); 3]) -&gt; bool {
-    for f in forb {
-        if (f.0 == w1 &amp;&amp; f.1 == w2) || (f.1 == w1 &amp;&amp; f.0 == w2) {
-            return true;
-        }
-    }
-    false
+fn all_highs(hash_map: &amp;HashMap&lt;String, Pulse&gt;) -&gt; bool {
+    hash_map
+        .into_iter()
+        .map(|x| x.1 == &amp;Pulse::High)
+        .fold(true, |acc, x| acc &amp;&amp; x)
 }
 
-fn partitions(wires: &amp;Vec&lt;Wire&gt;, forb: &amp;[(&amp;str, &amp;str); 3]) -&gt; u64 {
-    let mut found: HashSet&lt;String&gt; = HashSet::new();
-    let mut queue: VecDeque&lt;String&gt; = VecDeque::new();
-    found.insert(wires[0].start.clone());
-    queue.push_back(wires[0].start.clone());
+fn bfs(hash_map: &amp;mut HashMap&lt;String, Node&gt;) -&gt; (i64, i64) {
+    let mut lows: i64 = 1;
+    let mut highs: i64 = 0;
+    let mut name = BROADCASTER.to_string();
+    let mut pulse: Pulse = Pulse::Low;
+    let mut queue: VecDeque&lt;(String, Pulse)&gt; = VecDeque::new();
+    queue.push_back((name.clone(), pulse));
     while !queue.is_empty() {
-        let wire = queue.pop_front().unwrap();
-        for w in wires {
-            if wire == w.start {
-                for e in &amp;w.ends {
-                    if !is_forb(&amp;wire, &amp;e.clone(), forb) &amp;&amp; !found.contains(&amp;e.clone()) {
-                        found.insert(e.clone());
-                        queue.push_back(e.clone());
+        (name, pulse) = queue.pop_front().unwrap();
+        let next_nodes = &amp;hash_map[&amp;name].next_nodes.clone();
+        match &amp;hash_map[&amp;name].node_type {
+            NodeType::FlipFlop =&gt; {
+                if pulse == Pulse::Low {
+                    hash_map.get_mut(&amp;name).unwrap().on = !&amp;hash_map[&amp;name].on;
+                    if hash_map[&amp;name].on {
+                        pulse = Pulse::High;
+                    } else {
+                        pulse = Pulse::Low;
                     }
+                } else {
+                    continue;
                 }
-            } else if w.ends.clone().into_iter().filter(|e| &amp;wire == e).count() &gt; 0 {
-                for e in &amp;w.ends {
-                    if &amp;wire == e
-                        &amp;&amp; !is_forb(&amp;w.start, &amp;e.clone(), forb)
-                        &amp;&amp; !found.contains(&amp;w.start)
-                    {
-                        found.insert(w.start.clone());
-                        queue.push_back(w.start.clone());
-                    }
+            }
+            NodeType::Conjuction =&gt; {
+                if all_highs(&amp;hash_map[&amp;name].predecessors) {
+                    pulse = Pulse::Low;
+                } else {
+                    pulse = Pulse::High;
                 }
+            }
+            NodeType::Broadcast =&gt; pulse = pulse,
+        }
+        if pulse == Pulse::High {
+            highs += next_nodes.len() as i64;
+        } else {
+            lows += next_nodes.len() as i64;
+        }
+        for n in next_nodes {
+            if let Some(new_node) = hash_map.get_mut(n) {
+                new_node.predecessors.insert(name.clone(), pulse.clone());
+                queue.push_back((n.clone(), pulse.clone()));
             }
         }
     }
-    let mut all: HashSet&lt;String&gt; = HashSet::new();
-    for w in wires {
-        all.insert(w.start.clone());
-        for e in &amp;w.ends {
-            all.insert(e.clone());
-        }
+    (lows, highs)
+}
+
+fn gcd(mut a: u64, mut b: u64) -&gt; u64 {
+    while b != 0 {
+        let temp = b;
+        b = a % b;
+        a = temp;
     }
-    (found.len() * (all.len() - found.len())) as u64
+    a
+}
+
+fn lcm(a: u64, b: u64) -&gt; u64 {
+    (a * b) / gcd(a, b)
+}
+
+fn lcm_vec(vec: &amp;Vec&lt;u64&gt;) -&gt; u64 {
+    vec.into_iter().fold(1, |acc, x| lcm(*x, acc))
 }
 
 fn part1() {
-    let wires = read_file("INPUT");
-    create_graphviz("graph.dot", &amp;wires);
-    // This is only my solution. Run `dot -Kneato -Tsvg graph.dot -o graph.svg` to create your graph.
-    let forb: [(&amp;str, &amp;str); 3] = [("dlv", "tqh"), ("ngp", "bmd"), ("tqr", "grd")];
-    println!("Run `dot -Kneato -Tsvg graph.dot -o graph.svg` to see three edges.");
-    println!("Part 1: {}", partitions(&amp;wires, &amp;forb));
+    let mut hash_map = read_file("INPUT");
+    find_predecessors(&amp;mut hash_map);
+    let mut total_lows: i64 = 0;
+    let mut total_highs: i64 = 0;
+    for _ in 0..1000 {
+        let (low, high) = bfs(&amp;mut hash_map);
+        total_lows += low;
+        total_highs += high;
+    }
+    println!("Part 1: {}", total_lows * total_highs);
 }
 
 fn part2() {
-    println!("Part 2: {}", "PUSH THE RED BUTTON.");
+    let hash_map = read_file("INPUT");
+    create_graphviz(&amp;hash_map, "graph.dot");
+    // This is actually only my result.
+    let vec: Vec&lt;u64&gt; = [
+        0b111111010011,
+        0b111100000111,
+        0b111100100101,
+        0b111011010101,
+    ]
+    .to_vec();
+    println!("This is just my solution, yours can be found by looking at the graph in graph.dot.");
+    println!("Try running: dot -Kdot -Tsvg graph.dot -o graph.svg to see the graph.");
+    println!("Simply create binary numbers for each module; 1 if it goes in and 0 otherwise.");
+    println!("Part 2: {}", lcm_vec(&amp;vec));
 }
 
 fn main() {
-    println!("Year 2023 day 25 - Snowverload");
+    println!("Year 2023 day 20 - Pulse Propagation");
     part1();
     part2();
 }
@@ -293,11 +427,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2023-24.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2023-19.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2022.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023-21.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -307,11 +441,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2023-24.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2023-19.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2022.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023-21.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -162,181 +162,190 @@
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>In the second part we cycle the shifts counterclockwis and always remember current number of cycle and how the map looked. If we encounter the same situation we take a shortcut by skipping all repeating cycles and only finish the last ones.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use std::collections::HashMap;
+<pre><code class="language-rs">use std::collections::HashMap;
+use std::fs;
 
-const NOT_FREE : usize = usize::MAX;
+const NOT_FREE: usize = usize::MAX;
 
 #[derive(PartialEq)]
-enum Side{
-  North,
-  South,
-  West,
-  East
+enum Side {
+    North,
+    South,
+    West,
+    East,
 }
 
-fn read_file(filepath: &amp;str) -&gt; Vec&lt;Vec&lt;char&gt;&gt;{
-  let contents = fs::read_to_string(filepath);
-  let mut matrix: Vec&lt;Vec&lt;char&gt;&gt; = vec![];
-  let mut line: Vec&lt;char&gt; = vec!();
-  for c in contents.expect("REASON").chars(){
-    if c != '\n'{
-      line.push(c);
+fn read_file(filepath: &amp;str) -&gt; Vec&lt;Vec&lt;char&gt;&gt; {
+    let contents = fs::read_to_string(filepath);
+    let mut matrix: Vec&lt;Vec&lt;char&gt;&gt; = vec![];
+    let mut line: Vec&lt;char&gt; = vec![];
+    for c in contents.expect("REASON").chars() {
+        if c != '\n' {
+            line.push(c);
+        } else {
+            matrix.push(line.clone());
+            line.clear();
+        }
     }
-    else{
-      matrix.push(line.clone());
-      line.clear();
-    }
-  }
-  return matrix;
+    return matrix;
 }
 
-fn compute_position(row: usize, column: usize, by_row: bool, reverse: bool, shift: usize) -&gt; (usize, usize, bool){
-  if by_row{
-    if !reverse{
-      return (row + shift, column, false);
+fn compute_position(
+    row: usize,
+    column: usize,
+    by_row: bool,
+    reverse: bool,
+    shift: usize,
+) -&gt; (usize, usize, bool) {
+    if by_row {
+        if !reverse {
+            return (row + shift, column, false);
+        } else {
+            return (row - shift, column, row - shift == 0);
+        }
     }
-    else{
-      return (row - shift, column, row - shift == 0);
+    if !reverse {
+        return (row, column + shift, false);
+    } else {
+        return (row, column - shift, column - shift == 0);
     }
-  }
-  if !reverse{
-    return (row, column + shift, false);
-  }
-  else{
-    return (row, column - shift, column - shift == 0);
-  }
 }
 
-fn shift_array(matrix: &amp;mut Vec&lt;Vec&lt;char&gt;&gt;, row_start : usize, column_start : usize, by_row: bool, reverse: bool){
-  let mut shift: usize = 0;
-  let mut free: usize = NOT_FREE;
-  let (mut row, mut column, mut last) = compute_position(row_start, column_start, by_row, reverse, shift);
-  while row &lt; matrix.len() &amp;&amp; column &lt; matrix[row].len(){
-    if matrix[row][column] == '.' &amp;&amp; free == NOT_FREE{
-      if by_row{
-        free = row;
-      }
-      else {
-        free = column;
-      }
+fn shift_array(
+    matrix: &amp;mut Vec&lt;Vec&lt;char&gt;&gt;,
+    row_start: usize,
+    column_start: usize,
+    by_row: bool,
+    reverse: bool,
+) {
+    let mut shift: usize = 0;
+    let mut free: usize = NOT_FREE;
+    let (mut row, mut column, mut last) =
+        compute_position(row_start, column_start, by_row, reverse, shift);
+    while row &lt; matrix.len() &amp;&amp; column &lt; matrix[row].len() {
+        if matrix[row][column] == '.' &amp;&amp; free == NOT_FREE {
+            if by_row {
+                free = row;
+            } else {
+                free = column;
+            }
+        } else if matrix[row][column] == '#' {
+            free = NOT_FREE;
+        } else if matrix[row][column] == 'O' &amp;&amp; free != NOT_FREE {
+            if by_row {
+                matrix[free][column] = 'O';
+                matrix[row][column] = '.';
+            } else {
+                matrix[row][free] = 'O';
+                matrix[row][column] = '.';
+            }
+            if reverse {
+                free = free - 1;
+            } else {
+                free = free + 1;
+            }
+        }
+        shift += 1;
+        if last {
+            return;
+        }
+        (row, column, last) = compute_position(row_start, column_start, by_row, reverse, shift);
     }
-    else if matrix[row][column] == '#'{
-      free = NOT_FREE;
-    }
-    else if matrix[row][column] == 'O' &amp;&amp; free != NOT_FREE{
-      if by_row {
-        matrix[free][column] = 'O';
-        matrix[row][column] = '.';
-      }
-      else{
-        matrix[row][free] = 'O';
-        matrix[row][column] = '.';
-      }
-      if reverse{
-        free = free - 1;
-      }
-      else{
-        free = free + 1;
-      }
-    }
-    shift += 1;
-    if last{
-      return;
-    }
-    (row, column, last) = compute_position(row_start, column_start, by_row, reverse, shift);
-  }
 }
 
-fn shift_side(matrix: &amp;mut Vec&lt;Vec&lt;char&gt;&gt;, side: Side){
-  match side{
-    Side::North =&gt; {
-      for i in 0..matrix[0].len(){
-        shift_array(matrix, 0, i, true, false);
-      }
-    },
-    Side::South =&gt; {
-      for i in 0..matrix[0].len(){
-        shift_array(matrix, matrix.len() - 1, i, true, true);
-      }
-    },
-    Side::East =&gt; {
-      for i in 0..matrix[0].len(){
-        shift_array(matrix, i, matrix[i].len() - 1, false, true);
-      }
-    },
-    Side::West =&gt; {
-      for i in 0..matrix[0].len(){
-        shift_array(matrix, i, 0, false, false);
-      }
-    },
-  }
-}
-
-fn cycle(matrix: &amp;mut Vec&lt;Vec&lt;char&gt;&gt;){
-  shift_side(matrix, Side::North);
-  shift_side(matrix, Side::West);
-  shift_side(matrix, Side::South);
-  shift_side(matrix, Side::East);
-}
-
-fn compute(matrix: &amp;Vec&lt;Vec&lt;char&gt;&gt;) -&gt; usize{
-  let size: usize = matrix.len();
-  let mut ret: usize = 0;
-  for i in 0..size{
-    for j in 0..matrix[i].len(){
-      if matrix[i][j] == 'O'{
-        ret += size;
-        ret -= i
-      }
+fn shift_side(matrix: &amp;mut Vec&lt;Vec&lt;char&gt;&gt;, side: Side) {
+    match side {
+        Side::North =&gt; {
+            for i in 0..matrix[0].len() {
+                shift_array(matrix, 0, i, true, false);
+            }
+        }
+        Side::South =&gt; {
+            for i in 0..matrix[0].len() {
+                shift_array(matrix, matrix.len() - 1, i, true, true);
+            }
+        }
+        Side::East =&gt; {
+            for i in 0..matrix[0].len() {
+                shift_array(matrix, i, matrix[i].len() - 1, false, true);
+            }
+        }
+        Side::West =&gt; {
+            for i in 0..matrix[0].len() {
+                shift_array(matrix, i, 0, false, false);
+            }
+        }
     }
-  }
-  return ret;
 }
 
-fn insert_to_history(matrix: &amp; Vec&lt;Vec&lt;char&gt;&gt;, history: &amp;mut HashMap&lt;String, i64&gt;, cycle: i64) -&gt; i64{
-  let mut key: String = String::from("");
-  for i in 0..matrix.len(){
-    for j in 0..matrix[i].len(){
-      key.push(matrix[i][j]);
+fn cycle(matrix: &amp;mut Vec&lt;Vec&lt;char&gt;&gt;) {
+    shift_side(matrix, Side::North);
+    shift_side(matrix, Side::West);
+    shift_side(matrix, Side::South);
+    shift_side(matrix, Side::East);
+}
+
+fn compute(matrix: &amp;Vec&lt;Vec&lt;char&gt;&gt;) -&gt; usize {
+    let size: usize = matrix.len();
+    let mut ret: usize = 0;
+    for i in 0..size {
+        for j in 0..matrix[i].len() {
+            if matrix[i][j] == 'O' {
+                ret += size;
+                ret -= i
+            }
+        }
     }
-  }
-  if history.contains_key(&amp;key){
-    return history[&amp;key];
-  }
-  history.insert(key, cycle);
-  return -1;
+    return ret;
+}
+
+fn insert_to_history(
+    matrix: &amp;Vec&lt;Vec&lt;char&gt;&gt;,
+    history: &amp;mut HashMap&lt;String, i64&gt;,
+    cycle: i64,
+) -&gt; i64 {
+    let mut key: String = String::from("");
+    for i in 0..matrix.len() {
+        for j in 0..matrix[i].len() {
+            key.push(matrix[i][j]);
+        }
+    }
+    if history.contains_key(&amp;key) {
+        return history[&amp;key];
+    }
+    history.insert(key, cycle);
+    return -1;
 }
 
 fn part1() {
-  let mut matrix = read_file("INPUT");
-  shift_side(&amp;mut matrix, Side::North);
-  println!("Part 1: {}", compute(&amp;matrix));
+    let mut matrix = read_file("INPUT");
+    shift_side(&amp;mut matrix, Side::North);
+    println!("Part 1: {}", compute(&amp;matrix));
 }
 
 fn part2() {
-  let mut matrix = read_file("INPUT");
-  let mut history: HashMap&lt;String, i64&gt; = HashMap::new();
-  let cycles:i64 = 1_000_000_000;
-  for i in 0..cycles{
-    cycle(&amp;mut matrix);
-    let rep: i64 = insert_to_history(&amp;matrix, &amp;mut history, i);
-    if rep != -1{
-      let m: i64 = (1_000_000_000 - rep) % (i - rep) - 1;
-      for _ in 0..m{
+    let mut matrix = read_file("INPUT");
+    let mut history: HashMap&lt;String, i64&gt; = HashMap::new();
+    let cycles: i64 = 1_000_000_000;
+    for i in 0..cycles {
         cycle(&amp;mut matrix);
-      }
-      println!("Part 2: {}", compute(&amp;matrix));
-      return;
+        let rep: i64 = insert_to_history(&amp;matrix, &amp;mut history, i);
+        if rep != -1 {
+            let m: i64 = (1_000_000_000 - rep) % (i - rep) - 1;
+            for _ in 0..m {
+                cycle(&amp;mut matrix);
+            }
+            println!("Part 2: {}", compute(&amp;matrix));
+            return;
+        }
     }
-  }
-  println!("Part 2: {}", compute(&amp;matrix));
+    println!("Part 2: {}", compute(&amp;matrix));
 }
 
 fn main() {
-  println!("Year 2023 day 14 - Parabolic Reflector Dish");
-  part1();
-  part2();
+    println!("Year 2023 day 14 - Parabolic Reflector Dish");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -344,11 +353,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2023-15.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2023-13.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2023-13.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023-15.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -358,11 +367,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2023-15.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2023-13.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2023-13.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023-15.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

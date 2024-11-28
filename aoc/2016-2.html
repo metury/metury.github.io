@@ -166,83 +166,89 @@
 
 const EMPTY: char = '$';
 
-const DIALPAD: [[char; 7]; 7] = [[EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
-                                 [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
-                                 [EMPTY, EMPTY,   '1',   '2',   '3', EMPTY, EMPTY],
-                                 [EMPTY, EMPTY,   '4',   '5',   '6', EMPTY, EMPTY],
-                                 [EMPTY, EMPTY,   '7',   '8',   '9', EMPTY, EMPTY],
-                                 [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
-                                 [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY]];
+const DIALPAD: [[char; 7]; 7] = [
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, '1', '2', '3', EMPTY, EMPTY],
+    [EMPTY, EMPTY, '4', '5', '6', EMPTY, EMPTY],
+    [EMPTY, EMPTY, '7', '8', '9', EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+];
 
-const DIALPAD_ADVANCED: [[char; 7]; 7] = [[EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
-                                          [EMPTY, EMPTY, EMPTY,   '1', EMPTY, EMPTY, EMPTY],
-                                          [EMPTY, EMPTY,   '2',   '3',   '4', EMPTY, EMPTY],
-                                          [EMPTY,   '5',   '6',   '7',   '8',   '9', EMPTY],
-                                          [EMPTY, EMPTY,   'A',   'B',   'C', EMPTY, EMPTY],
-                                          [EMPTY, EMPTY, EMPTY,   'D', EMPTY, EMPTY, EMPTY],
-                                          [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY]];
+const DIALPAD_ADVANCED: [[char; 7]; 7] = [
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, '1', EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, '2', '3', '4', EMPTY, EMPTY],
+    [EMPTY, '5', '6', '7', '8', '9', EMPTY],
+    [EMPTY, EMPTY, 'A', 'B', 'C', EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, 'D', EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+];
 
-const MIDDLE: (usize, usize) = (3,3);
-const MIDDLE_ADVANCED: (usize, usize) = (3,1);
+const MIDDLE: (usize, usize) = (3, 3);
+const MIDDLE_ADVANCED: (usize, usize) = (3, 1);
 
 fn read_file(filepath: &amp;str) -&gt; Vec&lt;String&gt; {
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let lines = binding.split('\n')
-    .filter(|c| c.len() &gt; 0)
-    .map(|c| c.to_string()).collect();
-  lines
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let lines = binding
+        .split('\n')
+        .filter(|c| c.len() &gt; 0)
+        .map(|c| c.to_string())
+        .collect();
+    lines
 }
 
 fn step(start: (usize, usize), pad: &amp;[[char; 7]; 7], c: char) -&gt; (usize, usize) {
-  let mut pos = start;
-  match c {
-    'U' =&gt; pos.0 = pos.0 - 1,
-    'D' =&gt; pos.0 = pos.0 + 1,
-    'L' =&gt; pos.1 = pos.1 - 1,
-    'R' =&gt; pos.1 = pos.1 + 1,
-     _  =&gt; pos = pos,
-   }
-   if pad[pos.0][pos.1] != EMPTY {
-     return pos;
-   }
-   start
+    let mut pos = start;
+    match c {
+        'U' =&gt; pos.0 = pos.0 - 1,
+        'D' =&gt; pos.0 = pos.0 + 1,
+        'L' =&gt; pos.1 = pos.1 - 1,
+        'R' =&gt; pos.1 = pos.1 + 1,
+        _ =&gt; pos = pos,
+    }
+    if pad[pos.0][pos.1] != EMPTY {
+        return pos;
+    }
+    start
 }
 
 fn move_in_dialpad(start: (usize, usize), pad: &amp;[[char; 7]; 7], line: &amp;str) -&gt; (usize, usize) {
-  let mut pos = start;
-  for c in line.chars() {
-    pos = step(pos, pad, c);
-  }
-  pos
+    let mut pos = start;
+    for c in line.chars() {
+        pos = step(pos, pad, c);
+    }
+    pos
 }
 
 fn part1() {
-  let lines = read_file("INPUT");
-  let mut code: String = "".to_string();
-  let mut pos = MIDDLE;
-  for line in lines {
-    pos = move_in_dialpad(pos, &amp;DIALPAD, &amp;line);
-    code.push(DIALPAD[pos.0][pos.1]);
-  }
-  println!("Part 1: {}", code);
+    let lines = read_file("INPUT");
+    let mut code: String = "".to_string();
+    let mut pos = MIDDLE;
+    for line in lines {
+        pos = move_in_dialpad(pos, &amp;DIALPAD, &amp;line);
+        code.push(DIALPAD[pos.0][pos.1]);
+    }
+    println!("Part 1: {}", code);
 }
 
 fn part2() {
-  let lines = read_file("INPUT");
-  let mut code: String = "".to_string();
-  let mut pos = MIDDLE_ADVANCED;
-  for line in lines {
-    pos = move_in_dialpad(pos, &amp;DIALPAD_ADVANCED, &amp;line);
-    code.push(DIALPAD_ADVANCED[pos.0][pos.1]);
-  }
-  println!("Part 2: {}", code);
+    let lines = read_file("INPUT");
+    let mut code: String = "".to_string();
+    let mut pos = MIDDLE_ADVANCED;
+    for line in lines {
+        pos = move_in_dialpad(pos, &amp;DIALPAD_ADVANCED, &amp;line);
+        code.push(DIALPAD_ADVANCED[pos.0][pos.1]);
+    }
+    println!("Part 2: {}", code);
 }
 
 fn main() {
-  println!("Year 2016 day 2 - Bathroom Security");
-  part1();
-  part2();
+    println!("Year 2016 day 2 - Bathroom Security");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -250,11 +256,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2016-3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2016-1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2016-1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2016-3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -264,11 +270,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2016-3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2016-1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2016-1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2016-3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

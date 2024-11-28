@@ -162,240 +162,263 @@
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>We also introduce a minimal number of nodes in one direction, then we rewrite the code so it can work for both parts.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use std::cmp::Reverse;
+<pre><code class="language-rs">use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap};
+use std::fs;
 
 type Grid&lt;T&gt; = Vec&lt;Vec&lt;T&gt;&gt;;
 type Position = (usize, usize);
 
-fn read_file(filepath: &amp;str) -&gt; Grid&lt;usize&gt;{
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let lines = binding.split('\n');
-  let mut grid: Grid&lt;usize&gt; = vec![];
-  for line in lines{
-    let mut grid_line: Vec&lt;usize&gt; = vec!();
-    for c in line.chars(){
-      grid_line.push(c.to_digit(10).unwrap() as usize);
+fn read_file(filepath: &amp;str) -&gt; Grid&lt;usize&gt; {
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let lines = binding.split('\n');
+    let mut grid: Grid&lt;usize&gt; = vec![];
+    for line in lines {
+        let mut grid_line: Vec&lt;usize&gt; = vec![];
+        for c in line.chars() {
+            grid_line.push(c.to_digit(10).unwrap() as usize);
+        }
+        if grid_line.len() &gt; 0 {
+            grid.push(grid_line);
+        }
     }
-    if grid_line.len() &gt; 0{
-      grid.push(grid_line);
-    }
-  }
-  return grid;
+    return grid;
 }
 
 #[derive(Clone, Copy, Eq, Hash, PartialEq, Ord, PartialOrd)]
-enum Direction{
-  Up,
-  Down,
-  Right,
-  Left,
+enum Direction {
+    Up,
+    Down,
+    Right,
+    Left,
 }
 
 #[derive(Clone, Copy, Eq, Hash, PartialEq, Ord, PartialOrd)]
 struct State {
-  position: Position,
-  remaining_up: usize,
-  remaining_right: usize,
-  remaining_down: usize,
-  remaining_left: usize,
-  direction: Direction,
-  moves_in_current_direction: usize,
+    position: Position,
+    remaining_up: usize,
+    remaining_right: usize,
+    remaining_down: usize,
+    remaining_left: usize,
+    direction: Direction,
+    moves_in_current_direction: usize,
 }
 
 fn get_neighbouring_states(state: State, map: &amp;Grid&lt;usize&gt;, min: usize, max: usize) -&gt; Vec&lt;State&gt; {
-  let mut neighbours: Vec&lt;State&gt; = vec!();
+    let mut neighbours: Vec&lt;State&gt; = vec![];
 
-  if state.moves_in_current_direction &lt; min {
-  match state.direction {
-      Direction::Up =&gt; {
-        if state.position.0 &gt;= 1 {
-          neighbours.push(State {
-              position: (state.position.0 - 1, state.position.1),
-              remaining_up: state.remaining_up - 1,
-              remaining_right: max,
-              remaining_down: max,
-              remaining_left: max,
-              direction: Direction::Up,
-              moves_in_current_direction: state.moves_in_current_direction + 1,
-          });
+    if state.moves_in_current_direction &lt; min {
+        match state.direction {
+            Direction::Up =&gt; {
+                if state.position.0 &gt;= 1 {
+                    neighbours.push(State {
+                        position: (state.position.0 - 1, state.position.1),
+                        remaining_up: state.remaining_up - 1,
+                        remaining_right: max,
+                        remaining_down: max,
+                        remaining_left: max,
+                        direction: Direction::Up,
+                        moves_in_current_direction: state.moves_in_current_direction + 1,
+                    });
+                }
+                return neighbours;
+            }
+            Direction::Right =&gt; {
+                if state.position.1 &lt; map[0].len() - 1 {
+                    neighbours.push(State {
+                        position: (state.position.0, state.position.1 + 1),
+                        remaining_up: max,
+                        remaining_right: state.remaining_right - 1,
+                        remaining_down: max,
+                        remaining_left: max,
+                        direction: Direction::Right,
+                        moves_in_current_direction: state.moves_in_current_direction + 1,
+                    });
+                }
+                return neighbours;
+            }
+            Direction::Down =&gt; {
+                if state.position.0 &lt; map.len() - 1 {
+                    neighbours.push(State {
+                        position: (state.position.0 + 1, state.position.1),
+                        remaining_up: max,
+                        remaining_right: max,
+                        remaining_down: state.remaining_down - 1,
+                        remaining_left: max,
+                        direction: Direction::Down,
+                        moves_in_current_direction: state.moves_in_current_direction + 1,
+                    });
+                }
+                return neighbours;
+            }
+            Direction::Left =&gt; {
+                if state.position.1 &gt;= 1 {
+                    neighbours.push(State {
+                        position: (state.position.0, state.position.1 - 1),
+                        remaining_up: max,
+                        remaining_right: max,
+                        remaining_down: max,
+                        remaining_left: state.remaining_left - 1,
+                        direction: Direction::Left,
+                        moves_in_current_direction: state.moves_in_current_direction + 1,
+                    });
+                }
+                return neighbours;
+            }
         }
-        return neighbours;
-        }
-      Direction::Right =&gt; {
-        if state.position.1 &lt; map[0].len() - 1 {
-          neighbours.push(State {
-              position: (state.position.0, state.position.1 + 1),
-              remaining_up: max,
-              remaining_right: state.remaining_right - 1,
-              remaining_down: max,
-              remaining_left: max,
-              direction: Direction::Right,
-              moves_in_current_direction: state.moves_in_current_direction + 1,
-          });
-        }
-        return neighbours;
-      }
-      Direction::Down =&gt; {
-        if state.position.0 &lt; map.len() - 1 {
-          neighbours.push(State {
-              position: (state.position.0 + 1, state.position.1),
-              remaining_up: max,
-              remaining_right: max,
-              remaining_down: state.remaining_down - 1,
-              remaining_left: max,
-              direction: Direction::Down,
-              moves_in_current_direction: state.moves_in_current_direction + 1,
-          });
-        }
-        return neighbours;
-      }
-      Direction::Left =&gt; {
-        if state.position.1 &gt;= 1 {
-          neighbours.push(State {
-              position: (state.position.0, state.position.1 - 1),
-              remaining_up: max,
-              remaining_right: max,
-              remaining_down: max,
-              remaining_left: state.remaining_left - 1,
-              direction: Direction::Left,
-              moves_in_current_direction: state.moves_in_current_direction + 1,
-          });
-        }
-        return neighbours;
-      }
     }
-  }
 
-  if state.remaining_up &gt;= 1 &amp;&amp; state.position.0 &gt;= 1 &amp;&amp; state.direction != Direction::Down {
-    neighbours.push(State {
-        position: (state.position.0 - 1, state.position.1),
-        remaining_up: state.remaining_up - 1,
+    if state.remaining_up &gt;= 1 &amp;&amp; state.position.0 &gt;= 1 &amp;&amp; state.direction != Direction::Down {
+        neighbours.push(State {
+            position: (state.position.0 - 1, state.position.1),
+            remaining_up: state.remaining_up - 1,
+            remaining_right: max,
+            remaining_down: max,
+            remaining_left: max,
+            direction: Direction::Up,
+            moves_in_current_direction: if state.direction == Direction::Up {
+                state.moves_in_current_direction + 1
+            } else {
+                1
+            },
+        });
+    }
+
+    if state.remaining_right &gt;= 1
+        &amp;&amp; state.position.1 &lt; map[0].len() - 1
+        &amp;&amp; state.direction != Direction::Left
+    {
+        neighbours.push(State {
+            position: (state.position.0, state.position.1 + 1),
+            remaining_up: max,
+            remaining_right: state.remaining_right - 1,
+            remaining_down: max,
+            remaining_left: max,
+            direction: Direction::Right,
+            moves_in_current_direction: if state.direction == Direction::Right {
+                state.moves_in_current_direction + 1
+            } else {
+                1
+            },
+        });
+    }
+
+    if state.remaining_down &gt;= 1
+        &amp;&amp; state.position.0 &lt; map.len() - 1
+        &amp;&amp; state.direction != Direction::Up
+    {
+        neighbours.push(State {
+            position: (state.position.0 + 1, state.position.1),
+            remaining_up: max,
+            remaining_right: max,
+            remaining_down: state.remaining_down - 1,
+            remaining_left: max,
+            direction: Direction::Down,
+            moves_in_current_direction: if state.direction == Direction::Down {
+                state.moves_in_current_direction + 1
+            } else {
+                1
+            },
+        });
+    }
+
+    if state.remaining_left &gt;= 1 &amp;&amp; state.position.1 &gt;= 1 &amp;&amp; state.direction != Direction::Right {
+        neighbours.push(State {
+            position: (state.position.0, state.position.1 - 1),
+            remaining_up: max,
+            remaining_right: max,
+            remaining_down: max,
+            remaining_left: state.remaining_left - 1,
+            direction: Direction::Left,
+            moves_in_current_direction: if state.direction == Direction::Left {
+                state.moves_in_current_direction + 1
+            } else {
+                1
+            },
+        });
+    }
+
+    neighbours
+}
+
+fn get_cost(
+    map: &amp;Grid&lt;usize&gt;,
+    source: Position,
+    destination: Position,
+    min: usize,
+    max: usize,
+) -&gt; usize {
+    let mut costs: HashMap&lt;State, usize&gt; = HashMap::new();
+    let mut heap: BinaryHeap&lt;Reverse&lt;(usize, State)&gt;&gt; = BinaryHeap::new();
+
+    let start_state_right = State {
+        position: source,
+        remaining_up: max,
         remaining_right: max,
         remaining_down: max,
         remaining_left: max,
-        direction: Direction::Up,
-        moves_in_current_direction: if state.direction == Direction::Up {
-           state.moves_in_current_direction + 1
-        } else {
-           1
-        },
-    });
-  }
+        direction: Direction::Right,
+        moves_in_current_direction: 0,
+    };
+    let start_state_down = State {
+        position: source,
+        remaining_up: max,
+        remaining_right: max,
+        remaining_down: max,
+        remaining_left: max,
+        direction: Direction::Down,
+        moves_in_current_direction: 0,
+    };
 
-  if state.remaining_right &gt;= 1
-  &amp;&amp; state.position.1 &lt; map[0].len() - 1
-  &amp;&amp; state.direction != Direction::Left {
-    neighbours.push(State {
-      position: (state.position.0, state.position.1 + 1),
-      remaining_up: max,
-      remaining_right: state.remaining_right - 1,
-      remaining_down: max,
-      remaining_left: max,
-      direction: Direction::Right,
-      moves_in_current_direction: if state.direction == Direction::Right {
-         state.moves_in_current_direction + 1
-      } else { 1 }, });
-  }
+    costs.insert(start_state_right, 0);
+    costs.insert(start_state_down, 0);
+    heap.push(Reverse((0, start_state_right)));
+    heap.push(Reverse((0, start_state_down)));
 
-  if state.remaining_down &gt;= 1
-  &amp;&amp; state.position.0 &lt; map.len() - 1
-  &amp;&amp; state.direction != Direction::Up {
-    neighbours.push(State {
-      position: (state.position.0 + 1, state.position.1),
-      remaining_up: max,
-      remaining_right: max,
-      remaining_down: state.remaining_down - 1,
-      remaining_left: max,
-      direction: Direction::Down,
-      moves_in_current_direction: if state.direction == Direction::Down {
-         state.moves_in_current_direction + 1
-      } else { 1 }, });
-  }
+    while let Some(Reverse((curr_cost, curr_state))) = heap.pop() {
+        if curr_state.position == destination &amp;&amp; curr_state.moves_in_current_direction &gt;= min {
+            return curr_cost;
+        }
 
-  if state.remaining_left &gt;= 1 &amp;&amp; state.position.1 &gt;= 1 &amp;&amp; state.direction != Direction::Right {
-    neighbours.push(State {
-      position: (state.position.0, state.position.1 - 1),
-      remaining_up: max,
-      remaining_right: max,
-      remaining_down: max,
-      remaining_left: state.remaining_left - 1,
-      direction: Direction::Left,
-      moves_in_current_direction: if state.direction == Direction::Left {
-         state.moves_in_current_direction + 1
-      } else { 1 }, });
-  }
+        if curr_cost &gt; *costs.get(&amp;curr_state).unwrap_or(&amp;usize::MAX) {
+            continue;
+        }
 
-  neighbours
-}
+        let neighbours = get_neighbouring_states(curr_state, map, min, max);
 
-fn get_cost(map: &amp;Grid&lt;usize&gt;, source: Position, destination: Position, min: usize, max: usize) -&gt; usize {
-  let mut costs: HashMap&lt;State, usize&gt; = HashMap::new();
-  let mut heap: BinaryHeap&lt;Reverse&lt;(usize, State)&gt;&gt; = BinaryHeap::new();
-
-  let start_state_right = State {
-    position: source,
-    remaining_up: max,
-    remaining_right: max,
-    remaining_down: max,
-    remaining_left: max,
-    direction: Direction::Right,
-    moves_in_current_direction: 0,
-  };
-  let start_state_down = State {
-    position: source,
-    remaining_up: max,
-    remaining_right: max,
-    remaining_down: max,
-    remaining_left: max,
-    direction: Direction::Down,
-    moves_in_current_direction: 0,
-  };
-
-  costs.insert(start_state_right, 0);
-  costs.insert(start_state_down, 0);
-  heap.push(Reverse((0, start_state_right)));
-  heap.push(Reverse((0, start_state_down)));
-
-  while let Some(Reverse((curr_cost, curr_state))) = heap.pop() {
-    if curr_state.position == destination &amp;&amp; curr_state.moves_in_current_direction &gt;= min {
-      return curr_cost;
+        for neighbour in neighbours {
+            let next_pos = neighbour.position;
+            let next_cost = curr_cost + map[next_pos.0][next_pos.1];
+            if next_cost &lt; *costs.get(&amp;neighbour).unwrap_or(&amp;usize::MAX) {
+                heap.push(Reverse((next_cost, neighbour)));
+                costs.insert(neighbour, next_cost);
+            }
+        }
     }
-
-    if curr_cost &gt; *costs.get(&amp;curr_state).unwrap_or(&amp;usize::MAX) {
-      continue;
-    }
-
-    let neighbours = get_neighbouring_states(curr_state, map, min, max);
-
-    for neighbour in neighbours {
-      let next_pos = neighbour.position;
-      let next_cost = curr_cost + map[next_pos.0][next_pos.1];
-      if next_cost &lt; *costs.get(&amp;neighbour).unwrap_or(&amp;usize::MAX) {
-        heap.push(Reverse((next_cost, neighbour)));
-        costs.insert(neighbour, next_cost);
-      }
-    }
-  }
-  usize::MAX
+    usize::MAX
 }
 
 fn part1() {
-  let grid = read_file("INPUT");
-  println!("Part 1: {}", get_cost(&amp;grid, (0,0), (grid.len() - 1, grid.len() - 1), 0, 3));
+    let grid = read_file("INPUT");
+    println!(
+        "Part 1: {}",
+        get_cost(&amp;grid, (0, 0), (grid.len() - 1, grid.len() - 1), 0, 3)
+    );
 }
 
 fn part2() {
-  let grid = read_file("INPUT");
-  println!("Part 2: {}", get_cost(&amp;grid, (0,0), (grid.len() - 1, grid.len() - 1), 4, 10));
+    let grid = read_file("INPUT");
+    println!(
+        "Part 2: {}",
+        get_cost(&amp;grid, (0, 0), (grid.len() - 1, grid.len() - 1), 4, 10)
+    );
 }
 
 fn main() {
-  println!("Year 2023 day 17 - Clumsy Crucible");
-  part1();
-  part2();
+    println!("Year 2023 day 17 - Clumsy Crucible");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -403,11 +426,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2023-18.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2023-16.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2023-16.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023-18.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -417,11 +440,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2023-18.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2023-16.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2023-16.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023-18.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -162,56 +162,63 @@
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>In the second part we go through all posibilities and test if they are divisible or not. If they are add the division to the total and break the loop for the line.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use std::cmp::{max, min};
+<pre><code class="language-rs">use std::cmp::{max, min};
+use std::fs;
 use std::iter::zip;
 
 fn read_file(filepath: &amp;str) -&gt; Vec&lt;Vec&lt;i64&gt;&gt; {
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let numbers = binding.split('\n')
-    .filter(|c| c.len() &gt; 0)
-    .map(|c| c.split('\t')
-      .map(|val| val.parse::&lt;i64&gt;().unwrap()).collect())
-    .collect();
-  numbers
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let numbers = binding
+        .split('\n')
+        .filter(|c| c.len() &gt; 0)
+        .map(|c| {
+            c.split('\t')
+                .map(|val| val.parse::&lt;i64&gt;().unwrap())
+                .collect()
+        })
+        .collect();
+    numbers
 }
 
 fn part1() {
-  let numbers = read_file("INPUT");
-  let maximums: Vec&lt;i64&gt; = numbers.clone().into_iter()
-    .map(|vec| vec.into_iter().fold(0, |acc, x| max(acc, x)))
-    .collect();
-  let minimums: Vec&lt;i64&gt; = numbers.into_iter()
-    .map(|vec| vec.into_iter().fold(i64::MAX, |acc, x| min(acc, x)))
-    .collect();
-  let res = zip(minimums, maximums).map(|(a,b)| b - a).sum::&lt;i64&gt;();
-  println!("Part 1: {}", res);
+    let numbers = read_file("INPUT");
+    let maximums: Vec&lt;i64&gt; = numbers
+        .clone()
+        .into_iter()
+        .map(|vec| vec.into_iter().fold(0, |acc, x| max(acc, x)))
+        .collect();
+    let minimums: Vec&lt;i64&gt; = numbers
+        .into_iter()
+        .map(|vec| vec.into_iter().fold(i64::MAX, |acc, x| min(acc, x)))
+        .collect();
+    let res = zip(minimums, maximums).map(|(a, b)| b - a).sum::&lt;i64&gt;();
+    println!("Part 1: {}", res);
 }
 
 fn part2() {
-  let numbers = read_file("INPUT");
-  let mut total: i64 = 0;
-  for num_line in numbers {
-    'line: for i in 0 .. num_line.len() {
-      for j in i + 1 .. num_line.len() {
-        if num_line[i] % num_line[j] == 0 {
-          total += num_line[i] / num_line[j];
-          break 'line;
-        } else if num_line[j] % num_line[i] == 0 {
-          total += num_line[j] / num_line[i];
-          break 'line;
+    let numbers = read_file("INPUT");
+    let mut total: i64 = 0;
+    for num_line in numbers {
+        'line: for i in 0..num_line.len() {
+            for j in i + 1..num_line.len() {
+                if num_line[i] % num_line[j] == 0 {
+                    total += num_line[i] / num_line[j];
+                    break 'line;
+                } else if num_line[j] % num_line[i] == 0 {
+                    total += num_line[j] / num_line[i];
+                    break 'line;
+                }
+            }
         }
-      }
     }
-  }
-  println!("Part 2: {}", total);
+    println!("Part 2: {}", total);
 }
 
 fn main() {
-  println!("Year 2017 day 2 - Corruption Checksum");
-  part1();
-  part2();
+    println!("Year 2017 day 2 - Corruption Checksum");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -219,11 +226,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2017.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2017-1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2017-1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2016.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -233,11 +240,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2017.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2017-1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2017-1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2016.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

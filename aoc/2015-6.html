@@ -162,116 +162,129 @@
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>In the second part we redefine the instructions and compute the sum.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use regex::Regex;
+<pre><code class="language-rs">use regex::Regex;
+use std::fs;
 
 type Grid&lt;T&gt; = Vec&lt;Vec&lt;T&gt;&gt;;
 type Pos = (usize, usize);
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd)]
 enum InstructionType {
-  TurnOff,
-  TurnOn,
-  Toggle,
+    TurnOff,
+    TurnOn,
+    Toggle,
 }
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd)]
 struct Instruction {
-  start: Pos,
-  end: Pos,
-  instr_type: InstructionType,
+    start: Pos,
+    end: Pos,
+    instr_type: InstructionType,
 }
 
 fn read_file(filepath: &amp;str) -&gt; Vec&lt;Instruction&gt; {
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let mut instructions: Vec&lt;Instruction&gt; = vec!();
-  let input = Regex::new(r"(turn off|turn on|toggle) ([0-9]+),([0-9]+) through ([0-9]+),([0-9]+)").unwrap();
-  for (_, [ty, s1, s2, e1, e2]) in input.captures_iter(&amp;binding).map(|c| c.extract()) {
-    let instr_type: InstructionType;
-    if ty == "turn off" {
-      instr_type = InstructionType::TurnOff;
-    } else if ty == "turn on" {
-      instr_type = InstructionType::TurnOn;
-    } else {
-      instr_type = InstructionType::Toggle;
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let mut instructions: Vec&lt;Instruction&gt; = vec![];
+    let input =
+        Regex::new(r"(turn off|turn on|toggle) ([0-9]+),([0-9]+) through ([0-9]+),([0-9]+)")
+            .unwrap();
+    for (_, [ty, s1, s2, e1, e2]) in input.captures_iter(&amp;binding).map(|c| c.extract()) {
+        let instr_type: InstructionType;
+        if ty == "turn off" {
+            instr_type = InstructionType::TurnOff;
+        } else if ty == "turn on" {
+            instr_type = InstructionType::TurnOn;
+        } else {
+            instr_type = InstructionType::Toggle;
+        }
+        instructions.push(Instruction {
+            instr_type: instr_type,
+            start: (s1.parse().unwrap(), s2.parse().unwrap()),
+            end: (e1.parse().unwrap(), e2.parse().unwrap()),
+        });
     }
-    instructions.push(Instruction{instr_type: instr_type,
-      start: (s1.parse().unwrap(), s2.parse().unwrap()),
-      end: (e1.parse().unwrap(), e2.parse().unwrap()),
-    });
-  }
-  instructions
+    instructions
 }
 
 fn part1() {
-  let instructions = read_file("INPUT");
-  let mut grid: Grid&lt;bool&gt; = vec![vec!(false; 1000); 1000];
-  for ins in instructions {
-    match ins.instr_type {
-      InstructionType::Toggle =&gt; {
-        for i in ins.start.0 .. ins.end.0 + 1 {
-          for j in ins.start.1 .. ins.end.1 + 1 {
-            grid[i][j] = !grid[i][j];
-          }
+    let instructions = read_file("INPUT");
+    let mut grid: Grid&lt;bool&gt; = vec![vec!(false; 1000); 1000];
+    for ins in instructions {
+        match ins.instr_type {
+            InstructionType::Toggle =&gt; {
+                for i in ins.start.0..ins.end.0 + 1 {
+                    for j in ins.start.1..ins.end.1 + 1 {
+                        grid[i][j] = !grid[i][j];
+                    }
+                }
+            }
+            InstructionType::TurnOff =&gt; {
+                for i in ins.start.0..ins.end.0 + 1 {
+                    for j in ins.start.1..ins.end.1 + 1 {
+                        grid[i][j] = false;
+                    }
+                }
+            }
+            InstructionType::TurnOn =&gt; {
+                for i in ins.start.0..ins.end.0 + 1 {
+                    for j in ins.start.1..ins.end.1 + 1 {
+                        grid[i][j] = true;
+                    }
+                }
+            }
         }
-      },
-      InstructionType::TurnOff =&gt; {
-        for i in ins.start.0 .. ins.end.0 + 1 {
-          for j in ins.start.1 .. ins.end.1 + 1 {
-            grid[i][j] = false;
-          }
-        }
-      },
-      InstructionType::TurnOn =&gt; {
-        for i in ins.start.0 .. ins.end.0 + 1{
-          for j in ins.start.1 .. ins.end.1 + 1 {
-            grid[i][j] = true;
-          }
-        }
-      },
     }
-  }
-  let lit_up: u64 = grid.into_iter().map(|vec| vec.into_iter().map(|x| if x {1} else {0}).sum::&lt;u64&gt;()).sum();
-  println!("Part 1: {}", lit_up);
+    let lit_up: u64 = grid
+        .into_iter()
+        .map(|vec| vec.into_iter().map(|x| if x { 1 } else { 0 }).sum::&lt;u64&gt;())
+        .sum();
+    println!("Part 1: {}", lit_up);
 }
 
 fn part2() {
-  let instructions = read_file("INPUT");
-  let mut grid: Grid&lt;u64&gt; = vec![vec!(0_u64; 1000); 1000];
-  for ins in instructions {
-    match ins.instr_type {
-      InstructionType::Toggle =&gt; {
-        for i in ins.start.0 .. ins.end.0 + 1 {
-          for j in ins.start.1 .. ins.end.1 + 1 {
-            grid[i][j] += 2;
-          }
+    let instructions = read_file("INPUT");
+    let mut grid: Grid&lt;u64&gt; = vec![vec!(0_u64; 1000); 1000];
+    for ins in instructions {
+        match ins.instr_type {
+            InstructionType::Toggle =&gt; {
+                for i in ins.start.0..ins.end.0 + 1 {
+                    for j in ins.start.1..ins.end.1 + 1 {
+                        grid[i][j] += 2;
+                    }
+                }
+            }
+            InstructionType::TurnOff =&gt; {
+                for i in ins.start.0..ins.end.0 + 1 {
+                    for j in ins.start.1..ins.end.1 + 1 {
+                        grid[i][j] = if grid[i][j] &gt; 0 {
+                            grid[i][j] - 1
+                        } else {
+                            grid[i][j]
+                        };
+                    }
+                }
+            }
+            InstructionType::TurnOn =&gt; {
+                for i in ins.start.0..ins.end.0 + 1 {
+                    for j in ins.start.1..ins.end.1 + 1 {
+                        grid[i][j] += 1;
+                    }
+                }
+            }
         }
-      },
-      InstructionType::TurnOff =&gt; {
-        for i in ins.start.0 .. ins.end.0 + 1 {
-          for j in ins.start.1 .. ins.end.1 + 1 {
-            grid[i][j] = if grid[i][j] &gt; 0 {grid[i][j] - 1} else {grid[i][j]};
-          }
-        }
-      },
-      InstructionType::TurnOn =&gt; {
-        for i in ins.start.0 .. ins.end.0 + 1{
-          for j in ins.start.1 .. ins.end.1 + 1 {
-            grid[i][j] += 1;
-          }
-        }
-      },
     }
-  }
-  let lit_up: u64 = grid.into_iter().map(|vec| vec.into_iter().sum::&lt;u64&gt;()).sum();
-  println!("Part 2: {}", lit_up);
+    let lit_up: u64 = grid
+        .into_iter()
+        .map(|vec| vec.into_iter().sum::&lt;u64&gt;())
+        .sum();
+    println!("Part 2: {}", lit_up);
 }
 
 fn main() {
-  println!("Year 2015 day 6 - Probably a Fire Hazard");
-  part1();
-  part2();
+    println!("Year 2015 day 6 - Probably a Fire Hazard");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -279,11 +292,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2015-7.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2015-5.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2015-5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2015-7.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -293,11 +306,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2015-7.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2015-5.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2015-5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2015-7.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

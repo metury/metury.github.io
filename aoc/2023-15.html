@@ -162,106 +162,104 @@
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>In the second part we create  <code>hash_map</code> from vector and linked list. Then proceed the given instructions wit hthe ascii hash.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use std::collections::LinkedList;
+<pre><code class="language-rs">use std::collections::LinkedList;
+use std::fs;
 
-fn read_file(filepath: &amp;str) -&gt; Vec&lt;String&gt;{
-  let contents = fs::read_to_string(filepath);
-  let mut strings: Vec&lt;String&gt; = vec!();
-  let binding = contents.expect("REASON");
-  let lines = binding.split('\n');
-  for line in lines{
-    let inputs = line.split(',');
-    for input in inputs{
-      if input != ""{
-        strings.push(input.to_string());
-      }
+fn read_file(filepath: &amp;str) -&gt; Vec&lt;String&gt; {
+    let contents = fs::read_to_string(filepath);
+    let mut strings: Vec&lt;String&gt; = vec![];
+    let binding = contents.expect("REASON");
+    let lines = binding.split('\n');
+    for line in lines {
+        let inputs = line.split(',');
+        for input in inputs {
+            if input != "" {
+                strings.push(input.to_string());
+            }
+        }
     }
-  }
-  return strings;
+    return strings;
 }
 
-fn ascii_hash(string: &amp;str) -&gt; i32{
-  let mut hash: i32 = 0;
-  for c in string.chars(){
-    let ascii = c as i32;
-    hash = ((hash + ascii) * 17) % 256;
-  }
-  return hash;
-}
-
-fn insert_to_map(hash_map: &amp;mut Vec&lt;LinkedList&lt;(String, i32)&gt;&gt;, lens: i32, key: &amp;str){
-  let hash = ascii_hash(key) as usize;
-  for element in &amp;mut hash_map[hash]{
-    if element.0 == key{
-      element.1 = lens;
-      return;
+fn ascii_hash(string: &amp;str) -&gt; i32 {
+    let mut hash: i32 = 0;
+    for c in string.chars() {
+        let ascii = c as i32;
+        hash = ((hash + ascii) * 17) % 256;
     }
-  }
-  hash_map[hash].push_back((key.to_string(), lens));
+    return hash;
 }
 
-fn remove_from_map(hash_map: &amp;mut Vec&lt;LinkedList&lt;(String, i32)&gt;&gt;, key: &amp;str){
-  let hash = ascii_hash(key) as usize;
-  let mut j: usize = 0;
-  for element in &amp;mut hash_map[hash]{
-    if element.0 == key{
-      let mut last = hash_map[hash].split_off(j);
-      last.pop_front();
-      hash_map[hash].append(&amp;mut last);
-      return;
+fn insert_to_map(hash_map: &amp;mut Vec&lt;LinkedList&lt;(String, i32)&gt;&gt;, lens: i32, key: &amp;str) {
+    let hash = ascii_hash(key) as usize;
+    for element in &amp;mut hash_map[hash] {
+        if element.0 == key {
+            element.1 = lens;
+            return;
+        }
     }
-    j += 1;
-  }
+    hash_map[hash].push_back((key.to_string(), lens));
 }
 
-fn init_hash_map(size: i32) -&gt; Vec&lt;LinkedList&lt;(String, i32)&gt;&gt;{
-  let mut hash_map: Vec&lt;LinkedList&lt;(String, i32)&gt;&gt; = vec!();
-  for _ in 0..size{
-    hash_map.push(LinkedList::new());
-  }
-  return hash_map;
+fn remove_from_map(hash_map: &amp;mut Vec&lt;LinkedList&lt;(String, i32)&gt;&gt;, key: &amp;str) {
+    let hash = ascii_hash(key) as usize;
+    let mut j: usize = 0;
+    for element in &amp;mut hash_map[hash] {
+        if element.0 == key {
+            let mut last = hash_map[hash].split_off(j);
+            last.pop_front();
+            hash_map[hash].append(&amp;mut last);
+            return;
+        }
+        j += 1;
+    }
 }
 
+fn init_hash_map(size: i32) -&gt; Vec&lt;LinkedList&lt;(String, i32)&gt;&gt; {
+    let mut hash_map: Vec&lt;LinkedList&lt;(String, i32)&gt;&gt; = vec![];
+    for _ in 0..size {
+        hash_map.push(LinkedList::new());
+    }
+    return hash_map;
+}
 
 fn part1() {
-  let strings = read_file("INPUT");
-  let mut total = 0;
-  for string in strings{
-    total += ascii_hash(&amp;string);
-  }
-  println!("Part 1: {}", total);
+    let strings = read_file("INPUT");
+    let mut total = 0;
+    for string in strings {
+        total += ascii_hash(&amp;string);
+    }
+    println!("Part 1: {}", total);
 }
 
 fn part2() {
-  let mut hash_map = init_hash_map(256);
-  let strings = read_file("INPUT");
-  let mut total = 0;
-  for string in strings{
-    if string.chars().nth(string.len() - 1) == Some('-'){
-      let key = &amp;string[0..string.len() - 1];
-      remove_from_map(&amp;mut hash_map, key);
+    let mut hash_map = init_hash_map(256);
+    let strings = read_file("INPUT");
+    let mut total = 0;
+    for string in strings {
+        if string.chars().nth(string.len() - 1) == Some('-') {
+            let key = &amp;string[0..string.len() - 1];
+            remove_from_map(&amp;mut hash_map, key);
+        } else if string.chars().nth(string.len() - 2) == Some('=') {
+            let lens = string.chars().nth(string.len() - 1).unwrap() as i32 - '0' as i32;
+            let key = &amp;string[0..string.len() - 2];
+            insert_to_map(&amp;mut hash_map, lens, key);
+        }
     }
-    else if string.chars().nth(string.len() - 2) == Some('='){
-      let lens = string.chars().nth(string.len() - 1).unwrap() as i32 - '0' as i32;
-      let key = &amp;string[0..string.len() - 2];
-      insert_to_map(&amp;mut hash_map, lens, key);
+    for i in 0..hash_map.len() {
+        let mut j = 0;
+        for element in &amp;hash_map[i] {
+            total += (i + 1) * (j + 1) * (element.1 as usize);
+            j += 1;
+        }
     }
-  }
-  for i in 0..hash_map.len(){
-    let mut j = 0;
-    for element in &amp;hash_map[i]{
-      total += (i + 1) * (j + 1) * (element.1 as usize);
-      j += 1;
-    }
-  }
-  println!("Part 2: {}", total);
+    println!("Part 2: {}", total);
 }
 
 fn main() {
-  println!("Year 2023 day 15 - Lens Library");
-  part1();
-  part2();
+    println!("Year 2023 day 15 - Lens Library");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -269,11 +267,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2023-16.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2023-14.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2023-14.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023-16.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -283,11 +281,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2023-16.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2023-14.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2023-14.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023-16.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

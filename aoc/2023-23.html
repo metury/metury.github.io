@@ -167,8 +167,8 @@
 </ol>
 <p>In my code I just used the brute force, because after a lunch the result was already processed.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use std::collections::HashSet;
+<pre><code class="language-rs">use std::collections::HashSet;
+use std::fs;
 
 const EMPTY: char = '.';
 const NON_EMPTY: char = '#';
@@ -177,99 +177,111 @@ type Grid&lt;T&gt; = Vec&lt;Vec&lt;T&gt;&gt;;
 type Position = (usize, usize);
 
 fn read_file(filepath: &amp;str) -&gt; Grid&lt;char&gt; {
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let lines = binding.split('\n');
-  let mut map: Grid&lt;char&gt; = vec![];
-  for line in lines{
-    let map_line: Vec&lt;char&gt; = line.chars().collect();
-    if map_line.len() &gt; 0 {
-      map.push(map_line);
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let lines = binding.split('\n');
+    let mut map: Grid&lt;char&gt; = vec![];
+    for line in lines {
+        let map_line: Vec&lt;char&gt; = line.chars().collect();
+        if map_line.len() &gt; 0 {
+            map.push(map_line);
+        }
     }
-  }
-  map
+    map
 }
 
 fn find_start_end(map: &amp;Grid&lt;char&gt;) -&gt; (Position, Position) {
-  let mut start: Position = (0,0);
-  let mut end: Position = (0,0);
-  for i in 0 .. map[0].len() {
-    if map[0][i] == EMPTY {
-      start = (0, i);
-      break;
+    let mut start: Position = (0, 0);
+    let mut end: Position = (0, 0);
+    for i in 0..map[0].len() {
+        if map[0][i] == EMPTY {
+            start = (0, i);
+            break;
+        }
     }
-  }
-  for i in 0 .. map[map.len() - 1].len() {
-    if map[map.len() - 1][i] == EMPTY {
-      end = (map.len() - 1, i);
-      break;
+    for i in 0..map[map.len() - 1].len() {
+        if map[map.len() - 1][i] == EMPTY {
+            end = (map.len() - 1, i);
+            break;
+        }
     }
-  }
-  (start, end)
+    (start, end)
 }
 
 fn add(a: Position, b: (i8, i8)) -&gt; Position {
-  ((a.0 as i64 + b.0 as i64) as usize, (a.1 as i64 + b.1 as i64) as usize)
+    (
+        (a.0 as i64 + b.0 as i64) as usize,
+        (a.1 as i64 + b.1 as i64) as usize,
+    )
 }
 
 fn step(map: &amp;Grid&lt;char&gt;, position: Position, ignore_slopes: bool) -&gt; Vec&lt;Position&gt; {
-  let mut positions: Vec&lt;Position&gt; = vec!();
-  const LEN: usize = 4;
-  let neighbors: [(i8, i8); LEN] = [(0,-1), (0,1), (1,0), (-1,0)];
-  let slopes: [char; LEN] = ['&lt;', '&gt;', 'v', '^'];
-  for i in 0 .. LEN {
-    let pos: Position = add(position, neighbors[i]);
-    if pos.0 &lt; map.len() &amp;&amp; pos.1 &lt; map[pos.0].len() {
-      if ignore_slopes &amp;&amp; map[pos.0][pos.1] != NON_EMPTY {
-        positions.push(pos);
-      }
-      else if !ignore_slopes &amp;&amp; (map[pos.0][pos.1] == EMPTY || map[pos.0][pos.1] == slopes[i]) {
-        positions.push(pos);
-      }
+    let mut positions: Vec&lt;Position&gt; = vec![];
+    const LEN: usize = 4;
+    let neighbors: [(i8, i8); LEN] = [(0, -1), (0, 1), (1, 0), (-1, 0)];
+    let slopes: [char; LEN] = ['&lt;', '&gt;', 'v', '^'];
+    for i in 0..LEN {
+        let pos: Position = add(position, neighbors[i]);
+        if pos.0 &lt; map.len() &amp;&amp; pos.1 &lt; map[pos.0].len() {
+            if ignore_slopes &amp;&amp; map[pos.0][pos.1] != NON_EMPTY {
+                positions.push(pos);
+            } else if !ignore_slopes
+                &amp;&amp; (map[pos.0][pos.1] == EMPTY || map[pos.0][pos.1] == slopes[i])
+            {
+                positions.push(pos);
+            }
+        }
     }
-  }
-  positions
+    positions
 }
 
-fn longest_path(map: &amp;Grid&lt;char&gt;, visited: &amp;mut HashSet&lt;Position&gt;, pos: Position, max: &amp;mut u64, len: u64, end: &amp;Position, ignore_slopes: bool) {
-  if pos == *end {
-    if *max &lt; len {
-      *max = len;
+fn longest_path(
+    map: &amp;Grid&lt;char&gt;,
+    visited: &amp;mut HashSet&lt;Position&gt;,
+    pos: Position,
+    max: &amp;mut u64,
+    len: u64,
+    end: &amp;Position,
+    ignore_slopes: bool,
+) {
+    if pos == *end {
+        if *max &lt; len {
+            *max = len;
+        }
+        return;
     }
-    return;
-  }
-  let neighbors = step(map, pos, ignore_slopes);
-  for n in neighbors {
-    if !visited.contains(&amp;n) {
-      visited.insert(n);
-      longest_path(map, visited, n, max, len+1, end, ignore_slopes);
-      visited.remove(&amp;n);
+    let neighbors = step(map, pos, ignore_slopes);
+    for n in neighbors {
+        if !visited.contains(&amp;n) {
+            visited.insert(n);
+            longest_path(map, visited, n, max, len + 1, end, ignore_slopes);
+            visited.remove(&amp;n);
+        }
     }
-  }
 }
 
 fn part1() {
-  let map = read_file("INPUT");
-  let (start, end) = find_start_end(&amp;map);
-  let mut set: HashSet&lt;Position&gt; = HashSet::new();
-  let mut max: u64 = 0;
-  longest_path(&amp;map, &amp;mut set, start, &amp;mut max, 0, &amp;end, false);
-  println!("Part 1: {}", max);
+    let map = read_file("INPUT");
+    let (start, end) = find_start_end(&amp;map);
+    let mut set: HashSet&lt;Position&gt; = HashSet::new();
+    let mut max: u64 = 0;
+    longest_path(&amp;map, &amp;mut set, start, &amp;mut max, 0, &amp;end, false);
+    println!("Part 1: {}", max);
 }
 
 fn part2() {
-  let map = read_file("INPUT");
-  let (start, end) = find_start_end(&amp;map);
-  let mut set: HashSet&lt;Position&gt; = HashSet::new();
-  let mut max: u64 = 0;
-  longest_path(&amp;map, &amp;mut set, start, &amp;mut max, 0, &amp;end, true);
-  println!("Part 2: {}", max);
+    let map = read_file("INPUT");
+    let (start, end) = find_start_end(&amp;map);
+    let mut set: HashSet&lt;Position&gt; = HashSet::new();
+    let mut max: u64 = 0;
+    longest_path(&amp;map, &amp;mut set, start, &amp;mut max, 0, &amp;end, true);
+    println!("Part 2: {}", max);
 }
 
 fn main() {
-  println!("Year 2023 day 23 - A Long Walk");
-  part1();
-  part2();
+    println!("Year 2023 day 23 - A Long Walk");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -277,11 +289,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2023-24.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2023-22.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2023-22.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023-24.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -291,11 +303,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2023-24.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2023-22.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2023-22.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023-24.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

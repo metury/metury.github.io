@@ -160,109 +160,119 @@
 <h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use regex::Regex;
+<pre><code class="language-rs">use regex::Regex;
 use std::collections::HashMap;
+use std::fs;
 use std::option::Option;
 
 #[derive(Debug, Clone, Eq, PartialEq, Ord, PartialOrd)]
 enum GateType {
-  Or,
-  And,
-  LShift,
-  RShift,
-  Not,
-  Simple,
+    Or,
+    And,
+    LShift,
+    RShift,
+    Not,
+    Simple,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Ord, PartialOrd)]
 struct Gate {
-  inputs: [String; 2],
-  gate_type: GateType,
-  output: String,
+    inputs: [String; 2],
+    gate_type: GateType,
+    output: String,
 }
 
 impl Gate {
-  fn eval(&amp;self, assigned: &amp;mut HashMap&lt;String, u16&gt;) {
-    let mut first: u16 = 0;
-    let mut second: u16 = 0;
-    match get_number(&amp;self.inputs[0], assigned) {
-      Some(nr) =&gt; first = nr,
-      None =&gt; return,
+    fn eval(&amp;self, assigned: &amp;mut HashMap&lt;String, u16&gt;) {
+        let mut first: u16 = 0;
+        let mut second: u16 = 0;
+        match get_number(&amp;self.inputs[0], assigned) {
+            Some(nr) =&gt; first = nr,
+            None =&gt; return,
+        }
+        match get_number(&amp;self.inputs[1], assigned) {
+            Some(nr) =&gt; second = nr,
+            None =&gt; return,
+        }
+        match self.gate_type {
+            GateType::Or =&gt; assigned.insert(self.output.clone(), first | second),
+            GateType::And =&gt; assigned.insert(self.output.clone(), first &amp; second),
+            GateType::LShift =&gt; assigned.insert(self.output.clone(), first &lt;&lt; second),
+            GateType::RShift =&gt; assigned.insert(self.output.clone(), first &gt;&gt; second),
+            GateType::Not =&gt; assigned.insert(self.output.clone(), !first),
+            GateType::Simple =&gt; assigned.insert(self.output.clone(), first),
+        };
     }
-    match get_number(&amp;self.inputs[1], assigned) {
-      Some(nr) =&gt; second = nr,
-      None =&gt; return,
-    }
-    match self.gate_type {
-      GateType::Or =&gt; assigned.insert(self.output.clone(), first | second),
-      GateType::And =&gt; assigned.insert(self.output.clone(), first &amp; second),
-      GateType::LShift =&gt; assigned.insert(self.output.clone(), first &lt;&lt; second),
-      GateType::RShift =&gt; assigned.insert(self.output.clone(), first &gt;&gt; second),
-      GateType::Not =&gt; assigned.insert(self.output.clone(), !first),
-      GateType::Simple =&gt; assigned.insert(self.output.clone(), first),
-    };
-  }
 }
 
 fn get_number(written: &amp;str, assigned: &amp;HashMap&lt;String, u16&gt;) -&gt; Option&lt;u16&gt; {
-  if assigned.contains_key(written){
-    return Some(assigned[written]);
-  } else if written.chars().nth(0)?.is_digit(10) {
-    return Some(written.parse::&lt;u16&gt;().unwrap());
-  }
-  None
+    if assigned.contains_key(written) {
+        return Some(assigned[written]);
+    } else if written.chars().nth(0)?.is_digit(10) {
+        return Some(written.parse::&lt;u16&gt;().unwrap());
+    }
+    None
 }
 
 fn read_file(filepath: &amp;str) -&gt; Vec&lt;Gate&gt; {
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let mut gates: Vec&lt;Gate&gt; = vec!();
-  let bin_re = Regex::new(r"([^\s]+) (OR|AND|LSHIFT|RSHIFT) ([^\s]+) -&gt; (.+)").unwrap();
-  let not_re = Regex::new(r"NOT ([^\s]+) -&gt; (.+)").unwrap();
-  let simple_re = Regex::new(r"\n([^\s]+) -&gt; (.+)").unwrap();
-  for (_, [first, oper, second, res]) in bin_re.captures_iter(&amp;binding).map(|c| c.extract()) {
-    let operator: GateType;
-    match oper {
-      "OR" =&gt; operator = GateType::Or,
-      "AND" =&gt; operator = GateType::And,
-      "LSHIFT" =&gt; operator = GateType::LShift,
-      "RSHIFT" =&gt; operator = GateType::RShift,
-      _ =&gt; todo!(),
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let mut gates: Vec&lt;Gate&gt; = vec![];
+    let bin_re = Regex::new(r"([^\s]+) (OR|AND|LSHIFT|RSHIFT) ([^\s]+) -&gt; (.+)").unwrap();
+    let not_re = Regex::new(r"NOT ([^\s]+) -&gt; (.+)").unwrap();
+    let simple_re = Regex::new(r"\n([^\s]+) -&gt; (.+)").unwrap();
+    for (_, [first, oper, second, res]) in bin_re.captures_iter(&amp;binding).map(|c| c.extract()) {
+        let operator: GateType;
+        match oper {
+            "OR" =&gt; operator = GateType::Or,
+            "AND" =&gt; operator = GateType::And,
+            "LSHIFT" =&gt; operator = GateType::LShift,
+            "RSHIFT" =&gt; operator = GateType::RShift,
+            _ =&gt; todo!(),
+        }
+        gates.push(Gate {
+            inputs: [first.to_string(), second.to_string()],
+            gate_type: operator,
+            output: res.to_string(),
+        });
     }
-    gates.push(Gate {inputs: [first.to_string(), second.to_string()], gate_type: operator, output: res.to_string()});
-  }
-  for (_, [first, res]) in not_re.captures_iter(&amp;binding).map(|c| c.extract()) {
-    gates.push(Gate {inputs: [first.to_string(), "".to_string()], gate_type: GateType::Not, output: res.to_string()});
-  }
-  for (_, [first, res]) in simple_re.captures_iter(&amp;binding).map(|c| c.extract()) {
-    gates.push(Gate {inputs: [first.to_string(), "".to_string()], gate_type: GateType::Simple, output: res.to_string()});
-  }
-  gates
+    for (_, [first, res]) in not_re.captures_iter(&amp;binding).map(|c| c.extract()) {
+        gates.push(Gate {
+            inputs: [first.to_string(), "".to_string()],
+            gate_type: GateType::Not,
+            output: res.to_string(),
+        });
+    }
+    for (_, [first, res]) in simple_re.captures_iter(&amp;binding).map(|c| c.extract()) {
+        gates.push(Gate {
+            inputs: [first.to_string(), "".to_string()],
+            gate_type: GateType::Simple,
+            output: res.to_string(),
+        });
+    }
+    gates
 }
 
-
-
 fn part1() {
-  let gates = read_file("INPUT");
-  let mut assigned: HashMap&lt;String, u16&gt; = HashMap::new();
-  assigned.insert("".to_string(), 0);
-  while !assigned.contains_key("a") {
-    for gate in &amp;gates {
-      gate.eval(&amp;mut assigned);
+    let gates = read_file("INPUT");
+    let mut assigned: HashMap&lt;String, u16&gt; = HashMap::new();
+    assigned.insert("".to_string(), 0);
+    while !assigned.contains_key("a") {
+        for gate in &amp;gates {
+            gate.eval(&amp;mut assigned);
+        }
     }
-  }
-  println!("Part 1: {}", assigned["a"]);
+    println!("Part 1: {}", assigned["a"]);
 }
 
 fn part2() {
-  println!("Part 2: {}", 0);
+    println!("Part 2: {}", 0);
 }
 
 fn main() {
-  println!("Year 2015 day 7 - Some Assembly Required");
-  part1();
-  part2();
+    println!("Year 2015 day 7 - Some Assembly Required");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -270,13 +280,10 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2015.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2015-6.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2015-6.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -284,13 +291,10 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2015.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2015-6.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2015-6.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

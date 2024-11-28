@@ -162,54 +162,70 @@
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>In the second part we also replace written digits as numbers, but keep overlaps. Then again find the first and last digit.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use regex::Regex;
+<pre><code class="language-rs">use regex::Regex;
+use std::fs;
 
 fn read_file(filepath: &amp;str) -&gt; Vec&lt;String&gt; {
-  let contents = fs::read_to_string(filepath);
-  let binding = contents.expect("REASON");
-  let lines: Vec&lt;String&gt; = binding.split('\n')
-      .filter(|l| l.len() &gt; 0)
-      .map(|l| l.to_string()).collect();
-  lines
+    let contents = fs::read_to_string(filepath);
+    let binding = contents.expect("REASON");
+    let lines: Vec&lt;String&gt; = binding
+        .split('\n')
+        .filter(|l| l.len() &gt; 0)
+        .map(|l| l.to_string())
+        .collect();
+    lines
 }
 
 fn part1() {
-  let lines = read_file("INPUT");
-  let regex = Regex::new(r"[^1-9]").unwrap();
-  let mut total: u32 = 0;
-  for line in lines {
-    let numbers = regex.replace_all(&amp;line, "");
-    total += 10 * numbers.chars().nth(0).unwrap().to_digit(10).unwrap();
-    total += numbers.chars().nth(numbers.len() - 1).unwrap().to_digit(10).unwrap();
-  }
-  println!("Part 1: {}", total);
+    let lines = read_file("INPUT");
+    let regex = Regex::new(r"[^1-9]").unwrap();
+    let mut total: u32 = 0;
+    for line in lines {
+        let numbers = regex.replace_all(&amp;line, "");
+        total += 10 * numbers.chars().nth(0).unwrap().to_digit(10).unwrap();
+        total += numbers
+            .chars()
+            .nth(numbers.len() - 1)
+            .unwrap()
+            .to_digit(10)
+            .unwrap();
+    }
+    println!("Part 1: {}", total);
 }
 
 fn part2() {
-  let lines = read_file("INPUT");
-  const LEN: usize = 9;
-  let origin: [&amp;str; LEN] = [r"one", r"two", r"three", r"four", r"five", r"six", r"seven", r"eight", r"nine"];
-  let new: [&amp;str; LEN] = ["o1ne", "t2wo", "th3ree", "fo4ur", "fi5ve", "s6ix", "se7ven", "ei8ght", "ni9ne"];
-  let regex = Regex::new(r"[^1-9]").unwrap();
-  let mut total: u32 = 0;
-  for line in lines {
-    let mut numbers = line.clone();
-    for i in 0 .. LEN {
-      let nr = Regex::new(origin[i]).unwrap();
-      numbers = nr.replace_all(&amp;numbers, new[i]).to_string();
+    let lines = read_file("INPUT");
+    const LEN: usize = 9;
+    let origin: [&amp;str; LEN] = [
+        r"one", r"two", r"three", r"four", r"five", r"six", r"seven", r"eight", r"nine",
+    ];
+    let new: [&amp;str; LEN] = [
+        "o1ne", "t2wo", "th3ree", "fo4ur", "fi5ve", "s6ix", "se7ven", "ei8ght", "ni9ne",
+    ];
+    let regex = Regex::new(r"[^1-9]").unwrap();
+    let mut total: u32 = 0;
+    for line in lines {
+        let mut numbers = line.clone();
+        for i in 0..LEN {
+            let nr = Regex::new(origin[i]).unwrap();
+            numbers = nr.replace_all(&amp;numbers, new[i]).to_string();
+        }
+        numbers = regex.replace_all(&amp;numbers, "").to_string();
+        total += 10 * numbers.chars().nth(0).unwrap().to_digit(10).unwrap();
+        total += numbers
+            .chars()
+            .nth(numbers.len() - 1)
+            .unwrap()
+            .to_digit(10)
+            .unwrap();
     }
-    numbers = regex.replace_all(&amp;numbers, "").to_string();
-    total += 10 * numbers.chars().nth(0).unwrap().to_digit(10).unwrap();
-    total += numbers.chars().nth(numbers.len() - 1).unwrap().to_digit(10).unwrap();
-  }
-  println!("Part 2: {}", total);
+    println!("Part 2: {}", total);
 }
 
 fn main() {
-  println!("Year 2023 day 1 - Trebuchet?!");
-  part1();
-  part2();
+    println!("Year 2023 day 1 - Trebuchet?!");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -217,11 +233,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2023-2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2023.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2022.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023-2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -231,11 +247,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2023-2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2023.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2022.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023-2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

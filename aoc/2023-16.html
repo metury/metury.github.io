@@ -162,158 +162,198 @@
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>We reuse the codebase and run he simulation from every possible place and find the maximum.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
-use std::collections::HashMap;
+<pre><code class="language-rs">use std::collections::HashMap;
+use std::fs;
 
 type Grid&lt;T&gt; = Vec&lt;Vec&lt;T&gt;&gt;;
 
 /** Read the input file and return the matrix and empty visited map. */
-fn read_file(filepath: &amp;str) -&gt; (Grid&lt;char&gt;, Grid&lt;bool&gt;){
-  let contents = fs::read_to_string(filepath);
-  let mut matrix: Grid&lt;char&gt; = vec![];
-  let mut visited: Grid&lt;bool&gt; = vec![];
-  let binding = contents.expect("REASON");
-  let lines = binding.split('\n');
-  for line in lines{
-    let mut matrix_line: Vec&lt;char&gt; = vec!();
-    let mut visited_line: Vec&lt;bool&gt; = vec!();
-    for c in line.chars(){
-      matrix_line.push(c);
-      visited_line.push(false);
+fn read_file(filepath: &amp;str) -&gt; (Grid&lt;char&gt;, Grid&lt;bool&gt;) {
+    let contents = fs::read_to_string(filepath);
+    let mut matrix: Grid&lt;char&gt; = vec![];
+    let mut visited: Grid&lt;bool&gt; = vec![];
+    let binding = contents.expect("REASON");
+    let lines = binding.split('\n');
+    for line in lines {
+        let mut matrix_line: Vec&lt;char&gt; = vec![];
+        let mut visited_line: Vec&lt;bool&gt; = vec![];
+        for c in line.chars() {
+            matrix_line.push(c);
+            visited_line.push(false);
+        }
+        matrix.push(matrix_line);
+        visited.push(visited_line);
     }
-    matrix.push(matrix_line);
-    visited.push(visited_line);
-  }
-  return (matrix, visited);
+    return (matrix, visited);
 }
 
 /** Get the key to the hash function. */
-fn get_key(position: (usize, usize), movement: (i32, i32)) -&gt; String{
-  let mut key = String::from("");
-  key += &amp;position.0.to_string();
-  key.push(':');
-  key += &amp;position.1.to_string();
-  key.push('|');
-  key += &amp;movement.0.to_string();
-  key.push(':');
-  key += &amp;movement.1.to_string();
-  return key;
+fn get_key(position: (usize, usize), movement: (i32, i32)) -&gt; String {
+    let mut key = String::from("");
+    key += &amp;position.0.to_string();
+    key.push(':');
+    key += &amp;position.1.to_string();
+    key.push('|');
+    key += &amp;movement.0.to_string();
+    key.push(':');
+    key += &amp;movement.1.to_string();
+    return key;
 }
 
 /** Move one tile in a matrix. Also check and if it was used do not go there again. */
-fn step(matrix: &amp;Vec&lt;Vec&lt;char&gt;&gt;, visited: &amp;mut Vec&lt;Vec&lt;bool&gt;&gt;, position: (usize, usize), movement: (i32, i32), history: &amp;mut HashMap&lt;String, bool&gt;){
-  if position.0 &gt;= matrix.len() || position.1 &gt;= matrix[position.0].len(){
-    return;
-  }
-  let key = get_key(position, movement);
-  if history.contains_key(&amp;key){
-    return;
-  }
-  history.insert(key, true);
-  visited[position.0][position.1] = true;
-  match matrix[position.0][position.1]{
-    '/' =&gt; {
-      let new_movement = (-movement.1, -movement.0);
-      let new_position = ((position.0 as i32 + new_movement.0) as usize, (position.1 as i32 + new_movement.1) as usize);
-      step(matrix, visited, new_position, new_movement, history);
-      },
-    '\\' =&gt; {
-      let new_movement = (movement.1, movement.0);
-      let new_position = ((position.0 as i32 + new_movement.0) as usize, (position.1 as i32 + new_movement.1) as usize);
-      step(matrix, visited, new_position, new_movement, history);
-      },
-    '|' =&gt; {
-      if movement.0 == -1 || movement.0 == 1{
-          let new_position = ((position.0 as i32 + movement.0) as usize, (position.1 as i32 + movement.1) as usize);
-          step(matrix, visited, new_position, movement, history);
+fn step(
+    matrix: &amp;Vec&lt;Vec&lt;char&gt;&gt;,
+    visited: &amp;mut Vec&lt;Vec&lt;bool&gt;&gt;,
+    position: (usize, usize),
+    movement: (i32, i32),
+    history: &amp;mut HashMap&lt;String, bool&gt;,
+) {
+    if position.0 &gt;= matrix.len() || position.1 &gt;= matrix[position.0].len() {
+        return;
+    }
+    let key = get_key(position, movement);
+    if history.contains_key(&amp;key) {
+        return;
+    }
+    history.insert(key, true);
+    visited[position.0][position.1] = true;
+    match matrix[position.0][position.1] {
+        '/' =&gt; {
+            let new_movement = (-movement.1, -movement.0);
+            let new_position = (
+                (position.0 as i32 + new_movement.0) as usize,
+                (position.1 as i32 + new_movement.1) as usize,
+            );
+            step(matrix, visited, new_position, new_movement, history);
         }
-        else{
-          let mut new_position = ((position.0 as i32 + 1) as usize, position.1);
-          step(matrix, visited, new_position, (1, 0), history);
-          new_position = ((position.0 as i32 - 1) as usize, position.1);
-          step(matrix, visited, new_position, (-1, 0), history);
+        '\\' =&gt; {
+            let new_movement = (movement.1, movement.0);
+            let new_position = (
+                (position.0 as i32 + new_movement.0) as usize,
+                (position.1 as i32 + new_movement.1) as usize,
+            );
+            step(matrix, visited, new_position, new_movement, history);
         }
-      },
-    '-' =&gt; {
-        if movement.1 == -1 || movement.1 == 1{
-          let new_position = ((position.0 as i32 + movement.0) as usize, (position.1 as i32 + movement.1) as usize);
-          step(matrix, visited, new_position, movement, history);
+        '|' =&gt; {
+            if movement.0 == -1 || movement.0 == 1 {
+                let new_position = (
+                    (position.0 as i32 + movement.0) as usize,
+                    (position.1 as i32 + movement.1) as usize,
+                );
+                step(matrix, visited, new_position, movement, history);
+            } else {
+                let mut new_position = ((position.0 as i32 + 1) as usize, position.1);
+                step(matrix, visited, new_position, (1, 0), history);
+                new_position = ((position.0 as i32 - 1) as usize, position.1);
+                step(matrix, visited, new_position, (-1, 0), history);
+            }
         }
-        else{
-          let mut new_position = (position.0, (position.1 as i32 + 1) as usize);
-          step(matrix, visited, new_position, (0, 1), history);
-          new_position = (position.0, (position.1 as i32 - 1) as usize);
-          step(matrix, visited, new_position, (0, -1), history);
+        '-' =&gt; {
+            if movement.1 == -1 || movement.1 == 1 {
+                let new_position = (
+                    (position.0 as i32 + movement.0) as usize,
+                    (position.1 as i32 + movement.1) as usize,
+                );
+                step(matrix, visited, new_position, movement, history);
+            } else {
+                let mut new_position = (position.0, (position.1 as i32 + 1) as usize);
+                step(matrix, visited, new_position, (0, 1), history);
+                new_position = (position.0, (position.1 as i32 - 1) as usize);
+                step(matrix, visited, new_position, (0, -1), history);
+            }
         }
-      },
-    '.' =&gt; {
-      let new_position = ((position.0 as i32 + movement.0) as usize, (position.1 as i32 + movement.1) as usize);
-      step(matrix, visited, new_position, movement, history);
-      },
-    _ =&gt; {},
-  }
+        '.' =&gt; {
+            let new_position = (
+                (position.0 as i32 + movement.0) as usize,
+                (position.1 as i32 + movement.1) as usize,
+            );
+            step(matrix, visited, new_position, movement, history);
+        }
+        _ =&gt; {}
+    }
 }
 
 /** Count the visited places. */
-fn count_visited(visited: &amp;Vec&lt;Vec&lt;bool&gt;&gt;) -&gt; i64{
-  let mut total: i64 = 0;
-  for line in visited{
-    for c in line{
-      if *c{
-        total += 1;
-      }
+fn count_visited(visited: &amp;Vec&lt;Vec&lt;bool&gt;&gt;) -&gt; i64 {
+    let mut total: i64 = 0;
+    for line in visited {
+        for c in line {
+            if *c {
+                total += 1;
+            }
+        }
     }
-  }
-  return total;
+    return total;
 }
 
 /** Try one possibility. */
-fn try_one(matrix: &amp; Vec&lt;Vec&lt;char&gt;&gt;, visited: &amp;Vec&lt;Vec&lt;bool&gt;&gt;, position: (usize, usize), movement: (i32, i32)) -&gt; i64{
-  let mut v = visited.clone();
-  let mut h: HashMap&lt;String, bool&gt; = HashMap::new();
-  step(&amp;matrix, &amp;mut v, position, movement, &amp;mut h);
-  return count_visited(&amp;v);
+fn try_one(
+    matrix: &amp;Vec&lt;Vec&lt;char&gt;&gt;,
+    visited: &amp;Vec&lt;Vec&lt;bool&gt;&gt;,
+    position: (usize, usize),
+    movement: (i32, i32),
+) -&gt; i64 {
+    let mut v = visited.clone();
+    let mut h: HashMap&lt;String, bool&gt; = HashMap::new();
+    step(&amp;matrix, &amp;mut v, position, movement, &amp;mut h);
+    return count_visited(&amp;v);
 }
 
 /** Move in the matrix. */
 fn part1() {
-  let (matrix, mut visited) = read_file("INPUT");
-  let mut history: HashMap&lt;String, bool&gt; = HashMap::new();
-  step(&amp;matrix, &amp;mut visited, (0,0), (0,1), &amp;mut history);
-  println!("Part 1: {}", count_visited(&amp;visited));
+    let (matrix, mut visited) = read_file("INPUT");
+    let mut history: HashMap&lt;String, bool&gt; = HashMap::new();
+    step(&amp;matrix, &amp;mut visited, (0, 0), (0, 1), &amp;mut history);
+    println!("Part 1: {}", count_visited(&amp;visited));
 }
 
 /** Try all posibilitie. */
 fn part2() {
-  let (matrix, visited) = read_file("INPUT");
-  let mut max: i64 = 0;
-  for i in 1..matrix.len() - 1{
-    let c = try_one(&amp;matrix, &amp;visited, (i,0), (0,1));
-    if c &gt; max{ max = c; }
-    let c = try_one(&amp;matrix, &amp;visited, (matrix.len() - 1 - i,0), (0,-1));
-    if c &gt; max{ max = c; }
-  }
-  for i in 1..matrix[0].len() - 1{
-    let c = try_one(&amp;matrix, &amp;visited, (0,i), (1,0));
-    if c &gt; max{ max = c; }
-    let c = try_one(&amp;matrix, &amp;visited, (0,matrix.len() - 1 - i), (-1,0));
-    if c &gt; max{ max = c; }
-  }
-  let c = try_one(&amp;matrix, &amp;visited, (0,0), (1,0));
-  if c &gt; max{ max = c; }
-  let c = try_one(&amp;matrix, &amp;visited, (0,0), (0,1));
-  if c &gt; max{ max = c; }
-  let c = try_one(&amp;matrix, &amp;visited, (matrix.len(),matrix[0].len()), (-1,0));
-  if c &gt; max{ max = c; }
-  let c = try_one(&amp;matrix, &amp;visited, (matrix.len(),matrix[0].len()), (0,-1));
-  if c &gt; max{ max = c; }
-  println!("Part 2: {}", max);
+    let (matrix, visited) = read_file("INPUT");
+    let mut max: i64 = 0;
+    for i in 1..matrix.len() - 1 {
+        let c = try_one(&amp;matrix, &amp;visited, (i, 0), (0, 1));
+        if c &gt; max {
+            max = c;
+        }
+        let c = try_one(&amp;matrix, &amp;visited, (matrix.len() - 1 - i, 0), (0, -1));
+        if c &gt; max {
+            max = c;
+        }
+    }
+    for i in 1..matrix[0].len() - 1 {
+        let c = try_one(&amp;matrix, &amp;visited, (0, i), (1, 0));
+        if c &gt; max {
+            max = c;
+        }
+        let c = try_one(&amp;matrix, &amp;visited, (0, matrix.len() - 1 - i), (-1, 0));
+        if c &gt; max {
+            max = c;
+        }
+    }
+    let c = try_one(&amp;matrix, &amp;visited, (0, 0), (1, 0));
+    if c &gt; max {
+        max = c;
+    }
+    let c = try_one(&amp;matrix, &amp;visited, (0, 0), (0, 1));
+    if c &gt; max {
+        max = c;
+    }
+    let c = try_one(&amp;matrix, &amp;visited, (matrix.len(), matrix[0].len()), (-1, 0));
+    if c &gt; max {
+        max = c;
+    }
+    let c = try_one(&amp;matrix, &amp;visited, (matrix.len(), matrix[0].len()), (0, -1));
+    if c &gt; max {
+        max = c;
+    }
+    println!("Part 2: {}", max);
 }
 
 fn main() {
-  println!("Year 2023 day 16 - The Floor Will Be Lava");
-  part1();
-  part2();
+    println!("Year 2023 day 16 - The Floor Will Be Lava");
+    part1();
+    part2();
 }
 </code></pre>
 
@@ -321,11 +361,11 @@ fn main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2023-17.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2023-15.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2023-15.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023-17.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -335,11 +375,11 @@ fn main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2023-17.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2023-15.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2023-15.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023-17.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
