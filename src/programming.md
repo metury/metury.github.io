@@ -25,6 +25,9 @@ Here are some links:
 
 - [Cpp reference](https://en.cppreference.com)
 
+## Scala
+
+- [Webpage](https://www.scala-lang.org/)
 
 ## Elixir
 
