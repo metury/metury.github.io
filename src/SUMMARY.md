@@ -37,6 +37,8 @@
 - [Movie list](./movies.md)
 - [Books](./library.md)
 
+
+<!--AOC-->
 # Advent of code
 
 - [Advent of code](./adventofcode.md)
@@ -109,3 +111,4 @@
 		- [Year 2015 day 5](./aoc/2015-5.md)
 		- [Year 2015 day 6](./aoc/2015-6.md)
 		- [Year 2015 day 7](./aoc/2015-7.md)
+<!--AOC-->
