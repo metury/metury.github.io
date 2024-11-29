@@ -2,8 +2,6 @@
 
 [Welcome page](./index.md)
 
-<!-- [🎄🦌☃️]() -->
-
 # Main pages
 
 - [About](./about.md)

@@ -2,34 +2,11 @@
 
 I am keeping a list of usefull links and tools one may be using.
 
-<!--
-- [CPP]
-- [Rust]
-- [Python]
-- [Go]
--->
-
-## Rust
-
-Here are some usefull links:
-
-- [Rust page](https://www.rust-lang.org)
-- [Rust playground](https://play.rust-lang.org/)
-- [crates.io](https://crates.io/)
-- [lib.rs](https://lib.rs/)
-
-
-## C++
-
-Here are some links:
-
-- [Cpp reference](https://en.cppreference.com)
-
-## Scala
-
-- [Webpage](https://www.scala-lang.org/)
-
-## Elixir
-
-- [Webpage](https://elixir-lang.org/)
-- [Docs](https://hexdocs.pm/elixir)
+| Lang   | Links                                                                                                                                     |
+|:------:|:-----------------------------------------------------------------------------------------------------------------------------------------:|
+| C++    | [Cpp reference](https://en.cppreference.com)                                                                                              |
+| Rust   | [Web](https://www.rust-lang.org) [Playground](https://play.rust-lang.org/) [crates.io](https://crates.io/) [lib.rs](https://lib.rs/) |
+| Perl   | [Web](https://www.perl.org/)                                                                                                              |
+| Scala  | [Web](https://www.scala-lang.org/)                                                                                                        |
+| Python | [Web](https://www.python.org/)                                                                                                            |
+| Elixir | [Web](https://elixir-lang.org/) [Docs](https://hexdocs.pm/elixir)                                                                         |
