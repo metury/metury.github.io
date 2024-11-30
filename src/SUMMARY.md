@@ -10,7 +10,7 @@
 
 # Programming exercises
 
-- [Sandbox](./programming.md)
+- [Sandbox](./sandbox.md)
 - [Exercises](./exercises.md)
 
 # Tenerife
