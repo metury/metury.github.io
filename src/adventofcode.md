@@ -5,6 +5,7 @@ Plus you may also play a small [Bingo](https://aoc-bingo.fly.dev/) that someone 
 
 ### Years
 
+- [Year 2024](./aoc/2024.md)
 - [Year 2023](./aoc/2023.md)
 - [Year 2022](./aoc/2022.md)
 - [Year 2021](./aoc/2021.md)

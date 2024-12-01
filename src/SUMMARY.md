@@ -37,10 +37,13 @@
 
 
 
+
 <!--AOC-->
 # Advent of code
 
 - [Advent of code](./adventofcode.md)
+	- [Year 2024](./aoc/2024.md)
+		- [Year 2024 day 1](./aoc/2024-1.md)
 	- [Year 2023](./aoc/2023.md)
 		- [Year 2023 day 1](./aoc/2023-1.md)
 		- [Year 2023 day 2](./aoc/2023-2.md)
