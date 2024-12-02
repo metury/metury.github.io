@@ -1,10 +1,5 @@
 # Welcome, to my personal page.
 
-<p align=center>
-<img src="https://raw.githubusercontent.com/MariaLetta/free-gophers-pack/master/characters/png/63.png" alt="Excited universe gopher." width="200"/>
-<img src="https://raw.githubusercontent.com/MariaLetta/free-gophers-pack/master/illustrations/png/20.png" alt="UFO gopher." width="200"/>
-<p align=center>
-
 ```rust
 #fn main() {
     let mut interests : Vec<&str> = vec!["Computer science",
