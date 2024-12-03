@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Year 2024 day 1 - Personal page</title>
+        <title>Year 2024 day 3 - Personal page</title>
 
 
         <!-- Custom HTML head -->
@@ -154,84 +154,71 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="advent-of-code---year-2024-day-1"><a class="header" href="#advent-of-code---year-2024-day-1">Advent of code - Year 2024 Day 1</a></h1>
-<p>This is a solution of the <a href="https://adventofcode.com/2024/day/1">day 1</a>. Go back to year <a href="2024.html">2024</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
+                        <h1 id="advent-of-code---year-2024-day-3"><a class="header" href="#advent-of-code---year-2024-day-3">Advent of code - Year 2024 Day 3</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2024/day/3">day 3</a>. Go back to year <a href="2024.html">2024</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
 <h3 id="information"><a class="header" href="#information">Information</a></h3>
 <h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
-<p>In the first part we only compute the absolute difference in a sorted lists.</p>
+<p>In the first part we only match the regex <code>mul\(([0-9]{1,3}),([0-9]{1,3})\)</code> and compute the result.</p>
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
-<p>In the second part we create a map for the second column, where keys are the numers and value is the number of occurances. Then proceed in the first column and compute the value.</p>
+<p>In the second part we also add <code>do()|don't()</code> and iterate over found values. If we find <code>do()</code> enable computing otherwise for <code>don't()</code> disable it. Then compute the result.</p>
 <h2 id="maingo"><a class="header" href="#maingo">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
   "fmt"
   "log"
-  "math"
   "os"
   "regexp"
-  "sort"
   "strconv"
 )
 
-func read_file(file_path string) ([]int, []int) {
+func read_file(file_path string) string {
   content, err := os.ReadFile(file_path)
   if err != nil {
     log.Fatal(err)
   }
-  regex := regexp.MustCompile("([0-9]+)\\s+([0-9]+)")
-  found := regex.FindAllStringSubmatch(string(content), -1)
-  var first_column []int
-  var second_column []int
-  for _, f := range found {
-    nr1, _ := strconv.Atoi(f[1])
-    nr2, _ := strconv.Atoi(f[2])
-    first_column = append(first_column, nr1)
-    second_column = append(second_column, nr2)
-  }
-  sort.Ints(first_column)
-  sort.Ints(second_column)
-  return first_column, second_column
-}
-
-func count(list *[]int) map[int]int {
-  my_map := make(map[int]int)
-  for _, val := range *list {
-    if i, ok := my_map[val]; ok {
-      my_map[val] = i + 1
-    } else {
-      my_map[val] = 1
-    }
-  }
-  return my_map
+  return string(content)
 }
 
 func part1() {
   var result int
-  read_file("INPUT")
-  first_column, second_column := read_file("INPUT")
-  for i, _ := range first_column {
-    difference := math.Abs(float64(first_column[i] - second_column[i]))
-    result += int(difference)
+  var content = read_file("INPUT")
+  regex := regexp.MustCompile("mul\\(([0-9]{1,3}),([0-9]{1,3})\\)")
+  found := regex.FindAllStringSubmatch(content, -1)
+  for _, f := range found {
+    nr1, _ := strconv.Atoi(f[1])
+    nr2, _ := strconv.Atoi(f[2])
+    result += nr1 * nr2
   }
   fmt.Println("Part 1: ", result)
 }
 
 func part2() {
   var result int
-  first_column, second_column := read_file("INPUT")
-  second_map := count(&amp;second_column)
-  for _, key := range first_column {
-    i, ok := second_map[key]
-    if ok {
-      result = result + key*i
+  content := read_file("INPUT")
+  regex := regexp.MustCompile("do\\(\\)|don't\\(\\)|mul\\(([0-9]{1,3}),([0-9]{1,3})\\)")
+  found := regex.FindAllStringSubmatch(content, -1)
+  enabled := true
+  for _, f := range found {
+    switch f[0] {
+    case "do()":
+      enabled = true
+    case "don't()":
+      enabled = false
+    default:
+      if enabled {
+        nr1, _ := strconv.Atoi(f[1])
+        nr2, _ := strconv.Atoi(f[2])
+        result += nr1 * nr2
+      }
     }
   }
+
   fmt.Println("Part 2: ", result)
 }
 
 func main() {
-  fmt.Println("Year 2024 day 1 - Historian Hysteria")
+  fmt.Println("Year 2024 day 3 - Mull It Over")
   part1()
   part2()
 }
@@ -241,11 +228,11 @@ func main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2024.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2024-2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2024-2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -255,11 +242,11 @@ func main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2024.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2024-2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2024-2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
