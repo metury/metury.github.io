@@ -161,6 +161,25 @@
 <p>For both cases we read the file via regex and filter out the wrong sequences and good sequences. That is for each page in single order we check previous pages if they violate some rules. Then we just compute the sum of middle pages.</p>
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>For the second part we consider only the incorrect ones. We go by pages and check their violations. If we find some we put the vilated pages behind the current page while removing the violated ones. And proceed by the corrected page onwards, because the pages inserted afterward may be wrong.</p>
+<pre><code class="language-txt">-----------
+| |X| |O| |
+-----------
+   ^   ^
+   j   k
+
+---------
+| | |O| |
+---------
+   ^ ^
+   j k
+
+
+-----------
+| | |O|X| |
+-----------
+	 ^
+	 k
+</code></pre>
 <h2 id="maingo"><a class="header" href="#maingo">main.go</a></h2>
 <pre><code class="language-go">package main
 
