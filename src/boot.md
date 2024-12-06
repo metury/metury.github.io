@@ -62,5 +62,5 @@ scalainstall
 
 cargo install juliaup
 cargo install mdbook
-cargo install rust-analyzer
+rustup install rust-analyzer
 ```
