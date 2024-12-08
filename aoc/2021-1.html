@@ -156,75 +156,84 @@
                     <main>
                         <h1 id="advent-of-code---year-2021-day-1"><a class="header" href="#advent-of-code---year-2021-day-1">Advent of code - Year 2021 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/1">day 1</a>. Go back to year <a href="2021.html">2021</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partcpp"><a class="header" href="#first-partcpp">first-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;iostream&gt;
+<h3 id="information"><a class="header" href="#information">Information</a></h3>
+<h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
+<p>Generally we create a window of <code>n</code> elements and set their size. We proceed from <code>n</code>-th element and check if the sum of the new window is greater or not and update the sum and window. For part one the window has size <code>1</code>.</p>
+<h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
+<p>For the second part we set <code>n</code> to <code>3</code>.</p>
+<h2 id="maingo"><a class="header" href="#maingo">main.go</a></h2>
+<pre><code class="language-go">package main
 
-int main(int argc, char ** argv){
-  std::fstream stream;
-  stream.open("INPUT");
-  std::string line;
-  int last = -1;
-  int increase = 0;
-  while(getline(stream, line)){
-    int new_ = std::stoi(line);
-    if (last != -1 &amp;&amp; last &lt; new_){
-      increase += 1;
+import (
+  "fmt"
+  "log"
+  "os"
+  "regexp"
+  "strconv"
+  "time"
+)
+
+func read_file(file_path string) []int {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  regex := regexp.MustCompile("([0-9]+)")
+  found := regex.FindAllStringSubmatch(string(content), -1)
+  array := make([]int, len(found))
+  for i, f := range found {
+    array[i], _ = strconv.Atoi(f[1])
+  }
+  return array
+}
+
+func slide(start []int) func(int) bool {
+  window := start
+  sum := 0
+  for _, ele := range window {
+    sum += ele
+  }
+  return func(ele int) bool {
+    new_sum := sum - window[0] + ele
+    window = append(window[1:], ele)
+    res := new_sum &gt; sum
+    sum = new_sum
+    return res
+  }
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  array := read_file("INPUT")
+  s := slide(array[:1])
+  for i := 1; i &lt; len(array); i++ {
+    if s(array[i]) {
+      result += 1
     }
-    last = new_;
   }
-  std::cout &lt;&lt; increase &lt;&lt; std::endl;
-  return 0;
-}
-</code></pre>
-<h2 id="second-partcpp"><a class="header" href="#second-partcpp">second-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;iostream&gt;
-#include&lt;array&gt;
-
-void prepare_file(){
-  std::fstream stream;
-  std::ofstream file;
-  file.open("output.txt");
-  stream.open("input.txt");
-  std::string line;
-  std::array&lt;int, 3&gt; list = {0};
-  while(getline(stream, line)){
-      int new_ = stoi(line);
-      int i = 0;
-      list[0] += new_;
-      file &lt;&lt; list[0] &lt;&lt; std::endl;
-      list[1] += new_;
-      list[2] += new_;
-      list[0] = list[1];
-      list[1] = list[2];
-      list[2] = 0;
-  }
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-int count(){
-  std::fstream stream;
-  stream.open("output.txt");
-  std::string line;
-  int last = -1;
-  int increase = -2;
-  while(getline(stream, line)){
-    int new_ = std::stoi(line);
-    if (last != -1 &amp;&amp; last &lt; new_){
-      increase += 1;
+func part2() {
+  var result int
+  start := time.Now()
+  array := read_file("INPUT")
+  s := slide(array[:3])
+  for i := 3; i &lt; len(array); i++ {
+    if s(array[i]) {
+      result += 1
     }
-    last = new_;
   }
-  return increase;
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
 }
 
-int main(int argc, char ** argv){
-  prepare_file();
-  int result = count();
-  std::cout &lt;&lt; result &lt;&lt; std::endl;
-  return 0;
+func main() {
+  fmt.Println("Year 2021 day 1 - Sonar Sweep")
+  part1()
+  part2()
 }
 </code></pre>
 

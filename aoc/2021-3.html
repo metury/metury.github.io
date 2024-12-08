@@ -156,195 +156,116 @@
                     <main>
                         <h1 id="advent-of-code---year-2021-day-3"><a class="header" href="#advent-of-code---year-2021-day-3">Advent of code - Year 2021 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/3">day 3</a>. Go back to year <a href="2021.html">2021</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partcpp"><a class="header" href="#first-partcpp">first-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;iostream&gt;
-#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;array&gt;
+<h3 id="information"><a class="header" href="#information">Information</a></h3>
+<h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
+<p>In the first part we compute gamma and epsilon by computing number of ones. This determines the most significant bit among all lines. Then we compute the number from such binary representation.</p>
+<h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
+<p>In the second part we also compute the most significant bit and filter lines. Then get the number from binary representation and multiply both cases.</p>
+<h2 id="maingo"><a class="header" href="#maingo">main.go</a></h2>
+<pre><code class="language-go">package main
 
-int main(int argc, char * * argv){
-    std::fstream stream;
-    stream.open("INPUT");
-    std::string line;
-    const size_t length = 12;
-    std::array&lt;int, length&gt; ones = {0};
-    std::array&lt;int, length&gt; zeros = {0};
-    int gamma = 0;
-    int epsilon = 0;
-    while(getline(stream, line)){
-        for (size_t i = 0; i &lt; length; ++i){
-            if (line[i] == '0'){
-                if (ones[i] &gt;= 1){
-                    ones[i] -= 1;
-                }
-                else{
-                    zeros[i] += 1;
-                }
-            }
-            else if (line[i] == '1'){
-                if (zeros[i] &gt;= 1){
-                    zeros[i] -= 1;
-                }
-                else{
-                    ones[i] += 1;
-                }
-            }
-        }
-    }
-    int two = 2048; //16;
-    int max = 0;
-    for (size_t j = 0; j &lt; length; ++j){
-        if (zeros[j] == 0){
-            gamma += two;
-        }
-        else if (ones[j] == 0){
-            epsilon += two;
-        }
-        max += two;
-        two /= 2;
-    }
-    std::cout &lt;&lt; "Gamma: " &lt;&lt; gamma &lt;&lt; std::endl;
-    std::cout &lt;&lt; "Epsilon: " &lt;&lt; epsilon &lt;&lt; std::endl;
-    std::cout &lt;&lt; "Max: " &lt;&lt; max &lt;&lt; std::endl;
-    std::cout &lt;&lt; "Sum: " &lt;&lt; gamma + epsilon &lt;&lt; std::endl;
-    long compute = epsilon*gamma;
-    std::cout &lt;&lt; compute &lt;&lt; std::endl;  
-    return 0;
-}
-</code></pre>
-<h2 id="second-partcpp"><a class="header" href="#second-partcpp">second-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;iostream&gt;
-#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;array&gt;
+import (
+  "fmt"
+  "log"
+  "os"
+  "strconv"
+  "strings"
+  "time"
+)
 
-int write_file(std::string finput, std::string foutput, int compare, char comparison){
-    std::ifstream input;
-    std::ofstream output;
-    input.open(finput);
-    output.open(foutput);
-    std::string line;
-    int number = 0;
-    while(getline(input, line)){
-        if (line[compare] == comparison){
-            output &lt;&lt; line &lt;&lt; std::endl;
-            ++number;
-        }
+func read_file(file_path string) []string {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  lines := strings.Split(string(content), "\n")
+  for i, line := range lines {
+    if len(line) == 0 {
+      lines = append(lines[:i], lines[i+1:]...)
     }
-    return number;
+  }
+  return lines
 }
 
-void compute(std::string f1, std::string f2){
-    std::ifstream i1;
-    std::ifstream i2;
-    i1.open(f1);
-    i2.open(f2);
-    std::string line;
-    size_t p;
-    getline(i1, line);
-    int first = stoi(line, &amp;p, 2);
-    getline(i2, line);
-    int second = stoi(line, &amp;p, 2);
-    std::cout &lt;&lt; "First: " &lt;&lt; first &lt;&lt; std::endl;
-    std::cout &lt;&lt; "Second: " &lt;&lt; second &lt;&lt; std::endl;
-    std::cout &lt;&lt; first*second &lt;&lt; std::endl;
+func number_of_ones(lines []string, index int) int {
+  number_of_ones := 0
+  for _, line := range lines {
+    if line[index] == '0' {
+      number_of_ones -= 1
+    } else {
+      number_of_ones += 1
+    }
+  }
+  return number_of_ones
 }
 
-char filter_most(std::string file, int i){
-    std::fstream stream;
-    stream.open(file);
-    std::string line;
-    const size_t length = 12;
-    int ones = 0;
-    int zeros = 0;
-    while(getline(stream, line)){
-        if (line[i] == '0'){
-            if (ones &gt;= 1){
-                ones -= 1;
-            }
-            else{
-                zeros += 1;
-            }
-        }
-        else if (line[i] == '1'){
-            if (zeros &gt;= 1){
-                zeros -= 1;
-            }
-            else{
-                ones += 1;
-            }
-        }
+func significants(lines []string) int {
+  gamma, epsilon := 0, 0
+  acc := 1
+  for j := len(lines[0]) - 1; j &gt;= 0; j-- {
+    if number_of_ones(lines, j) &gt; 0 {
+      gamma += acc
+    } else {
+      epsilon += acc
     }
-    if (zeros == 0){
-        return '1';
-    }
-    else{
-        return '0';
-    }
+    acc *= 2
+  }
+  return gamma * epsilon
 }
 
-char filter_least(std::string file, int i){
-    std::fstream stream;
-    stream.open(file);
-    std::string line;
-    const size_t length = 12;
-    int ones = {0};
-    int zeros = {0};
-    while(getline(stream, line)){
-        if (line[i] == '0'){
-            if (ones &gt;= 1){
-                ones -= 1;
-            }
-            else{
-                zeros += 1;
-            }
-        }
-        else if (line[i] == '1'){
-            if (zeros &gt;= 1){
-                zeros -= 1;
-            }
-            else{
-                ones += 1;
-            }
-        }
+func filter(lines []string, rule func(int, byte) bool) int {
+  for i := 0; i &lt; len(lines[0]); i++ {
+    number_of_ones := number_of_ones(lines, i)
+    for j := 0; j &lt; len(lines); j++ {
+      if rule(number_of_ones, lines[j][i]) {
+        lines = append(lines[:j], lines[j+1:]...)
+        j--
+      }
     }
-    if (zeros == 0){
-        return '0';
+    if len(lines) == 1 {
+      nr, _ := strconv.ParseInt(lines[0], 2, 64)
+      return int(nr)
     }
-    else{
-        return '1';
-    }
+  }
+  return 0
 }
 
-int main(int argc, char * * argv){
-    std::string first = "1";
-    std::string second = "2";
-    char gamma = filter_most(first, 0);
-    int i = 0;
-    while (write_file(first, second, i, gamma) &gt; 1){
-        std::string temp = second;
-        second = first;
-        first = temp;
-        ++i;
-        gamma = filter_most(first, i);
-    }
-    first = "3";
-    second = "4";
-    char epsilon = filter_least(first, 0);
-    i = 0;
-    while (write_file(first, second, i, epsilon) &gt; 1){
-            std::string temp = second;
-            second = first;
-            first = temp;
-            ++i;
-            epsilon = filter_least(first, i);
-        }
-    first = "3";
-    second = "1";
-    compute(first, second);
-    return 0;
+func oxygen(lines []string) int {
+  rule := func(number_of_ones int, bit byte) bool {
+    return (number_of_ones &gt;= 0 &amp;&amp; bit == '0') || (number_of_ones &lt; 0 &amp;&amp; bit == '1')
+  }
+  return filter(lines, rule)
 }
 
+func co2(lines []string) int {
+  rule := func(number_of_ones int, bit byte) bool {
+    return (number_of_ones &lt; 0 &amp;&amp; bit == '0') || (number_of_ones &gt;= 0 &amp;&amp; bit == '1')
+  }
+  return filter(lines, rule)
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  lines := read_file("INPUT")
+  result = significants(lines)
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
+}
+
+func part2() {
+  var result int
+  start := time.Now()
+  result = oxygen(read_file("INPUT")) * co2(read_file("INPUT"))
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
+}
+
+func main() {
+  fmt.Println("Year 2021 day 3 - Binary Diagnostic")
+  part1()
+  part2()
+}
 </code></pre>
 
                     </main>

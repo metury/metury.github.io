@@ -726,7 +726,8 @@ alias mesi='meson install -C build/'
 alias p='python3'
 alias c='g++ -o main *.cpp'
 alias h='ghci'
-aliad g='go run main.go'
+alias gor='go run *.go'
+alias gof='go fmt *.go'
 
 # Update and install Rust language.
 alias rustinstall="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
@@ -6077,304 +6078,296 @@ compute2(0, 4000000)
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-1"><a class="header" href="#advent-of-code---year-2021-day-1">Advent of code - Year 2021 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/1">day 1</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partcpp"><a class="header" href="#first-partcpp">first-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;iostream&gt;
+<h3 id="information-23"><a class="header" href="#information-23">Information</a></h3>
+<h4 id="part-1-22"><a class="header" href="#part-1-22">Part 1</a></h4>
+<p>Generally we create a window of <code>n</code> elements and set their size. We proceed from <code>n</code>-th element and check if the sum of the new window is greater or not and update the sum and window. For part one the window has size <code>1</code>.</p>
+<h4 id="part-2-22"><a class="header" href="#part-2-22">Part 2</a></h4>
+<p>For the second part we set <code>n</code> to <code>3</code>.</p>
+<h2 id="maingo-8"><a class="header" href="#maingo-8">main.go</a></h2>
+<pre><code class="language-go">package main
 
-int main(int argc, char ** argv){
-  std::fstream stream;
-  stream.open("INPUT");
-  std::string line;
-  int last = -1;
-  int increase = 0;
-  while(getline(stream, line)){
-    int new_ = std::stoi(line);
-    if (last != -1 &amp;&amp; last &lt; new_){
-      increase += 1;
+import (
+  "fmt"
+  "log"
+  "os"
+  "regexp"
+  "strconv"
+  "time"
+)
+
+func read_file(file_path string) []int {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  regex := regexp.MustCompile("([0-9]+)")
+  found := regex.FindAllStringSubmatch(string(content), -1)
+  array := make([]int, len(found))
+  for i, f := range found {
+    array[i], _ = strconv.Atoi(f[1])
+  }
+  return array
+}
+
+func slide(start []int) func(int) bool {
+  window := start
+  sum := 0
+  for _, ele := range window {
+    sum += ele
+  }
+  return func(ele int) bool {
+    new_sum := sum - window[0] + ele
+    window = append(window[1:], ele)
+    res := new_sum &gt; sum
+    sum = new_sum
+    return res
+  }
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  array := read_file("INPUT")
+  s := slide(array[:1])
+  for i := 1; i &lt; len(array); i++ {
+    if s(array[i]) {
+      result += 1
     }
-    last = new_;
   }
-  std::cout &lt;&lt; increase &lt;&lt; std::endl;
-  return 0;
-}
-</code></pre>
-<h2 id="second-partcpp"><a class="header" href="#second-partcpp">second-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;iostream&gt;
-#include&lt;array&gt;
-
-void prepare_file(){
-  std::fstream stream;
-  std::ofstream file;
-  file.open("output.txt");
-  stream.open("input.txt");
-  std::string line;
-  std::array&lt;int, 3&gt; list = {0};
-  while(getline(stream, line)){
-      int new_ = stoi(line);
-      int i = 0;
-      list[0] += new_;
-      file &lt;&lt; list[0] &lt;&lt; std::endl;
-      list[1] += new_;
-      list[2] += new_;
-      list[0] = list[1];
-      list[1] = list[2];
-      list[2] = 0;
-  }
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-int count(){
-  std::fstream stream;
-  stream.open("output.txt");
-  std::string line;
-  int last = -1;
-  int increase = -2;
-  while(getline(stream, line)){
-    int new_ = std::stoi(line);
-    if (last != -1 &amp;&amp; last &lt; new_){
-      increase += 1;
+func part2() {
+  var result int
+  start := time.Now()
+  array := read_file("INPUT")
+  s := slide(array[:3])
+  for i := 3; i &lt; len(array); i++ {
+    if s(array[i]) {
+      result += 1
     }
-    last = new_;
   }
-  return increase;
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
 }
 
-int main(int argc, char ** argv){
-  prepare_file();
-  int result = count();
-  std::cout &lt;&lt; result &lt;&lt; std::endl;
-  return 0;
+func main() {
+  fmt.Println("Year 2021 day 1 - Sonar Sweep")
+  part1()
+  part2()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-2"><a class="header" href="#advent-of-code---year-2021-day-2">Advent of code - Year 2021 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/2">day 2</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="maincpp-2"><a class="header" href="#maincpp-2">main.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;iostream&gt;
-#include&lt;fstream&gt;
-#include&lt;string&gt;
+<h3 id="information-24"><a class="header" href="#information-24">Information</a></h3>
+<h4 id="part-1-23"><a class="header" href="#part-1-23">Part 1</a></h4>
+<p>In the first part we simply calculate the depth and forward position. The parsing is done via <code>regex</code>.</p>
+<h4 id="part-2-23"><a class="header" href="#part-2-23">Part 2</a></h4>
+<p>For the second part we use the provided calculation using aim.</p>
+<h2 id="maingo-9"><a class="header" href="#maingo-9">main.go</a></h2>
+<pre><code class="language-go">package main
 
-int main(int argc, char * * argv){
-  std::ifstream stream;
-  stream.open("INPUT");
-  std::string line;
-  int depth = 0;
-  int forward = 0;
-  int aim = 0;
-  while(getline(stream, line)){
-    int now = std::stoi(line.substr(line.length()-2, line.length()-1));
-    if (line[0] == 'u'){
-      aim -= now;
-    }
-    else if (line[0] == 'f'){
-      forward += now;
-      depth += (aim*now);
-    }
-    else{
-      aim += now;
+import (
+  "fmt"
+  "log"
+  "os"
+  "regexp"
+  "strconv"
+  "time"
+)
+
+type Instruction struct {
+  instruction string
+  value       int
+}
+
+func read_file(file_path string) []Instruction {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  regex := regexp.MustCompile("(forward|up|down) ([0-9])")
+  found := regex.FindAllStringSubmatch(string(content), -1)
+  instructions := make([]Instruction, len(found))
+  for i, f := range found {
+    nr, _ := strconv.Atoi(f[2])
+    instructions[i] = Instruction{f[1], nr}
+  }
+  return instructions
+}
+
+func compute(instructions []Instruction) int {
+  depth, forward := 0, 0
+  for _, instruction := range instructions {
+    switch instruction.instruction {
+    case "up":
+      depth -= instruction.value
+    case "down":
+      depth += instruction.value
+    case "forward":
+      forward += instruction.value
     }
   }
-  std::cout &lt;&lt; "Depth: " &lt;&lt; depth &lt;&lt; ", forward: " &lt;&lt; forward &lt;&lt; std::endl;
-  long mult = depth*forward;
-  std::cout &lt;&lt; mult &lt;&lt; std::endl; 
+  return depth * forward
+}
+
+func compute_aim(instructions []Instruction) int {
+  depth, forward, aim := 0, 0, 0
+  for _, instruction := range instructions {
+    switch instruction.instruction {
+    case "up":
+      aim -= instruction.value
+    case "down":
+      aim += instruction.value
+    case "forward":
+      forward += instruction.value
+      depth += aim * instruction.value
+    }
+  }
+  return depth * forward
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  instructions := read_file("INPUT")
+  result = compute(instructions)
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
+}
+
+func part2() {
+  var result int
+  start := time.Now()
+  instructions := read_file("INPUT")
+  result = compute_aim(instructions)
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
+}
+
+func main() {
+  fmt.Println("Year 2021 day 2 - Dive!")
+  part1()
+  part2()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-3"><a class="header" href="#advent-of-code---year-2021-day-3">Advent of code - Year 2021 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/3">day 3</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partcpp-1"><a class="header" href="#first-partcpp-1">first-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;iostream&gt;
-#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;array&gt;
+<h3 id="information-25"><a class="header" href="#information-25">Information</a></h3>
+<h4 id="part-1-24"><a class="header" href="#part-1-24">Part 1</a></h4>
+<p>In the first part we compute gamma and epsilon by computing number of ones. This determines the most significant bit among all lines. Then we compute the number from such binary representation.</p>
+<h4 id="part-2-24"><a class="header" href="#part-2-24">Part 2</a></h4>
+<p>In the second part we also compute the most significant bit and filter lines. Then get the number from binary representation and multiply both cases.</p>
+<h2 id="maingo-10"><a class="header" href="#maingo-10">main.go</a></h2>
+<pre><code class="language-go">package main
 
-int main(int argc, char * * argv){
-    std::fstream stream;
-    stream.open("INPUT");
-    std::string line;
-    const size_t length = 12;
-    std::array&lt;int, length&gt; ones = {0};
-    std::array&lt;int, length&gt; zeros = {0};
-    int gamma = 0;
-    int epsilon = 0;
-    while(getline(stream, line)){
-        for (size_t i = 0; i &lt; length; ++i){
-            if (line[i] == '0'){
-                if (ones[i] &gt;= 1){
-                    ones[i] -= 1;
-                }
-                else{
-                    zeros[i] += 1;
-                }
-            }
-            else if (line[i] == '1'){
-                if (zeros[i] &gt;= 1){
-                    zeros[i] -= 1;
-                }
-                else{
-                    ones[i] += 1;
-                }
-            }
-        }
-    }
-    int two = 2048; //16;
-    int max = 0;
-    for (size_t j = 0; j &lt; length; ++j){
-        if (zeros[j] == 0){
-            gamma += two;
-        }
-        else if (ones[j] == 0){
-            epsilon += two;
-        }
-        max += two;
-        two /= 2;
-    }
-    std::cout &lt;&lt; "Gamma: " &lt;&lt; gamma &lt;&lt; std::endl;
-    std::cout &lt;&lt; "Epsilon: " &lt;&lt; epsilon &lt;&lt; std::endl;
-    std::cout &lt;&lt; "Max: " &lt;&lt; max &lt;&lt; std::endl;
-    std::cout &lt;&lt; "Sum: " &lt;&lt; gamma + epsilon &lt;&lt; std::endl;
-    long compute = epsilon*gamma;
-    std::cout &lt;&lt; compute &lt;&lt; std::endl;  
-    return 0;
-}
-</code></pre>
-<h2 id="second-partcpp-1"><a class="header" href="#second-partcpp-1">second-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;iostream&gt;
-#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;array&gt;
+import (
+  "fmt"
+  "log"
+  "os"
+  "strconv"
+  "strings"
+  "time"
+)
 
-int write_file(std::string finput, std::string foutput, int compare, char comparison){
-    std::ifstream input;
-    std::ofstream output;
-    input.open(finput);
-    output.open(foutput);
-    std::string line;
-    int number = 0;
-    while(getline(input, line)){
-        if (line[compare] == comparison){
-            output &lt;&lt; line &lt;&lt; std::endl;
-            ++number;
-        }
+func read_file(file_path string) []string {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  lines := strings.Split(string(content), "\n")
+  for i, line := range lines {
+    if len(line) == 0 {
+      lines = append(lines[:i], lines[i+1:]...)
     }
-    return number;
+  }
+  return lines
 }
 
-void compute(std::string f1, std::string f2){
-    std::ifstream i1;
-    std::ifstream i2;
-    i1.open(f1);
-    i2.open(f2);
-    std::string line;
-    size_t p;
-    getline(i1, line);
-    int first = stoi(line, &amp;p, 2);
-    getline(i2, line);
-    int second = stoi(line, &amp;p, 2);
-    std::cout &lt;&lt; "First: " &lt;&lt; first &lt;&lt; std::endl;
-    std::cout &lt;&lt; "Second: " &lt;&lt; second &lt;&lt; std::endl;
-    std::cout &lt;&lt; first*second &lt;&lt; std::endl;
+func number_of_ones(lines []string, index int) int {
+  number_of_ones := 0
+  for _, line := range lines {
+    if line[index] == '0' {
+      number_of_ones -= 1
+    } else {
+      number_of_ones += 1
+    }
+  }
+  return number_of_ones
 }
 
-char filter_most(std::string file, int i){
-    std::fstream stream;
-    stream.open(file);
-    std::string line;
-    const size_t length = 12;
-    int ones = 0;
-    int zeros = 0;
-    while(getline(stream, line)){
-        if (line[i] == '0'){
-            if (ones &gt;= 1){
-                ones -= 1;
-            }
-            else{
-                zeros += 1;
-            }
-        }
-        else if (line[i] == '1'){
-            if (zeros &gt;= 1){
-                zeros -= 1;
-            }
-            else{
-                ones += 1;
-            }
-        }
+func significants(lines []string) int {
+  gamma, epsilon := 0, 0
+  acc := 1
+  for j := len(lines[0]) - 1; j &gt;= 0; j-- {
+    if number_of_ones(lines, j) &gt; 0 {
+      gamma += acc
+    } else {
+      epsilon += acc
     }
-    if (zeros == 0){
-        return '1';
-    }
-    else{
-        return '0';
-    }
+    acc *= 2
+  }
+  return gamma * epsilon
 }
 
-char filter_least(std::string file, int i){
-    std::fstream stream;
-    stream.open(file);
-    std::string line;
-    const size_t length = 12;
-    int ones = {0};
-    int zeros = {0};
-    while(getline(stream, line)){
-        if (line[i] == '0'){
-            if (ones &gt;= 1){
-                ones -= 1;
-            }
-            else{
-                zeros += 1;
-            }
-        }
-        else if (line[i] == '1'){
-            if (zeros &gt;= 1){
-                zeros -= 1;
-            }
-            else{
-                ones += 1;
-            }
-        }
+func filter(lines []string, rule func(int, byte) bool) int {
+  for i := 0; i &lt; len(lines[0]); i++ {
+    number_of_ones := number_of_ones(lines, i)
+    for j := 0; j &lt; len(lines); j++ {
+      if rule(number_of_ones, lines[j][i]) {
+        lines = append(lines[:j], lines[j+1:]...)
+        j--
+      }
     }
-    if (zeros == 0){
-        return '0';
+    if len(lines) == 1 {
+      nr, _ := strconv.ParseInt(lines[0], 2, 64)
+      return int(nr)
     }
-    else{
-        return '1';
-    }
+  }
+  return 0
 }
 
-int main(int argc, char * * argv){
-    std::string first = "1";
-    std::string second = "2";
-    char gamma = filter_most(first, 0);
-    int i = 0;
-    while (write_file(first, second, i, gamma) &gt; 1){
-        std::string temp = second;
-        second = first;
-        first = temp;
-        ++i;
-        gamma = filter_most(first, i);
-    }
-    first = "3";
-    second = "4";
-    char epsilon = filter_least(first, 0);
-    i = 0;
-    while (write_file(first, second, i, epsilon) &gt; 1){
-            std::string temp = second;
-            second = first;
-            first = temp;
-            ++i;
-            epsilon = filter_least(first, i);
-        }
-    first = "3";
-    second = "1";
-    compute(first, second);
-    return 0;
+func oxygen(lines []string) int {
+  rule := func(number_of_ones int, bit byte) bool {
+    return (number_of_ones &gt;= 0 &amp;&amp; bit == '0') || (number_of_ones &lt; 0 &amp;&amp; bit == '1')
+  }
+  return filter(lines, rule)
 }
 
+func co2(lines []string) int {
+  rule := func(number_of_ones int, bit byte) bool {
+    return (number_of_ones &lt; 0 &amp;&amp; bit == '0') || (number_of_ones &gt;= 0 &amp;&amp; bit == '1')
+  }
+  return filter(lines, rule)
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  lines := read_file("INPUT")
+  result = significants(lines)
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
+}
+
+func part2() {
+  var result int
+  start := time.Now()
+  result = oxygen(read_file("INPUT")) * co2(read_file("INPUT"))
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
+}
+
+func main() {
+  fmt.Println("Year 2021 day 3 - Binary Diagnostic")
+  part1()
+  part2()
+}
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-4"><a class="header" href="#advent-of-code---year-2021-day-4">Advent of code - Year 2021 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/4">day 4</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partcpp-2"><a class="header" href="#first-partcpp-2">first-part.cpp</a></h2>
+<h2 id="first-partcpp"><a class="header" href="#first-partcpp">first-part.cpp</a></h2>
 <pre><code class="language-cpp">#include&lt;iostream&gt;
 #include&lt;fstream&gt;
 #include&lt;string&gt;
@@ -6495,7 +6488,7 @@ int main(int argc, char * * argv){
     return 0;
 }
 </code></pre>
-<h2 id="second-partcpp-2"><a class="header" href="#second-partcpp-2">second-part.cpp</a></h2>
+<h2 id="second-partcpp"><a class="header" href="#second-partcpp">second-part.cpp</a></h2>
 <pre><code class="language-cpp">#include&lt;iostream&gt;
 #include&lt;fstream&gt;
 #include&lt;string&gt;
@@ -6839,10 +6832,10 @@ with open("INPUT") as f:
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2017-day-1"><a class="header" href="#advent-of-code---year-2017-day-1">Advent of code - Year 2017 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2017/day/1">day 1</a>. Go back to year <a href="aoc/2017.html">2017</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-23"><a class="header" href="#information-23">Information</a></h3>
-<h4 id="part-1-22"><a class="header" href="#part-1-22">Part 1</a></h4>
+<h3 id="information-26"><a class="header" href="#information-26">Information</a></h3>
+<h4 id="part-1-25"><a class="header" href="#part-1-25">Part 1</a></h4>
 <p>In the first part we lineary check the two consecutive indexes and if they match add them. These are taken with modulo.</p>
-<h4 id="part-2-22"><a class="header" href="#part-2-22">Part 2</a></h4>
+<h4 id="part-2-25"><a class="header" href="#part-2-25">Part 2</a></h4>
 <p>In the second part instead of looking at consecutive ones look at the ones that are hlafway apart.</p>
 <h2 id="mainrs-14"><a class="header" href="#mainrs-14">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -6883,10 +6876,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2017-day-2"><a class="header" href="#advent-of-code---year-2017-day-2">Advent of code - Year 2017 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2017/day/2">day 2</a>. Go back to year <a href="aoc/2017.html">2017</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-24"><a class="header" href="#information-24">Information</a></h3>
-<h4 id="part-1-23"><a class="header" href="#part-1-23">Part 1</a></h4>
+<h3 id="information-27"><a class="header" href="#information-27">Information</a></h3>
+<h4 id="part-1-26"><a class="header" href="#part-1-26">Part 1</a></h4>
 <p>In the first part we use iterations. We compute the maximums and minimums. After that we zip those together and find the subtraction and sum it up.</p>
-<h4 id="part-2-23"><a class="header" href="#part-2-23">Part 2</a></h4>
+<h4 id="part-2-26"><a class="header" href="#part-2-26">Part 2</a></h4>
 <p>In the second part we go through all posibilities and test if they are divisible or not. If they are add the division to the total and break the loop for the line.</p>
 <h2 id="mainrs-15"><a class="header" href="#mainrs-15">main.rs</a></h2>
 <pre><code class="language-rs">use std::cmp::{max, min};
@@ -6959,10 +6952,10 @@ fn main() {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-1"><a class="header" href="#advent-of-code---year-2016-day-1">Advent of code - Year 2016 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/1">day 1</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-25"><a class="header" href="#information-25">Information</a></h3>
-<h4 id="part-1-24"><a class="header" href="#part-1-24">Part 1</a></h4>
+<h3 id="information-28"><a class="header" href="#information-28">Information</a></h3>
+<h4 id="part-1-27"><a class="header" href="#part-1-27">Part 1</a></h4>
 <p>In the first part we jump from one place to another and then compute the manhattan distance. It is implemented to solve also the other part.</p>
-<h4 id="part-2-24"><a class="header" href="#part-2-24">Part 2</a></h4>
+<h4 id="part-2-27"><a class="header" href="#part-2-27">Part 2</a></h4>
 <p>The second part we visit every single step in the middle and find the one which was already visited.</p>
 <h2 id="mainrs-16"><a class="header" href="#mainrs-16">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -7071,10 +7064,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-2"><a class="header" href="#advent-of-code---year-2016-day-2">Advent of code - Year 2016 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/2">day 2</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-26"><a class="header" href="#information-26">Information</a></h3>
-<h4 id="part-1-25"><a class="header" href="#part-1-25">Part 1</a></h4>
+<h3 id="information-29"><a class="header" href="#information-29">Information</a></h3>
+<h4 id="part-1-28"><a class="header" href="#part-1-28">Part 1</a></h4>
 <p>The first part can be done with aritmetics and matrix <code>3x3</code> and not to move out of boundaries.</p>
-<h4 id="part-2-25"><a class="header" href="#part-2-25">Part 2</a></h4>
+<h4 id="part-2-28"><a class="header" href="#part-2-28">Part 2</a></h4>
 <p>In the second part we create a dialpads with boundaries so we never can reach out of it. So when we move we only check if there is empty symbol or not. This is also used for the first part to reuse the code.</p>
 <h2 id="mainrs-17"><a class="header" href="#mainrs-17">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -7168,9 +7161,9 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-3"><a class="header" href="#advent-of-code---year-2016-day-3">Advent of code - Year 2016 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/3">day 3</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-27"><a class="header" href="#information-27">Information</a></h3>
-<h4 id="part-1-26"><a class="header" href="#part-1-26">Part 1</a></h4>
-<h4 id="part-2-26"><a class="header" href="#part-2-26">Part 2</a></h4>
+<h3 id="information-30"><a class="header" href="#information-30">Information</a></h3>
+<h4 id="part-1-29"><a class="header" href="#part-1-29">Part 1</a></h4>
+<h4 id="part-2-29"><a class="header" href="#part-2-29">Part 2</a></h4>
 <h2 id="mainrs-18"><a class="header" href="#mainrs-18">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
 use std::fs;
@@ -7253,10 +7246,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-4"><a class="header" href="#advent-of-code---year-2016-day-4">Advent of code - Year 2016 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/4">day 4</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-28"><a class="header" href="#information-28">Information</a></h3>
-<h4 id="part-1-27"><a class="header" href="#part-1-27">Part 1</a></h4>
+<h3 id="information-31"><a class="header" href="#information-31">Information</a></h3>
+<h4 id="part-1-30"><a class="header" href="#part-1-30">Part 1</a></h4>
 <p>In the first part we count all alfabet symbols, then sort the ones that have at least some appearance. And lastly match it with the <code>checksum</code>.</p>
-<h4 id="part-2-27"><a class="header" href="#part-2-27">Part 2</a></h4>
+<h4 id="part-2-30"><a class="header" href="#part-2-30">Part 2</a></h4>
 <p>In the second part we normally shift the alfa by the given <code>id</code> and check if is equal to <code>northpole object storage</code>.</p>
 <h2 id="mainrs-19"><a class="header" href="#mainrs-19">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -7373,10 +7366,10 @@ fn main() {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-1"><a class="header" href="#advent-of-code---year-2015-day-1">Advent of code - Year 2015 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/1">day 1</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-29"><a class="header" href="#information-29">Information</a></h3>
-<h4 id="part-1-28"><a class="header" href="#part-1-28">Part 1</a></h4>
+<h3 id="information-32"><a class="header" href="#information-32">Information</a></h3>
+<h4 id="part-1-31"><a class="header" href="#part-1-31">Part 1</a></h4>
 <p>Simply just go through the list and count the floors.</p>
-<h4 id="part-2-28"><a class="header" href="#part-2-28">Part 2</a></h4>
+<h4 id="part-2-31"><a class="header" href="#part-2-31">Part 2</a></h4>
 <p>Also just compute the floors and whenever we hit something <code>&lt;0</code> return index.</p>
 <h2 id="mainrs-20"><a class="header" href="#mainrs-20">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -7428,10 +7421,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-2"><a class="header" href="#advent-of-code---year-2015-day-2">Advent of code - Year 2015 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/2">day 2</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-30"><a class="header" href="#information-30">Information</a></h3>
-<h4 id="part-1-29"><a class="header" href="#part-1-29">Part 1</a></h4>
+<h3 id="information-33"><a class="header" href="#information-33">Information</a></h3>
+<h4 id="part-1-32"><a class="header" href="#part-1-32">Part 1</a></h4>
 <p>We simply compute the given formula.</p>
-<h4 id="part-2-29"><a class="header" href="#part-2-29">Part 2</a></h4>
+<h4 id="part-2-32"><a class="header" href="#part-2-32">Part 2</a></h4>
 <p>Also just usage of the given formula.</p>
 <h2 id="mainrs-21"><a class="header" href="#mainrs-21">main.rs</a></h2>
 <pre><code class="language-rs">use std::cmp::min;
@@ -7506,10 +7499,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-3"><a class="header" href="#advent-of-code---year-2015-day-3">Advent of code - Year 2015 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/3">day 3</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-31"><a class="header" href="#information-31">Information</a></h3>
-<h4 id="part-1-30"><a class="header" href="#part-1-30">Part 1</a></h4>
+<h3 id="information-34"><a class="header" href="#information-34">Information</a></h3>
+<h4 id="part-1-33"><a class="header" href="#part-1-33">Part 1</a></h4>
 <p>In the first part we remember in a set whihc positins were visited and count the size of the set.</p>
-<h4 id="part-2-30"><a class="header" href="#part-2-30">Part 2</a></h4>
+<h4 id="part-2-33"><a class="header" href="#part-2-33">Part 2</a></h4>
 <p>In the second part we only swap these values every time and after that we do the same thing. So we switch the santas.</p>
 <h2 id="mainrs-22"><a class="header" href="#mainrs-22">main.rs</a></h2>
 <pre><code class="language-rs">use std::collections::HashSet;
@@ -7563,10 +7556,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-4"><a class="header" href="#advent-of-code---year-2015-day-4">Advent of code - Year 2015 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/4">day 4</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-32"><a class="header" href="#information-32">Information</a></h3>
-<h4 id="part-1-31"><a class="header" href="#part-1-31">Part 1</a></h4>
+<h3 id="information-35"><a class="header" href="#information-35">Information</a></h3>
+<h4 id="part-1-34"><a class="header" href="#part-1-34">Part 1</a></h4>
 <p>First of all we import <code>md-5</code> library to compute the hashes. Then simply compute the hashses of <code>key</code> appended by iterating indexes.</p>
-<h4 id="part-2-31"><a class="header" href="#part-2-31">Part 2</a></h4>
+<h4 id="part-2-34"><a class="header" href="#part-2-34">Part 2</a></h4>
 <p>The second part is same only we check six zeros.</p>
 <h2 id="mainrs-23"><a class="header" href="#mainrs-23">main.rs</a></h2>
 <pre><code class="language-rs">use md5::{Digest, Md5};
@@ -7612,10 +7605,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-5"><a class="header" href="#advent-of-code---year-2015-day-5">Advent of code - Year 2015 Day 5</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/5">day 5</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-33"><a class="header" href="#information-33">Information</a></h3>
-<h4 id="part-1-32"><a class="header" href="#part-1-32">Part 1</a></h4>
+<h3 id="information-36"><a class="header" href="#information-36">Information</a></h3>
+<h4 id="part-1-35"><a class="header" href="#part-1-35">Part 1</a></h4>
 <p>For the first part we only need to configure the right regexes to represent each type. And than either mathc them or count them.</p>
-<h4 id="part-2-32"><a class="header" href="#part-2-32">Part 2</a></h4>
+<h4 id="part-2-35"><a class="header" href="#part-2-35">Part 2</a></h4>
 <p>The second part is similiar only we use different regexes.</p>
 <h2 id="mainrs-24"><a class="header" href="#mainrs-24">main.rs</a></h2>
 <pre><code class="language-rs">use fancy_regex::Regex as Rgx;
@@ -7681,10 +7674,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-6"><a class="header" href="#advent-of-code---year-2015-day-6">Advent of code - Year 2015 Day 6</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/6">day 6</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-34"><a class="header" href="#information-34">Information</a></h3>
-<h4 id="part-1-33"><a class="header" href="#part-1-33">Part 1</a></h4>
+<h3 id="information-37"><a class="header" href="#information-37">Information</a></h3>
+<h4 id="part-1-36"><a class="header" href="#part-1-36">Part 1</a></h4>
 <p>We simply follow the given instructions on the <code>1000x1000</code> grid. Then compute those which are <code>true</code>.</p>
-<h4 id="part-2-33"><a class="header" href="#part-2-33">Part 2</a></h4>
+<h4 id="part-2-36"><a class="header" href="#part-2-36">Part 2</a></h4>
 <p>In the second part we redefine the instructions and compute the sum.</p>
 <h2 id="mainrs-25"><a class="header" href="#mainrs-25">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -7814,9 +7807,9 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-7"><a class="header" href="#advent-of-code---year-2015-day-7">Advent of code - Year 2015 Day 7</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/7">day 7</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-35"><a class="header" href="#information-35">Information</a></h3>
-<h4 id="part-1-34"><a class="header" href="#part-1-34">Part 1</a></h4>
-<h4 id="part-2-34"><a class="header" href="#part-2-34">Part 2</a></h4>
+<h3 id="information-38"><a class="header" href="#information-38">Information</a></h3>
+<h4 id="part-1-37"><a class="header" href="#part-1-37">Part 1</a></h4>
+<h4 id="part-2-37"><a class="header" href="#part-2-37">Part 2</a></h4>
 <h2 id="mainrs-26"><a class="header" href="#mainrs-26">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
 use std::collections::HashMap;
