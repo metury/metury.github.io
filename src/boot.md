@@ -22,7 +22,8 @@ alias mesi='meson install -C build/'
 alias p='python3'
 alias c='g++ -o main *.cpp'
 alias h='ghci'
-aliad g='go run main.go'
+alias gor='go run *.go'
+alias gof='go fmt *.go'
 
 # Update and install Rust language.
 alias rustinstall="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
