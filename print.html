@@ -6367,345 +6367,430 @@ func main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-4"><a class="header" href="#advent-of-code---year-2021-day-4">Advent of code - Year 2021 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/4">day 4</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partcpp"><a class="header" href="#first-partcpp">first-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;iostream&gt;
-#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;array&gt;
-#include&lt;vector&gt;
+<h3 id="information-26"><a class="header" href="#information-26">Information</a></h3>
+<h4 id="part-1-25"><a class="header" href="#part-1-25">Part 1</a></h4>
+<p>In the first part we iterate over the numbers and fill in the bingo cards and check if it is winning, if so compute the value and multiply it by the drawn number.</p>
+<h4 id="part-2-25"><a class="header" href="#part-2-25">Part 2</a></h4>
+<p>In the second part use the same procedure, only cycle through the winning boards, since multiple boards can win in with the same number.</p>
+<h2 id="maingo-11"><a class="header" href="#maingo-11">main.go</a></h2>
+<pre><code class="language-go">package main
 
-struct Square{
-    public:
-        int number;
-        bool used;
-};
+import (
+  "fmt"
+  "log"
+  "os"
+  "strconv"
+  "strings"
+  "time"
+)
 
-using board = std::array&lt; std::array &lt; Square, 5&gt;, 5&gt;;
+type Box struct {
+  value int
+  mark  bool
+}
 
-void read(std::vector&lt;int&gt;&amp; numbers, std::vector&lt;board&gt;&amp; boards){
-    std::ifstream file;
-    file.open("INPUT");
-    std::string line;
-    bool first = true;
-    while (getline(file, line)){
-        if (first){
-            for (size_t i = 0; i &lt; line.length(); ++i){
-                size_t shift = 0;
-                int now = std::stoi(line.substr(i, line.length()), &amp;shift);
-                i += shift;
-                numbers.push_back(now);
-            }
-            first = false;
-            getline(file, line);
+type Bingo [5][5]Box
+
+func empty_bingo() Bingo {
+  var bingo Bingo
+  return bingo
+}
+
+func read_file(file_path string) ([]int, []Bingo) {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  counter := 0
+  var numbers []int
+  var bingos []Bingo
+  for _, line := range strings.Split(string(content), "\n") {
+    if len(line) == 0 {
+      continue
+    }
+    space_splited := strings.Split(line, " ")
+    comma_splited := strings.Split(line, ",")
+    if len(comma_splited) &gt; 1 {
+      for _, nbr_string := range comma_splited {
+        nr, _ := strconv.Atoi(nbr_string)
+        numbers = append(numbers, nr)
+      }
+    } else {
+      if counter%5 == 0 {
+        bingos = append(bingos, empty_bingo())
+      }
+      j := 0
+      for i := 0; i &lt; len(space_splited); i++ {
+        if len(space_splited[i]) == 0 {
+          continue
         }
-        else{
-            board temp;
-            for (size_t j = 0; j &lt; 5; ++j){
-                size_t l = 0;
-                for (size_t i = 0; i &lt; line.length(); ++i){
-                    Square sq;
-                    size_t shift;
-                int now = std::stoi(line.substr(i, line.length()), &amp;shift);
-                    i += shift;
-                sq.number = now;
-                    temp[j][l] = sq;
-                    ++l;
-                }
-                getline(file, line);
-            }
-            boards.push_back(temp);
+        nr, _ := strconv.Atoi(space_splited[i])
+        bingos[counter/5][counter%5][j] = Box{nr, false}
+        j++
+      }
+      counter++
+    }
+  }
+  return numbers, bingos
+}
+
+func is_winning(bingo Bingo) bool {
+  for i, row := range bingo {
+    is_row_winning := true
+    is_column_winning := true
+    for j, ele := range row {
+      is_row_winning = is_row_winning &amp;&amp; ele.mark
+      is_column_winning = is_column_winning &amp;&amp; bingo[j][i].mark
+    }
+    if is_row_winning || is_column_winning {
+      return true
+    }
+  }
+  return false
+}
+
+func value_of_bingo(bingo Bingo) int {
+  result := 0
+  for _, row := range bingo {
+    for _, ele := range row {
+      if !ele.mark {
+        result += ele.value
+      }
+    }
+  }
+  return result
+}
+
+func draw_number(bingos []Bingo, number int) (int, int, bool) {
+  for k, bingo := range bingos {
+    for i, row := range bingo {
+      for j, ele := range row {
+        if number == ele.value {
+          bingos[k][i][j].mark = true
         }
+      }
     }
-}
-
-bool check (board&amp; brd){
-    std::array&lt;bool, 5&gt; rows = {true, true, true, true, true};
-    std::array&lt;bool, 5&gt; columns = {true, true, true, true, true};
-    bool succes = false;
-    for (size_t i = 0; i &lt; 5; ++i){
-        for (size_t j = 0; j &lt; 5; ++j){
-            rows[i] = rows[i] &amp;&amp; brd[i][j].used;
-            columns[j] = columns[j] &amp;&amp; brd[i][j].used;
-        }
+    if is_winning(bingos[k]) {
+      return number * value_of_bingo(bingos[k]), k, true
     }
-    for (size_t i = 0; i &lt; 5; ++i){
-        succes = succes || rows[i];
-        succes = succes || columns[i];
+  }
+  return 0, -1, false
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  numbers, bingos := read_file("INPUT")
+  for _, number := range numbers {
+    val, _, win := draw_number(bingos, number)
+    if win {
+      result = val
+      break
     }
-    return succes;
+  }
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-int calculate(int number, board&amp; brd){
-    int result = 0;
-    for (size_t i = 0; i &lt; 5; ++i){
-        for (size_t j = 0; j &lt; 5; ++j){
-            if (!brd[i][j].used){
-                result += brd[i][j].number;
-            }
-        }
+func part2() {
+  var result int
+  start := time.Now()
+  numbers, bingos := read_file("INPUT")
+  for _, number := range numbers {
+    val, index, win := draw_number(bingos, number)
+    for win {
+      bingos = append(bingos[:index], bingos[index+1:]...)
+      result = val
+      val, index, win = draw_number(bingos, number)
     }
-    std::cout &lt;&lt; "Sum: " &lt;&lt; result &lt;&lt; std::endl;
-    result *= number;
-    return result;
+  }
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
 }
 
-void print_matrix(board&amp; brd){
-std::cout &lt;&lt; "Matrix:" &lt;&lt; std::endl;
-for (size_t i = 0; i &lt; 5; ++i){
-    for (size_t j = 0; j &lt; 5; ++j){
-            std::cout &lt;&lt; brd[i][j].number &lt;&lt; ":" &lt;&lt; brd[i][j].used &lt;&lt; " ";
-    }
-std::cout &lt;&lt; std::endl;
-}
-}
-
-int compute(std::vector&lt;int&gt;&amp; numbers, std::vector&lt;board&gt;&amp; boards){
-    for (auto&amp; num : numbers){
-        for (auto&amp; brd : boards){
-            for (size_t i = 0; i &lt; 5; ++i){
-                for (size_t j = 0; j &lt; 5; ++j){
-                    if(brd[i][j].number == num){
-                        brd[i][j].used = true;          
-                    }
-                }
-            }
-            if (check(brd)){
-                std::cout &lt;&lt; "Number: " &lt;&lt; num &lt;&lt; std::endl;
-                print_matrix(brd);
-                return calculate(num, brd);
-            }
-        }
-    }
-    return 0;
-}
-
-int main(int argc, char * * argv){
-    std::vector&lt;int&gt; numbers;
-    std::vector&lt;board&gt; boards;
-    read(numbers, boards);
-    int result = compute(numbers, boards);
-    std::cout &lt;&lt; result &lt;&lt; std::endl;
-    return 0;
-}
-</code></pre>
-<h2 id="second-partcpp"><a class="header" href="#second-partcpp">second-part.cpp</a></h2>
-<pre><code class="language-cpp">#include&lt;iostream&gt;
-#include&lt;fstream&gt;
-#include&lt;string&gt;
-#include&lt;array&gt;
-#include&lt;vector&gt;
-
-struct Square{
-    public:
-        int number;
-        bool used;
-};
-
-using board = std::array&lt; std::array &lt; Square, 5&gt;, 5&gt;;
-
-void read(std::vector&lt;int&gt;&amp; numbers, std::vector&lt;board&gt;&amp; boards){
-    std::ifstream file;
-    file.open("input.txt");
-    std::string line;
-    bool first = true;
-    while (getline(file, line)){
-        if (first){
-            for (size_t i = 0; i &lt; line.length(); ++i){
-                size_t shift = 0;
-                int now = std::stoi(line.substr(i, line.length()), &amp;shift);
-                i += shift;
-                numbers.push_back(now);
-            }
-            first = false;
-            getline(file, line);
-        }
-        else{
-            board temp;
-            for (size_t j = 0; j &lt; 5; ++j){
-                size_t l = 0;
-                for (size_t i = 0; i &lt; line.length(); ++i){
-                    Square sq;
-                    size_t shift;
-                int now = std::stoi(line.substr(i, line.length()), &amp;shift);
-                    i += shift;
-                sq.number = now;
-                    temp[j][l] = sq;
-                    ++l;
-                }
-                getline(file, line);
-            }
-            boards.push_back(temp);
-        }
-    }
-}
-
-bool check (board&amp; brd){
-    std::array&lt;bool, 5&gt; rows = {true, true, true, true, true};
-    std::array&lt;bool, 5&gt; columns = {true, true, true, true, true};
-    bool succes = false;
-    for (size_t i = 0; i &lt; 5; ++i){
-        for (size_t j = 0; j &lt; 5; ++j){
-            rows[i] = rows[i] &amp;&amp; brd[i][j].used;
-            columns[j] = columns[j] &amp;&amp; brd[i][j].used;
-        }
-    }
-    for (size_t i = 0; i &lt; 5; ++i){
-        succes = succes || rows[i];
-        succes = succes || columns[i];
-    }
-    return succes;
-}
-
-int calculate(int number, board&amp; brd){
-    int result = 0;
-    for (size_t i = 0; i &lt; 5; ++i){
-        for (size_t j = 0; j &lt; 5; ++j){
-            if (!brd[i][j].used){
-                result += brd[i][j].number;
-            }
-        }
-    }
-    std::cout &lt;&lt; "Sum: " &lt;&lt; result &lt;&lt; std::endl;
-    result *= number;
-    return result;
-}
-
-void print_matrix(board&amp; brd){
-std::cout &lt;&lt; "Matrix:" &lt;&lt; std::endl;
-for (size_t i = 0; i &lt; 5; ++i){
-    for (size_t j = 0; j &lt; 5; ++j){
-            std::cout &lt;&lt; brd[i][j].number &lt;&lt; ":" &lt;&lt; brd[i][j].used &lt;&lt; " ";
-    }
-std::cout &lt;&lt; std::endl;
-}
-}
-
-int compute(std::vector&lt;int&gt;&amp; numbers, std::vector&lt;board&gt;&amp; boards){
-    std::array&lt;bool, 100&gt; used_boards;
-    int left = 100;
-    board last;
-    int lastnum;
-    for (auto&amp; num : numbers){
-        int index = 0;
-        for (auto&amp; brd : boards){
-            if (!used_boards[index]){
-                for (size_t i = 0; i &lt; 5; ++i){
-                    for (size_t j = 0; j &lt; 5; ++j){
-                        if(brd[i][j].number == num){
-                            brd[i][j].used = true;          
-                        }
-                    }
-                }
-                if (check(brd)){
-                    --left;
-                    used_boards[index] = true;
-                    last = brd;
-                    lastnum = num;
-                    if (left == 0){
-                        std::cout &lt;&lt; "Number: " &lt;&lt; num &lt;&lt; std::endl;
-                        print_matrix(brd);
-                        return calculate(num, brd);
-                    }
-                }
-            }
-            ++index;
-        }
-    }
-    std::cout &lt;&lt; "Number: " &lt;&lt; lastnum &lt;&lt; std::endl;
-    print_matrix(last);
-    return calculate(lastnum, last);
-}
-
-int main(int argc, char * * argv){
-    std::vector&lt;int&gt; numbers;
-    std::vector&lt;board&gt; boards;
-    read(numbers, boards);
-    int result = compute(numbers, boards);
-    std::cout &lt;&lt; result &lt;&lt; std::endl;
-    return 0;
+func main() {
+  fmt.Println("Year 2021 day 4 - Giant Squid")
+  part1()
+  part2()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-5"><a class="header" href="#advent-of-code---year-2021-day-5">Advent of code - Year 2021 Day 5</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/5">day 5</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partpy"><a class="header" href="#first-partpy">first-part.py</a></h2>
-<pre><code class="language-py">#!/usr/bin/env python3
+<h3 id="information-27"><a class="header" href="#information-27">Information</a></h3>
+<h4 id="part-1-26"><a class="header" href="#part-1-26">Part 1</a></h4>
+<p>In the first part we check if at least one coordinate is equal. If so add all midpoints by computing the difference.</p>
+<h4 id="part-2-26"><a class="header" href="#part-2-26">Part 2</a></h4>
+<p>In the second part we use pretty much the same approach only this time we will consider also diagonal cases. Which are found by having the same absolute values of difference.</p>
+<h2 id="maingo-12"><a class="header" href="#maingo-12">main.go</a></h2>
+<pre><code class="language-go">package main
 
-with open("INPUT") as f:
-    array = []
-    for i in range(1000):
-        array.append([])
-        for j in range(1000):
-            array[i].append(0)
-    for line in f:
-        separate = line.split(" -&gt; ")
-        first = separate[0].split(",")
-        second = separate[1].split(",")
-        x1 = int(first[0])
-        y1 = int(first[1])
-        x2 = int(second[0])
-        y2 = int(second[1])
-        if x1 == x2:
-            if y1 &gt; y2:
-                y1, y2 = y2, y1
-            for i in range(y1, y2+1):
-                array[x1][i] += 1
-        elif y1 == y2:
-            if x1 &gt; x2:
-                x1, x2 = x2, x1
-            for i in range(x1, x2+1):
-                array[i][y1] += 1
-    sum = 0
-    for line in array:
-        for box in line:
-            if box &gt;= 2:
-                sum += 1
-    print(sum)
+import (
+  "fmt"
+  "log"
+  "math"
+  "os"
+  "regexp"
+  "strconv"
+  "time"
+)
+
+type Line struct {
+  start [2]int
+  end   [2]int
+}
+
+func read_file(file_path string) []Line {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  regex := regexp.MustCompile("([0-9]+),([0-9]+) -&gt; ([0-9]+),([0-9]+)")
+  found := regex.FindAllStringSubmatch(string(content), -1)
+  var lines []Line
+  for _, f := range found {
+    start_x, _ := strconv.Atoi(f[1])
+    start_y, _ := strconv.Atoi(f[2])
+    end_x, _ := strconv.Atoi(f[3])
+    end_y, _ := strconv.Atoi(f[4])
+    lines = append(lines, Line{[2]int{start_x, start_y}, [2]int{end_x, end_y}})
+  }
+  return lines
+}
+
+func add_to_map(number_of_lines *map[[2]int]int, pos [2]int) {
+  _, ok := (*number_of_lines)[pos]
+  if ok {
+    (*number_of_lines)[pos] += 1
+  } else {
+    (*number_of_lines)[pos] = 1
+  }
+}
+
+func midpoints(number_of_lines *map[[2]int]int, line Line) {
+  diff := [2]int{line.start[0] - line.end[0], line.start[1] - line.end[1]}
+  if diff[0] == 0 {
+    incr := diff[1] / int(math.Abs(float64(diff[1])))
+    for x := line.end[1]; x != line.start[1]; x += incr {
+      add_to_map(number_of_lines, [2]int{line.start[0], x})
+    }
+    add_to_map(number_of_lines, line.start)
+  } else if diff[1] == 0 {
+    incr := diff[0] / int(math.Abs(float64(diff[0])))
+    for x := line.end[0]; x != line.start[0]; x += incr {
+      add_to_map(number_of_lines, [2]int{x, line.start[1]})
+    }
+    add_to_map(number_of_lines, line.start)
+  } else if int(math.Abs(float64(diff[1]))) == int(math.Abs(float64(diff[0]))) {
+    incr := [2]int{diff[0] / int(math.Abs(float64(diff[0]))), diff[1] / int(math.Abs(float64(diff[1])))}
+    y := line.end[1]
+    for x := line.end[0]; x != line.start[0]; x += incr[0] {
+      add_to_map(number_of_lines, [2]int{x, y})
+      y += incr[1]
+    }
+    add_to_map(number_of_lines, line.start)
+
+  }
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  number_of_lines := make(map[[2]int]int)
+  lines := read_file("INPUT")
+  for _, line := range lines {
+    if line.start[0] == line.end[0] || line.start[1] == line.end[1] {
+      midpoints(&amp;number_of_lines, line)
+    }
+  }
+  for _, ele := range number_of_lines {
+    if ele &gt;= 2 {
+      result += 1
+    }
+  }
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
+}
+
+func part2() {
+  var result int
+  start := time.Now()
+  number_of_lines := make(map[[2]int]int)
+  lines := read_file("INPUT")
+  for _, line := range lines {
+    midpoints(&amp;number_of_lines, line)
+  }
+  for _, ele := range number_of_lines {
+    if ele &gt;= 2 {
+      result += 1
+    }
+  }
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
+}
+
+func main() {
+  fmt.Println("Year 2021 day 5 - Hydrothermal Venture")
+  part1()
+  part2()
+}
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-6"><a class="header" href="#advent-of-code---year-2021-day-6">Advent of code - Year 2021 Day 6</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/6">day 6</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partpy-1"><a class="header" href="#first-partpy-1">first-part.py</a></h2>
-<pre><code class="language-py">#!/usr/bin/env python3
+<h3 id="information-28"><a class="header" href="#information-28">Information</a></h3>
+<h4 id="part-1-27"><a class="header" href="#part-1-27">Part 1</a></h4>
+<p>We setup an array of lanternfish based on their days until new reproduction cycle starts. Then we add the number of lanternfish which will reproduce to the end and also to the reset index. We will run this for <code>80</code> days.</p>
+<h4 id="part-2-27"><a class="header" href="#part-2-27">Part 2</a></h4>
+<p>We use the same simulation, only run it for <code>256</code> days.</p>
+<h2 id="maingo-13"><a class="header" href="#maingo-13">main.go</a></h2>
+<pre><code class="language-go">package main
 
-with open("INPUT") as f:
-    line = f.readline()
-    splitted = line.split(',')
-    integers = []
-    for box in splitted:
-        integers.append(int(box))
-    for i in range(80):
-        for i in range(len(integers)):
-            integers[i] -= 1
-            if integers[i] == -1:
-                integers[i] = 6
-                integers.append(8)
-    sum = len(integers)
-    print(sum)
+import (
+  "fmt"
+  "log"
+  "os"
+  "regexp"
+  "strconv"
+  "time"
+)
+
+func read_file(file_path string) [9]int {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  regex := regexp.MustCompile("[0-9]+")
+  found := regex.FindAllString(string(content), -1)
+  var lanternfish [9]int
+  for _, f := range found {
+    index, _ := strconv.Atoi(f)
+    lanternfish[index] += 1
+  }
+  return lanternfish
+}
+
+func simulate_life(lanternfish [9]int, days int) int {
+  for i := 0; i &lt; days; i++ {
+    first := lanternfish[0]
+    for j := 1; j &lt; len(lanternfish); j++ {
+      lanternfish[j-1] =lanternfish[j]
+    }
+    lanternfish[8] = first
+    lanternfish[6] += first
+  }
+  sum := 0
+  for i := 0; i &lt; len(lanternfish); i++ {
+    sum += lanternfish[i]
+  }
+  return sum
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  lanternfish := read_file("INPUT")
+  result = simulate_life(lanternfish, 80)
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
+}
+
+func part2() {
+  var result int
+  start := time.Now()
+  lanternfish := read_file("INPUT")
+  result = simulate_life(lanternfish, 256)
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
+}
+
+func main() {
+  fmt.Println("Year 2021 day 6 - Lanternfish")
+  part1()
+  part2()
+}
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-7"><a class="header" href="#advent-of-code---year-2021-day-7">Advent of code - Year 2021 Day 7</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/7">day 7</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partpy-2"><a class="header" href="#first-partpy-2">first-part.py</a></h2>
-<pre><code class="language-py">#!/usr/bin/env python3
+<h3 id="information-29"><a class="header" href="#information-29">Information</a></h3>
+<h4 id="part-1-28"><a class="header" href="#part-1-28">Part 1</a></h4>
+<p>In both cases we try all possibilities and find the optimum.</p>
+<h4 id="part-2-28"><a class="header" href="#part-2-28">Part 2</a></h4>
+<p>In the second part we only need to rewrite the operator for computing the distance.</p>
+<h2 id="maingo-14"><a class="header" href="#maingo-14">main.go</a></h2>
+<pre><code class="language-go">package main
 
-with open("input.txt") as f:
-    line = f.readline()
-    separated = line.split(",")
-    integers = []
-    for box in separated:
-        integers.append(int(box))
-    integers.sort()
-    middle = integers[len(integers)//2]
-    print(middle)
-    sum = 0
-    for sub in integers:
-        if sub &lt;= middle:
-            sum += (middle - sub)
-        else:
-            sum += (sub - middle)
-    print(sum)
+import (
+  "fmt"
+  "log"
+  "math"
+  "os"
+  "regexp"
+  "sort"
+  "strconv"
+  "time"
+)
+
+func read_file(file_path string) []int {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  regex := regexp.MustCompile("[0-9]+")
+  found := regex.FindAllString(string(content), -1)
+  var horizontal_positions []int
+  for _, f := range found {
+    nr, _ := strconv.Atoi(f)
+    horizontal_positions = append(horizontal_positions, nr)
+  }
+  return horizontal_positions
+}
+
+func optimize_distance(numbers []int, op func(int, int) int) int {
+  sort.Ints(numbers)
+  result := op(numbers[0], numbers[len(numbers)-1]) * len(numbers)
+  for x := numbers[0]; x &lt; numbers[len(numbers)-1]; x++ {
+    sum := 0
+    for _, pos := range numbers {
+      sum += op(x, pos)
+    }
+    if sum &lt; result {
+      result = sum
+    }
+  }
+  return result
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  horizontal_positions := read_file("INPUT")
+  dist := func(x, y int) int { return int(math.Abs(float64(x - y))) }
+  result = optimize_distance(horizontal_positions, dist)
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
+}
+
+func part2() {
+  var result int
+  start := time.Now()
+  horizontal_positions := read_file("INPUT")
+  scaled_dist := func(x, y int) int {
+    diff := int(math.Abs(float64(x - y)))
+    return (diff * (diff + 1)) / 2
+  }
+  result = optimize_distance(horizontal_positions, scaled_dist)
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
+}
+
+func main() {
+  fmt.Println("Year 2021 day 7 - The Treachery of Whales")
+  part1()
+  part2()
+}
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-8"><a class="header" href="#advent-of-code---year-2021-day-8">Advent of code - Year 2021 Day 8</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/8">day 8</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partpy-3"><a class="header" href="#first-partpy-3">first-part.py</a></h2>
+<h2 id="first-partpy"><a class="header" href="#first-partpy">first-part.py</a></h2>
 <pre><code class="language-py">#!/usr/bin/env python3
 
 with open("INPUT") as f:
@@ -6730,7 +6815,7 @@ with open("INPUT") as f:
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-11"><a class="header" href="#advent-of-code---year-2021-day-11">Advent of code - Year 2021 Day 11</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/11">day 11</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partpy-4"><a class="header" href="#first-partpy-4">first-part.py</a></h2>
+<h2 id="first-partpy-1"><a class="header" href="#first-partpy-1">first-part.py</a></h2>
 <pre><code class="language-py">#!/usr/bin/env python3
 
 with open("INPUT") as f:
@@ -6770,7 +6855,7 @@ with open("INPUT") as f:
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-14"><a class="header" href="#advent-of-code---year-2021-day-14">Advent of code - Year 2021 Day 14</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/14">day 14</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partpy-5"><a class="header" href="#first-partpy-5">first-part.py</a></h2>
+<h2 id="first-partpy-2"><a class="header" href="#first-partpy-2">first-part.py</a></h2>
 <pre><code class="language-py">#!/usr/bin/env python3
 
 with open("INPUT") as f:
@@ -6832,10 +6917,10 @@ with open("INPUT") as f:
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2017-day-1"><a class="header" href="#advent-of-code---year-2017-day-1">Advent of code - Year 2017 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2017/day/1">day 1</a>. Go back to year <a href="aoc/2017.html">2017</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-26"><a class="header" href="#information-26">Information</a></h3>
-<h4 id="part-1-25"><a class="header" href="#part-1-25">Part 1</a></h4>
+<h3 id="information-30"><a class="header" href="#information-30">Information</a></h3>
+<h4 id="part-1-29"><a class="header" href="#part-1-29">Part 1</a></h4>
 <p>In the first part we lineary check the two consecutive indexes and if they match add them. These are taken with modulo.</p>
-<h4 id="part-2-25"><a class="header" href="#part-2-25">Part 2</a></h4>
+<h4 id="part-2-29"><a class="header" href="#part-2-29">Part 2</a></h4>
 <p>In the second part instead of looking at consecutive ones look at the ones that are hlafway apart.</p>
 <h2 id="mainrs-14"><a class="header" href="#mainrs-14">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -6876,10 +6961,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2017-day-2"><a class="header" href="#advent-of-code---year-2017-day-2">Advent of code - Year 2017 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2017/day/2">day 2</a>. Go back to year <a href="aoc/2017.html">2017</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-27"><a class="header" href="#information-27">Information</a></h3>
-<h4 id="part-1-26"><a class="header" href="#part-1-26">Part 1</a></h4>
+<h3 id="information-31"><a class="header" href="#information-31">Information</a></h3>
+<h4 id="part-1-30"><a class="header" href="#part-1-30">Part 1</a></h4>
 <p>In the first part we use iterations. We compute the maximums and minimums. After that we zip those together and find the subtraction and sum it up.</p>
-<h4 id="part-2-26"><a class="header" href="#part-2-26">Part 2</a></h4>
+<h4 id="part-2-30"><a class="header" href="#part-2-30">Part 2</a></h4>
 <p>In the second part we go through all posibilities and test if they are divisible or not. If they are add the division to the total and break the loop for the line.</p>
 <h2 id="mainrs-15"><a class="header" href="#mainrs-15">main.rs</a></h2>
 <pre><code class="language-rs">use std::cmp::{max, min};
@@ -6952,10 +7037,10 @@ fn main() {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-1"><a class="header" href="#advent-of-code---year-2016-day-1">Advent of code - Year 2016 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/1">day 1</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-28"><a class="header" href="#information-28">Information</a></h3>
-<h4 id="part-1-27"><a class="header" href="#part-1-27">Part 1</a></h4>
+<h3 id="information-32"><a class="header" href="#information-32">Information</a></h3>
+<h4 id="part-1-31"><a class="header" href="#part-1-31">Part 1</a></h4>
 <p>In the first part we jump from one place to another and then compute the manhattan distance. It is implemented to solve also the other part.</p>
-<h4 id="part-2-27"><a class="header" href="#part-2-27">Part 2</a></h4>
+<h4 id="part-2-31"><a class="header" href="#part-2-31">Part 2</a></h4>
 <p>The second part we visit every single step in the middle and find the one which was already visited.</p>
 <h2 id="mainrs-16"><a class="header" href="#mainrs-16">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -7064,10 +7149,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-2"><a class="header" href="#advent-of-code---year-2016-day-2">Advent of code - Year 2016 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/2">day 2</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-29"><a class="header" href="#information-29">Information</a></h3>
-<h4 id="part-1-28"><a class="header" href="#part-1-28">Part 1</a></h4>
+<h3 id="information-33"><a class="header" href="#information-33">Information</a></h3>
+<h4 id="part-1-32"><a class="header" href="#part-1-32">Part 1</a></h4>
 <p>The first part can be done with aritmetics and matrix <code>3x3</code> and not to move out of boundaries.</p>
-<h4 id="part-2-28"><a class="header" href="#part-2-28">Part 2</a></h4>
+<h4 id="part-2-32"><a class="header" href="#part-2-32">Part 2</a></h4>
 <p>In the second part we create a dialpads with boundaries so we never can reach out of it. So when we move we only check if there is empty symbol or not. This is also used for the first part to reuse the code.</p>
 <h2 id="mainrs-17"><a class="header" href="#mainrs-17">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -7161,9 +7246,9 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-3"><a class="header" href="#advent-of-code---year-2016-day-3">Advent of code - Year 2016 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/3">day 3</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-30"><a class="header" href="#information-30">Information</a></h3>
-<h4 id="part-1-29"><a class="header" href="#part-1-29">Part 1</a></h4>
-<h4 id="part-2-29"><a class="header" href="#part-2-29">Part 2</a></h4>
+<h3 id="information-34"><a class="header" href="#information-34">Information</a></h3>
+<h4 id="part-1-33"><a class="header" href="#part-1-33">Part 1</a></h4>
+<h4 id="part-2-33"><a class="header" href="#part-2-33">Part 2</a></h4>
 <h2 id="mainrs-18"><a class="header" href="#mainrs-18">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
 use std::fs;
@@ -7246,10 +7331,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-4"><a class="header" href="#advent-of-code---year-2016-day-4">Advent of code - Year 2016 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/4">day 4</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-31"><a class="header" href="#information-31">Information</a></h3>
-<h4 id="part-1-30"><a class="header" href="#part-1-30">Part 1</a></h4>
+<h3 id="information-35"><a class="header" href="#information-35">Information</a></h3>
+<h4 id="part-1-34"><a class="header" href="#part-1-34">Part 1</a></h4>
 <p>In the first part we count all alfabet symbols, then sort the ones that have at least some appearance. And lastly match it with the <code>checksum</code>.</p>
-<h4 id="part-2-30"><a class="header" href="#part-2-30">Part 2</a></h4>
+<h4 id="part-2-34"><a class="header" href="#part-2-34">Part 2</a></h4>
 <p>In the second part we normally shift the alfa by the given <code>id</code> and check if is equal to <code>northpole object storage</code>.</p>
 <h2 id="mainrs-19"><a class="header" href="#mainrs-19">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -7366,10 +7451,10 @@ fn main() {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-1"><a class="header" href="#advent-of-code---year-2015-day-1">Advent of code - Year 2015 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/1">day 1</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-32"><a class="header" href="#information-32">Information</a></h3>
-<h4 id="part-1-31"><a class="header" href="#part-1-31">Part 1</a></h4>
+<h3 id="information-36"><a class="header" href="#information-36">Information</a></h3>
+<h4 id="part-1-35"><a class="header" href="#part-1-35">Part 1</a></h4>
 <p>Simply just go through the list and count the floors.</p>
-<h4 id="part-2-31"><a class="header" href="#part-2-31">Part 2</a></h4>
+<h4 id="part-2-35"><a class="header" href="#part-2-35">Part 2</a></h4>
 <p>Also just compute the floors and whenever we hit something <code>&lt;0</code> return index.</p>
 <h2 id="mainrs-20"><a class="header" href="#mainrs-20">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -7421,10 +7506,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-2"><a class="header" href="#advent-of-code---year-2015-day-2">Advent of code - Year 2015 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/2">day 2</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-33"><a class="header" href="#information-33">Information</a></h3>
-<h4 id="part-1-32"><a class="header" href="#part-1-32">Part 1</a></h4>
+<h3 id="information-37"><a class="header" href="#information-37">Information</a></h3>
+<h4 id="part-1-36"><a class="header" href="#part-1-36">Part 1</a></h4>
 <p>We simply compute the given formula.</p>
-<h4 id="part-2-32"><a class="header" href="#part-2-32">Part 2</a></h4>
+<h4 id="part-2-36"><a class="header" href="#part-2-36">Part 2</a></h4>
 <p>Also just usage of the given formula.</p>
 <h2 id="mainrs-21"><a class="header" href="#mainrs-21">main.rs</a></h2>
 <pre><code class="language-rs">use std::cmp::min;
@@ -7499,10 +7584,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-3"><a class="header" href="#advent-of-code---year-2015-day-3">Advent of code - Year 2015 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/3">day 3</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-34"><a class="header" href="#information-34">Information</a></h3>
-<h4 id="part-1-33"><a class="header" href="#part-1-33">Part 1</a></h4>
+<h3 id="information-38"><a class="header" href="#information-38">Information</a></h3>
+<h4 id="part-1-37"><a class="header" href="#part-1-37">Part 1</a></h4>
 <p>In the first part we remember in a set whihc positins were visited and count the size of the set.</p>
-<h4 id="part-2-33"><a class="header" href="#part-2-33">Part 2</a></h4>
+<h4 id="part-2-37"><a class="header" href="#part-2-37">Part 2</a></h4>
 <p>In the second part we only swap these values every time and after that we do the same thing. So we switch the santas.</p>
 <h2 id="mainrs-22"><a class="header" href="#mainrs-22">main.rs</a></h2>
 <pre><code class="language-rs">use std::collections::HashSet;
@@ -7556,10 +7641,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-4"><a class="header" href="#advent-of-code---year-2015-day-4">Advent of code - Year 2015 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/4">day 4</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-35"><a class="header" href="#information-35">Information</a></h3>
-<h4 id="part-1-34"><a class="header" href="#part-1-34">Part 1</a></h4>
+<h3 id="information-39"><a class="header" href="#information-39">Information</a></h3>
+<h4 id="part-1-38"><a class="header" href="#part-1-38">Part 1</a></h4>
 <p>First of all we import <code>md-5</code> library to compute the hashes. Then simply compute the hashses of <code>key</code> appended by iterating indexes.</p>
-<h4 id="part-2-34"><a class="header" href="#part-2-34">Part 2</a></h4>
+<h4 id="part-2-38"><a class="header" href="#part-2-38">Part 2</a></h4>
 <p>The second part is same only we check six zeros.</p>
 <h2 id="mainrs-23"><a class="header" href="#mainrs-23">main.rs</a></h2>
 <pre><code class="language-rs">use md5::{Digest, Md5};
@@ -7605,10 +7690,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-5"><a class="header" href="#advent-of-code---year-2015-day-5">Advent of code - Year 2015 Day 5</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/5">day 5</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-36"><a class="header" href="#information-36">Information</a></h3>
-<h4 id="part-1-35"><a class="header" href="#part-1-35">Part 1</a></h4>
+<h3 id="information-40"><a class="header" href="#information-40">Information</a></h3>
+<h4 id="part-1-39"><a class="header" href="#part-1-39">Part 1</a></h4>
 <p>For the first part we only need to configure the right regexes to represent each type. And than either mathc them or count them.</p>
-<h4 id="part-2-35"><a class="header" href="#part-2-35">Part 2</a></h4>
+<h4 id="part-2-39"><a class="header" href="#part-2-39">Part 2</a></h4>
 <p>The second part is similiar only we use different regexes.</p>
 <h2 id="mainrs-24"><a class="header" href="#mainrs-24">main.rs</a></h2>
 <pre><code class="language-rs">use fancy_regex::Regex as Rgx;
@@ -7674,10 +7759,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-6"><a class="header" href="#advent-of-code---year-2015-day-6">Advent of code - Year 2015 Day 6</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/6">day 6</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-37"><a class="header" href="#information-37">Information</a></h3>
-<h4 id="part-1-36"><a class="header" href="#part-1-36">Part 1</a></h4>
+<h3 id="information-41"><a class="header" href="#information-41">Information</a></h3>
+<h4 id="part-1-40"><a class="header" href="#part-1-40">Part 1</a></h4>
 <p>We simply follow the given instructions on the <code>1000x1000</code> grid. Then compute those which are <code>true</code>.</p>
-<h4 id="part-2-36"><a class="header" href="#part-2-36">Part 2</a></h4>
+<h4 id="part-2-40"><a class="header" href="#part-2-40">Part 2</a></h4>
 <p>In the second part we redefine the instructions and compute the sum.</p>
 <h2 id="mainrs-25"><a class="header" href="#mainrs-25">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -7807,9 +7892,9 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-7"><a class="header" href="#advent-of-code---year-2015-day-7">Advent of code - Year 2015 Day 7</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/7">day 7</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-38"><a class="header" href="#information-38">Information</a></h3>
-<h4 id="part-1-37"><a class="header" href="#part-1-37">Part 1</a></h4>
-<h4 id="part-2-37"><a class="header" href="#part-2-37">Part 2</a></h4>
+<h3 id="information-42"><a class="header" href="#information-42">Information</a></h3>
+<h4 id="part-1-41"><a class="header" href="#part-1-41">Part 1</a></h4>
+<h4 id="part-2-41"><a class="header" href="#part-2-41">Part 2</a></h4>
 <h2 id="mainrs-26"><a class="header" href="#mainrs-26">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
 use std::collections::HashMap;
