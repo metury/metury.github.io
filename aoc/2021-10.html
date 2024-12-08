@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Year 2021 day 8 - Personal page</title>
+        <title>Year 2021 day 10 - Personal page</title>
 
 
         <!-- Custom HTML head -->
@@ -154,30 +154,113 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="advent-of-code---year-2021-day-8"><a class="header" href="#advent-of-code---year-2021-day-8">Advent of code - Year 2021 Day 8</a></h1>
-<p>This is a solution of the <a href="https://adventofcode.com/2021/day/8">day 8</a>. Go back to year <a href="2021.html">2021</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
-<h2 id="first-partpy"><a class="header" href="#first-partpy">first-part.py</a></h2>
-<pre><code class="language-py">#!/usr/bin/env python3
+                        <h1 id="advent-of-code---year-2021-day-10"><a class="header" href="#advent-of-code---year-2021-day-10">Advent of code - Year 2021 Day 10</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2021/day/10">day 10</a>. Go back to year <a href="2021.html">2021</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
+<h3 id="information"><a class="header" href="#information">Information</a></h3>
+<h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
+<p>In the first part we go though the characters. If they are opening add them to the stack and if it is closing one check the top of the stack and either return the value of the bracket or continue.</p>
+<h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
+<p>For the second part if the previous procedure did not exited we pop characters one by one and compute the sum, then we collect all sums and sort them to find the middle one.</p>
+<h2 id="maingo"><a class="header" href="#maingo">main.go</a></h2>
+<pre><code class="language-go">package main
 
-with open("INPUT") as f:
-    stack = []
-    sum = 0
-    for line in f:
-        for char in line:
-            if char == "&lt;" or char == "(" or char == "{" or char == "[":
-                stack.append(char)
-            elif char == "&gt;" or char == ")" or char == "}" or char == "]":
-                temp = stack.pop()
-                if (temp == "&lt;" and char != "&gt;") or (temp == "(" and char != ")") or (temp == "[" and char != "]") or (temp == "{" and char != "}"):
-                    if char == "&gt;":
-                        sum += 25137
-                    elif char == "}":
-                        sum += 1197
-                    elif char == ")":
-                        sum += 3
-                    elif char == "]":
-                        sum += 57
-    print(sum)
+import (
+  "fmt"
+  "log"
+  "os"
+  "sort"
+  "strings"
+  "time"
+)
+
+func read_file(file_path string) []string {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  lines := strings.Split(string(content), "\n")
+  for i := 0; i &lt; len(lines); i++ {
+    if len(lines[i]) == 0 {
+      lines = append(lines[:i], lines[i+1:]...)
+      i--
+    }
+  }
+  return lines
+}
+
+func filter_or_fill(line string) (int, int) {
+  var stack []byte
+  for i := 0; i &lt; len(line); i++ {
+    switch line[i] {
+    case '&lt;', '(', '{', '[':
+      stack = append(stack, line[i])
+    case '&gt;', ')', '}', ']':
+      top := stack[len(stack)-1]
+      stack = stack[:len(stack)-1]
+      if line[i] == '&gt;' &amp;&amp; top != '&lt;' {
+        return 25137, 0
+      } else if line[i] == ')' &amp;&amp; top != '(' {
+        return 3, 0
+      } else if line[i] == ']' &amp;&amp; top != '[' {
+        return 57, 0
+      } else if line[i] == '}' &amp;&amp; top != '{' {
+        return 1197, 0
+      }
+    }
+  }
+  sum := 0
+  for len(stack) &gt; 0 {
+    top := stack[len(stack)-1]
+    stack = stack[:len(stack)-1]
+    sum *= 5
+    switch top {
+    case '(':
+      sum += 1
+    case '[':
+      sum += 2
+    case '{':
+      sum += 3
+    case '&lt;':
+      sum += 4
+    }
+  }
+  return 0, sum
+}
+
+func part1() {
+  var result int
+  start := time.Now()
+  lines := read_file("INPUT")
+  for _, line := range lines {
+    val, _ := filter_or_fill(line)
+    result += val
+  }
+  end := time.Now()
+  fmt.Println("Part 1 [", end.Sub(start), "]:", result)
+}
+
+func part2() {
+  var result int
+  start := time.Now()
+  lines := read_file("INPUT")
+  var scores []int
+  for _, line := range lines {
+    _, val := filter_or_fill(line)
+    if val != 0 {
+      scores = append(scores, val)
+    }
+  }
+  sort.Ints(scores)
+  result = scores[len(scores)/2]
+  end := time.Now()
+  fmt.Println("Part 2 [", end.Sub(start), "]:", result)
+}
+
+func main() {
+  fmt.Println("Year 2021 day 10 - Syntax Scoring")
+  part1()
+  part2()
+}
 </code></pre>
 
                     </main>
