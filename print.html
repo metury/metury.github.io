@@ -1567,7 +1567,7 @@ func read_file(file_path string) (Map, Position) {
   return m, pos
 }
 
-func guard_step(m Map, pos Position, step Position, obstacle Position) (Position, Position, bool) {
+func guard_step(m Map, pos, step, obstacle Position) (Position, Position, bool) {
   new_pos := [2]int{pos[0] + step[0], pos[1] + step[1]}
   inside := new_pos[0] &lt; len(m) &amp;&amp; new_pos[0] &gt;= 0 &amp;&amp; new_pos[1] &lt; len(m[0]) &amp;&amp; new_pos[1] &gt;= 0
   if inside {
@@ -1598,7 +1598,7 @@ func found_visited(m Map, pos Position) Map {
   return visited
 }
 
-func is_loop(m Map, pos Position, obstacle Position, c chan bool) {
+func is_loop(m Map, pos, obstacle Position, c chan bool) {
   visited := make(map[[4]int]bool)
   step := [2]int{-1, 0}
   visited[[4]int{pos[0], pos[1], step[0], step[1]}] = true
@@ -1708,12 +1708,12 @@ func read_file(file_path string) []Equation {
   return equations
 }
 
-func concat(x int, y int) int {
+func concat(x, y int) int {
   res, _ := strconv.Atoi(strconv.Itoa(x) + strconv.Itoa(y))
   return res
 }
 
-func solve(eq Equation, acc int, i int) bool{
+func solve(eq Equation, acc, i int) bool{
   if i &lt; len(eq.operands) &amp;&amp; acc &gt; eq.result {
     return false
   }
@@ -1723,7 +1723,7 @@ func solve(eq Equation, acc int, i int) bool{
   return solve(eq, acc + eq.operands[i], i+1) || solve(eq, acc * eq.operands[i], i+1)
 }
 
-func solve_concat(eq Equation, acc int, i int) bool {
+func solve_concat(eq Equation, acc, i int) bool {
   if i &lt; len(eq.operands) &amp;&amp; acc &gt; eq.result {
     return false
   }
@@ -1818,7 +1818,7 @@ func read_file(file_path string) (map[string][]Position, int) {
         if ok {
           m[c] = append(val, [2]int{i, j})
         } else {
-          m[c] = []Position{[2]int{i,j}}
+          m[c] = []Position{[2]int{i, j}}
         }
       }
     }
@@ -1847,8 +1847,8 @@ func add_nodes(nodes *map[[2]int]bool, first_antenna, second_antenna Position, s
     (*nodes)[first_antenna] = true
     (*nodes)[second_antenna] = true
   }
-  add := func(x int, y int) int {return x + y;}
-  sub := func(x int, y int) int {return x - y;}
+  add := func(x int, y int) int { return x + y }
+  sub := func(x int, y int) int { return x - y }
   add_antinodes(nodes, first_antenna, diff, add, size, first_only)
   add_antinodes(nodes, second_antenna, diff, sub, size, first_only)
 }
@@ -1859,8 +1859,8 @@ func part1() {
   m, size := read_file("INPUT")
   nodes := make(map[[2]int]bool)
   for _, antennas := range m {
-    for i := 0; i &lt; len(antennas) -1; i++ {
-      for j := i + 1; j &lt; len(antennas); j++{
+    for i := 0; i &lt; len(antennas)-1; i++ {
+      for j := i + 1; j &lt; len(antennas); j++ {
         add_nodes(&amp;nodes, antennas[i], antennas[j], size, true)
       }
     }
@@ -1876,8 +1876,8 @@ func part2() {
   m, size := read_file("INPUT")
   nodes := make(map[[2]int]bool)
   for _, antennas := range m {
-    for i := 0; i &lt; len(antennas) -1; i++ {
-      for j := i + 1; j &lt; len(antennas); j++{
+    for i := 0; i &lt; len(antennas)-1; i++ {
+      for j := i + 1; j &lt; len(antennas); j++ {
         add_nodes(&amp;nodes, antennas[i], antennas[j], size, false)
       }
     }
