@@ -985,7 +985,7 @@ func count(list *[]int) map[int]int {
   return my_map
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   first_column, second_column := read_file("INPUT")
@@ -997,7 +997,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   first_column, second_column := read_file("INPUT")
@@ -1014,8 +1014,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 1 - Historian Hysteria")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-2"><a class="header" href="#advent-of-code---year-2024-day-2">Advent of code - Year 2024 Day 2</a></h1>
@@ -1101,7 +1101,7 @@ func increasing_or_decreasing(tolerate bool, level *[]int) bool {
   return incr || decr
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   levels := read_file("INPUT")
@@ -1114,7 +1114,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   levels := read_file("INPUT")
@@ -1130,8 +1130,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 2 - Red-Nosed Reports")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-3"><a class="header" href="#advent-of-code---year-2024-day-3">Advent of code - Year 2024 Day 3</a></h1>
@@ -1161,7 +1161,7 @@ func read_file(file_path string) string {
   return string(content)
 }
 
-func part1() {
+func part_one() {
   var result int
   var content = read_file("INPUT")
   start := time.Now()
@@ -1176,7 +1176,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   content := read_file("INPUT")
   start := time.Now()
@@ -1203,8 +1203,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 3 - Mull It Over")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-4"><a class="header" href="#advent-of-code---year-2024-day-4">Advent of code - Year 2024 Day 4</a></h1>
@@ -1322,7 +1322,7 @@ func count_x_mas(table [][]string) int {
   return res
 }
 
-func part1() {
+func part_one() {
   var result int
   var content = read_file("INPUT")
   start := time.Now()
@@ -1342,7 +1342,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   var content = read_file("INPUT")
   start := time.Now()
@@ -1354,8 +1354,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 4 - Ceres Search")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-5"><a class="header" href="#advent-of-code---year-2024-day-5">Advent of code - Year 2024 Day 5</a></h1>
@@ -1481,7 +1481,7 @@ func fix(rules map[int][]int, order []int) []int {
   return order
 }
 
-func part1() {
+func part_one() {
   var result int
   rules, orders := read_file("INPUT")
   start := time.Now()
@@ -1493,7 +1493,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   rules, orders := read_file("INPUT")
   start := time.Now()
@@ -1507,8 +1507,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 5 - Print Queue")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-6"><a class="header" href="#advent-of-code---year-2024-day-6">Advent of code - Year 2024 Day 6</a></h1>
@@ -1608,7 +1608,7 @@ func is_loop(m Map, pos, obstacle Position, c chan bool) {
   c &lt;- hash_ok
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   m, pos := read_file("INPUT")
@@ -1624,7 +1624,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   m, pos := read_file("INPUT")
@@ -1653,8 +1653,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 6 - Guard Gallivant")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-7"><a class="header" href="#advent-of-code---year-2024-day-7">Advent of code - Year 2024 Day 7</a></h1>
@@ -1737,7 +1737,7 @@ func common_solve(eq Equation, solver func(Equation, int, int) bool, c chan int)
   }
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   equations := read_file("INPUT")
@@ -1753,7 +1753,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   equations := read_file("INPUT")
@@ -1771,8 +1771,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 7 - Bridge Repair")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-8"><a class="header" href="#advent-of-code---year-2024-day-8">Advent of code - Year 2024 Day 8</a></h1>
@@ -1849,7 +1849,7 @@ func add_nodes(nodes *map[[2]int]bool, first_antenna, second_antenna Position, s
   add_antinodes(nodes, second_antenna, diff, sub, size, first_only)
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   m, size := read_file("INPUT")
@@ -1866,7 +1866,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   m, size := read_file("INPUT")
@@ -1885,8 +1885,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 8 - Resonant Collinearity")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-9"><a class="header" href="#advent-of-code---year-2024-day-9">Advent of code - Year 2024 Day 9</a></h1>
@@ -2035,7 +2035,7 @@ func reallocate(format *[]Partition) {
   }
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   disk := recreate_disk(read_file("INPUT"))
@@ -2049,7 +2049,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   format := create_my_format(read_file("INPUT"))
@@ -2069,8 +2069,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 9 - Disk Fragmenter")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-10"><a class="header" href="#advent-of-code---year-2024-day-10">Advent of code - Year 2024 Day 10</a></h1>
@@ -2158,7 +2158,7 @@ func find_distinct(m *[][]int, x, y int) int {
   return res
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   m := read_file("INPUT")
@@ -2173,7 +2173,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   m := read_file("INPUT")
@@ -2190,8 +2190,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 10 - Hoof It")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-11"><a class="header" href="#advent-of-code---year-2024-day-11">Advent of code - Year 2024 Day 11</a></h1>
@@ -2281,7 +2281,7 @@ func count_all(iter int) int {
   return blink182(m, iter)
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   result = count_all(25)
@@ -2289,7 +2289,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   result = count_all(75)
@@ -2299,8 +2299,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2024 day 11 - Plutonian Pebbles")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-12"><a class="header" href="#advent-of-code---year-2024-day-12">Advent of code - Year 2024 Day 12</a></h1>
@@ -2309,7 +2309,7 @@ func main() {
 <h4 id="part-1-11"><a class="header" href="#part-1-11">Part 1</a></h4>
 <p>We will firstly use bucket fill algorithm to find the inner tiles and also the fences with their positions, orientations and sides. After that in the first part we multiple the number of fences with the number of fences.</p>
 <h4 id="part-2-11"><a class="header" href="#part-2-11">Part 2</a></h4>
-<p>In the second part we compare the fences between each other if they are in the same side or not. That is we check the same type values and sort them, after that we will proceed, if the difference is greater than 1 then it is a different side, also always add one for the whole side.</p>
+<p>In the second part we compare the fences between each other if they are in the same side or not. We also abuse the fact, that we set UPPER and LOWER to even numbers and LOWER and RIGHT to odd numbers. Hence the horizontal ones have parity <code>0</code> and vertical <code>1</code>.</p>
 <h2 id="maingo-11"><a class="header" href="#maingo-11">main.go</a></h2>
 <pre><code class="language-go">package main
 
@@ -2324,16 +2324,15 @@ import (
 )
 
 const (
-  HORIZONTAL = 0
-  VERTICAL = 1
-  UP = 2
-  DOWN = 3
+  UPPER = 0
+  LOWER = 2
+  LEFT  = 1
+  RIGHT = 3
 )
 
 type Fence struct {
   position [2]int
-  orientation int
-  side int
+  side     int
 }
 
 func read_file(file_path string) [][]string {
@@ -2354,67 +2353,53 @@ func read_file(file_path string) [][]string {
   return m
 }
 
-func check_similarity(considered *map[[2]int]bool, array *[]int, current, fence Fence, index, orientation int) {
-  _, ok := (*considered)[[2]int{current.position[index], current.side}]
-  if current.position[index] == fence.position[index] &amp;&amp; !ok &amp;&amp; current.orientation == orientation &amp;&amp; fence.orientation == orientation &amp;&amp; current.side == fence.side {
-    *array = append(*array, fence.position[(index + 1) % 2])
-  }
-}
-
-func count_sides(array []int) int {
-  sum := 0
-  sort.Ints(array)
-  for j := 1; j &lt; len(array); j++ {
-    if int(math.Abs(float64(array[j - 1] - array[j]))) &gt; 1 {
-      sum += 1
-    }
-  }
-  if len(array) &gt; 0 {
-    sum += 1
-  }
-  return sum
-}
-
-func filter_count(fences map[Fence]bool) int {
-  considered_vertical := make(map[[2]int]bool)
-  considered_horizontal := make(map[[2]int]bool)
+func count_sides(fences map[Fence]bool) int {
+  considered := make(map[[2]int]bool)
   sum := 0
   for current := range fences {
-    vertical := make([]int, 0)
-    horizontal := make([]int, 0)
+    i := current.side % 2
+    _, used := considered[[2]int{current.position[i], current.side}]
+    if used {
+      continue
+    }
+    array := make([]int, 0)
     for fence := range fences {
-      check_similarity(&amp;considered_vertical, &amp;vertical, current, fence, 0, VERTICAL)
-      check_similarity(&amp;considered_horizontal, &amp;horizontal, current, fence, 1, HORIZONTAL)
+      if current.side == fence.side &amp;&amp; current.position[i] == fence.position[i] {
+        array = append(array, fence.position[(i+1)%2])
+      }
     }
-    if current.orientation == VERTICAL {
-      considered_vertical[[2]int{current.position[0], current.side}] = true
-    } else {
-      considered_horizontal[[2]int{current.position[1], current.side}] = true
+    considered[[2]int{current.position[i], current.side}] = true
+    sort.Ints(array)
+    for j := 1; j &lt; len(array); j++ {
+      if int(math.Abs(float64(array[j-1]-array[j]))) &gt; 1 {
+        sum += 1
+      }
     }
-    sum += count_sides(horizontal) + count_sides(vertical)
+    if len(array) &gt; 0 {
+      sum += 1
+    }
   }
   return sum
 }
 
 func insert_fence(fences *map[Fence]bool, current, neigh [2]int) {
-  if  neigh[0] == current[0] {
+  if neigh[0] == current[0] {
     if neigh[1] &lt; current[1] {
-      (*fences)[Fence{position: neigh, orientation: HORIZONTAL, side: UP}] = true
+      (*fences)[Fence{position: neigh, side: RIGHT}] = true
     } else {
-      (*fences)[Fence{position: neigh, orientation: HORIZONTAL, side: DOWN}] = true
+      (*fences)[Fence{position: neigh, side: LEFT}] = true
     }
   } else {
     if neigh[0] &lt; current[0] {
-      (*fences)[Fence{position: neigh, orientation: VERTICAL, side: UP}] = true
+      (*fences)[Fence{position: neigh, side: UPPER}] = true
     } else {
-      (*fences)[Fence{position: neigh, orientation: VERTICAL, side: DOWN}] = true
+      (*fences)[Fence{position: neigh, side: LOWER}] = true
     }
   }
 }
 
-func bucket(garden *[][]string, visited_map *map[[2]int]bool, i, j int) (map[Fence]bool, map[[2]int]bool) {
-  var queue [][2]int
-  queue = append(queue, [2]int{i,j})
+func flood_fill(garden *[][]string, visited_map *map[[2]int]bool, i, j int) (map[Fence]bool, map[[2]int]bool) {
+  queue := append(make([][2]int, 0), [2]int{i, j})
   fences := make(map[Fence]bool)
   inner := make(map[[2]int]bool)
 
@@ -2422,7 +2407,7 @@ func bucket(garden *[][]string, visited_map *map[[2]int]bool, i, j int) (map[Fen
     current := queue[0]
     inner[current] = true
     queue = queue[1:]
-    neighbours := [4][2]int {
+    neighbours := [4][2]int{
       {current[0] - 1, current[1]},
       {current[0] + 1, current[1]},
       {current[0], current[1] + 1},
@@ -2449,45 +2434,45 @@ func bucket(garden *[][]string, visited_map *map[[2]int]bool, i, j int) (map[Fen
   return fences, inner
 }
 
-func count_fence(garden *[][]string, f func(map[Fence]bool) int) int {
+func count_fences(garden *[][]string, f func(map[Fence]bool) int) int {
   sum := 0
   visited := make(map[[2]int]bool)
   for i, row := range *garden {
     for j := range row {
-      _, ok := visited[[2]int{i,j}]
+      _, ok := visited[[2]int{i, j}]
       if ok {
         continue
       }
-      fences, inner := bucket(garden, &amp;visited, i, j)
+      fences, inner := flood_fill(garden, &amp;visited, i, j)
       sum += len(inner) * f(fences)
     }
   }
   return sum
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   garden := read_file("INPUT")
-  my_len := func(m map[Fence]bool) int { return len(m); }
-  result = count_fence(&amp;garden, my_len)
+  my_len := func(m map[Fence]bool) int { return len(m) }
+  result = count_fences(&amp;garden, my_len)
   end := time.Now()
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   garden := read_file("INPUT")
-  result = count_fence(&amp;garden, filter_count)
+  result = count_fences(&amp;garden, count_sides)
   end := time.Now()
   fmt.Println("Part 2 [", end.Sub(start), "]:", result)
 }
 
 func main() {
   fmt.Println("Year 2024 day 12 - Garden Groups")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023"><a class="header" href="#advent-of-code---year-2023">Advent of code - Year 2023</a></h1>
@@ -6720,7 +6705,7 @@ func slide(start []int) func(int) bool {
   }
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   array := read_file("INPUT")
@@ -6734,7 +6719,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   array := read_file("INPUT")
@@ -6750,8 +6735,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2021 day 1 - Sonar Sweep")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-2"><a class="header" href="#advent-of-code---year-2021-day-2">Advent of code - Year 2021 Day 2</a></h1>
@@ -6824,7 +6809,7 @@ func compute_aim(instructions []Instruction) int {
   return depth * forward
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   instructions := read_file("INPUT")
@@ -6833,7 +6818,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   instructions := read_file("INPUT")
@@ -6844,8 +6829,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2021 day 2 - Dive!")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-3"><a class="header" href="#advent-of-code---year-2021-day-3">Advent of code - Year 2021 Day 3</a></h1>
@@ -6938,7 +6923,7 @@ func co2(lines []string) int {
   return filter(lines, rule)
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   lines := read_file("INPUT")
@@ -6947,7 +6932,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   result = oxygen(read_file("INPUT")) * co2(read_file("INPUT"))
@@ -6957,8 +6942,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2021 day 3 - Binary Diagnostic")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-4"><a class="header" href="#advent-of-code---year-2021-day-4">Advent of code - Year 2021 Day 4</a></h1>
@@ -7073,7 +7058,7 @@ func draw_number(bingos []Bingo, number int) (int, int, bool) {
   return 0, -1, false
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   numbers, bingos := read_file("INPUT")
@@ -7088,7 +7073,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   numbers, bingos := read_file("INPUT")
@@ -7106,8 +7091,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2021 day 4 - Giant Squid")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-5"><a class="header" href="#advent-of-code---year-2021-day-5">Advent of code - Year 2021 Day 5</a></h1>
@@ -7188,7 +7173,7 @@ func midpoints(number_of_lines *map[[2]int]int, line Line) {
   }
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   number_of_lines := make(map[[2]int]int)
@@ -7207,7 +7192,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   number_of_lines := make(map[[2]int]int)
@@ -7226,8 +7211,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2021 day 5 - Hydrothermal Venture")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-6"><a class="header" href="#advent-of-code---year-2021-day-6">Advent of code - Year 2021 Day 6</a></h1>
@@ -7280,7 +7265,7 @@ func simulate_life(lanternfish [9]int, days int) int {
   return sum
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   lanternfish := read_file("INPUT")
@@ -7289,7 +7274,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   lanternfish := read_file("INPUT")
@@ -7300,8 +7285,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2021 day 6 - Lanternfish")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-7"><a class="header" href="#advent-of-code---year-2021-day-7">Advent of code - Year 2021 Day 7</a></h1>
@@ -7355,7 +7340,7 @@ func optimize_distance(numbers []int, op func(int, int) int) int {
   return result
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   horizontal_positions := read_file("INPUT")
@@ -7365,7 +7350,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   horizontal_positions := read_file("INPUT")
@@ -7380,8 +7365,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2021 day 7 - The Treachery of Whales")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-10"><a class="header" href="#advent-of-code---year-2021-day-10">Advent of code - Year 2021 Day 10</a></h1>
@@ -7457,7 +7442,7 @@ func filter_or_fill(line string) (int, int) {
   return 0, sum
 }
 
-func part1() {
+func part_one() {
   var result int
   start := time.Now()
   lines := read_file("INPUT")
@@ -7469,7 +7454,7 @@ func part1() {
   fmt.Println("Part 1 [", end.Sub(start), "]:", result)
 }
 
-func part2() {
+func part_two() {
   var result int
   start := time.Now()
   lines := read_file("INPUT")
@@ -7488,8 +7473,8 @@ func part2() {
 
 func main() {
   fmt.Println("Year 2021 day 10 - Syntax Scoring")
-  part1()
-  part2()
+  part_one()
+  part_two()
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-11"><a class="header" href="#advent-of-code---year-2021-day-11">Advent of code - Year 2021 Day 11</a></h1>
