@@ -30,6 +30,9 @@ alias rustinstall="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | s
 
 # Update and install Scala lang.
 alias scalainstall="curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d > cs && chmod +x cs && ./cs setup"
+
+# Update and install bun.
+alias buninstall="curl -fsSL https://bun.sh/install | bash"
 ```
 
 # Instalation of all apps
