@@ -56,6 +56,7 @@
 		- [Year 2024 day 11](./aoc/2024-11.md)
 		- [Year 2024 day 12](./aoc/2024-12.md)
 		- [Year 2024 day 13](./aoc/2024-13.md)
+		- [Year 2024 day 14](./aoc/2024-14.md)
 	- [Year 2023](./aoc/2023.md)
 		- [Year 2023 day 1](./aoc/2023-1.md)
 		- [Year 2023 day 2](./aoc/2023-2.md)
