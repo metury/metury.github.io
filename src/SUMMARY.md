@@ -107,6 +107,7 @@
 		- [Year 2021 day 5](./aoc/2021-5.md)
 		- [Year 2021 day 6](./aoc/2021-6.md)
 		- [Year 2021 day 7](./aoc/2021-7.md)
+		- [Year 2021 day 8](./aoc/2021-8.md)
 		- [Year 2021 day 10](./aoc/2021-10.md)
 		- [Year 2021 day 11](./aoc/2021-11.md)
 		- [Year 2021 day 14](./aoc/2021-14.md)
