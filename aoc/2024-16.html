@@ -158,9 +158,9 @@
 <p>This is a solution of the <a href="https://adventofcode.com/2024/day/16">day 16</a>. Go back to year <a href="2024.html">2024</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
 <h3 id="information"><a class="header" href="#information">Information</a></h3>
 <h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
-<p>In the first part we do a <code>BFS</code> and mark visited places indexed by place and orientation and with value of their length. If we may step on the tile with smaller score do so.</p>
+<p>In the first part we do a <code>BFS</code> and mark visited places indexed by place and with value of their length. If we may step on the tile with smaller score do so.</p>
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
-<p>In the second part we also return all visited places with the shortest path, but now we recourse on the path which has also the same score. Note that this is actually pretty slow, because we are rerunning the same suffix of each shortest path multiple times.</p>
+<p>In the second part we also return all visited places with the shortest path, but now we recourse on the path which has also the same score. Also if we run out of the budget, which was computed from the previous step we end.</p>
 <h2 id="maingo"><a class="header" href="#maingo">main.go</a></h2>
 <pre><code class="language-go">package main
 
@@ -253,10 +253,10 @@ func find_path(maze [][]int8, current, end, orientation [2]int, visited map[[2]i
   return res
 }
 
-func extend_seats(maze [][]int8, position, end, orientation [2]int, visited map[[4]int]int, score, res int, spots [][2]int) (int, [][2]int) {
+func extend_seats(maze [][]int8, position, end, orientation [2]int, visited map[[4]int]int, score, res, budget int, spots [][2]int) (int, [][2]int) {
   length, ok := visited[[4]int{position[0], position[1], orientation[0], orientation[1]}]
   if (!ok || length &gt;= score) &amp;&amp; maze[position[0]][position[1]] == Space {
-    new_res, new_spots := find_seats(maze, position, end, orientation, visited, score)
+    new_res, new_spots := find_seats(maze, position, end, orientation, visited, score, budget)
     if res &gt; new_res {
       res = new_res
       spots = new_spots
@@ -267,7 +267,10 @@ func extend_seats(maze [][]int8, position, end, orientation [2]int, visited map[
   return res, spots
 }
 
-func find_seats(maze [][]int8, current, end, orientation [2]int, visited map[[4]int]int, score int) (int, [][2]int) {
+func find_seats(maze [][]int8, current, end, orientation [2]int, visited map[[4]int]int, score, budget int) (int, [][2]int) {
+  if score &gt; budget {
+    return Max, [][2]int{}
+  }
   if current == end {
     return score, [][2]int{end}
   }
@@ -276,15 +279,15 @@ func find_seats(maze [][]int8, current, end, orientation [2]int, visited map[[4]
   visited[[4]int{current[0], current[1], orientation[0], orientation[1]}] = score
 
   new_pos := [2]int{current[0] + orientation[0], current[1] + orientation[1]}
-  res, seats = extend_seats(maze, new_pos, end, orientation, visited, score + 1, res, seats)
+  res, seats = extend_seats(maze, new_pos, end, orientation, visited, score + 1, res, budget, seats)
 
   new_orientation := [2]int{-orientation[1], orientation[0]}
   new_pos = [2]int{current[0] + new_orientation[0], current[1] + new_orientation[1]}
-  res, seats = extend_seats(maze, new_pos, end, new_orientation, visited, score + 1001, res, seats)
+  res, seats = extend_seats(maze, new_pos, end, new_orientation, visited, score + 1001, res, budget, seats)
 
   new_orientation = [2]int{orientation[1], -orientation[0]}
   new_pos = [2]int{current[0] + new_orientation[0], current[1] + new_orientation[1]}
-  res, seats = extend_seats(maze, new_pos, end, new_orientation, visited, score + 1001, res, seats)
+  res, seats = extend_seats(maze, new_pos, end, new_orientation, visited, score + 1001, res, budget, seats)
 
   return res, append(seats, current)
 }
@@ -302,7 +305,8 @@ func part_two() {
   var result int
   start := time.Now()
   maze, start_point, end_point := read_file("INPUT")
-  _, spots := find_seats(maze, start_point, end_point, [2]int{0,1}, make(map[[4]int]int), 0)
+  length := find_path(maze, start_point, end_point, [2]int{0,1}, make(map[[2]int]int), 0)
+  _, spots := find_seats(maze, start_point, end_point, [2]int{0,1}, make(map[[4]int]int), 0, length)
   seats := make(map[[2]int]bool)
   for _, s := range spots {
     seats[s] = true
