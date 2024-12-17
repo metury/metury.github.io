@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Year 2023 - Personal page</title>
+        <title>Year 2024 day 17 - Personal page</title>
 
 
         <!-- Custom HTML head -->
@@ -154,46 +154,190 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="advent-of-code---year-2023"><a class="header" href="#advent-of-code---year-2023">Advent of code - Year 2023</a></h1>
-<p>This contains tasks from the <a href="https://adventofcode.com/2023">year 2023</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
-<h3 id="days"><a class="header" href="#days">Days</a></h3>
-<ul>
-<li><a href="2023-1.html">Day 1</a></li>
-<li><a href="2023-2.html">Day 2</a></li>
-<li><a href="2023-3.html">Day 3</a></li>
-<li><a href="2023-4.html">Day 4</a></li>
-<li><a href="2023-5.html">Day 5</a></li>
-<li><a href="2023-6.html">Day 6</a></li>
-<li><a href="2023-7.html">Day 7</a></li>
-<li><a href="2023-8.html">Day 8</a></li>
-<li><a href="2023-9.html">Day 9</a></li>
-<li><a href="2023-10.html">Day 10</a></li>
-<li><a href="2023-11.html">Day 11</a></li>
-<li><a href="2023-12.html">Day 12</a></li>
-<li><a href="2023-13.html">Day 13</a></li>
-<li><a href="2023-14.html">Day 14</a></li>
-<li><a href="2023-15.html">Day 15</a></li>
-<li><a href="2023-16.html">Day 16</a></li>
-<li><a href="2023-17.html">Day 17</a></li>
-<li><a href="2023-18.html">Day 18</a></li>
-<li><a href="2023-19.html">Day 19</a></li>
-<li><a href="2023-20.html">Day 20</a></li>
-<li><a href="2023-21.html">Day 21</a></li>
-<li><a href="2023-22.html">Day 22</a></li>
-<li><a href="2023-23.html">Day 23</a></li>
-<li><a href="2023-24.html">Day 24</a></li>
-<li><a href="2023-25.html">Day 25</a></li>
-</ul>
+                        <h1 id="advent-of-code---year-2024-day-17"><a class="header" href="#advent-of-code---year-2024-day-17">Advent of code - Year 2024 Day 17</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2024/day/17">day 17</a>. Go back to year <a href="2024.html">2024</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
+<h3 id="information"><a class="header" href="#information">Information</a></h3>
+<h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
+<p>In the first part we reconstruct the <code>computer</code> and simulate the given program.</p>
+<h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
+<p>In the second part we may see that there is only one instruction which changes <code>A</code> that is <code>0 X</code> where <code>X &lt;= 3</code>. So we construct the program from back. In each step we iterate over all numbers between <code>0</code> and <code>2^X</code>. If on the current position we have the same number as in the program itself we recourse on the previous index, also we multiply the current solution by <code>2^X</code> so that the tail stays the same. In other iterations we have some previous solution and add the new number for the current one. We also need to check if we don't have too long array of numbers and properly end.</p>
+<h2 id="maingo"><a class="header" href="#maingo">main.go</a></h2>
+<pre><code class="language-go">package main
+
+import (
+  "fmt"
+  "log"
+  "math"
+  "os"
+  "regexp"
+  "strconv"
+  "strings"
+  "time"
+)
+
+const (
+  Blue   = "[1;34m"
+  Yellow = "[1;33m"
+  Green  = "[1;32m"
+  Reset  = "[0m"
+)
+
+func print_result(dur time.Duration, part int, result string) {
+  fmt.Println("Part " + fmt.Sprint(part) + " [" + Blue + fmt.Sprint(dur) + Reset + "]: " + Yellow + result + Reset)
+}
+
+type Computer struct {
+  a       int
+  b       int
+  c       int
+  program []int
+  output  []int
+}
+
+func read_file(file_path string) Computer {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  a_regex := regexp.MustCompile("Register A: ([0-9]+)")
+  b_regex := regexp.MustCompile("Register B: ([0-9]+)")
+  c_regex := regexp.MustCompile("Register C: ([0-9]+)")
+  prg_regex := regexp.MustCompile("Program: ([0-9,]+)")
+  a, _ := strconv.Atoi(a_regex.FindStringSubmatch(string(content))[1])
+  b, _ := strconv.Atoi(b_regex.FindStringSubmatch(string(content))[1])
+  c, _ := strconv.Atoi(c_regex.FindStringSubmatch(string(content))[1])
+  var program []int
+  for _, chr := range strings.Split(prg_regex.FindStringSubmatch(string(content))[1], ",") {
+    nr, _ := strconv.Atoi(chr)
+    program = append(program, nr)
+  }
+  return Computer{a, b, c, program, make([]int, 0)}
+}
+
+func combo(computer *Computer, val int) int {
+  if val &gt;= 0 &amp;&amp; val &lt;= 3 {
+    return val
+  }
+  if val == 4 {
+    return (*computer).a
+  }
+  if val == 5 {
+    return (*computer).b
+  }
+  if val == 6 {
+    return (*computer).c
+  }
+  panic("WHOA")
+}
+
+func do_operation(computer *Computer, pointer int) (int, bool) {
+  if pointer &gt;= len((*computer).program) {
+    return -1, true
+  }
+  operation := (*computer).program[pointer]
+  operand := (*computer).program[pointer+1]
+  switch operation {
+  case 0:
+    (*computer).a = (*computer).a / int(math.Pow(2, float64(combo(computer, operand))))
+  case 1:
+    (*computer).b = (*computer).b ^ operand
+  case 2:
+    (*computer).b = combo(computer, operand) % 8
+  case 3:
+    if (*computer).a != 0 {
+      return operand, false
+    }
+  case 4:
+    (*computer).b = (*computer).b ^ (*computer).c
+  case 5:
+    (*computer).output = append((*computer).output, combo(computer, operand)%8)
+  case 6:
+    (*computer).b = (*computer).a / int(math.Pow(2, float64(combo(computer, operand))))
+  case 7:
+    (*computer).c = (*computer).a / int(math.Pow(2, float64(combo(computer, operand))))
+  }
+  return pointer + 2, false
+}
+
+func simulate(computer *Computer) string {
+  pointer := 0
+  halt := false
+  for ; !halt; pointer, halt = do_operation(computer, pointer) {
+  }
+  str_output := make([]string, len((*computer).output))
+  for i, out := range (*computer).output {
+    str_output[i] = fmt.Sprint(out)
+  }
+  return strings.Join(str_output, ",")
+}
+
+func find_divisor(computer Computer) int {
+  divisor := 1
+  for i := 0; i &lt; len(computer.program); i += 2 {
+    if computer.program[i] == 0 {
+      divisor *= int(math.Pow(2, float64(combo(&amp;computer, computer.program[i+1]))))
+    }
+  }
+  return divisor
+}
+
+func solve(computer Computer, prev, index, divisor int) (int, bool) {
+  j := index
+  for i := 0; i &lt; divisor; i++ {
+    computer.a = prev*8 + i
+    computer.output = make([]int, 0)
+    simulate(&amp;computer)
+    if j &gt;= len(computer.output) {
+      continue
+    }
+    if computer.output[len(computer.output)-j-1] == computer.program[len(computer.program)-j-1] {
+      if j == len(computer.program)-1 {
+        return prev*8 + i, true
+      }
+      sol, ok := solve(computer, prev*8+i, index+1, divisor)
+      if ok {
+        return sol, ok
+      }
+    }
+  }
+  return 0, false
+}
+
+func part_one() {
+  var result string
+  start := time.Now()
+  computer := read_file("INPUT")
+  result = simulate(&amp;computer)
+  end := time.Now()
+  print_result(end.Sub(start), 1, result)
+}
+
+func part_two() {
+  var result string
+  start := time.Now()
+  computer := read_file("INPUT")
+  sol, _ := solve(computer, 0, 0, find_divisor(computer))
+  result = fmt.Sprint(sol)
+  end := time.Now()
+  print_result(end.Sub(start), 2, result)
+}
+
+func main() {
+  fmt.Println("Year " + Green + "2024" + Reset + " day " + Green + "17 - Claw Contraption" + Reset)
+  part_one()
+  part_two()
+}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2024-17.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2024-16.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2023-1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2023.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -203,11 +347,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2024-17.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2024-16.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2023-1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2023.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
