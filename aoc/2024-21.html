@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Year 2024 day 20 - Personal page</title>
+        <title>Year 2024 day 21 - Personal page</title>
 
 
         <!-- Custom HTML head -->
@@ -154,13 +154,15 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="advent-of-code---year-2024-day-20"><a class="header" href="#advent-of-code---year-2024-day-20">Advent of code - Year 2024 Day 20</a></h1>
-<p>This is a solution of the <a href="https://adventofcode.com/2024/day/20">day 20</a>. Go back to year <a href="2024.html">2024</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
+                        <h1 id="advent-of-code---year-2024-day-21"><a class="header" href="#advent-of-code---year-2024-day-21">Advent of code - Year 2024 Day 21</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2024/day/21">day 21</a>. Go back to year <a href="2024.html">2024</a>. Go back to <a href="../adventofcode.html">AOC</a>.</p>
 <h3 id="information"><a class="header" href="#information">Information</a></h3>
 <h4 id="part-1"><a class="header" href="#part-1">Part 1</a></h4>
-<p>In the first part we will search the graph and find the length of the path. Then we do a flood-fill algorithm on all empty spaces so that we can have 2 picoseconds.</p>
+<p>Generally we will establish ordering of arrow symbols, in this order <code>&lt;</code>, <code>v</code>, <code>^</code>, <code>&gt;</code> and <code>A</code>. Then we will create a mapping from one sequence on a pad to all others following te instructions. These sequences will be sorted in a previously mentioned way. Also we will move all leading <code>&gt;</code> symbols (if there is more than 1 of them). This mapping is from two characters to a sequence of instructions.</p>
+<p>Then we will create optimal solution for numerical pad and then we will keep in map number of common sub-strings neighboring with <code>A</code>'s. We will repair such sequence by simulating the movement on the pad. lastly we move all symbols so that the same ones are neighbouring.</p>
+<p>This way we proceed for the directional pad and compute it for <code>2</code> repetitions.</p>
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
-<p>In the second part wee only have now 20 picoseconds instead.</p>
+<p>In the second one we only change <code>2</code> to <code>25</code>.</p>
 <h2 id="maingo"><a class="header" href="#maingo">main.go</a></h2>
 <pre><code class="language-go">package main
 
@@ -168,8 +170,9 @@ import (
   "fmt"
   "log"
   "os"
+  "sort"
+  "strconv"
   "strings"
-  "sync"
   "time"
 )
 
@@ -184,117 +187,222 @@ func print_result(dur time.Duration, part, result int) {
   fmt.Println("Part " + fmt.Sprint(part) + " [" + Blue + fmt.Sprint(dur) + Reset + "]: " + Yellow + fmt.Sprint(result) + Reset)
 }
 
-const Max int = int(^uint(0) &gt;&gt; 1)
+const Invalid rune = '#'
 
-func read_file(file_path string) ([][]bool, [2]int, [2]int) {
+var Numpad [][]rune = [][]rune{
+  {'#', '#', '#', '#', '#'},
+  {'#', '7', '8', '9', '#'},
+  {'#', '4', '5', '6', '#'},
+  {'#', '1', '2', '3', '#'},
+  {'#', '#', '0', 'A', '#'},
+  {'#', '#', '#', '#', '#'},
+}
+
+var Numstart [2]int = [2]int{4, 3}
+
+var Dirpad = [][]rune{
+  {'#', '#', '#', '#', '#'},
+  {'#', '#', '^', 'A', '#'},
+  {'#', '&lt;', 'v', '&gt;', '#'},
+  {'#', '#', '#', '#', '#'},
+}
+
+var Dirstart [2]int = [2]int{1, 3}
+
+var order = map[rune]int{
+  '&lt;': 1,
+  'v': 2,
+  '^': 3,
+  '&gt;': 4,
+  'A': 5,
+}
+
+func order_runes(a, b rune) bool {
+  return order[a] &lt; order[b]
+}
+
+func read_file(file_path string) []string {
   content, err := os.ReadFile(file_path)
   if err != nil {
     log.Fatal(err)
   }
-  var start [2]int
-  var end [2]int
-  var m [][]bool
-  for i, line := range strings.Split(string(content), "\n") {
+  var codes []string
+  for _, line := range strings.Split(string(content), "\n") {
     if len(line) == 0 {
       continue
     }
-    row := make([]bool, len(line))
-    for j, c := range line {
-      switch c {
-        case '#':
-          row[j] = false
-        case '.':
-          row[j] = true
-        case 'S':
-          row[j] = true
-          start = [2]int{i, j}
-        case 'E':
-          row[j] = true
-          end = [2]int{i, j}
-      }
-    }
-    m = append(m, row)
+    codes = append(codes, line)
   }
-  return m, start, end
+  return codes
 }
 
-func get_neighbours(x, y int) [4][2]int {
-   return [4][2]int{{x + 1,y}, {x - 1, y}, {x, y + 1},{x, y - 1}}
+func add_one_neighbour(start, current [2]int, instr string, table map[[2]rune]string, pad [][]rune, sign rune) {
+  if pad[current[0]][current[1]] != Invalid {
+    append_neighbours(start, current, instr+string(sign), table, pad)
+  }
 }
 
-func find_shortest_path(m *[][]bool, position [2]int, length int, visited *[][]int) {
-  if position[0] &lt; 0 || position[1] &lt; 0 || position[0] &gt;= len(*m) || position[1] &gt;= len((*m)[position[0]]) {
+func append_neighbours(start, current [2]int, instr string, table map[[2]rune]string, pad [][]rune) {
+  c_start := pad[start[0]][start[1]]
+  c_current := pad[current[0]][current[1]]
+  prev, ok := table[[2]rune{c_start, c_current}]
+  if ok &amp;&amp; len(prev) &lt;= len(instr) {
     return
   }
-  if !(*m)[position[0]][position[1]] || (*visited)[position[0]][position[1]] &lt; length {
-    return
-  }
-  (*visited)[position[0]][position[1]] = length
-  for _, neigh := range get_neighbours(position[0], position[1]) {
-    find_shortest_path(m, neigh, length + 1, visited)
-  }
+  table[[2]rune{c_start, c_current}] = instr + "A"
+  add_one_neighbour(start, [2]int{current[0] + 1, current[1]}, instr, table, pad, 'v')
+  add_one_neighbour(start, [2]int{current[0] - 1, current[1]}, instr, table, pad, '^')
+  add_one_neighbour(start, [2]int{current[0], current[1] - 1}, instr, table, pad, '&lt;')
+  add_one_neighbour(start, [2]int{current[0], current[1] + 1}, instr, table, pad, '&gt;')
 }
 
-func find_shortcuts(m *[][]bool, visited *[][]int, timer, limit, length int, position [2]int, previous map[[2]int]int, ends map[[2]int]bool, cheat bool) {
-  if timer &lt;= 0 {
-    return
-  }
-  timer--
-  length++
-  for _, neigh := range get_neighbours(position[0], position[1]) {
-    if neigh[0] &lt; 0 || neigh[1] &lt; 0 || neigh[0] &gt;= len(*m) || neigh[1] &gt;= len((*m)[neigh[0]]) {
-      continue
-    }
-    if (*m)[neigh[0]][neigh[1]] &amp;&amp; (*visited)[neigh[0]][neigh[1]] - limit &gt;= length {
-      ends[neigh] = true
-    }
-    prev, ok := previous[neigh]
-    if ok &amp;&amp; prev &lt;= length {
-      continue
-    }
-    previous[neigh] = length
-    find_shortcuts(m, visited, timer, limit, length, neigh, previous, ends, cheat &amp;&amp; (*m)[neigh[0]][neigh[1]])
-  }
-}
-
-func count_shortcuts(picoseconds, limit int) int {
-  result := 0
-  m, start_pos, end_pos := read_file("INPUT")
-  visited := make([][]int, len(m))
-  for i, row := range m {
-    visited[i] = make([]int, len(m[i]))
+func create_mapping(pad [][]rune) map[[2]rune]string {
+  table := make(map[[2]rune]string)
+  for i, row := range pad {
     for j := range row {
-      visited[i][j] = Max
-    }
-  }
-  find_shortest_path(&amp;m, start_pos, 0, &amp;visited)
-  var wg sync.WaitGroup
-  c := make(chan int, visited[end_pos[0]][end_pos[1]] + 1)
-  wg.Add(visited[end_pos[0]][end_pos[1]] + 1)
-  for i, row := range m {
-    for j := range row {
-      if m[i][j] {
-        ends := make(map[[2]int]bool)
-        go func(i, j int) {
-          defer wg.Done()
-          find_shortcuts(&amp;m, &amp;visited, picoseconds, limit, visited[i][j], [2]int{i,j}, make(map[[2]int]int), ends, true)
-          c &lt;- len(ends)
-        }(i, j)
+      if pad[i][j] != Invalid {
+        append_neighbours([2]int{i, j}, [2]int{i, j}, "", table, pad)
       }
     }
   }
-  wg.Wait()
-  close(c)
-  for res := range c {
-    result += res
+  for key, val := range table {
+    runes := []rune(val)
+    sort.Slice(runes, func(i, j int) bool {
+      return order_runes(runes[i], runes[j])
+    })
+    table[key] = string(runes)
   }
-  return result
+  return table
+}
+
+func find(table map[[2]rune]string, instr string) string {
+  instr = "A" + instr
+  movement := ""
+  for i := 1; i &lt; len(instr); i++ {
+    movement += table[[2]rune{rune(instr[i-1]), rune(instr[i])}]
+  }
+  runes := []rune(movement)
+  if runes[0] == '&lt;' &amp;&amp; runes[1] == '&lt;' {
+    i := 0
+    for ; runes[i] == '&lt;'; i++ {
+    }
+    j := i + 1
+    for ; runes[j] == runes[i]; j++ {
+    }
+    for k := 0; k &lt; i &amp;&amp; i+k &lt; j; k++ {
+      runes[k], runes[j-1-k] = runes[j-k-1], runes[k]
+    }
+  }
+  movement = string(runes)
+  return movement
+}
+
+func repair(intr string, pad [][]rune, i, j int) string {
+  res := []rune(intr)
+  for k := 0; k &lt; len(res); k++ {
+    chr := res[k]
+    switch chr {
+    case '&lt;':
+      if pad[i][j-1] == Invalid {
+        res[k+1], res[k] = res[k], res[k+1]
+        k--
+      } else {
+        j--
+      }
+    case '&gt;':
+      if pad[i][j+1] == Invalid {
+        res[k+1], res[k] = res[k], res[k+1]
+        k--
+      } else {
+        j++
+      }
+    case '^':
+      if pad[i-1][j] == Invalid {
+        res[k+1], res[k] = res[k], res[k+1]
+        k--
+      } else {
+        i--
+      }
+    case 'v':
+      if pad[i+1][j] == Invalid {
+        res[k+1], res[k] = res[k], res[k+1]
+        k--
+      } else {
+        i++
+      }
+    }
+  }
+  return string(res)
+}
+
+func squish(instr string) string {
+  runes := []rune(instr)
+  for i := 1; i &lt; len(runes)-1; i++ {
+    if runes[i] == 'A' || runes[i-1] == 'A' {
+      continue
+    }
+    if runes[i-1] == runes[i+1] &amp;&amp; runes[i] != runes[i-1] {
+      if runes[i-1] == '&gt;' {
+        runes[i+1], runes[i] = runes[i], runes[i+1]
+      } else {
+        runes[i-1], runes[i] = runes[i], runes[i-1]
+      }
+
+    }
+  }
+  return string(runes)
+}
+
+func bootstrap(code string, repetitions int, table map[[2]rune]string, table_d map[[2]rune]string) int {
+  m := squish(repair(find(table, code), Numpad, Numstart[0], Numstart[1]))
+  counters := make(map[string]int)
+  splited := strings.Split(m, "A")
+  for _, str := range splited[:len(splited)-1] {
+    prev, ok := counters["A"+str+"A"]
+    if ok {
+      counters["A"+str+"A"] = prev + 1
+    } else {
+      counters["A"+str+"A"] = 1
+    }
+  }
+  for i := 0; i &lt; repetitions; i++ {
+    counters = simplified(counters, table_d)
+  }
+  sum := 0
+  for key, val := range counters {
+    sum += val * (len(key) - 1)
+  }
+  return sum
+}
+
+func simplified(counters map[string]int, table map[[2]rune]string) map[string]int {
+  new_map := make(map[string]int)
+  for key, val := range counters {
+    m := squish(repair(find(table, key), Dirpad, Dirstart[0], Dirstart[1]))
+    splited := strings.Split(m, "A")
+    for _, str := range splited[1 : len(splited)-1] {
+      prev, ok := new_map["A"+str+"A"]
+      if ok {
+        new_map["A"+str+"A"] = val + prev
+      } else {
+        new_map["A"+str+"A"] = val
+      }
+    }
+  }
+  return new_map
 }
 
 func part_one() {
   var result int
   start := time.Now()
-  result = count_shortcuts(2, 100)
+  codes := read_file("INPUT")
+  table := create_mapping(Numpad)
+  table_d := create_mapping(Dirpad)
+  for _, code := range codes {
+    nr, _ := strconv.Atoi(code[:len(code)-1])
+    sum := bootstrap(code, 2, table, table_d)
+    result += nr * sum
+  }
   end := time.Now()
   print_result(end.Sub(start), 1, result)
 }
@@ -302,13 +410,20 @@ func part_one() {
 func part_two() {
   var result int
   start := time.Now()
-  result = count_shortcuts(20, 100)
+  codes := read_file("INPUT")
+  table := create_mapping(Numpad)
+  table_d := create_mapping(Dirpad)
+  for _, code := range codes {
+    nr, _ := strconv.Atoi(code[:len(code)-1])
+    sum := bootstrap(code, 25, table, table_d)
+    result += nr * sum
+  }
   end := time.Now()
   print_result(end.Sub(start), 2, result)
 }
 
 func main() {
-  fmt.Println("Year " + Green + "2024" + Reset + " day " + Green + "20 - Claw Contraption" + Reset)
+  fmt.Println("Year " + Green + "2024" + Reset + " day " + Green + "21 - Claw Contraption" + Reset)
   part_one()
   part_two()
 }
@@ -318,11 +433,11 @@ func main() {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../aoc/2024-19.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../aoc/2024-20.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../aoc/2024-21.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../aoc/2024-22.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -332,11 +447,11 @@ func main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../aoc/2024-19.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../aoc/2024-20.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../aoc/2024-21.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../aoc/2024-22.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
