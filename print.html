@@ -4415,7 +4415,20 @@ func main() {
 <h4 id="part-1-23"><a class="header" href="#part-1-23">Part 1</a></h4>
 <p>For the first part we only evaluate all of the gates and recreate the number.</p>
 <h4 id="part-2-23"><a class="header" href="#part-2-23">Part 2</a></h4>
-<p>For the second part it is somewhat easier to look up by hand. There are three easy candidates with <code>z</code> values. next you may recreate a mermaid diagram by using regex <code>([0-9a-z]+) ((?:OR)|(?:AND)|(?:XOR)) ([0-9a-z]+) -&gt; ([0-9a-z]+)</code> and replace it by <code>\1 -- "\2" --&gt; \4;\n\3 -- "\2" --&gt; \4;</code>.</p>
+<p>For the second part it is somewhat easier to look up by hand. There are three easy candidates with <code>z</code> values. next you may recreate a mermaid diagram by using regex <code>([0-9a-z]+) ((?:OR)|(?:AND)|(?:XOR)) ([0-9a-z]+) -&gt; ([0-9a-z]+)</code> and replace it by <code>\1 -- "\2" --&gt; \4;\n\3 -- "\2" --&gt; \4;</code>. next graph shows the labeling of the nodes.</p>
+<pre><code class="language-mermaid">graph TB
+x("X") -- "XOR" --&gt; xor(("^"));
+	y("Y") -- "XOR" --&gt; xor;
+	x -- "AND" --&gt; and(("&amp;"));
+	y -- "AND" --&gt; and;
+	carry("carry") -- "XOR" --&gt; z("Z");
+	xor -- "XOR" --&gt; z;
+	and -- "OR" --&gt; nextcarry;
+	carry -- "AND" --&gt; secondand(("&amp;"));
+	xor -- "AND" --&gt; secondand;
+	secondand -- "OR" --&gt; nextcarry("next carry");
+
+</code></pre>
 <h2 id="maingo-23"><a class="header" href="#maingo-23">main.go</a></h2>
 <pre><code class="language-go">package main
 
