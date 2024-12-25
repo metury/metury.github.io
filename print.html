@@ -946,6 +946,7 @@ Plus you may also play a small <a href="https://aoc-bingo.fly.dev/">Bingo</a> th
 <li><a href="aoc/2024-22.html">Day 22</a></li>
 <li><a href="aoc/2024-23.html">Day 23</a></li>
 <li><a href="aoc/2024-24.html">Day 24</a></li>
+<li><a href="aoc/2024-25.html">Day 25</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-1"><a class="header" href="#advent-of-code---year-2024-day-1">Advent of code - Year 2024 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2024/day/1">day 1</a>. Go back to year <a href="aoc/2024.html">2024</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
@@ -4587,6 +4588,114 @@ func main() {
   part_two()
 }
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2024-day-25"><a class="header" href="#advent-of-code---year-2024-day-25">Advent of code - Year 2024 Day 25</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2024/day/25">day 25</a>. Go back to year <a href="aoc/2024.html">2024</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
+<h3 id="information-25"><a class="header" href="#information-25">Information</a></h3>
+<h4 id="part-1-24"><a class="header" href="#part-1-24">Part 1</a></h4>
+<p>In the first part we try all possible combinations.</p>
+<h4 id="part-2-24"><a class="header" href="#part-2-24">Part 2</a></h4>
+<p><code>Deliver the Chronicle</code></p>
+<h2 id="maingo-24"><a class="header" href="#maingo-24">main.go</a></h2>
+<pre><code class="language-go">package main
+
+import (
+  "fmt"
+  "log"
+  "os"
+  "strings"
+  "time"
+)
+
+const (
+  Blue   = "[1;34m"
+  Yellow = "[1;33m"
+  Green  = "[1;32m"
+  Reset  = "[0m"
+)
+
+func print_result(dur time.Duration, part int, result string) {
+  fmt.Println("Part " + fmt.Sprint(part) + " [" + Blue + fmt.Sprint(dur) + Reset + "]: " + Yellow + fmt.Sprint(result) + Reset)
+}
+
+func read_file(file_path string) ([][5]int, [][5]int) {
+  content, err := os.ReadFile(file_path)
+  if err != nil {
+    log.Fatal(err)
+  }
+
+  lines := strings.Split(string(content), "\n")
+  var locks [][5]int
+  var keys [][5]int
+  var buffer [5]int
+  key := false
+  index := 0
+  for _, line := range lines {
+    if len(line) == 0 {
+      buffer[0], buffer[1], buffer[2], buffer[3], buffer[4] = buffer[0]-1, buffer[1]-1, buffer[2]-1, buffer[3]-1, buffer[4]-1
+      if key {
+        keys = append(keys, buffer)
+      } else {
+        locks = append(locks, buffer)
+      }
+      buffer[0], buffer[1], buffer[2], buffer[3], buffer[4] = 0, 0, 0, 0, 0
+      continue
+    }
+    if index%7 == 0 {
+      if line[0] == '#' {
+        key = false
+      } else {
+        key = true
+      }
+    }
+    for i, chr := range line {
+      if chr == '#' {
+        buffer[i] += 1
+      }
+    }
+    index++
+  }
+  return keys, locks
+}
+
+func try_all(keys [][5]int, locks [][5]int) int {
+  sum := 0
+  for _, key := range keys {
+  outer:
+    for _, lock := range locks {
+      for i := 0; i &lt; 5; i++ {
+        if key[i]+lock[i] &gt;= 6 {
+          continue outer
+        }
+      }
+      sum += 1
+    }
+  }
+  return sum
+}
+
+func part_one() {
+  var result int
+  start := time.Now()
+  keys, locks := read_file("INPUT")
+  result = try_all(keys, locks)
+  end := time.Now()
+  print_result(end.Sub(start), 1, fmt.Sprint(result))
+}
+
+func part_two() {
+  var result string
+  start := time.Now()
+  result = "Deliver the Chronicle"
+  end := time.Now()
+  print_result(end.Sub(start), 2, result)
+}
+
+func main() {
+  fmt.Println("Year " + Green + "2024" + Reset + " day " + Green + "25 - Claw Contraption" + Reset)
+  part_one()
+  part_two()
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023"><a class="header" href="#advent-of-code---year-2023">Advent of code - Year 2023</a></h1>
 <p>This contains tasks from the <a href="https://adventofcode.com/2023">year 2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
 <h3 id="days-1"><a class="header" href="#days-1">Days</a></h3>
@@ -4619,10 +4728,10 @@ func main() {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-1"><a class="header" href="#advent-of-code---year-2023-day-1">Advent of code - Year 2023 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/1">day 1</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-25"><a class="header" href="#information-25">Information</a></h3>
-<h4 id="part-1-24"><a class="header" href="#part-1-24">Part 1</a></h4>
+<h3 id="information-26"><a class="header" href="#information-26">Information</a></h3>
+<h4 id="part-1-25"><a class="header" href="#part-1-25">Part 1</a></h4>
 <p>In the first part we delete all non-digits characters and found the first and last one.</p>
-<h4 id="part-2-24"><a class="header" href="#part-2-24">Part 2</a></h4>
+<h4 id="part-2-25"><a class="header" href="#part-2-25">Part 2</a></h4>
 <p>In the second part we also replace written digits as numbers, but keep overlaps. Then again find the first and last digit.</p>
 <h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -4693,10 +4802,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-2"><a class="header" href="#advent-of-code---year-2023-day-2">Advent of code - Year 2023 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/2">day 2</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-26"><a class="header" href="#information-26">Information</a></h3>
-<h4 id="part-1-25"><a class="header" href="#part-1-25">Part 1</a></h4>
+<h3 id="information-27"><a class="header" href="#information-27">Information</a></h3>
+<h4 id="part-1-26"><a class="header" href="#part-1-26">Part 1</a></h4>
 <p>In both parts we use regexes to find red, blue and green numbers. In the first part we compare these values to the limits.</p>
-<h4 id="part-2-25"><a class="header" href="#part-2-25">Part 2</a></h4>
+<h4 id="part-2-26"><a class="header" href="#part-2-26">Part 2</a></h4>
 <p>In the second part we compute the maximums.</p>
 <h2 id="mainrs-1"><a class="header" href="#mainrs-1">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -5679,10 +5788,10 @@ if __name__ == "__main__":
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-14"><a class="header" href="#advent-of-code---year-2023-day-14">Advent of code - Year 2023 Day 14</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/14">day 14</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-27"><a class="header" href="#information-27">Information</a></h3>
-<h4 id="part-1-26"><a class="header" href="#part-1-26">Part 1</a></h4>
+<h3 id="information-28"><a class="header" href="#information-28">Information</a></h3>
+<h4 id="part-1-27"><a class="header" href="#part-1-27">Part 1</a></h4>
 <p>In the first part we create a grid of all stones and shift it to one north side and then compute it.</p>
-<h4 id="part-2-26"><a class="header" href="#part-2-26">Part 2</a></h4>
+<h4 id="part-2-27"><a class="header" href="#part-2-27">Part 2</a></h4>
 <p>In the second part we cycle the shifts counterclockwis and always remember current number of cycle and how the map looked. If we encounter the same situation we take a shortcut by skipping all repeating cycles and only finish the last ones.</p>
 <h2 id="mainrs-2"><a class="header" href="#mainrs-2">main.rs</a></h2>
 <pre><code class="language-rs">use std::collections::HashMap;
@@ -5873,10 +5982,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-15"><a class="header" href="#advent-of-code---year-2023-day-15">Advent of code - Year 2023 Day 15</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/15">day 15</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-28"><a class="header" href="#information-28">Information</a></h3>
-<h4 id="part-1-27"><a class="header" href="#part-1-27">Part 1</a></h4>
+<h3 id="information-29"><a class="header" href="#information-29">Information</a></h3>
+<h4 id="part-1-28"><a class="header" href="#part-1-28">Part 1</a></h4>
 <p>In the first part we just straightforwardly compute the given acii hash.</p>
-<h4 id="part-2-27"><a class="header" href="#part-2-27">Part 2</a></h4>
+<h4 id="part-2-28"><a class="header" href="#part-2-28">Part 2</a></h4>
 <p>In the second part we create  <code>hash_map</code> from vector and linked list. Then proceed the given instructions wit hthe ascii hash.</p>
 <h2 id="mainrs-3"><a class="header" href="#mainrs-3">main.rs</a></h2>
 <pre><code class="language-rs">use std::collections::LinkedList;
@@ -5981,10 +6090,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-16"><a class="header" href="#advent-of-code---year-2023-day-16">Advent of code - Year 2023 Day 16</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/16">day 16</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-29"><a class="header" href="#information-29">Information</a></h3>
-<h4 id="part-1-28"><a class="header" href="#part-1-28">Part 1</a></h4>
+<h3 id="information-30"><a class="header" href="#information-30">Information</a></h3>
+<h4 id="part-1-29"><a class="header" href="#part-1-29">Part 1</a></h4>
 <p>We simply recursively simulate beam step-by-step. We use hashmap to memorize already visited places in grid with the same directions.</p>
-<h4 id="part-2-28"><a class="header" href="#part-2-28">Part 2</a></h4>
+<h4 id="part-2-29"><a class="header" href="#part-2-29">Part 2</a></h4>
 <p>We reuse the codebase and run he simulation from every possible place and find the maximum.</p>
 <h2 id="mainrs-4"><a class="header" href="#mainrs-4">main.rs</a></h2>
 <pre><code class="language-rs">use std::collections::HashMap;
@@ -6183,10 +6292,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-17"><a class="header" href="#advent-of-code---year-2023-day-17">Advent of code - Year 2023 Day 17</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/17">day 17</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-30"><a class="header" href="#information-30">Information</a></h3>
-<h4 id="part-1-29"><a class="header" href="#part-1-29">Part 1</a></h4>
+<h3 id="information-31"><a class="header" href="#information-31">Information</a></h3>
+<h4 id="part-1-30"><a class="header" href="#part-1-30">Part 1</a></h4>
 <p>We record every single step by its position, direction, all other possibilities. Then we use heap for the shortest paths and hashmap to record alreeady visited nodes.</p>
-<h4 id="part-2-29"><a class="header" href="#part-2-29">Part 2</a></h4>
+<h4 id="part-2-30"><a class="header" href="#part-2-30">Part 2</a></h4>
 <p>We also introduce a minimal number of nodes in one direction, then we rewrite the code so it can work for both parts.</p>
 <h2 id="mainrs-5"><a class="header" href="#mainrs-5">main.rs</a></h2>
 <pre><code class="language-rs">use std::cmp::Reverse;
@@ -6450,10 +6559,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-18"><a class="header" href="#advent-of-code---year-2023-day-18">Advent of code - Year 2023 Day 18</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/18">day 18</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-31"><a class="header" href="#information-31">Information</a></h3>
-<h4 id="part-1-30"><a class="header" href="#part-1-30">Part 1</a></h4>
+<h3 id="information-32"><a class="header" href="#information-32">Information</a></h3>
+<h4 id="part-1-31"><a class="header" href="#part-1-31">Part 1</a></h4>
 <p>We can simply calculate the whole grid. Then create the outline and after that recursively fill in the polygon from a starting node. This solution is actually in here anymore.</p>
-<h4 id="part-2-30"><a class="header" href="#part-2-30">Part 2</a></h4>
+<h4 id="part-2-31"><a class="header" href="#part-2-31">Part 2</a></h4>
 <p>Again we use <a href="https://en.wikipedia.org/wiki/Pick%27s_theorem">Pick's Theorem</a>. And <a href="https://docs.rs/geo/latest/geo/">geo</a> library to create a polygon from the instruction set and compute the area using the library. Then we procede with the use of the theoem.</p>
 <h2 id="mainrs-6"><a class="header" href="#mainrs-6">main.rs</a></h2>
 <pre><code class="language-rs">use geo::{coord, Area, Coord, LineString, Polygon};
@@ -6544,11 +6653,11 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-19"><a class="header" href="#advent-of-code---year-2023-day-19">Advent of code - Year 2023 Day 19</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/19">day 19</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-32"><a class="header" href="#information-32">Information</a></h3>
+<h3 id="information-33"><a class="header" href="#information-33">Information</a></h3>
 <p>The main key was to parse properly the given input. That is why the code today is pretty long.</p>
-<h4 id="part-1-31"><a class="header" href="#part-1-31">Part 1</a></h4>
+<h4 id="part-1-32"><a class="header" href="#part-1-32">Part 1</a></h4>
 <p>After that we just use hash table to memorize given states. Than we process each request from left to right until it is satisfied.</p>
-<h4 id="part-2-31"><a class="header" href="#part-2-31">Part 2</a></h4>
+<h4 id="part-2-32"><a class="header" href="#part-2-32">Part 2</a></h4>
 <p>In the second part we had to use the same aproach only to compute the intervals not just single numbers. But it is very similiar, since we just split parts on each comparison and recursively called to the next step.</p>
 <h2 id="mainrs-7"><a class="header" href="#mainrs-7">main.rs</a></h2>
 <pre><code class="language-rs">use std::cmp::{max, min};
@@ -6848,10 +6957,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-20"><a class="header" href="#advent-of-code---year-2023-day-20">Advent of code - Year 2023 Day 20</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/20">day 20</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-33"><a class="header" href="#information-33">Information</a></h3>
-<h4 id="part-1-32"><a class="header" href="#part-1-32">Part 1</a></h4>
+<h3 id="information-34"><a class="header" href="#information-34">Information</a></h3>
+<h4 id="part-1-33"><a class="header" href="#part-1-33">Part 1</a></h4>
 <p>In the first part you run the bfs to firstly find predecessors. Then you have the whole graph represented. After you run once again bfs with some different cases for the logic to work.</p>
-<h4 id="part-2-32"><a class="header" href="#part-2-32">Part 2</a></h4>
+<h4 id="part-2-33"><a class="header" href="#part-2-33">Part 2</a></h4>
 <p>The second part is easier to solve by hand. You may create a <code>graph.dot</code> in <a href="https://graphviz.org/doc/info/lang.html">graphviz dot language</a> and then by running <code>dot -Kdot -Tsvg graph.dot -o graph.svg</code> create a picture of the graph. There are 4 modules that behave like a binary counters. For each you represent it by a binary number; 1 if the edge goes to the conjection and 0 otherwise. After you represent it you use LCM for them and that is the answer.</p>
 <h2 id="mainrs-8"><a class="header" href="#mainrs-8">main.rs</a></h2>
 <pre><code class="language-rs">use std::collections::{HashMap, HashSet, VecDeque};
@@ -7116,15 +7225,15 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-21"><a class="header" href="#advent-of-code---year-2023-day-21">Advent of code - Year 2023 Day 21</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/21">day 21</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-34"><a class="header" href="#information-34">Information</a></h3>
-<h4 id="part-1-33"><a class="header" href="#part-1-33">Part 1</a></h4>
+<h3 id="information-35"><a class="header" href="#information-35">Information</a></h3>
+<h4 id="part-1-34"><a class="header" href="#part-1-34">Part 1</a></h4>
 <p>For the first part we have more options.</p>
 <ol>
 <li>Completely brute force it. It is just <code>64</code> steps. <strong>:D</strong></li>
 <li>Remember two sets: Odd visited and even visited. Then see the number of even visited with the limit <code>64</code>.</li>
 <li>Use <code>bfs</code> algorithm to compute distances to every place. Then just filter out these that were visited in an even steep and is under the limit of <code>64</code>.</li>
 </ol>
-<h4 id="part-2-33"><a class="header" href="#part-2-33">Part 2</a></h4>
+<h4 id="part-2-34"><a class="header" href="#part-2-34">Part 2</a></h4>
 <p>The second part uses the implemented <code>bfs</code>. We are not able to compute it for all <code>26501365</code> steps. But there is some quite nice math behind the input. Firstly it is a square and there is a straight line from the middle to each side. Every neighbouring blocks switch <strong>even</strong>/<strong>odd</strong> parity. And lastly we campute the corners.</p>
 <p>This is just simplified steps of the computation. I actually didn't come up with that on my own, but one can see it make sense due to the nice input. By which we can have some assumptions.</p>
 <h2 id="mainrs-9"><a class="header" href="#mainrs-9">main.rs</a></h2>
@@ -7263,10 +7372,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-22"><a class="header" href="#advent-of-code---year-2023-day-22">Advent of code - Year 2023 Day 22</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/22">day 22</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-35"><a class="header" href="#information-35">Information</a></h3>
-<h4 id="part-1-34"><a class="header" href="#part-1-34">Part 1</a></h4>
+<h3 id="information-36"><a class="header" href="#information-36">Information</a></h3>
+<h4 id="part-1-35"><a class="header" href="#part-1-35">Part 1</a></h4>
 <p>In the first part we parse the input than sort the bricks by their <code>z</code> value. After that we simply squish the bricks together (or <code>compress</code> them) so they won't  levitate anymore. After that we compute how they are dependent on each other, or in other words how they <strong>support</strong> each other. Lastly we compute these that follows the rules and left out the others.</p>
-<h4 id="part-2-34"><a class="header" href="#part-2-34">Part 2</a></h4>
+<h4 id="part-2-35"><a class="header" href="#part-2-35">Part 2</a></h4>
 <p>We use the already written code to construct such bricks. After that we look on every brick and remove it. Then see if any bricks that were supported by this will fall (so the <strong>interection</strong> with the <code>supported_by</code> contains all of them. Then we follow on these bricks until they stay in place.</p>
 <h2 id="mainrs-10"><a class="header" href="#mainrs-10">main.rs</a></h2>
 <pre><code class="language-rs">use std::collections::{HashMap, HashSet, VecDeque};
@@ -7418,10 +7527,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-23"><a class="header" href="#advent-of-code---year-2023-day-23">Advent of code - Year 2023 Day 23</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/23">day 23</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-36"><a class="header" href="#information-36">Information</a></h3>
-<h4 id="part-1-35"><a class="header" href="#part-1-35">Part 1</a></h4>
+<h3 id="information-37"><a class="header" href="#information-37">Information</a></h3>
+<h4 id="part-1-36"><a class="header" href="#part-1-36">Part 1</a></h4>
 <p>First part is pretty simple and fast. We just recursively go through the map and follow the slopes. We are trying every possibility and then find the maximum.</p>
-<h4 id="part-2-35"><a class="header" href="#part-2-35">Part 2</a></h4>
+<h4 id="part-2-36"><a class="header" href="#part-2-36">Part 2</a></h4>
 <p>For the second part they are at least two approaches.</p>
 <ol>
 <li>Use the same code just ignore the slopes and try every possibilty. As one may see this is not quite the best way to do it. But as it turns out you will wait way less than an hour, so it si doable.</li>
@@ -7548,10 +7657,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-24"><a class="header" href="#advent-of-code---year-2023-day-24">Advent of code - Year 2023 Day 24</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/24">day 24</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-37"><a class="header" href="#information-37">Information</a></h3>
-<h4 id="part-1-36"><a class="header" href="#part-1-36">Part 1</a></h4>
+<h3 id="information-38"><a class="header" href="#information-38">Information</a></h3>
+<h4 id="part-1-37"><a class="header" href="#part-1-37">Part 1</a></h4>
 <p>First part was somewhat easy since we only take a look at two dimensional matrix and finc the solution if there is any. After that check the bounds and return right answer.</p>
-<h4 id="part-2-36"><a class="header" href="#part-2-36">Part 2</a></h4>
+<h4 id="part-2-37"><a class="header" href="#part-2-37">Part 2</a></h4>
 <p>In the second part we used <a href="https://docs.rs/z3/latest/z3/">z3</a> proving system to set the variables and solve the problem.</p>
 <h2 id="mainrs-12"><a class="header" href="#mainrs-12">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -7680,11 +7789,11 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2023-day-25"><a class="header" href="#advent-of-code---year-2023-day-25">Advent of code - Year 2023 Day 25</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2023/day/25">day 25</a>. Go back to year <a href="aoc/2023.html">2023</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-38"><a class="header" href="#information-38">Information</a></h3>
-<h4 id="part-1-37"><a class="header" href="#part-1-37">Part 1</a></h4>
+<h3 id="information-39"><a class="header" href="#information-39">Information</a></h3>
+<h4 id="part-1-38"><a class="header" href="#part-1-38">Part 1</a></h4>
 <p>The first part is done by <a href="https://graphviz.org/doc/info/lang.html">graphviz dot language</a>. So the code creates a file <code>graph.dot</code> than you run <code>dot -Kneato -Tsvg graph.dot -o graph.svg</code>. You find the three pairs forming the min cut and manually insert it into the code. Then you ran the code again.</p>
 <p>The alternate algorithm is to use <a href="https://en.wikipedia.org/wiki/Karger%27s_algorithm">Karger-Steins</a> approximation algorithm. This I didn't make.</p>
-<h4 id="part-2-37"><a class="header" href="#part-2-37">Part 2</a></h4>
+<h4 id="part-2-38"><a class="header" href="#part-2-38">Part 2</a></h4>
 <p><strong>PUSH THE RED BUTTON.</strong></p>
 <h2 id="mainrs-13"><a class="header" href="#mainrs-13">main.rs</a></h2>
 <pre><code class="language-rs">use std::collections::{HashSet, VecDeque};
@@ -8772,12 +8881,12 @@ compute2(0, 4000000)
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-1"><a class="header" href="#advent-of-code---year-2021-day-1">Advent of code - Year 2021 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/1">day 1</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-39"><a class="header" href="#information-39">Information</a></h3>
-<h4 id="part-1-38"><a class="header" href="#part-1-38">Part 1</a></h4>
+<h3 id="information-40"><a class="header" href="#information-40">Information</a></h3>
+<h4 id="part-1-39"><a class="header" href="#part-1-39">Part 1</a></h4>
 <p>Generally we create a window of <code>n</code> elements and set their size. We proceed from <code>n</code>-th element and check if the sum of the new window is greater or not and update the sum and window. For part one the window has size <code>1</code>.</p>
-<h4 id="part-2-38"><a class="header" href="#part-2-38">Part 2</a></h4>
+<h4 id="part-2-39"><a class="header" href="#part-2-39">Part 2</a></h4>
 <p>For the second part we set <code>n</code> to <code>3</code>.</p>
-<h2 id="maingo-24"><a class="header" href="#maingo-24">main.go</a></h2>
+<h2 id="maingo-25"><a class="header" href="#maingo-25">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
@@ -8865,12 +8974,12 @@ func main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-2"><a class="header" href="#advent-of-code---year-2021-day-2">Advent of code - Year 2021 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/2">day 2</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-40"><a class="header" href="#information-40">Information</a></h3>
-<h4 id="part-1-39"><a class="header" href="#part-1-39">Part 1</a></h4>
+<h3 id="information-41"><a class="header" href="#information-41">Information</a></h3>
+<h4 id="part-1-40"><a class="header" href="#part-1-40">Part 1</a></h4>
 <p>In the first part we simply calculate the depth and forward position. The parsing is done via <code>regex</code>.</p>
-<h4 id="part-2-39"><a class="header" href="#part-2-39">Part 2</a></h4>
+<h4 id="part-2-40"><a class="header" href="#part-2-40">Part 2</a></h4>
 <p>For the second part we use the provided calculation using aim.</p>
-<h2 id="maingo-25"><a class="header" href="#maingo-25">main.go</a></h2>
+<h2 id="maingo-26"><a class="header" href="#maingo-26">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
@@ -8970,12 +9079,12 @@ func main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-3"><a class="header" href="#advent-of-code---year-2021-day-3">Advent of code - Year 2021 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/3">day 3</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-41"><a class="header" href="#information-41">Information</a></h3>
-<h4 id="part-1-40"><a class="header" href="#part-1-40">Part 1</a></h4>
+<h3 id="information-42"><a class="header" href="#information-42">Information</a></h3>
+<h4 id="part-1-41"><a class="header" href="#part-1-41">Part 1</a></h4>
 <p>In the first part we compute gamma and epsilon by computing number of ones. This determines the most significant bit among all lines. Then we compute the number from such binary representation.</p>
-<h4 id="part-2-40"><a class="header" href="#part-2-40">Part 2</a></h4>
+<h4 id="part-2-41"><a class="header" href="#part-2-41">Part 2</a></h4>
 <p>In the second part we also compute the most significant bit and filter lines. Then get the number from binary representation and multiply both cases.</p>
-<h2 id="maingo-26"><a class="header" href="#maingo-26">main.go</a></h2>
+<h2 id="maingo-27"><a class="header" href="#maingo-27">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
@@ -9094,12 +9203,12 @@ func main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-4"><a class="header" href="#advent-of-code---year-2021-day-4">Advent of code - Year 2021 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/4">day 4</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-42"><a class="header" href="#information-42">Information</a></h3>
-<h4 id="part-1-41"><a class="header" href="#part-1-41">Part 1</a></h4>
+<h3 id="information-43"><a class="header" href="#information-43">Information</a></h3>
+<h4 id="part-1-42"><a class="header" href="#part-1-42">Part 1</a></h4>
 <p>In the first part we iterate over the numbers and fill in the bingo cards and check if it is winning, if so compute the value and multiply it by the drawn number.</p>
-<h4 id="part-2-41"><a class="header" href="#part-2-41">Part 2</a></h4>
+<h4 id="part-2-42"><a class="header" href="#part-2-42">Part 2</a></h4>
 <p>In the second part use the same procedure, only cycle through the winning boards, since multiple boards can win in with the same number.</p>
-<h2 id="maingo-27"><a class="header" href="#maingo-27">main.go</a></h2>
+<h2 id="maingo-28"><a class="header" href="#maingo-28">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
@@ -9254,12 +9363,12 @@ func main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-5"><a class="header" href="#advent-of-code---year-2021-day-5">Advent of code - Year 2021 Day 5</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/5">day 5</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-43"><a class="header" href="#information-43">Information</a></h3>
-<h4 id="part-1-42"><a class="header" href="#part-1-42">Part 1</a></h4>
+<h3 id="information-44"><a class="header" href="#information-44">Information</a></h3>
+<h4 id="part-1-43"><a class="header" href="#part-1-43">Part 1</a></h4>
 <p>In the first part we check if at least one coordinate is equal. If so add all midpoints by computing the difference.</p>
-<h4 id="part-2-42"><a class="header" href="#part-2-42">Part 2</a></h4>
+<h4 id="part-2-43"><a class="header" href="#part-2-43">Part 2</a></h4>
 <p>In the second part we use pretty much the same approach only this time we will consider also diagonal cases. Which are found by having the same absolute values of difference.</p>
-<h2 id="maingo-28"><a class="header" href="#maingo-28">main.go</a></h2>
+<h2 id="maingo-29"><a class="header" href="#maingo-29">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
@@ -9385,12 +9494,12 @@ func main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-6"><a class="header" href="#advent-of-code---year-2021-day-6">Advent of code - Year 2021 Day 6</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/6">day 6</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-44"><a class="header" href="#information-44">Information</a></h3>
-<h4 id="part-1-43"><a class="header" href="#part-1-43">Part 1</a></h4>
+<h3 id="information-45"><a class="header" href="#information-45">Information</a></h3>
+<h4 id="part-1-44"><a class="header" href="#part-1-44">Part 1</a></h4>
 <p>We setup an array of lanternfish based on their days until new reproduction cycle starts. Then we add the number of lanternfish which will reproduce to the end and also to the reset index. We will run this for <code>80</code> days.</p>
-<h4 id="part-2-43"><a class="header" href="#part-2-43">Part 2</a></h4>
+<h4 id="part-2-44"><a class="header" href="#part-2-44">Part 2</a></h4>
 <p>We use the same simulation, only run it for <code>256</code> days.</p>
-<h2 id="maingo-29"><a class="header" href="#maingo-29">main.go</a></h2>
+<h2 id="maingo-30"><a class="header" href="#maingo-30">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
@@ -9470,12 +9579,12 @@ func main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-7"><a class="header" href="#advent-of-code---year-2021-day-7">Advent of code - Year 2021 Day 7</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/7">day 7</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-45"><a class="header" href="#information-45">Information</a></h3>
-<h4 id="part-1-44"><a class="header" href="#part-1-44">Part 1</a></h4>
+<h3 id="information-46"><a class="header" href="#information-46">Information</a></h3>
+<h4 id="part-1-45"><a class="header" href="#part-1-45">Part 1</a></h4>
 <p>In both cases we try all possibilities and find the optimum.</p>
-<h4 id="part-2-44"><a class="header" href="#part-2-44">Part 2</a></h4>
+<h4 id="part-2-45"><a class="header" href="#part-2-45">Part 2</a></h4>
 <p>In the second part we only need to rewrite the operator for computing the distance.</p>
-<h2 id="maingo-30"><a class="header" href="#maingo-30">main.go</a></h2>
+<h2 id="maingo-31"><a class="header" href="#maingo-31">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
@@ -9561,11 +9670,11 @@ func main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-8"><a class="header" href="#advent-of-code---year-2021-day-8">Advent of code - Year 2021 Day 8</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/8">day 8</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-46"><a class="header" href="#information-46">Information</a></h3>
-<h4 id="part-1-45"><a class="header" href="#part-1-45">Part 1</a></h4>
+<h3 id="information-47"><a class="header" href="#information-47">Information</a></h3>
+<h4 id="part-1-46"><a class="header" href="#part-1-46">Part 1</a></h4>
 <p>For the first part we only compute the number of strings which have certain lengths: <code>2</code>, <code>3</code>, <code>4</code> and <code>7</code>.</p>
-<h4 id="part-2-45"><a class="header" href="#part-2-45">Part 2</a></h4>
-<h2 id="maingo-31"><a class="header" href="#maingo-31">main.go</a></h2>
+<h4 id="part-2-46"><a class="header" href="#part-2-46">Part 2</a></h4>
+<h2 id="maingo-32"><a class="header" href="#maingo-32">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
@@ -9641,12 +9750,12 @@ func main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2021-day-10"><a class="header" href="#advent-of-code---year-2021-day-10">Advent of code - Year 2021 Day 10</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2021/day/10">day 10</a>. Go back to year <a href="aoc/2021.html">2021</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-47"><a class="header" href="#information-47">Information</a></h3>
-<h4 id="part-1-46"><a class="header" href="#part-1-46">Part 1</a></h4>
+<h3 id="information-48"><a class="header" href="#information-48">Information</a></h3>
+<h4 id="part-1-47"><a class="header" href="#part-1-47">Part 1</a></h4>
 <p>In the first part we go though the characters. If they are opening add them to the stack and if it is closing one check the top of the stack and either return the value of the bracket or continue.</p>
-<h4 id="part-2-46"><a class="header" href="#part-2-46">Part 2</a></h4>
+<h4 id="part-2-47"><a class="header" href="#part-2-47">Part 2</a></h4>
 <p>For the second part if the previous procedure did not exited we pop characters one by one and compute the sum, then we collect all sums and sort them to find the middle one.</p>
-<h2 id="maingo-32"><a class="header" href="#maingo-32">main.go</a></h2>
+<h2 id="maingo-33"><a class="header" href="#maingo-33">main.go</a></h2>
 <pre><code class="language-go">package main
 
 import (
@@ -9862,10 +9971,10 @@ with open("INPUT") as f:
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2017-day-1"><a class="header" href="#advent-of-code---year-2017-day-1">Advent of code - Year 2017 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2017/day/1">day 1</a>. Go back to year <a href="aoc/2017.html">2017</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-48"><a class="header" href="#information-48">Information</a></h3>
-<h4 id="part-1-47"><a class="header" href="#part-1-47">Part 1</a></h4>
+<h3 id="information-49"><a class="header" href="#information-49">Information</a></h3>
+<h4 id="part-1-48"><a class="header" href="#part-1-48">Part 1</a></h4>
 <p>In the first part we lineary check the two consecutive indexes and if they match add them. These are taken with modulo.</p>
-<h4 id="part-2-47"><a class="header" href="#part-2-47">Part 2</a></h4>
+<h4 id="part-2-48"><a class="header" href="#part-2-48">Part 2</a></h4>
 <p>In the second part instead of looking at consecutive ones look at the ones that are hlafway apart.</p>
 <h2 id="mainrs-14"><a class="header" href="#mainrs-14">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -9906,10 +10015,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2017-day-2"><a class="header" href="#advent-of-code---year-2017-day-2">Advent of code - Year 2017 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2017/day/2">day 2</a>. Go back to year <a href="aoc/2017.html">2017</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-49"><a class="header" href="#information-49">Information</a></h3>
-<h4 id="part-1-48"><a class="header" href="#part-1-48">Part 1</a></h4>
+<h3 id="information-50"><a class="header" href="#information-50">Information</a></h3>
+<h4 id="part-1-49"><a class="header" href="#part-1-49">Part 1</a></h4>
 <p>In the first part we use iterations. We compute the maximums and minimums. After that we zip those together and find the subtraction and sum it up.</p>
-<h4 id="part-2-48"><a class="header" href="#part-2-48">Part 2</a></h4>
+<h4 id="part-2-49"><a class="header" href="#part-2-49">Part 2</a></h4>
 <p>In the second part we go through all posibilities and test if they are divisible or not. If they are add the division to the total and break the loop for the line.</p>
 <h2 id="mainrs-15"><a class="header" href="#mainrs-15">main.rs</a></h2>
 <pre><code class="language-rs">use std::cmp::{max, min};
@@ -9982,10 +10091,10 @@ fn main() {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-1"><a class="header" href="#advent-of-code---year-2016-day-1">Advent of code - Year 2016 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/1">day 1</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-50"><a class="header" href="#information-50">Information</a></h3>
-<h4 id="part-1-49"><a class="header" href="#part-1-49">Part 1</a></h4>
+<h3 id="information-51"><a class="header" href="#information-51">Information</a></h3>
+<h4 id="part-1-50"><a class="header" href="#part-1-50">Part 1</a></h4>
 <p>In the first part we jump from one place to another and then compute the manhattan distance. It is implemented to solve also the other part.</p>
-<h4 id="part-2-49"><a class="header" href="#part-2-49">Part 2</a></h4>
+<h4 id="part-2-50"><a class="header" href="#part-2-50">Part 2</a></h4>
 <p>The second part we visit every single step in the middle and find the one which was already visited.</p>
 <h2 id="mainrs-16"><a class="header" href="#mainrs-16">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -10094,10 +10203,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-2"><a class="header" href="#advent-of-code---year-2016-day-2">Advent of code - Year 2016 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/2">day 2</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-51"><a class="header" href="#information-51">Information</a></h3>
-<h4 id="part-1-50"><a class="header" href="#part-1-50">Part 1</a></h4>
+<h3 id="information-52"><a class="header" href="#information-52">Information</a></h3>
+<h4 id="part-1-51"><a class="header" href="#part-1-51">Part 1</a></h4>
 <p>The first part can be done with aritmetics and matrix <code>3x3</code> and not to move out of boundaries.</p>
-<h4 id="part-2-50"><a class="header" href="#part-2-50">Part 2</a></h4>
+<h4 id="part-2-51"><a class="header" href="#part-2-51">Part 2</a></h4>
 <p>In the second part we create a dialpads with boundaries so we never can reach out of it. So when we move we only check if there is empty symbol or not. This is also used for the first part to reuse the code.</p>
 <h2 id="mainrs-17"><a class="header" href="#mainrs-17">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -10191,9 +10300,9 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-3"><a class="header" href="#advent-of-code---year-2016-day-3">Advent of code - Year 2016 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/3">day 3</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-52"><a class="header" href="#information-52">Information</a></h3>
-<h4 id="part-1-51"><a class="header" href="#part-1-51">Part 1</a></h4>
-<h4 id="part-2-51"><a class="header" href="#part-2-51">Part 2</a></h4>
+<h3 id="information-53"><a class="header" href="#information-53">Information</a></h3>
+<h4 id="part-1-52"><a class="header" href="#part-1-52">Part 1</a></h4>
+<h4 id="part-2-52"><a class="header" href="#part-2-52">Part 2</a></h4>
 <h2 id="mainrs-18"><a class="header" href="#mainrs-18">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
 use std::fs;
@@ -10276,10 +10385,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2016-day-4"><a class="header" href="#advent-of-code---year-2016-day-4">Advent of code - Year 2016 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2016/day/4">day 4</a>. Go back to year <a href="aoc/2016.html">2016</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-53"><a class="header" href="#information-53">Information</a></h3>
-<h4 id="part-1-52"><a class="header" href="#part-1-52">Part 1</a></h4>
+<h3 id="information-54"><a class="header" href="#information-54">Information</a></h3>
+<h4 id="part-1-53"><a class="header" href="#part-1-53">Part 1</a></h4>
 <p>In the first part we count all alfabet symbols, then sort the ones that have at least some appearance. And lastly match it with the <code>checksum</code>.</p>
-<h4 id="part-2-52"><a class="header" href="#part-2-52">Part 2</a></h4>
+<h4 id="part-2-53"><a class="header" href="#part-2-53">Part 2</a></h4>
 <p>In the second part we normally shift the alfa by the given <code>id</code> and check if is equal to <code>northpole object storage</code>.</p>
 <h2 id="mainrs-19"><a class="header" href="#mainrs-19">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -10396,10 +10505,10 @@ fn main() {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-1"><a class="header" href="#advent-of-code---year-2015-day-1">Advent of code - Year 2015 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/1">day 1</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-54"><a class="header" href="#information-54">Information</a></h3>
-<h4 id="part-1-53"><a class="header" href="#part-1-53">Part 1</a></h4>
+<h3 id="information-55"><a class="header" href="#information-55">Information</a></h3>
+<h4 id="part-1-54"><a class="header" href="#part-1-54">Part 1</a></h4>
 <p>Simply just go through the list and count the floors.</p>
-<h4 id="part-2-53"><a class="header" href="#part-2-53">Part 2</a></h4>
+<h4 id="part-2-54"><a class="header" href="#part-2-54">Part 2</a></h4>
 <p>Also just compute the floors and whenever we hit something <code>&lt;0</code> return index.</p>
 <h2 id="mainrs-20"><a class="header" href="#mainrs-20">main.rs</a></h2>
 <pre><code class="language-rs">use std::fs;
@@ -10451,10 +10560,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-2"><a class="header" href="#advent-of-code---year-2015-day-2">Advent of code - Year 2015 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/2">day 2</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-55"><a class="header" href="#information-55">Information</a></h3>
-<h4 id="part-1-54"><a class="header" href="#part-1-54">Part 1</a></h4>
+<h3 id="information-56"><a class="header" href="#information-56">Information</a></h3>
+<h4 id="part-1-55"><a class="header" href="#part-1-55">Part 1</a></h4>
 <p>We simply compute the given formula.</p>
-<h4 id="part-2-54"><a class="header" href="#part-2-54">Part 2</a></h4>
+<h4 id="part-2-55"><a class="header" href="#part-2-55">Part 2</a></h4>
 <p>Also just usage of the given formula.</p>
 <h2 id="mainrs-21"><a class="header" href="#mainrs-21">main.rs</a></h2>
 <pre><code class="language-rs">use std::cmp::min;
@@ -10529,10 +10638,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-3"><a class="header" href="#advent-of-code---year-2015-day-3">Advent of code - Year 2015 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/3">day 3</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-56"><a class="header" href="#information-56">Information</a></h3>
-<h4 id="part-1-55"><a class="header" href="#part-1-55">Part 1</a></h4>
+<h3 id="information-57"><a class="header" href="#information-57">Information</a></h3>
+<h4 id="part-1-56"><a class="header" href="#part-1-56">Part 1</a></h4>
 <p>In the first part we remember in a set whihc positins were visited and count the size of the set.</p>
-<h4 id="part-2-55"><a class="header" href="#part-2-55">Part 2</a></h4>
+<h4 id="part-2-56"><a class="header" href="#part-2-56">Part 2</a></h4>
 <p>In the second part we only swap these values every time and after that we do the same thing. So we switch the santas.</p>
 <h2 id="mainrs-22"><a class="header" href="#mainrs-22">main.rs</a></h2>
 <pre><code class="language-rs">use std::collections::HashSet;
@@ -10586,10 +10695,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-4"><a class="header" href="#advent-of-code---year-2015-day-4">Advent of code - Year 2015 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/4">day 4</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-57"><a class="header" href="#information-57">Information</a></h3>
-<h4 id="part-1-56"><a class="header" href="#part-1-56">Part 1</a></h4>
+<h3 id="information-58"><a class="header" href="#information-58">Information</a></h3>
+<h4 id="part-1-57"><a class="header" href="#part-1-57">Part 1</a></h4>
 <p>First of all we import <code>md-5</code> library to compute the hashes. Then simply compute the hashses of <code>key</code> appended by iterating indexes.</p>
-<h4 id="part-2-56"><a class="header" href="#part-2-56">Part 2</a></h4>
+<h4 id="part-2-57"><a class="header" href="#part-2-57">Part 2</a></h4>
 <p>The second part is same only we check six zeros.</p>
 <h2 id="mainrs-23"><a class="header" href="#mainrs-23">main.rs</a></h2>
 <pre><code class="language-rs">use md5::{Digest, Md5};
@@ -10635,10 +10744,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-5"><a class="header" href="#advent-of-code---year-2015-day-5">Advent of code - Year 2015 Day 5</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/5">day 5</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-58"><a class="header" href="#information-58">Information</a></h3>
-<h4 id="part-1-57"><a class="header" href="#part-1-57">Part 1</a></h4>
+<h3 id="information-59"><a class="header" href="#information-59">Information</a></h3>
+<h4 id="part-1-58"><a class="header" href="#part-1-58">Part 1</a></h4>
 <p>For the first part we only need to configure the right regexes to represent each type. And than either mathc them or count them.</p>
-<h4 id="part-2-57"><a class="header" href="#part-2-57">Part 2</a></h4>
+<h4 id="part-2-58"><a class="header" href="#part-2-58">Part 2</a></h4>
 <p>The second part is similiar only we use different regexes.</p>
 <h2 id="mainrs-24"><a class="header" href="#mainrs-24">main.rs</a></h2>
 <pre><code class="language-rs">use fancy_regex::Regex as Rgx;
@@ -10704,10 +10813,10 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-6"><a class="header" href="#advent-of-code---year-2015-day-6">Advent of code - Year 2015 Day 6</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/6">day 6</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-59"><a class="header" href="#information-59">Information</a></h3>
-<h4 id="part-1-58"><a class="header" href="#part-1-58">Part 1</a></h4>
+<h3 id="information-60"><a class="header" href="#information-60">Information</a></h3>
+<h4 id="part-1-59"><a class="header" href="#part-1-59">Part 1</a></h4>
 <p>We simply follow the given instructions on the <code>1000x1000</code> grid. Then compute those which are <code>true</code>.</p>
-<h4 id="part-2-58"><a class="header" href="#part-2-58">Part 2</a></h4>
+<h4 id="part-2-59"><a class="header" href="#part-2-59">Part 2</a></h4>
 <p>In the second part we redefine the instructions and compute the sum.</p>
 <h2 id="mainrs-25"><a class="header" href="#mainrs-25">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
@@ -10837,9 +10946,9 @@ fn main() {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-7"><a class="header" href="#advent-of-code---year-2015-day-7">Advent of code - Year 2015 Day 7</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/7">day 7</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
-<h3 id="information-60"><a class="header" href="#information-60">Information</a></h3>
-<h4 id="part-1-59"><a class="header" href="#part-1-59">Part 1</a></h4>
-<h4 id="part-2-59"><a class="header" href="#part-2-59">Part 2</a></h4>
+<h3 id="information-61"><a class="header" href="#information-61">Information</a></h3>
+<h4 id="part-1-60"><a class="header" href="#part-1-60">Part 1</a></h4>
+<h4 id="part-2-60"><a class="header" href="#part-2-60">Part 2</a></h4>
 <h2 id="mainrs-26"><a class="header" href="#mainrs-26">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
 use std::collections::HashMap;
