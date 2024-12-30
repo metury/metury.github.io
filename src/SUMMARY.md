@@ -110,6 +110,8 @@
 		- [Year 2022 day 13](./aoc/2022-13.md)
 		- [Year 2022 day 14](./aoc/2022-14.md)
 		- [Year 2022 day 15](./aoc/2022-15.md)
+		- [Year 2022 day 16](./aoc/2022-16.md)
+		- [Year 2022 day 17](./aoc/2022-17.md)
 	- [Year 2021](./aoc/2021.md)
 		- [Year 2021 day 1](./aoc/2021-1.md)
 		- [Year 2021 day 2](./aoc/2021-2.md)
