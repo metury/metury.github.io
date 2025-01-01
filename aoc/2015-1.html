@@ -161,53 +161,23 @@
 <p>Simply just go through the list and count the floors.</p>
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>Also just compute the floors and whenever we hit something <code>&lt;0</code> return index.</p>
-<h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
+<h2 id="mainexs"><a class="header" href="#mainexs">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 01 - Not Quite Lisp")
 
-fn read_file(filepath: &amp;str) -&gt; String {
-    let contents = fs::read_to_string(filepath);
-    let binding = contents.expect("REASON");
-    let mut lines = binding.split('\n');
-    return lines.next().unwrap().to_string();
-}
+if {:ok, string} = File.read("INPUT") do
+  map = String.trim(string)
+  |&gt; String.graphemes()
+  |&gt; Enum.frequencies()
+  IO.puts("Part 1: #{map["("] - map[")"]}")
+end
 
-fn basement(string: &amp;str) -&gt; i64 {
-    let mut floor: i64 = 0;
-    let mut i: i64 = 0;
-    for c in string.chars() {
-        i += 1;
-        match c {
-            '(' =&gt; floor += 1,
-            ')' =&gt; floor -= 1,
-            _ =&gt; floor = floor,
-        }
-        if floor &lt; 0 {
-            return i;
-        }
-    }
-    -1
-}
-
-fn part1() {
-    let line = read_file("INPUT");
-    let total: i64 = line
-        .chars()
-        .into_iter()
-        .map(|c| if c == '(' { 1 } else { -1 })
-        .sum();
-    println!("Part 1: {}", total);
-}
-
-fn part2() {
-    let line = read_file("INPUT");
-    println!("Part 2: {}", basement(&amp;line));
-}
-
-fn main() {
-    println!("Year 2015 day 01 - Not Quite Lisp");
-    part1();
-    part2();
-}
+if {:ok, string} = File.read("INPUT") do
+  {basement, _} = String.trim(string)
+  |&gt; String.graphemes()
+  |&gt; Enum.map(fn c -&gt; if c == "(" do +1 else -1 end end)
+  |&gt; Enum.reduce_while({0,0}, fn x, {index, acc} -&gt; if acc &gt;= 0 do {:cont, {index + 1, acc + x}} else {:halt, {index, acc}} end end)
+  IO.puts("Part 2: #{basement}")
+end
 </code></pre>
 
                     </main>

@@ -9009,15 +9009,6 @@ def change(block, x, y):
       block[i] = (part[0] + x, part[1] + y)
 
 def move(block, movement, blocks):
-  change(block, -1, 0)
-  for part in block:
-    if part[0] &lt; 0:
-      change(block, 1, 0)
-      return True
-    for b in blocks:
-      if b == part:
-        change(block, 1, 0)
-        return True
   if movement == "&lt;":
     change(block, 0, -1)
     for part in block:
@@ -9038,6 +9029,15 @@ def move(block, movement, blocks):
         if b == part:
           change(block, 0, -1)
           break
+  change(block, -1, 0)
+  for part in block:
+    if part[0] &lt; 0:
+      change(block, 1, 0)
+      return True
+    for b in blocks:
+      if b == part:
+        change(block, 1, 0)
+        return True
   return False
 
 class Block:
@@ -9056,7 +9056,6 @@ class Block:
     if self.current == 0:
       return [(height+1, 2), (height+1, 3), (height, 2), (height, 3)]
 
-
 def part1():
   instructions = read_file("INPUT")
   block = Block()
@@ -9066,18 +9065,34 @@ def part1():
   counter = 0
   i = 0
   while counter &lt; 2022:
-    end = move(current, instructions[i % len(instructions)], blocks)
-    i += 1
+    end = move(current, instructions[i], blocks)
+    i = (i + 1) % len(instructions)
     if end:
       counter += 1
       for c in current:
         blocks.append(c)
-      height = max([b[0] for b in blocks]) + 3
+      height = max([b[0] for b in blocks]) + 4
       current = block.new(height)
-  print(f"Part 1: {max([b[0] for b in blocks])}")
+  print(f"Part 1: {max([b[0] for b in blocks]) + 1}")
 
 def part2():
-  print(f"Part 2: {0}")
+  instructions = read_file("INPUT")
+  block = Block()
+  blocks = []
+  height = 3
+  current = block.new(height)
+  counter = 0
+  i = 0
+  while counter &lt; 1000000000000:
+    end = move(current, instructions[i], blocks)
+    i = (i + 1) % len(instructions)
+    if end:
+      counter += 1
+      for c in current:
+        blocks.append(c)
+      height = max([b[0] for b in blocks]) + 4
+      current = block.new(height)
+  print(f"Part 1: {max([b[0] for b in blocks]) + 1}")
 
 if __name__ == "__main__":
   print("Year 2022 day 17 - Pyroclastic Flow")
@@ -10724,6 +10739,11 @@ fn main() {
 <li><a href="aoc/2015-5.html">Day 5</a></li>
 <li><a href="aoc/2015-6.html">Day 6</a></li>
 <li><a href="aoc/2015-7.html">Day 7</a></li>
+<li><a href="aoc/2015-8.html">Day 8</a></li>
+<li><a href="aoc/2015-9.html">Day 9</a></li>
+<li><a href="aoc/2015-10.html">Day 10</a></li>
+<li><a href="aoc/2015-11.html">Day 11</a></li>
+<li><a href="aoc/2015-12.html">Day 12</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-1"><a class="header" href="#advent-of-code---year-2015-day-1">Advent of code - Year 2015 Day 1</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/1">day 1</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
@@ -10732,53 +10752,23 @@ fn main() {
 <p>Simply just go through the list and count the floors.</p>
 <h4 id="part-2-56"><a class="header" href="#part-2-56">Part 2</a></h4>
 <p>Also just compute the floors and whenever we hit something <code>&lt;0</code> return index.</p>
-<h2 id="mainrs-20"><a class="header" href="#mainrs-20">main.rs</a></h2>
-<pre><code class="language-rs">use std::fs;
+<h2 id="mainexs"><a class="header" href="#mainexs">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 01 - Not Quite Lisp")
 
-fn read_file(filepath: &amp;str) -&gt; String {
-    let contents = fs::read_to_string(filepath);
-    let binding = contents.expect("REASON");
-    let mut lines = binding.split('\n');
-    return lines.next().unwrap().to_string();
-}
+if {:ok, string} = File.read("INPUT") do
+  map = String.trim(string)
+  |&gt; String.graphemes()
+  |&gt; Enum.frequencies()
+  IO.puts("Part 1: #{map["("] - map[")"]}")
+end
 
-fn basement(string: &amp;str) -&gt; i64 {
-    let mut floor: i64 = 0;
-    let mut i: i64 = 0;
-    for c in string.chars() {
-        i += 1;
-        match c {
-            '(' =&gt; floor += 1,
-            ')' =&gt; floor -= 1,
-            _ =&gt; floor = floor,
-        }
-        if floor &lt; 0 {
-            return i;
-        }
-    }
-    -1
-}
-
-fn part1() {
-    let line = read_file("INPUT");
-    let total: i64 = line
-        .chars()
-        .into_iter()
-        .map(|c| if c == '(' { 1 } else { -1 })
-        .sum();
-    println!("Part 1: {}", total);
-}
-
-fn part2() {
-    let line = read_file("INPUT");
-    println!("Part 2: {}", basement(&amp;line));
-}
-
-fn main() {
-    println!("Year 2015 day 01 - Not Quite Lisp");
-    part1();
-    part2();
-}
+if {:ok, string} = File.read("INPUT") do
+  {basement, _} = String.trim(string)
+  |&gt; String.graphemes()
+  |&gt; Enum.map(fn c -&gt; if c == "(" do +1 else -1 end end)
+  |&gt; Enum.reduce_while({0,0}, fn x, {index, acc} -&gt; if acc &gt;= 0 do {:cont, {index + 1, acc + x}} else {:halt, {index, acc}} end end)
+  IO.puts("Part 2: #{basement}")
+end
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-2"><a class="header" href="#advent-of-code---year-2015-day-2">Advent of code - Year 2015 Day 2</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/2">day 2</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
@@ -10787,76 +10777,27 @@ fn main() {
 <p>We simply compute the given formula.</p>
 <h4 id="part-2-57"><a class="header" href="#part-2-57">Part 2</a></h4>
 <p>Also just usage of the given formula.</p>
-<h2 id="mainrs-21"><a class="header" href="#mainrs-21">main.rs</a></h2>
-<pre><code class="language-rs">use std::cmp::min;
-use std::fs;
+<h2 id="mainexs-1"><a class="header" href="#mainexs-1">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 02 - I Was Told There Would Be No Math")
 
-struct Sizes {
-    h: i64,
-    w: i64,
-    l: i64,
-}
+if {:ok, string} = File.read("INPUT") do
+  result = String.split(string, "\n")
+  |&gt; Enum.filter(fn str -&gt; String.length(str) &gt; 0 end)
+  |&gt; Enum.map(fn line -&gt; String.split(line, "x") |&gt; Enum.map(fn val -&gt; Integer.parse(val) end) end)
+  |&gt; Enum.map(fn [{l, _}, {w, _}, {h, _}] -&gt; 2 * l * w + 2 * l * h + 2 * h * w + Enum.min([l*w, l*h, h*w]) end)
+  |&gt; Enum.sum()
+  IO.puts("Part 1: #{result}")
+end
 
-fn read_file(filepath: &amp;str) -&gt; Vec&lt;Sizes&gt; {
-    let contents = fs::read_to_string(filepath);
-    let mut boxes: Vec&lt;Sizes&gt; = vec![];
-    let binding = contents.expect("REASON");
-    let lines = binding.split('\n');
-    for line in lines {
-        if line == "" {
-            continue;
-        }
-        let mut parts = line.split('x');
-        let l = i64::from_str_radix(parts.next().unwrap(), 10).unwrap();
-        let w = i64::from_str_radix(parts.next().unwrap(), 10).unwrap();
-        let h = i64::from_str_radix(parts.next().unwrap(), 10).unwrap();
-        boxes.push(Sizes { h: h, l: l, w: w });
-    }
-    return boxes;
-}
-
-fn wrapping_size(boxes: &amp;Vec&lt;Sizes&gt;) -&gt; i64 {
-    let mut total: i64 = 0;
-    for b in boxes {
-        let area = 2 * b.l * b.w + 2 * b.l * b.h + 2 * b.h * b.w;
-        let addition = min(min(b.l * b.w, b.l * b.h), b.h * b.w);
-        total += area + addition;
-    }
-    total
-}
-
-fn ribbon_len(boxes: &amp;Vec&lt;Sizes&gt;) -&gt; i64 {
-    let mut total: i64 = 0;
-    for b in boxes {
-        let bow = b.l * b.w * b.h;
-        let mut ribbon = 0;
-        if b.h &lt;= b.w &amp;&amp; b.h &lt;= b.l {
-            ribbon += 2 * b.h + 2 * min(b.w, b.l);
-        } else if b.w &lt;= b.h &amp;&amp; b.w &lt;= b.l {
-            ribbon += 2 * b.w + 2 * min(b.h, b.l);
-        } else {
-            ribbon += 2 * b.l + 2 * min(b.w, b.h);
-        }
-        total += bow + ribbon;
-    }
-    total
-}
-
-fn part1() {
-    let boxes = read_file("INPUT");
-    println!("Part 1: {}", wrapping_size(&amp;boxes));
-}
-
-fn part2() {
-    let boxes = read_file("INPUT");
-    println!("Part 2: {}", ribbon_len(&amp;boxes));
-}
-
-fn main() {
-    println!("Year 2015 day 02 - I Was Told There Would Be No Math");
-    part1();
-    part2();
-}
+if {:ok, string} = File.read("INPUT") do
+  result = String.split(string, "\n")
+  |&gt; Enum.filter(fn str -&gt; String.length(str) &gt; 0 end)
+  |&gt; Enum.map(fn line -&gt; String.split(line, "x")
+  |&gt; Enum.map(fn val -&gt; Integer.parse(val) end) end)
+  |&gt; Enum.map(fn [{l, _}, {w, _}, {h, _}] -&gt; l * w * h + 2 * Enum.min([l,w,h]) + 2 * Enum.min([Enum.max([l, w]), Enum.max([l, h]), Enum.max([h, w])]) end)
+  |&gt; Enum.sum()
+  IO.puts("Part 2: #{result}")
+end
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-3"><a class="header" href="#advent-of-code---year-2015-day-3">Advent of code - Year 2015 Day 3</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/3">day 3</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
@@ -10865,55 +10806,39 @@ fn main() {
 <p>In the first part we remember in a set whihc positins were visited and count the size of the set.</p>
 <h4 id="part-2-58"><a class="header" href="#part-2-58">Part 2</a></h4>
 <p>In the second part we only swap these values every time and after that we do the same thing. So we switch the santas.</p>
-<h2 id="mainrs-22"><a class="header" href="#mainrs-22">main.rs</a></h2>
-<pre><code class="language-rs">use std::collections::HashSet;
-use std::fs;
+<h2 id="mainexs-2"><a class="header" href="#mainexs-2">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 3 - Perfectly Spherical Houses in a Vacuum")
 
-type Pos = (i64, i64);
-type Houses = HashSet&lt;Pos&gt;;
+if {:ok, string} = File.read("INPUT") do
+  {map, _, _} = string |&gt; String.graphemes()
+  |&gt; List.foldl({%{}, 0,0}, fn(x, {map, acc_x, acc_y}) -&gt;
+  cond do
+    x == "&lt;" -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x - 1, acc_y}
+    x == "&gt;" -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x + 1, acc_y}
+    x == "^" -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x, acc_y - 1}
+    x == "v" -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x, acc_y + 1}
+    true     -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x, acc_y}
+  end end)
+  IO.puts("Part 1: #{map_size(map)}")
+end
 
-fn read_file(filepath: &amp;str) -&gt; String {
-    let contents = fs::read_to_string(filepath);
-    let binding = contents.expect("REASON");
-    binding.split('\n').next().unwrap().to_string()
-}
-
-fn found_houses(line: &amp;str, robo_santa: bool) -&gt; usize {
-    let mut houses: Houses = HashSet::new();
-    let mut pos: Pos = (0, 0);
-    let mut robo_pos: Pos = (0, 0);
-    houses.insert(pos);
-    for c in line.chars() {
-        match c {
-            '&gt;' =&gt; pos = (pos.0, pos.1 + 1),
-            '&lt;' =&gt; pos = (pos.0, pos.1 - 1),
-            'v' =&gt; pos = (pos.0 + 1, pos.1),
-            '^' =&gt; pos = (pos.0 - 1, pos.1),
-            _ =&gt; pos = pos,
-        }
-        houses.insert(pos);
-        if robo_santa {
-            (pos, robo_pos) = (robo_pos, pos);
-        }
-    }
-    houses.len()
-}
-
-fn part1() {
-    let line = read_file("INPUT");
-    println!("Part 1: {}", found_houses(&amp;line, false));
-}
-
-fn part2() {
-    let line = read_file("INPUT");
-    println!("Part 2: {}", found_houses(&amp;line, true));
-}
-
-fn main() {
-    println!("Year 2015 day 3 - Perfectly Spherical Houses in a Vacuum");
-    part1();
-    part2();
-}
+if {:ok, string} = File.read("INPUT") do
+  {map, _, _, _, _, _} = string |&gt; String.graphemes()
+  |&gt; List.foldl({%{},0,0,false, 0, 0}, fn(x, {map, acc_x, acc_y, robo, robo_x, robo_y}) -&gt;
+  cond do
+    x == "&lt;" and not robo -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x - 1, acc_y, true, robo_x, robo_y}
+    x == "&gt;" and not robo -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x + 1, acc_y, true, robo_x, robo_y}
+    x == "^" and not robo -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x, acc_y - 1, true, robo_x, robo_y}
+    x == "v" and not robo -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x, acc_y + 1, true, robo_x, robo_y}
+    x == "&lt;" and robo     -&gt; {Map.put_new(map, "#{robo_x}X#{robo_y}", true), acc_x, acc_y, false, robo_x - 1, robo_y}
+    x == "&gt;" and robo     -&gt; {Map.put_new(map, "#{robo_x}X#{robo_y}", true), acc_x, acc_y, false, robo_x + 1, robo_y}
+    x == "^" and robo     -&gt; {Map.put_new(map, "#{robo_x}X#{robo_y}", true), acc_x, acc_y, false, robo_x, robo_y - 1}
+    x == "v" and robo     -&gt; {Map.put_new(map, "#{robo_x}X#{robo_y}", true), acc_x, acc_y, false, robo_x, robo_y + 1}
+    not robo              -&gt; {Map.put_new(map, "#{acc_x}X#{acc_y}", true), acc_x, acc_y, true, robo_x, robo_y}
+    robo                  -&gt; {Map.put_new(map, "#{robo_x}X#{robo_y}", true), acc_x, acc_y, false, robo_x, robo_y}
+  end end)
+  IO.puts("Part 2: #{map_size(map)}")
+end
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-4"><a class="header" href="#advent-of-code---year-2015-day-4">Advent of code - Year 2015 Day 4</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/4">day 4</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
@@ -10922,47 +10847,21 @@ fn main() {
 <p>First of all we import <code>md-5</code> library to compute the hashes. Then simply compute the hashses of <code>key</code> appended by iterating indexes.</p>
 <h4 id="part-2-59"><a class="header" href="#part-2-59">Part 2</a></h4>
 <p>The second part is same only we check six zeros.</p>
-<h2 id="mainrs-23"><a class="header" href="#mainrs-23">main.rs</a></h2>
-<pre><code class="language-rs">use md5::{Digest, Md5};
-use std::fs;
+<h2 id="mainexs-3"><a class="header" href="#mainexs-3">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 4 - The Ideal Stocking Stuffer")
 
-fn read_file(filepath: &amp;str) -&gt; String {
-    let contents = fs::read_to_string(filepath);
-    let binding = contents.expect("REASON");
-    binding.split('\n').next().unwrap().to_string()
-}
+defmodule Crypto do
+  def find(key, size, prefix) do
+    Stream.iterate(0, fn x -&gt; x + 1 end)
+    |&gt; Enum.take_while(fn x -&gt; :crypto.hash(:md5, key &lt;&gt; "#{x}") |&gt; Base.encode16() |&gt; String.slice(0, size) != prefix end)
+    |&gt; length()
+  end
+end
 
-fn prefix_md5(origin: &amp;str, eq: &amp;str) -&gt; u64 {
-    let mut i: u64 = 0;
-    loop {
-        let input = format!("{}{}", origin, i);
-        let mut hasher = Md5::new();
-        hasher.update(input);
-        let result = hasher.finalize();
-        let hash_string = format!("{:x}", result);
-        if hash_string[0..eq.len()] == eq.to_string() {
-            break;
-        }
-        i += 1;
-    }
-    i
-}
-
-fn part1() {
-    let origin = read_file("INPUT");
-    println!("Part 1: {}", prefix_md5(&amp;origin, "00000"));
-}
-
-fn part2() {
-    let origin = read_file("INPUT");
-    println!("Part 2: {}", prefix_md5(&amp;origin, "000000"));
-}
-
-fn main() {
-    println!("Year 2015 day 4 - The Ideal Stocking Stuffer");
-    part1();
-    part2();
-}
+if {:ok, string} = File.read("INPUT") do
+  IO.puts("Part 1: #{Crypto.find(String.trim(string), 5, "00000")}")
+  IO.puts("Part 2: #{Crypto.find(String.trim(string), 6, "000000")}")
+end
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-5"><a class="header" href="#advent-of-code---year-2015-day-5">Advent of code - Year 2015 Day 5</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/5">day 5</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
@@ -10971,67 +10870,29 @@ fn main() {
 <p>For the first part we only need to configure the right regexes to represent each type. And than either mathc them or count them.</p>
 <h4 id="part-2-60"><a class="header" href="#part-2-60">Part 2</a></h4>
 <p>The second part is similiar only we use different regexes.</p>
-<h2 id="mainrs-24"><a class="header" href="#mainrs-24">main.rs</a></h2>
-<pre><code class="language-rs">use fancy_regex::Regex as Rgx;
-use regex::Regex;
-use std::fs;
+<h2 id="mainexs-4"><a class="header" href="#mainexs-4">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 5 - Doesn't He Have Intern-Elves For This?")
 
-fn read_file(filepath: &amp;str) -&gt; Vec&lt;String&gt; {
-    let contents = fs::read_to_string(filepath);
-    let binding = contents.expect("REASON");
-    let lines = binding
-        .split('\n')
-        .filter(|c| c.len() &gt; 0)
-        .map(|c| c.to_string())
-        .collect();
-    lines
-}
+if {:ok, string} = File.read("INPUT") do
+  result = String.trim(string)
+  |&gt; String.split("\n")
+  |&gt; Enum.filter(fn x -&gt; String.length(x) &gt; 0 end)
+  |&gt; Enum.filter(fn x -&gt; String.match?(x, ~r/([a-z])\1/) end)
+  |&gt; Enum.filter(fn x -&gt; String.graphemes(x) |&gt; Enum.filter(fn x -&gt; x == "a" or x == "e" or x == "i" or x == "o" or x == "u" end) |&gt; Enum.count() &gt;= 3 end)
+  |&gt; Enum.filter(fn x -&gt; not String.match?(x, ~r/(?:ab)|(?:cd)|(?:pq)|(?:xy)/) end)
+  |&gt; Enum.count()
+  IO.puts("Part 1: #{result}")
+end
 
-fn nice_string(lines: &amp;Vec&lt;String&gt;) -&gt; u64 {
-    let mut total: u64 = 0;
-    let vowels = Regex::new(r"a|e|i|o|u").unwrap();
-    let pairs = Rgx::new(r"([a-z])\1").unwrap();
-    let forb = Regex::new(r"ab|cd|pq|xy").unwrap();
-    for line in lines {
-        let nr_vowels = vowels.captures_iter(&amp;line).count();
-        let exists_pairs = pairs.is_match(&amp;line).unwrap();
-        let nr_forb = forb.captures_iter(&amp;line).count();
-        if nr_vowels &gt;= 3 &amp;&amp; exists_pairs &amp;&amp; nr_forb &lt;= 0 {
-            total += 1;
-        }
-    }
-    total
-}
-
-fn nicer_string(lines: &amp;Vec&lt;String&gt;) -&gt; u64 {
-    let mut total: u64 = 0;
-    let pairs = Rgx::new(r"([a-z]{2}).*\1").unwrap();
-    let middle = Rgx::new(r"([a-z])[a-z]\1").unwrap();
-    for line in lines {
-        let is_pair = pairs.is_match(&amp;line).unwrap();
-        let is_middle = middle.is_match(&amp;line).unwrap();
-        if is_pair &amp;&amp; is_middle {
-            total += 1;
-        }
-    }
-    total
-}
-
-fn part1() {
-    let lines = read_file("INPUT");
-    println!("Part 1: {}", nice_string(&amp;lines));
-}
-
-fn part2() {
-    let lines = read_file("INPUT");
-    println!("Part 2: {}", nicer_string(&amp;lines));
-}
-
-fn main() {
-    println!("Year 2015 day 5 - Doesn't He Have Intern-Elves For This?");
-    part1();
-    part2();
-}
+if {:ok, string} = File.read("INPUT") do
+  result = String.trim(string)
+  |&gt; String.split("\n")
+  |&gt; Enum.filter(fn x -&gt; String.length(x) &gt; 0 end)
+  |&gt; Enum.filter(fn x -&gt; String.match?(x, ~r/([a-z]{2}).*\1/) end)
+  |&gt; Enum.filter(fn x -&gt; String.match?(x, ~r/([a-z]).\1/) end)
+  |&gt; Enum.count()
+  IO.puts("Part 2: #{result}")
+end
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-6"><a class="header" href="#advent-of-code---year-2015-day-6">Advent of code - Year 2015 Day 6</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/6">day 6</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
@@ -11040,7 +10901,7 @@ fn main() {
 <p>We simply follow the given instructions on the <code>1000x1000</code> grid. Then compute those which are <code>true</code>.</p>
 <h4 id="part-2-61"><a class="header" href="#part-2-61">Part 2</a></h4>
 <p>In the second part we redefine the instructions and compute the sum.</p>
-<h2 id="mainrs-25"><a class="header" href="#mainrs-25">main.rs</a></h2>
+<h2 id="mainrs-20"><a class="header" href="#mainrs-20">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
 use std::fs;
 
@@ -11166,12 +11027,43 @@ fn main() {
     part2();
 }
 </code></pre>
+<h2 id="mainexs-5"><a class="header" href="#mainexs-5">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 6 - Probably a Fire Hazard")
+
+if {:ok, string} = File.read("INPUT") do
+  array = :array.new(size: 1000 * 1000, default: false)
+  result = Regex.scan(~r/((?:turn off)|(?:turn on)|(?:toggle)) ([0-9]+),([0-9]+) through ([0-9]+),([0-9]+)/, String.trim(string))
+  |&gt; Enum.map(fn [_, keyword, x, y, end_x, end_y] -&gt; [keyword, Integer.parse(x), Integer.parse(y), Integer.parse(end_x), Integer.parse(end_y)] end)
+  |&gt; Enum.map(fn [keyword, {start_x, _}, {start_y, _}, {end_x, _}, {end_y, _}] -&gt; {keyword, for x &lt;- start_x..end_x, y &lt;- start_y..end_y do 1000*x + y end} end)
+  |&gt; List.foldl(array, fn {keyword, range}, acc -&gt;
+  case keyword do
+    "turn on" -&gt;  Enum.reduce(range, acc, fn x, acc -&gt; :array.set(x, true, acc) end)
+    "turn off" -&gt;  Enum.reduce(range, acc, fn x, acc -&gt; :array.set(x, false, acc) end)
+    "toggle" -&gt;  Enum.reduce(range, acc, fn x, acc -&gt; :array.set(x, not :array.get(x, acc), acc) end)
+  end end)
+  IO.puts("Part 1: #{Enum.count(:array.to_list(result), fn x -&gt; x end)}")
+end
+
+if {:ok, string} = File.read("INPUT") do
+  array = :array.new(size: 1000 * 1000, default: 0)
+  result = Regex.scan(~r/((?:turn off)|(?:turn on)|(?:toggle)) ([0-9]+),([0-9]+) through ([0-9]+),([0-9]+)/, String.trim(string))
+  |&gt; Enum.map(fn [_, keyword, x, y, end_x, end_y] -&gt; [keyword, Integer.parse(x), Integer.parse(y), Integer.parse(end_x), Integer.parse(end_y)] end)
+  |&gt; Enum.map(fn [keyword, {start_x, _}, {start_y, _}, {end_x, _}, {end_y, _}] -&gt; {keyword, for x &lt;- start_x..end_x, y &lt;- start_y..end_y do 1000*x + y end} end)
+  |&gt; List.foldl(array, fn {keyword, range}, acc -&gt;
+  case keyword do
+    "turn on" -&gt;  Enum.reduce(range, acc, fn x, acc -&gt; :array.set(x, :array.get(x, acc) + 1, acc) end)
+    "turn off" -&gt;  Enum.reduce(range, acc, fn x, acc -&gt; :array.set(x, Enum.max([0, :array.get(x, acc) - 1]), acc) end)
+    "toggle" -&gt;  Enum.reduce(range, acc, fn x, acc -&gt; :array.set(x, :array.get(x, acc) + 2, acc) end)
+  end end)
+  IO.puts("Part 2: #{Enum.sum(:array.to_list(result))}")
+end
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-7"><a class="header" href="#advent-of-code---year-2015-day-7">Advent of code - Year 2015 Day 7</a></h1>
 <p>This is a solution of the <a href="https://adventofcode.com/2015/day/7">day 7</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
 <h3 id="information-63"><a class="header" href="#information-63">Information</a></h3>
 <h4 id="part-1-62"><a class="header" href="#part-1-62">Part 1</a></h4>
 <h4 id="part-2-62"><a class="header" href="#part-2-62">Part 2</a></h4>
-<h2 id="mainrs-26"><a class="header" href="#mainrs-26">main.rs</a></h2>
+<h2 id="mainrs-21"><a class="header" href="#mainrs-21">main.rs</a></h2>
 <pre><code class="language-rs">use regex::Regex;
 use std::collections::HashMap;
 use std::fs;
@@ -11278,7 +11170,23 @@ fn part1() {
 }
 
 fn part2() {
-    println!("Part 2: {}", 0);
+    let mut gates = read_file("INPUT");
+    let mut assigned: HashMap&lt;String, u16&gt; = HashMap::new();
+    assigned.insert("".to_string(), 0);
+    while !assigned.contains_key("a") {
+        for gate in &amp;gates {
+            gate.eval(&amp;mut assigned);
+        }
+    }
+    gates.push(Gate{inputs: [assigned["a"].to_string(), "".to_string()], gate_type: GateType::Simple, output: "b".to_string()});
+    let mut assigned2: HashMap&lt;String, u16&gt; = HashMap::new();
+    assigned2.insert("".to_string(), 0);
+    while !assigned2.contains_key("a") {
+        for gate in &amp;gates {
+            gate.eval(&amp;mut assigned2);
+        }
+    }
+    println!("Part 2: {}", assigned2["a"]);
 }
 
 fn main() {
@@ -11286,6 +11194,171 @@ fn main() {
     part1();
     part2();
 }
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-8"><a class="header" href="#advent-of-code---year-2015-day-8">Advent of code - Year 2015 Day 8</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2015/day/8">day 8</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
+<h3 id="information-64"><a class="header" href="#information-64">Information</a></h3>
+<h4 id="part-1-63"><a class="header" href="#part-1-63">Part 1</a></h4>
+<p>In the first part we will replace all <code>\"</code>, <code>\x27</code> and <code>\\</code> as a single characters, to be honest we may choose arbitrarily. We also subtract two for both <code>"</code> at the end and begining.</p>
+<h4 id="part-2-63"><a class="header" href="#part-2-63">Part 2</a></h4>
+<p>For the second part we replace all <code>"</code> and <code>\</code> symbols by two characters and again get the length. And add 2 for <code>"</code>.</p>
+<h2 id="mainexs-6"><a class="header" href="#mainexs-6">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 8 - Matchsticks")
+
+if {:ok, string} = File.read("INPUT") do
+  result = String.trim(string)
+  |&gt; String.split("\n")
+  |&gt; Enum.map(fn x -&gt; {String.length(x), x} end)
+  |&gt; Enum.map(fn {size, x} -&gt; {size, String.replace(x, ~r/(?:\\\\)|(?:\\x[a-f0-9]{2})|(?:\\")/, "A")} end)
+  |&gt; Enum.map(fn {size, x} -&gt; size - String.length(x) + 2 end)
+  |&gt; Enum.sum()
+  IO.puts("Part 1: #{result}")
+end
+
+if {:ok, string} = File.read("INPUT") do
+  result = String.trim(string)
+  |&gt; String.split("\n")
+  |&gt; Enum.map(fn x -&gt; {String.length(x), x} end)
+  |&gt; Enum.map(fn {size, x} -&gt; {size, String.replace(x, ~r/\"|\\/, "AA")} end)
+  |&gt; Enum.map(fn {size, x} -&gt; String.length(x) + 2 - size end)
+  |&gt; Enum.sum()
+  IO.puts("Part 2: #{result}")
+end
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-9"><a class="header" href="#advent-of-code---year-2015-day-9">Advent of code - Year 2015 Day 9</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2015/day/9">day 9</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
+<h3 id="information-65"><a class="header" href="#information-65">Information</a></h3>
+<h4 id="part-1-64"><a class="header" href="#part-1-64">Part 1</a></h4>
+<p>We will create all permutations of towns and then compute their distance, after that we find the minimal one.</p>
+<h4 id="part-2-64"><a class="header" href="#part-2-64">Part 2</a></h4>
+<p>In the second part find the maximal one.</p>
+<h2 id="mainexs-7"><a class="header" href="#mainexs-7">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 9 - All in a Single Night")
+
+defmodule Perms do
+  def perms([]), do: [[]]
+
+  def perms(l) do
+    for h &lt;- l, t &lt;- perms(l -- [h]),
+      do: [h|t]
+  end
+end
+
+defmodule Cycle do
+  def compute(_, [_]), do: 0
+
+  def compute(distances, [t1, t2 | towns]) do
+    {_, _, dist} = Enum.find(distances, fn {t3, t4, _} -&gt; t3 == t1 and t4 == t2 end)
+    dist + compute(distances, [t2 | towns])
+  end
+end
+
+if {:ok, content} = File.read("INPUT") do
+  distances = Regex.scan(~r/([a-zA-Z]+) to ([a-zA-Z]+) = ([0-9]+)/, String.trim(content))
+  |&gt; Enum.map(fn [_, town1, town2, dist] -&gt; [town1, town2, Integer.parse(dist)] end)
+  |&gt; Enum.map(fn [town1, town2, {dist, _}] -&gt; [{town1, town2, dist}, {town2, town1, dist}] end)
+  |&gt; List.flatten()
+  |&gt; Enum.sort(fn {t1, t2, _}, {t3, t4, _} -&gt; t1 &lt; t3 or (t1 == t3 and t2 &lt; t4) end)
+  lengths = Enum.map(distances, fn {town  , _, _} -&gt; town end)
+  |&gt; Enum.dedup()
+  |&gt; Perms.perms()
+  |&gt; Enum.map(fn towns -&gt; Cycle.compute(distances, towns) end)
+  {min, max} = Enum.min_max(lengths)
+  IO.puts("Part 1: #{min}")
+  IO.puts("Part 2: #{max}")
+end
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-10"><a class="header" href="#advent-of-code---year-2015-day-10">Advent of code - Year 2015 Day 10</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2015/day/10">day 10</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
+<h3 id="information-66"><a class="header" href="#information-66">Information</a></h3>
+<h4 id="part-1-65"><a class="header" href="#part-1-65">Part 1</a></h4>
+<p>We will generate one by one all next variations from the input. That will be done <code>40</code> times.</p>
+<h4 id="part-2-65"><a class="header" href="#part-2-65">Part 2</a></h4>
+<p>For the second part we add <code>10</code> more iterations.</p>
+<h2 id="mainexs-8"><a class="header" href="#mainexs-8">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 10 - Elves Look, Elves Say")
+
+defmodule Digits do
+  def next(current, counter, []), do: [counter, current]
+
+  def next(current, counter, [h | l]) do
+    cond do
+      current == h -&gt; next(current, counter + 1, l)
+      current != h -&gt; [counter, current] ++ next(h, 1, l)
+    end
+  end
+
+  def next([h | l]), do: next(h, 1, l)
+end
+
+if {:ok, content} = File.read("INPUT") do
+  input = String.trim(content) |&gt; String.graphemes() |&gt; Enum.map(fn x -&gt; if {val, _} = Integer.parse(x) do val end end)
+  result = Enum.reduce(1..40, input, fn _, acc -&gt; Digits.next(acc) end)
+  IO.puts("Part 1: #{length(result)}")
+  result = Enum.reduce(1..10, result, fn _, acc -&gt; Digits.next(acc) end)
+  IO.puts("Part 2: #{length(result)}")
+end
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-11"><a class="header" href="#advent-of-code---year-2015-day-11">Advent of code - Year 2015 Day 11</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2015/day/11">day 11</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
+<h3 id="information-67"><a class="header" href="#information-67">Information</a></h3>
+<h4 id="part-1-66"><a class="header" href="#part-1-66">Part 1</a></h4>
+<p>In the first part we generate new passwords until it is valid.</p>
+<h4 id="part-2-66"><a class="header" href="#part-2-66">Part 2</a></h4>
+<p>Generate next one.</p>
+<h2 id="mainexs-9"><a class="header" href="#mainexs-9">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 11 - Corporate Policy")
+
+defmodule Password do
+  def shift(word) do
+    {word, _} = word
+    |&gt; Enum.reverse()
+    |&gt; List.foldl({[], 1}, fn x, {word, add} -&gt; {word ++ [rem(x + add - ?a,?z - ?a + 1) + ?a], if x + add &gt; ?z do 1 else 0 end}  end)
+    Enum.reverse(word)
+  end
+
+  def valid(word) do
+    word = List.to_string(word)
+    not String.match?(word, ~r/o|i|l/)
+    and String.match?(word, ~r/([a-z])\1.*([a-z])\2/)
+    and String.match?(word, ~r/(?:abc)|(?:bcd)|(?:cde)|(?:def)|(?:efg)|(?:fgh)|(?:pqr)|(?:qrs)|(?:rst)|(?:stu)|(?:tuv)|(?:uvw)|(?:vwx)|(?:wxy)|(?:xyz)/)
+  end
+
+  def find(password) do
+    Stream.iterate(1, fn x -&gt; x + 1 end)
+    |&gt; Enum.reduce_while(password, fn _, acc -&gt; if Password.valid(acc) do {:halt, acc} else {:cont, Password.shift(acc)} end end)
+  end
+end
+
+if {:ok, content} = File.read("INPUT") do
+  password = String.trim(content) |&gt; String.to_charlist()
+  password = Password.find(password)
+  IO.puts("Part 1: #{password}")
+  password = Password.find(Password.shift(password))
+  IO.puts("Part 2: #{password}")
+end
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advent-of-code---year-2015-day-12"><a class="header" href="#advent-of-code---year-2015-day-12">Advent of code - Year 2015 Day 12</a></h1>
+<p>This is a solution of the <a href="https://adventofcode.com/2015/day/12">day 12</a>. Go back to year <a href="aoc/2015.html">2015</a>. Go back to <a href="aoc/../adventofcode.html">AOC</a>.</p>
+<h3 id="information-68"><a class="header" href="#information-68">Information</a></h3>
+<h4 id="part-1-67"><a class="header" href="#part-1-67">Part 1</a></h4>
+<h4 id="part-2-67"><a class="header" href="#part-2-67">Part 2</a></h4>
+<h2 id="mainexs-10"><a class="header" href="#mainexs-10">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 12 - JSAbacusFramework.io")
+
+defmodule JSON do
+  def count(content) do
+  Regex.scan(~r/\-{0,1}[0-9]+/, content)
+  |&gt; Enum.map(fn [x] -&gt; if {val, _ } = Integer.parse(x) do val end end)
+  |&gt; Enum.sum
+  end
+end
+
+if {:ok, content} = File.read("INPUT") do
+  IO.puts("Part 1: #{JSON.count(content)}")
+  valid = Regex.replace(~r/\{[^\{\}]*\:"red"[^\{\}]*\}/, content, "")
+  IO.puts("Part 2: #{JSON.count(valid)}")
+end
 </code></pre>
 
                     </main>

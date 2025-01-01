@@ -161,76 +161,27 @@
 <p>We simply compute the given formula.</p>
 <h4 id="part-2"><a class="header" href="#part-2">Part 2</a></h4>
 <p>Also just usage of the given formula.</p>
-<h2 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h2>
-<pre><code class="language-rs">use std::cmp::min;
-use std::fs;
+<h2 id="mainexs"><a class="header" href="#mainexs">main.exs</a></h2>
+<pre><code class="language-exs">IO.puts("Year 2015 day 02 - I Was Told There Would Be No Math")
 
-struct Sizes {
-    h: i64,
-    w: i64,
-    l: i64,
-}
+if {:ok, string} = File.read("INPUT") do
+  result = String.split(string, "\n")
+  |&gt; Enum.filter(fn str -&gt; String.length(str) &gt; 0 end)
+  |&gt; Enum.map(fn line -&gt; String.split(line, "x") |&gt; Enum.map(fn val -&gt; Integer.parse(val) end) end)
+  |&gt; Enum.map(fn [{l, _}, {w, _}, {h, _}] -&gt; 2 * l * w + 2 * l * h + 2 * h * w + Enum.min([l*w, l*h, h*w]) end)
+  |&gt; Enum.sum()
+  IO.puts("Part 1: #{result}")
+end
 
-fn read_file(filepath: &amp;str) -&gt; Vec&lt;Sizes&gt; {
-    let contents = fs::read_to_string(filepath);
-    let mut boxes: Vec&lt;Sizes&gt; = vec![];
-    let binding = contents.expect("REASON");
-    let lines = binding.split('\n');
-    for line in lines {
-        if line == "" {
-            continue;
-        }
-        let mut parts = line.split('x');
-        let l = i64::from_str_radix(parts.next().unwrap(), 10).unwrap();
-        let w = i64::from_str_radix(parts.next().unwrap(), 10).unwrap();
-        let h = i64::from_str_radix(parts.next().unwrap(), 10).unwrap();
-        boxes.push(Sizes { h: h, l: l, w: w });
-    }
-    return boxes;
-}
-
-fn wrapping_size(boxes: &amp;Vec&lt;Sizes&gt;) -&gt; i64 {
-    let mut total: i64 = 0;
-    for b in boxes {
-        let area = 2 * b.l * b.w + 2 * b.l * b.h + 2 * b.h * b.w;
-        let addition = min(min(b.l * b.w, b.l * b.h), b.h * b.w);
-        total += area + addition;
-    }
-    total
-}
-
-fn ribbon_len(boxes: &amp;Vec&lt;Sizes&gt;) -&gt; i64 {
-    let mut total: i64 = 0;
-    for b in boxes {
-        let bow = b.l * b.w * b.h;
-        let mut ribbon = 0;
-        if b.h &lt;= b.w &amp;&amp; b.h &lt;= b.l {
-            ribbon += 2 * b.h + 2 * min(b.w, b.l);
-        } else if b.w &lt;= b.h &amp;&amp; b.w &lt;= b.l {
-            ribbon += 2 * b.w + 2 * min(b.h, b.l);
-        } else {
-            ribbon += 2 * b.l + 2 * min(b.w, b.h);
-        }
-        total += bow + ribbon;
-    }
-    total
-}
-
-fn part1() {
-    let boxes = read_file("INPUT");
-    println!("Part 1: {}", wrapping_size(&amp;boxes));
-}
-
-fn part2() {
-    let boxes = read_file("INPUT");
-    println!("Part 2: {}", ribbon_len(&amp;boxes));
-}
-
-fn main() {
-    println!("Year 2015 day 02 - I Was Told There Would Be No Math");
-    part1();
-    part2();
-}
+if {:ok, string} = File.read("INPUT") do
+  result = String.split(string, "\n")
+  |&gt; Enum.filter(fn str -&gt; String.length(str) &gt; 0 end)
+  |&gt; Enum.map(fn line -&gt; String.split(line, "x")
+  |&gt; Enum.map(fn val -&gt; Integer.parse(val) end) end)
+  |&gt; Enum.map(fn [{l, _}, {w, _}, {h, _}] -&gt; l * w * h + 2 * Enum.min([l,w,h]) + 2 * Enum.min([Enum.max([l, w]), Enum.max([l, h]), Enum.max([h, w])]) end)
+  |&gt; Enum.sum()
+  IO.puts("Part 2: #{result}")
+end
 </code></pre>
 
                     </main>
