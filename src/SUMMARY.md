@@ -140,4 +140,9 @@
 		- [Year 2015 day 5](./aoc/2015-5.md)
 		- [Year 2015 day 6](./aoc/2015-6.md)
 		- [Year 2015 day 7](./aoc/2015-7.md)
+		- [Year 2015 day 8](./aoc/2015-8.md)
+		- [Year 2015 day 9](./aoc/2015-9.md)
+		- [Year 2015 day 10](./aoc/2015-10.md)
+		- [Year 2015 day 11](./aoc/2015-11.md)
+		- [Year 2015 day 12](./aoc/2015-12.md)
 <!--AOC-->
