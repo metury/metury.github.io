@@ -32,6 +32,3 @@
 # Miscellaneous
 
 - [Boot](./boot.md)
-- [(Dez)Informace](./dezinfo.md)
-- [Movie list](./movies.md)
-- [Books](./library.md)
