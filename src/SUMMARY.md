@@ -6,10 +6,6 @@
 
 - [Matfyz](./mff.md)
 
-# Programming exercises
-
-- [Advent of code](./adventofcode.md)
-
 # Tenerife
 
 - [Tenerife](./tenerife.md)
@@ -24,7 +20,3 @@
         - [Další aktivity](./tenerife/extra.md)
     - [Počasí](./tenerife/weather.md)
     - [Okolí Costa del Silencio](./tenerife/surroundings.md)
-
-# Miscellaneous
-
-- [Boot](./boot.md)
