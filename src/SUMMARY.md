@@ -11,8 +11,6 @@
 # Programming exercises
 
 - [Advent of code](./adventofcode.md)
-- [Sandbox](./sandbox.md)
-- [Exercises](./exercises.md)
 
 # Tenerife
 
