@@ -1,12 +1,10 @@
 # Summary
 
-[Welcome page](./index.md)
+[About](./about.md)
 
-# Main pages
+# Matfyz
 
-- [About](./about.md)
 - [Matfyz](./mff.md)
-- [Projects](./projects.md)
 
 # Programming exercises
 
