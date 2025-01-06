@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Welcome page - Personal page</title>
+        <title>About - Personal page</title>
 
 
         <!-- Custom HTML head -->
@@ -154,40 +154,29 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="welcome-to-my-personal-page"><a class="header" href="#welcome-to-my-personal-page">Welcome, to my personal page.</a></h1>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
-</span>    let mut interests : Vec&lt;&amp;str&gt; = vec!["Computer science",
-                                         "Travel",
-                                         "Music",
-                                         "Movies"];
-
-    println!("Welcome to my personal webpage.");
-    println!("");
-    println!("Here you may find some things I enjoy or do.");
-
-    for int in &amp;interests {
-        println!("\t- {}", int);
-    }
-
-    interests.push("Advent of code");
-
-    println!("And also I cannot forget: {}", interests[interests.len() - 1]);
-
-    let url = "github.com/metury/metury.github.io";
-    let tools = vec!["Github pages", "MdBook"];
-
-    println!("");
-    println!("Source of this page can be found at the link: {}", url);
-    println!("");
-    println!("For the proper usecase I used {}.", tools.join(" and "));
-<span class="boring">}</span></code></pre></pre>
+                        <h1 id="welcome"><a class="header" href="#welcome">Welcome</a></h1>
+<p>This is my own personal page. Feel free to see the pages.</p>
+<h2 id="about-me"><a class="header" href="#about-me">About me</a></h2>
+<p>I am a student at Charles University studying computer science. My CV can be found here:</p>
+<ul>
+<li><a href="./resources/CV_cs.pdf">Životopis</a></li>
+<li><a href="./resources/CV_en.pdf">Resumé</a></li>
+</ul>
+<h2 id="project"><a class="header" href="#project">Project</a></h2>
+<p>There is a small list of my projects.</p>
+<h3 id="-rodoc"><a class="header" href="#-rodoc">🌳 <a href="https://github.com/rodoc-app">rodoc</a></a></h3>
+<p>My own bachelors project that is for organizing your own family tree.</p>
+<p><a href="https://github.com/rodoc-app/rodoc-app">GitHub</a> and <a href="https://rodoc-app.github.io/">Page</a> for more information.</p>
+<h3 id="graphs"><a class="header" href="#graphs">graphs</a></h3>
+<p>Library for graphs that is written in <code>Java</code>. There are some basic algorithms implemented as well.</p>
+<p><a href="https://github.com/metury/graphs">GitHub</a> and <a href="../resources/docs/graphs/index.html">Documentation</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
-                            <a rel="next prefetch" href="about.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="mff.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -198,7 +187,7 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
 
-                    <a rel="next prefetch" href="about.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="mff.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
