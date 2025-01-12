@@ -6,6 +6,12 @@
 
 - [Matfyz](./mff.md)
 
+# Collections
+
+- [Movies]()
+- [Books]()
+- [Programming languanges]()
+
 # Tenerife
 
 - [Tenerife](./tenerife.md)
