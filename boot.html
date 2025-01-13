@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Tenerife - Personal page</title>
+        <title>Setup - Personal page</title>
 
 
         <!-- Custom HTML head -->
@@ -159,20 +159,80 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="jednoduchý-průvodce-po-tenerife"><a class="header" href="#jednoduchý-průvodce-po-tenerife">Jednoduchý průvodce po Tenerife</a></h1>
-<p>Zde můžete najít pár tipů a rad ohledně návštěvy Španělského ostrova Tenerife. Mimo samotné cesty můžete zde najít pár zajímavých míst a taky několik konkrétních tras.</p>
-<p>Vše berte trochu s ohledem. Ne všechny trasy jsou vhodné pro každého a také se v průběhu času mohou měnit konkrétní mistní podmínky a situace. Tento průvodce je občas aktualizován, ale je to pouze moje volnočasová aktivita.</p>
-<p>Všechny typy a rady jsou na Vaše vlastní nebezpečí a tímto nijak neodpovídám, že případné potíže.</p>
+                        <h1 id="fresh-instalation-of-debian-computer"><a class="header" href="#fresh-instalation-of-debian-computer">Fresh instalation of <a href="https://www.debian.org">Debian</a> computer.</a></h1>
+<h1 id="my-bashrc"><a class="header" href="#my-bashrc">My <code>.bashrc</code></a></h1>
+<pre><code class="language-bash">export EDITOR='nvim'
+export VISUAL='nvim'
+
+# Git aliases
+alias gtpl='git pull'
+alias gtps='git push'
+alias gadd='git add .'
+alias gcom='git commit'
+alias gdif='git diff'
+
+# Meson aliases
+alias mess='meson setup build/'
+alias mesc='meson compile -C build/'
+alias mesi='meson install -C build/'
+
+# Programming languages aliases
+alias p='python3'
+alias c='g++ -o main *.cpp'
+alias h='ghci'
+alias gor='go run *.go'
+alias gof='go fmt *.go'
+
+# Update and install Rust language.
+alias rustinstall="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+
+# Update and install Scala lang.
+alias scalainstall="curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d &gt; cs &amp;&amp; chmod +x cs &amp;&amp; ./cs setup"
+
+# Update and install bun.
+alias buninstall="curl -fsSL https://bun.sh/install | bash"
+</code></pre>
+<h1 id="instalation-of-all-apps"><a class="header" href="#instalation-of-all-apps">Instalation of all apps</a></h1>
+<pre><code class="language-bash">apt update
+apt upgrade
+
+general="firefox-esr thunderbird vlc freefilesync neovim"
+media="gimp inkscape handbrake kid3-qt asunder obs-studio"
+chat="telegram-desktop"
+kde="kdiff3 kdenlive k3b kate karbon krita krename"
+
+office="texstudio tikzit libreoffice texlive-full pandoc ipe xournalpp ghostwriter calligra"
+tools="screenfetch htop tree curl exiftool bleachbit"
+
+dev="git python3 ruby"
+cpp="cpp cppcheck meson cmake make valgrind doxygen"
+java="default-jre default-jdk"
+math="sagemath octave jupyter polymake"
+go="golang gopls"
+perl="perl"
+haskell="ghc ghc-prof ghc-doc"
+prolog="swi-prolog-full"
+
+apps="$general $media $chat $kde $office $tools $dev $cpp $java $math $go $perl $haskell $prolog"
+apt install $apps
+
+rustinstall
+scalainstall
+
+cargo install juliaup
+cargo install mdbook
+rustup install rust-analyzer
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="boot.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="langs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="tenerife/travel.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="tenerife.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -182,11 +242,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="boot.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="langs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="tenerife/travel.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="tenerife.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
