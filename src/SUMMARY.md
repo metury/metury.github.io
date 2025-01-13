@@ -10,7 +10,8 @@
 
 - [Movies]()
 - [Books]()
-- [Programming languanges]()
+- [Programming languages](langs.md)
+- [Setup](boot.md)
 
 # Tenerife
 
