@@ -53,5 +53,6 @@ For some small programs it is better to use just scripts.
 
 - A mongo database is a vector database.
 - [Forum](https://www.mongodb.com/community/forums/)
+- [Learning courses](https://learn.mongodb.com/)
 
 ## [Qt](https://www.qt.io/)
