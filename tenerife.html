@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tury - Tenerife</title>
+
+
+
+<link rel="canonical" href="http://tury.codeberg.page/tenerife.html">
+<meta name="twitter:title" content="Tury - Tenerife">
+<meta property="og:title" content="Tury - Tenerife">
+
+
+<link rel="sitemap" href="http://tury.codeberg.page/sitemap.xml" type="application/xml" title="Sitemap">
+<meta name="author" content="Tomáš Turek">
+<meta name="description" content="My Personal Page">
+<meta name="generator" content="HydePHP v1.7.5">
+<meta property="og:site_name" content="HydePHP">
+
+
+
+
+<style>[x-cloak] {display: none!important}</style>
+
+
+    <link rel="stylesheet" href="media/app.css?v=6147bc70ebe5e53e1d69a0a83dc70330">
+
+
+
+
+
+    
+    <meta id="meta-color-scheme" name="color-scheme" content="light">
+    <script>if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); document.getElementById('meta-color-scheme').setAttribute('content', 'dark');} else { document.documentElement.classList.remove('dark') } </script>
+
+
+
+
+
+
+</head>
+<body id="app" class="flex flex-col min-h-screen overflow-x-hidden dark:bg-gray-900 dark:text-white" x-data="{ navigationOpen: false }" x-on:keydown.escape="navigationOpen = false;">
+    <a href="#content" id="skip-to-content" class="sr-only focus:not-sr-only bg-black border-4 border-yellow-400 focus:absolute focus:mt-2 focus:mx-auto focus:p-2 focus:w-64 h-auto left-0 overflow-auto right-0 rounded-md text-center text-lg text-white top-auto z-50 ">Skip to content</a>    <nav aria-label="Main navigation" id="main-navigation" class="flex flex-wrap items-center justify-between p-4 shadow-lg sm:shadow-xl md:shadow-none dark:bg-gray-800">
+    <div class="flex flex-grow items-center flex-shrink-0 text-gray-700 dark:text-gray-200">
+        <a href="index.html" class="font-bold px-4" aria-label="Home page">
+    Tury
+</a>
+        <div class="ml-auto">
+            <button @click="toggleTheme" class="theme-toggle-button flex items-center px-2 py-1 hover:text-gray-700 dark:text-gray-200" title="Toggle theme">
+        <span class="sr-only">Toggle dark theme</span>
+        <svg width="1.25rem" height="1.25rem" class="w-5 h-5 hidden dark:block" fill="#FFFFFF" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        <svg width="1.25rem" height="1.25rem" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+    </button>
+        </div>
+    </div>
+
+    <div class="block md:hidden">
+        <button id="navigation-toggle-button" class="flex items-center px-3 py-1 hover:text-gray-700 dark:text-gray-200"
+                aria-label="Toggle navigation menu" @click="navigationOpen = ! navigationOpen">
+            <svg id="open-main-navigation-menu-icon" title="Open Navigation Menu" class="dark:fill-gray-200"
+                 xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24"
+                 x-show="! navigationOpen" style="display: block;"
+            ><title>Open Menu</title>
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+            <svg id="close-main-navigation-menu-icon" title="Close Navigation Menu" class="dark:fill-gray-200"
+                 xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24"
+                 x-show="navigationOpen" style="display: none;"
+            ><title>Close Menu</title>
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div id="main-navigation-links" class="w-full x-uncloak-md md:flex flex-grow md:flex-grow-0 md:items-center md:w-auto px-6 -mx-4 border-t mt-3 pt-3 md:border-none md:mt-0 md:py-0 border-gray-200 dark:border-gray-700"
+         :class="navigationOpen ? '' : 'hidden'" x-cloak>
+        <ul aria-label="Navigation links" class="md:flex-grow md:flex justify-end">
+                            <li class="md:mx-2">
+                                            <a href="index.html"  class="block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100">Home</a>                                    </li>
+                            <li class="md:mx-2">
+                                            <a href="collections.html"  class="block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100">Collections</a>                                    </li>
+                            <li class="md:mx-2">
+                                            <a href="developer-toys.html"  class="block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100">Developer toys</a>                                    </li>
+                            <li class="md:mx-2">
+                                            <a href="matfyz.html"  class="block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100">Matfyz</a>                                    </li>
+                            <li class="md:mx-2">
+                                            <a href="projects.html"  class="block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100">Projects</a>                                    </li>
+                            <li class="md:mx-2">
+                                            <a href="tenerife.html" aria-current="page" class="block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100 border-l-4 border-indigo-500 md:border-none font-medium -ml-6 pl-5 md:ml-0 md:pl-0 bg-gray-100 dark:bg-gray-800 md:bg-transparent dark:md:bg-transparent">Tenerife</a>                                    </li>
+                    </ul>
+    </div>
+</nav>
+    <section>
+        
+    <main id="content" class="mx-auto max-w-7xl py-16 px-8">
+        <article class="mx-auto prose dark:prose-invert">
+            <h1>Jednoduchý průvodce po Tenerife</h1>
+<p>Zde můžete najít pár tipů a rad ohledně návštěvy Španělského ostrova Tenerife. Mimo samotné cesty můžete zde najít pár zajímavých míst a taky několik konkrétních tras.</p>
+<p>Vše berte trochu s ohledem. Ne všechny trasy jsou vhodné pro každého a také se v průběhu času mohou měnit konkrétní mistní podmínky a situace. Tento průvodce je občas aktualizován, ale je to pouze moje volnočasová aktivita.</p>
+<p>Všechny typy a rady jsou na Vaše vlastní nebezpečí a tímto nijak neodpovídám, že případné potíže.</p>
+<h1>Cesta</h1>
+<p>Zde si nejdříve představím doporučení na věci, které by šlo vzít s sebou a následně nějaké komentáře ohledně cesty letadlem.</p>
+<p>Závěrem také stručně představím, jak se lze po ostrově pohybovat.</p>
+<h2>Co si vzít s sebou</h2>
+<p>Koneckonců přesný seznam závisí na potřebách každého z Vás. Nicméně i tak dodám nějaké doporučení, které mi přijde užitečné.</p>
+<p>Pokud si budete brát velký kufr, tak tohle není moc potřeba. Většinou stačí jen příruční zavazadlo, které nabývají rozměrů batohu, do kterého se vejde dost potřebných věcí.</p>
+<p>Díky dobrému počasí toho člověk zas tak moc nepotřebuje. Jako boty stačí jen nějaké <strong>botasky</strong> na normální chození a pak se hodí nějaké <strong>pořádnější boty</strong> do hor. Do hor se taky málokdy hodí i teplejší oblečení, ale většinou to nebývá třeba (je třeba dodat, že moc na ostrově zima nebývá). Proto pokud letíte někdy v zimních termínech, tak se do letadla oblečte v dlouhém oblečení a jděte v pořádnějších botách a díky tomu věci, které zabírají nejvíce místa nemusíte mít v batohu.</p>
+<p>Pak nějaké základní věci jako ručníky bývávají na ubytování (ale záleží kde jste ubytováni). Pak už snad jen plavky a normální oblečení do tepla. Popřípadě se vše dá dokoupit v místních obchodech, které poslední dobou bývají snad i levnější než v Česku.</p>
+<p>Detaily psát nechci, jednak bych na něco určitě zapomněl a taky každý chce s sebou něco jiného, takže mi to nedává smysl.</p>
+<h2>Cesta letadlem</h2>
+<p>Přijde mi, že ne všichni mají nějaké nedávné zkušenosti s létáním. Pokud ale jo, tak tohle číst nemusíte.</p>
+<h3>Aerolinky</h3>
+<p>Doporučené letové trasy za levné peníze jsou z Katowic a Vídně. Postupem času mohou být užitečné i nepřímé spoje z Prahy, ale není to vždy nejlevnější spojení.</p>
+<p>Nějaké konkrétní tipy na aerolinky:</p>
+<ul>
+<li><a href="https://wizzair.com/">WIZZ Air</a></li>
+<li><a href="https://www.ryanair.com/">Ryanair</a></li>
+<li><a href="https://www.vueling.com/en">Vuelingu</a></li>
+</ul>
+<h3>Cesta na letiště</h3>
+<h4>Katowice</h4>
+<p>Klasicky se na letiště lze dostat autem, nicméně to je třeba pak zaparkovat. Například v Katowicích ve vedlejší vesnici <em>Pyrzowice</em> je spoustu domů, které mají místo zahrady parkoviště.</p>
+<p>Alternativně se lze dopravit pomocí autobusů a vlaků. Myslím, že na letiště ve Vídní jezdí už přímo linky (minimálně z Brna) ale na letiště do Katowic už moc ne, ale tam jezdí místní <a href="https://rj.metropoliaztm.pl/rozklady/1-ap/76430/1/162106/">MHD</a> z hlavního nádraží na letiště. Lístky se dají koupit (i kartou, ale ne vždy) na nádraží.</p>
+<ul>
+<li><a href="https://www.flixbus.cz/">FlixBus</a></li>
+<li><a href="https://www.studentagency.cz/">Student agency</a></li>
+<li><a href="https://www.gepard.com/">Gepard express</a></li>
+</ul>
+<h4>Vídeň</h4>
+<p>V případě vídně je lepší použít hromadné dopravy, které jsem již dříve zmínil. Pokud byste chtěli jet autem, tak lze použít oficiální parkoviště, nicméně to bývá dražší. Dostal jsem doporučení na jedno parkoviště, které je celkem blízko a mělo by být levnější.</p>
+<ul>
+<li><a href="https://www.mazur-parken.at/en">Mazur parking</a></li>
+</ul>
+<h3>Samotný let</h3>
+<p>Na co je dobré upozornit (z vlastní zkušenosti) je lepší si vzít nějaké jídlo a pak buď na letišti (za kontrolou!) koupit pití anebo si vzít láhev a pak si ji naplnit. Popřípadě si lze občerstvení zakoupit v letadle, ale to si opět připlatíte.</p>
+<p>Tohle snad nebude potřeba dodávat, ale na cestu letadlem si s sebou nesmíte do příručního zavazadla brát ostré nebo nebezpečné předměty a také nesmíte brát tekutiny. V případě tekutin je omezení myslím do 100 ml. Takže bacha třeba na kosmetiku.</p>
+<p>Potom také v případě odbaveného zavazadla nesmí obsahovat baterie. Ty pak musí být v příručním zavazadle. Mimo jiné existuje i celkové omezení na velikost baterií, ale ty snad nikdo nepřesáhne.</p>
+<p>Pokud s sebou budete brát jen normální věci, tak to nejhorší co se může stát je, že vám danou věc vyhodí. Aspoň budete mít pěknou historku.</p>
+<h2>Jak se pohybovat po ostrově</h2>
+<p>Buď se dá půjčit auto. Proto jsou dobré půjčovny jako následující:</p>
+<ul>
+<li><a href="https://autoreisen.com/car-hire/car-hire.php">AutoReisen</a></li>
+<li><a href="https://www.cicar.com/EN">Cicar</a></li>
+<li><a href="https://www.pluscar-tenerife.com/booking.php?lang=en">PlusCar</a></li>
+</ul>
+<p>Jako další možnost je používat místní autobusy. Autobusy nemají až tak přísný řád, ale jezdí docela dost dobře. Pro ně je lepší si zařídit jejich kartičku <a href="https://tenmas.es/">TenMas</a>. Kartička se dá pořídit hned na letišti. Pak je většinou lepší si ji dát jako kreditní (<em>purse</em>) a nabýt si ji. Hlavní výhoda je, že pokud přestupujete, tak cena je o hodně levnější, protože se vlastně počítá celá cesta dohromady a ne dvě separátní cesty. Použití této karty je hodně jednoduché. Při vstupu si pípnete a <strong>PŘI VÝCHODU TAKY</strong> (na to se celkem často zapomíná, potom se bere jako cena až do konečné stanice). Pokud na kartu jede více lidí, tak je třeba předem říct řidiči kolik vás je a kam jedete. Následně pro hledání spojů se dá vyhledat přes <em>google maps</em> anebo použít jejich aplikaci <a href="https://play.google.com/store/apps/details?id=com.diodev.guaguas&amp;gl=US">Guaguas</a> (<em>už není moc funkční</em>) ale nehledal jsem jestli existuje i verze na iOS.</p>
+<h1>Trasy a místa</h1>
+<p>V textu zmiňuji <strong>Jih</strong> a <strong>Sever</strong> ostrova. Tato terminologie je tak, jak by člověk očekával. Přesněji to beru vůči Teide.</p>
+<p>Také přidám <strong>GPX</strong> soubor s konkrétními místy, které budu v textu zmiňovat.</p>
+<ul>
+<li>Pár tras už jsem dal do toho co navštívit, ale je možné, že tady taky nějaké přidám. Jako hlavní zdroj doporučuji pro různé trasy pomocí <a href="https://www.geocaching.com/">Geocaching</a> a taky i někdy přímo <a href="https://wherigo.com/">WhereIGo</a>,ale to je vlastně spojené s Geocachingem také.</li>
+<li>Takové doporučení jak si naplánovat den je, že ráno se vyjede někam na výlet a odpoledne se zajede na nějakou blízkou pláž a tam si člověk hodně odpočine.</li>
+<li>Samozřejmě je potřeba nepřecenit svoje možnosti a taky nejlépe nejít sám a nepodcenit pitný režim. Možná bych ještě doporučil pokrývku hlavy. A taky v nějakých oblastech už není moc dobrý signál. Neznamená to, že máte mít satelitní telefon, ale nespoléhat se na připojení k internetu.</li>
+<li>Je asi dobré si naplánovat svoje vlastní trasy, ale jako inspiraci přidám pár tras, které byly celkem pěkné.</li>
+<li>Jinak jako aplikaci na mapy doporučuji klasické <a href="https://mapy.cz/">mapy.cz</a> které mají dobré turistické trasy a taky umí import/export gpx.</li>
+</ul>
+<h2>Okolí Teide</h2>
+<ul>
+<li>Jedna kratší cesta poblíž výhledu <a href="./tenerife//Samara.gpx" title="resources/Samara.gpx">Samara</a>.</li>
+<li>Pak výlet na horu <a href="./tenerife//Sombrero.gpx" title="resources/Sombrero.gpx">Sombrero</a> ze které je výhled na park Teide.</li>
+<li>Pak ještě <a href="./tenerife//teide-view.gpx" title="resources/teide-view.gpx">trasa</a> poblíž, ale z opačné strany poblíž Roques de Garcia.</li>
+</ul>
+<h2>Pohoří Anaga</h2>
+<ul>
+<li>Trasa okolo hory <a href="./tenerife/Taborno.gpx" title="resources/Taborno.gpx">Taborno</a>.</li>
+</ul>
+<h2>Pohoří Teno</h2>
+<ul>
+<li>Tady je jedna pěkná <a href="https://www.geocaching.com/geocache/GC65QKW">Where I Go</a> ohledně pána prstenů. Není potřeba přidat trasu ale popř. je to zhruba <a href="./tenerife//tlotr.gpx" title="resources/tlotr.gpx">tahle</a>.</li>
+<li>Ještě je zajímavé jiné Where I Go také poblíž a to <a href="https://www.geocaching.com/geocache/GC8J7A3">reverzní keš</a>.</li>
+</ul>
+<h2>Příroda</h2>
+<p>Na celém ostrově je spoustu zajímavých přírodních úkazů. Při výběru berte v potaz to, jestli se bojíte výšek (nebo dokonce máte závratě). Většinu tras jsem osobně zvládl, ale každý má jiné hranice.\</p>
+<h3>Parque National del Teide</h3>
+<p>Samozřejmostí je středobod Tenerife <a href="https://goo.gl/maps/qYmkyHaMSfNSbAkY7">Pico del Teide</a>. Pokud by se někdo chtěl dostat až na vrchol, tak je třeba si zajistit včas <a href="https://www.reservasparquesnacionales.es/real/ParquesNac/usu/html/listado-actividades-oapn.aspx?cen=2">permit</a>. A i tak to není zaručené kvůli počasí, protože nahoře můžou být klidně i závěje sněhu. Na samotný vrchol jezdí lanovka, ale lze zvolit i cestu po svých.</p>
+<p>Dalším místem je <a href="https://goo.gl/maps/QTHVNU92jzp3gDeBA">Roques de Garcia</a>, což jsou skály uprostřed &quot;pouště&quot;. Je tady jeden kratší <a href="./tenerife//garcia.gpx" title="resources/garcia.gpx">okruh</a>, který se dá jít, ale výrazně doporučuji jít daným směrem, kvůli výškovému profilu.</p>
+<h3>Anaga</h3>
+<p>Celý sever je také hodně hornatý. Pohoří se jmenuje <a href="https://goo.gl/maps/Y49XMutjRv124ZSr7">Anaga</a>. Tady se dají najít zajímavé trasy. Ale cesta autem už je dost záživnější (jak když polechtáš hada #snake). A trasy už jsou také intenzivnější, ale s pěknými výhledy.</p>
+<h3>Teno</h3>
+<p>Dalším pohořím je Teno ve kterém se mimo jiné nachází nejvýše postavená vesnice <a href="https://goo.gl/maps/byGNbp8r4mAbzukL8">Masca</a>. Ve které je taky <a href="./tenerife//masca.gpx" title="resources/masca.gpx">trasa</a> údolím. Cesta autem bývá jedna z těch nejhorších a to ne kvůli serpentinám, ale protože tam je velký provoz. Lze zvolit autobus a to někdy bývá i větší zážitek než cesta autem.</p>
+<p>Součástí pohoří Teno jsou skály vysoce se tyčící přímo z oceánu  <a href="https://goo.gl/maps/oQFcwSWWEjWE9V1k6">Los Gigantes</a>. Pak zase záleží jak blízko chce člověk jít, protože se dá jít <a href="./tenerife//gigantes.gpx" title="resources/gigantes.gpx">trasa</a> po Los Gigantes.</p>
+<h3>Další</h3>
+<p>Další v pořadí je <a href="https://www.barrancodelinfierno.es/en/">Barranco del Infierno</a>. Jedná se o celkem pěkné údolí akorát kvůli ne zas tak dávné nehodě se vstup hodně hlídá a člověk je nucen koupit si vstup a jít tam z helmou. Řekl bych, že to není zas tak zajímavé. Ale přišlo mi blbé to aspoň neříct.</p>
+<p>Co mě ještě napadlo jsou skály známé jako <a href="https://goo.gl/maps/FZuzgERWUWpBjWQT7">Paisaje Lunar</a>(&quot;měsíční krajina&quot;). Buď lze zastavit ve Vilafloru a jít celou trasu pěšky anebo se jde i více přiblížit autem, ale pokud dobře vím, tak tam není moc dobrá cesta vzhledem k povrchu.</p>
+<h2>Města</h2>
+<p>Možná pokud by někdo chtěl navštívit spíše kulturu, tak pak zajímavá města by mohla být.</p>
+<h3>Garachico</h3>
+<p>Městečko <a href="https://goo.gl/maps/mHCb6RYfBmf5BGFE7">Garachico</a> které kdysi bylo zalité lávou. Také zde jezdíme na <a href="https://goo.gl/maps/Xfbu3stRrEJknuax7">jídlo</a> (králík naložený v místní omáčce) a pak tu jsou přírodní bazénky, ale tam se mockrát nedá plavat, protože to tam je spíše jako v pračce. Pokud si náhodou někdy pamatuje, jak bývalo ve zprávách, že na Tenerife se kvůli bouři ničí baráky z přívalových vln, tak to bylo v těchto oblastech.</p>
+<h3>Candelarioa</h3>
+<p>Další město je <a href="https://goo.gl/maps/6e3SA1BZ9FwFJ6JN6">Candelaria</a>. Tady je to hlavně známé svojí katedrálou (nebo co to je) a pokud si to správně pamatuji tak v ní je &quot;černá Madonna&quot;.</p>
+<h3>La Orotava</h3>
+<p>Dále bych řekl <a href="https://goo.gl/maps/T3zynzWUvovTTgLBA">La Orotava</a>, které je také dost pěkné a to svými parky.</p>
+<h3>La Laguna</h3>
+<p>Nesmí chybět ani <a href="https://goo.gl/maps/xEwbv2aDbRi3DyDT6">La Laguna</a>, které je prakticky spojené i s hlavním městem <a href="https://goo.gl/maps/e9t6WvGBUK4GF4To7">Santa Cruz de Tenerife - hlavní město</a>. V La Laguně je hodně kostelů a pěkná architektury.</p>
+<h3>Santa Cruz de Tenerife</h3>
+<h3>Buenavista del Norte</h3>
+<p>Jako poslední bych dodal asi <a href="https://goo.gl/maps/aKKuDLBAECqJuccF8">Buenovista del Norte</a> ani ne tím, že by to bylo pěkné město, ale vede odsuď cesta na severní cíp ostrova. To se musí ale už busem.</p>
+<h2>Pláže</h2>
+<p>Samozřejmě nesmí ani chybět pár známých pláží.</p>
+<h3>Severní pobřeží</h3>
+<p>Na severnějším pobřežím pláže spíš bývají kamenité a také více divoké, za to nabízejí pěkné pohledy.</p>
+<p>Nebo také se zde občas vyskytují &quot;přírodní&quot; bazénky např. <a href="https://goo.gl/maps/SQPZC5LWMhPEGWzk9">Bajamar</a> anebo v jak jsem říkal i v Garachicu.</p>
+<h3>Jižní pobřeží</h3>
+<p>Pláže nacházející se na jižním pobřeží bývají spíše písečné a jsou spíše zaměřené pro turisty.</p>
+<p>Za hlavním městem je <a href="https://goo.gl/maps/UnD8CAmhuvKnnt7u9">Playa de las Teresitas</a> která je asi největší pláž, nicméně je uměle vytvořená z písku ze Sahary.</p>
+<p>Další je taky <a href="https://goo.gl/maps/8buUpg68wUNmJHkE6">Playa de la Tejita</a>, kterou si pamatuji tím, že tam byla asi tak nejteplejší voda (nevím čím to je). Ale bývá tam také větrno a velké vlny. K tomu pak patří i pláže v El Medanu. Tam je to spíše pro windsurfing.</p>
+<p>Pak Pláže v <a href="https://goo.gl/maps/bB9e8AdtTUhw9VGE80">Los Cristianos (např.)</a> a také vedlejší <a href="https://goo.gl/maps/p4sZm2meg3KCcwbC9">Las Americas</a>, tady už není co dodat.</p>
+<p>Významnou pláží je <a href="https://goo.gl/maps/A3bQHKSqsY8x4aQG7">Playa de la Arena</a> na které je černý písek. To nese i svoji špatnou stránku, protože může být až vařící a nedá se po něm chodit. Také zde bývají vlny. Ale jinak je to celkem menší pláž.</p>
+<p>Dodám ještě kamenitou (ne štěrkovou) pláž poblíž žluté hory. Tato pláž je dobrá pro potápění.</p>
+<h2>Vedlejší</h2>
+<p>Jednou z nejznámější atrakcí je <a href="https://www.loroparque.com/index.php/en/">Loro Parque</a>, což je jednoduše řečeno velká zoo. Aby se to pořádně vyplatilo a člověk viděl vše, tak je to zhruba na celý den. Protože zde jsou naplánované všemožné show.</p>
+<p>Podobný jako Loro Parque je <a href="https://www.siampark.net/index.php/en/">Siam Park</a> akorát tady se jedná o akvapark. Rozhodně se vyplatí jít během nějakého dne kdy není svátek nebo volno aby tam nebylo úplně narváno.</p>
+<p>Pokud chcete klidně strávený den, tak jako možnost doporučuji si vyjet směrem k Teide a pak cestou se nachází u cesty &quot;kempy&quot; ve kterých je spousta volně dostupných &quot;grilů&quot;. Člověk si musí přinést něco co dobře hoří a jídlo a cokoliv co chce. Pokud si správně pamatuji tak je tam přístup k vodě a také je tam toaleta. Jenom přidám jeden <a href="https://goo.gl/maps/VyYMBCxJ1tVeZEQLA">příklad</a> ale je jich tam více a na vícero cestách.</p>
+<p><em>Nejspíše jsem toho spoustu vynechal, ale to už je na vás, abyste to našli sami.</em></p>
+<h1>Počasí</h1>
+<p>Tady není moc co dodat. Během celého roku se teplota pohybuje kolem 25 stupňů. Samozřejmě není vždy zcela konstatní. Občas můžete narazit na studené noci s 16 stupni anebo zažít 40ti stupňové dny.</p>
+<p>Je dobré dodat, že tohle se týká jižní části ostrova. Kvůli tomu jak uprostřed ostrova je Teide, tak vzniká to, že na severu častěji prší a také zde bývá trochu nižší teplota, ale ne s nějakým velkým rozdílem. Respektive dobrá rada je, že pokud na jedné části ostrova prší, tak na druhé nejspíše ne.</p>
+<p>Ještě bych řekl, že občas nastane něco čemu místní říkají <strong>&quot;Calima&quot;</strong> a to je pro písek, který je kvůli bouři vynesen ze Sahary a dále putuje nejenom na Kanárské ostrovy. Pokud to nastane, tak je poznat, že ve vzduchu je písek a taky se zvýší teplota. Proto se moc nedoporučuje dělat fyzicky náročné aktivity. Jednak protože je hodně horko, ale taky člověk vdechuje písek.</p>
+<p>Jako poslední (spíše taková zajímavost) je, že na Teide (popř. i v národním parku okolo Teide někdy může nasněžit. To ale není moc časté. Nicméně pokud se pojedé do národního parku podívat, tak u cest uvidíte dvojbarevné tyče, které slouží k použití pluhu.</p>
+<h1>Okolí Costa del Silencio</h1>
+<p>Tady sepíšu to co je v okolí Costa del Silencio a Las Galletas, která se pár čtenářům může hodit.</p>
+<h2>Restaurace:</h2>
+<p>Jednou z nejlevnějších je restaurace <a href="https://goo.gl/maps/3t8R4k3FGjeEEkBL7">3,60</a>. Bacha v pondělí mají zavřeno, ale jak název určuje, tak ceny jsou 3.60 EUR. (Snad se v blízké době neplánují přejmenovat.)</p>
+<p>V blízkém okolí ve stejné ulici je spoustu dalších restaurací.</p>
+<p>Pak také dobrá <a href="https://g.page/el-patio-del-coral?share">restaurace</a> kde dělají dobré speciality jako např. krevety na víně.</p>
+<p>Ale myslím si, že vlastním výběrem nějaké jiné restaurace člověk neudělá chybu.</p>
+<h2>Obchody:</h2>
+<ul>
+<li>Jedním z nejlepších obchodů, který je sice dál je <a href="https://goo.gl/maps/wp2s7g8y9tYnRZYQ8">Mercadonna</a> což je přímo řetězec a existuje vícero míst kde tyhle obchody jsou, ale tenhle je poměrně blízko.</li>
+<li>V docházkové vzdálenosti je taky <a href="https://goo.gl/maps/5zCdqZXhgD9STP2s7">HyperDino</a>, což je taky velký řetězec a tyto pobočky bývají skoro všude. A levnější, ale vzdálenější je <a href="https://maps.app.goo.gl/MsiFrkcgy76godm98">Superdino</a>.</li>
+<li>A taky <a href="https://goo.gl/maps/7U93xPvPrC4DEchw7">Hermussa</a> kde mývají i jiné potraviny bližší českému.</li>
+<li>Podstatný další místo je <a href="https://goo.gl/maps/TH3TqrZP95npKrZW7">rybí market</a>, kde skoro každý ráno mají čerstvé ryby.</li>
+<li>Také v centru Las Galletas je místní obchod s ovocem a zeleninou, kde mají místní věci. Přesnou ulici si nepamatuji, ale aspoň si člověk může projít ne tak velké centrum.</li>
+<li>Kdo by chtěl spíše obchod, který zná tak i v dojezdové vzdálenosti je <a href="https://goo.gl/maps/ZwaZ35cjsRfCVap1A">Lidl</a>.</li>
+<li>Pak ještě na odlet většinou aerolinky vyžadují mít vytištěné letenky. Sice to většinou není zcela třeba, ale jsou zde místa podobné &quot;internetovým kavárnám&quot; kde mají i tiskárny. Jedna je poblíž <a href="https://goo.gl/maps/HvZCsYA1RXkQ9Twm9">tohoto místa</a> a jiná je taky v centrum Las Galletas. (Ani já už si nepamatuji v jaké ulici to přímo je.</li>
+</ul>
+<h1>Slovníček</h1>
+
+        </article>
+    </main>
+
+    </section>
+
+    <footer aria-label="Page footer" class="flex py-4 px-6 w-full text-center mt-auto bg-slate-100 dark:bg-gray-800">
+        <div class="prose dark:prose-invert text-center mx-auto">
+            <p>Site proudly built with <a href="https://github.com/hydephp/hyde">HydePHP</a> 🎩 and tinkered by Tomáš Turek.</p>
+
+        </div>
+        <a href="#app" aria-label="Go to top of page" class="float-right">
+            <button title="Scroll to top">
+                <svg width="1.5rem" height="1.5rem" role="presentation" class="fill-current text-gray-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+                </svg>
+            </button>
+        </a>
+    </footer>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.3/dist/cdn.min.js" integrity="sha256-gOkV4d9/FmMNEkjOzVlyM2eNAWSUXisT+1RbMTTIgXI=" crossorigin="anonymous"></script>
+
+<script>
+    function toggleTheme() {
+        if (localStorage.getItem('color-theme') === 'dark' || !('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem('color-theme', 'light');
+            document.getElementById('meta-color-scheme').setAttribute('content', 'light');
+        } else {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem('color-theme', 'dark');
+            document.getElementById('meta-color-scheme').setAttribute('content', 'dark');
+        }
+    }
+</script>
+
+
+
+
+
+
+</body>
+</html>
