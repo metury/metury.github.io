@@ -39,9 +39,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <script>
   // Game Logic
   const diceFaces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-  
-  // The rule: only 3s and 5s have "bears" (the dots around the center lake)
-  // 3 has 2 bears, 5 has 4 bears. All others have 0.
   const bearCounts = { 1: 0, 2: 0, 3: 2, 4: 0, 5: 4, 6: 0 };
   
   let currentSolution = 0;
@@ -52,21 +49,62 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const feedback = document.getElementById('feedback');
 
   function rollDice() {
+    // 1. Lock the inputs so the user can't guess while the dice are rolling
+    guessInput.disabled = true;
+    guessBtn.disabled = true;
     diceGrid.innerHTML = '';
     currentSolution = 0;
     
-    // Roll 4 dice for the 2x2 grid
+    const diceElements = [];
+    const finalRolls = [];
+    
+    // 2. Pre-calculate the final solution and create the HTML elements
     for (let i = 0; i < 4; i++) {
       const roll = Math.floor(Math.random() * 6) + 1;
+      finalRolls.push(roll);
       currentSolution += bearCounts[roll];
       
-      // Create die element
       const dieElement = document.createElement('div');
-      dieElement.textContent = diceFaces[roll - 1];
-      // Add a small animation class
-      dieElement.className = "hover:scale-110 transition-transform cursor-default select-none"; 
+      // Adding Tailwind transition classes for smooth scaling and fading
+      dieElement.className = "cursor-default select-none transition-all duration-75"; 
       diceGrid.appendChild(dieElement);
+      diceElements.push(dieElement);
     }
+
+    // 3. The Scramble Animation
+    let rollCount = 0;
+    const maxRolls = 10; // How many times the faces will flash
+    
+    const rollInterval = setInterval(() => {
+      // Show random faces and make them look "unsettled" (slightly transparent and smaller)
+      diceElements.forEach(die => {
+        const randomFace = Math.floor(Math.random() * 6);
+        die.textContent = diceFaces[randomFace];
+        die.classList.add('opacity-50', 'scale-90');
+      });
+      
+      rollCount++;
+
+      // 4. Lock in the final rolls
+      if (rollCount >= maxRolls) {
+        clearInterval(rollInterval);
+        
+        diceElements.forEach((die, index) => {
+          die.textContent = diceFaces[finalRolls[index] - 1];
+          // Remove the unsettled look and add a quick "pop" effect
+          die.classList.remove('opacity-50', 'scale-90');
+          die.classList.add('scale-110');
+          
+          // Return to normal size after a tiny delay
+          setTimeout(() => die.classList.remove('scale-110'), 150);
+        });
+        
+        // Unlock the game
+        guessInput.disabled = false;
+        guessBtn.disabled = false;
+        guessInput.focus();
+      }
+    }, 50); // Flashes a new random die every 50 milliseconds
   }
 
   function handleGuess() {
@@ -80,13 +118,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     if (guess === currentSolution) {
       feedback.textContent = `Correct! There were ${currentSolution} bears. Rolling again...`;
-      feedback.className = "h-6 font-medium mt-4 text-green-600 dark:text-green-400";
+      feedback.className = "h-6 font-medium mt-4 text-green-600 dark:text-green-400 text-center";
     } else {
-      feedback.textContent = "Not quite! Try again. Rolling again...";
-      feedback.className = "h-6 font-medium mt-4 text-red-600 dark:text-red-400";
+      feedback.textContent = "Not quite! Try again.";
+      feedback.className = "h-6 font-medium mt-4 text-red-600 dark:text-red-400 text-center";
     }
     guessInput.value = '';
-    // Briefly wait so they see they won, then roll again
     setTimeout(() => {
       feedback.textContent = '';
       rollDice();
@@ -95,8 +132,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   // Event Listeners
   guessBtn.addEventListener('click', handleGuess);
-  
-  // Allow pressing "Enter" in the input field
   guessInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleGuess();
   });
