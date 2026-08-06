@@ -8,6 +8,18 @@ import '../styles/global.css';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+
+    <!-- KaTeX Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body, {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false}
+        ]
+      });">
+    </script>
     
     <script is:inline>
       const theme = (() => {
@@ -39,8 +51,8 @@ import '../styles/global.css';
         <div class="flex items-center gap-4 sm:gap-6">
           <ul class="flex gap-4 text-sm sm:text-base font-medium">
             <!-- Note: In a real app you might use JavaScript to dynamically highlight the active page -->
-            <li><a href="/" class="font-bold hover:text-red-500 transition-colors">Home</a></li>
-            <li><a href="/work" class="font-bold hover:text-green-500 transition-colors">Work</a></li>
+            <li><a href="/" class="font-bold hover:text-blue-500 transition-colors">Home</a></li>
+            <li><a href="/work" class="font-bold hover:text-blue-500 transition-colors">Work</a></li>
             <li><a href="/cv" class="font-bold hover:text-blue-500 transition-colors">CV</a></li>
           </ul>
         </div>

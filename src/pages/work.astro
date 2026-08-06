@@ -2,26 +2,113 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="About Me">
+<BaseLayout title="My Work">
   <main class="mt-16 sm:mt-24 pb-12">
     <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-8">
-      About Me
+      My Work
     </h1>
     
     <div class="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
       <p>
-        Hi! I am a developer learning how to build fast, simple, and responsive websites. I recently started exploring Astro and Tailwind CSS.
+        I am a computer science PhD student.
       </p>
       
       <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-10 mb-4">
-        My Skills
+        My Master Thesis
       </h2>
-      
-      <ul class="list-disc list-inside space-y-2 ml-4">
-        <li>HTML, CSS, JavaScript</li>
-        <li>Astro Framework</li>
-        <li>Tailwind CSS</li>
-        <li>Git & GitHub</li>
+
+      <p>
+        <span class="font-bold text-blue-500">Abstract:</span> Cut problems in graph theory are extensively studied and well understood. However, cuts that partition graphs into components that are connected in a prescribed way, have received comparatively less attention. In this thesis, we formally define several connected cut problems, focusing on Minimum $k$-connected cut and Minimum $k$-connected cut with source problems. Given a graph $G=(V,E)$, and an interger $k$, the goal is to partition a vertex set $V$ into two subsets, $S$ and $V \setminus S$, such that the induced subgraph $G[S]$ is connected, the size of $S$ is exactly $k$, and the number of edges between $S$ and $V \setminus S$ is minimized. In the second problem, we are in addition given a source vertex $s\in V$ that has to be included in $S$. Our first result is a proof that both Minimum $k$-connected cut and Minimum $k$-connected cut with source problems are NP-complete. Additionally, we propose a bicriteria approximation algorithm for the Minimum $k$-connected cut with source problem. As a result, we also obtain a bicriteria approximation for the general Minimum $k$-connected cut problem.
+      </p>
+
+      <div class="flex gap-4">
+        <a href="http://hdl.handle.net/20.500.11956/199974" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+          DSpace
+        </a>
+
+        <a href="/thesis/thesis.pdf" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+          Thesis
+        </a>
+
+        <a href="/thesis/presentation.pdf" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+          Presentation
+        </a>
+
+        <a href="https://github.com/metury/masters-thesis" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+          Github
+        </a>
+      </div>
+
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-10 mb-4">
+        My Bachelor Thesis
+      </h2>
+
+      <p>
+        <span class="font-bold text-blue-500">Abstract:</span> This thesis describes the development of a desktop application that should allow the user to organize their family tree. The existing solutions, such as MyHeritage or Family Historian, are analyzed first. The detailed specification of the program itself is subsequently performed, covering the list of requirements, processes, individual entities, and the solution concept. We conclude with the documentation of the already implemented program, which contains programming and installation documentation as well as the user manual.
+      </p>
+
+      <div class="flex gap-4">
+        <a href="http://hdl.handle.net/20.500.11956/184411" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+          DSpace
+        </a>
+
+        <a href="https://github.com/rodoc-app/rodoc-app" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+          GitHub
+        </a>
+
+        <a href="https://rodoc-app.github.io/" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+          Rodoc page
+        </a>
+      </div>
+
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-10 mb-4">
+        Notes From Charles University
+      </h2>
+
+      <p>
+      Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň trochu) za to, tak se tady budou nacházet. Veškeré texty lze najív v repozitáři na <a href="https://github.com/metury/notes" class="hover:text-blue-500 font-semibold">Github</a>.
+      </p>
+
+      <p>
+        Berte v potaz, že v poznámkách mohou být chyby. Jak už gramatické nebo i faktické.
+      </p>
+
+      <ul class="list-disc list-inside">
+        <li>
+        <a href="/matfyz/fpc.pdf" class="hover:text-blue-500 font-semibold">
+          Flows, paths and cuts
+        </a>
+        </li>
+        <li>
+        <a href="/matfyz/grg.pdf" class="hover:text-blue-500 font-semibold">
+          Geometric Representations of Graphs
+        </a>
+        </li>
+        <li>
+        <a href="/matfyz/kg.pdf" class="hover:text-blue-500 font-semibold">
+          Kombinatorika a Grafy
+        </a>
+        </li>
+        <li>
+        <a href="/matfyz/past-ii.pdf" class="hover:text-blue-500 font-semibold">
+          Probability and Statistics 2
+        </a>
+        </li>
+        <li>
+        <a href="/matfyz/polyhedra.pdf" class="hover:text-blue-500 font-semibold">
+          Polyhedral Combinatorics
+        </a>
+        </li>
+        <li>
+        <a href="/matfyz/temno.pdf" class="hover:text-blue-500 font-semibold">
+          Teorie Množin
+        </a>
+        </li>
+        <li>
+        <a href="/matfyz/selected-chapters-kg.pdf" class="hover:text-blue-500 font-semibold">
+          Selected Chapters From Combinatorics
+        </a>
+        </li>
       </ul>
     </div>
   </main>
