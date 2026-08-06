@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="My Work">
   <main class="mt-16 sm:mt-24 pb-12">
     <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-8">
-      My Work
+      My Work.
     </h1>
     
     <div class="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -18,14 +18,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </h2>
 
       <p>
-        <span class="font-bold text-blue-500">
-          Abstract: 
-        </span> Cut problems in graph theory are extensively studied and well understood. However, cuts that partition graphs into components that are connected in a prescribed way, have received comparatively less attention. In this thesis, we formally define several connected cut problems, focusing on Minimum $k$-connected cut and Minimum $k$-connected cut with source problems. Given a graph $G=(V,E)$, and an interger $k$, the goal is to partition a vertex set $V$ into two subsets, $S$ and $V \setminus S$, such that the induced subgraph $G[S]$ is connected, the size of $S$ is exactly $k$, and the number of edges between $S$ and $V \setminus S$ is minimized. In the second problem, we are in addition given a source vertex $s\in V$ that has to be included in $S$. Our first result is a proof that both Minimum $k$-connected cut and Minimum $k$-connected cut with source problems are NP-complete. Additionally, we propose a bicriteria approximation algorithm for the Minimum $k$-connected cut with source problem. As a result, we also obtain a bicriteria approximation for the general Minimum $k$-connected cut problem.
+        <span class="emph">Abstract:</span> Cut problems in graph theory are extensively studied and well understood. However, cuts that partition graphs into components that are connected in a prescribed way, have received comparatively less attention. In this thesis, we formally define several connected cut problems, focusing on Minimum $k$-connected cut and Minimum $k$-connected cut with source problems. Given a graph $G=(V,E)$, and an interger $k$, the goal is to partition a vertex set $V$ into two subsets, $S$ and $V \setminus S$, such that the induced subgraph $G[S]$ is connected, the size of $S$ is exactly $k$, and the number of edges between $S$ and $V \setminus S$ is minimized. In the second problem, we are in addition given a source vertex $s\in V$ that has to be included in $S$. Our first result is a proof that both Minimum $k$-connected cut and Minimum $k$-connected cut with source problems are NP-complete. Additionally, we propose a bicriteria approximation algorithm for the Minimum $k$-connected cut with source problem. As a result, we also obtain a bicriteria approximation for the general Minimum $k$-connected cut problem.
       </p>
 
       <div class="flex flex-col gap-4 text-center mx-5">
         <a href="http://hdl.handle.net/20.500.11956/199974" class="btn-link">
           DSpace
+        </a>
+
+        <a href="https://github.com/metury/masters-thesis" class="btn-link">
+          Github
         </a>
 
         <a href="/thesis/thesis.pdf" class="btn-file">
@@ -35,10 +37,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <a href="/thesis/presentation.pdf" class="btn-file">
           Presentation
         </a>
-
-        <a href="https://github.com/metury/masters-thesis" class="btn-link">
-          Github
-        </a>
       </div>
 
       <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-10 mb-4">
@@ -46,7 +44,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </h2>
 
       <p>
-        <span class="font-bold text-blue-500">Abstract:</span> This thesis describes the development of a desktop application that should allow the user to organize their family tree. The existing solutions, such as MyHeritage or Family Historian, are analyzed first. The detailed specification of the program itself is subsequently performed, covering the list of requirements, processes, individual entities, and the solution concept. We conclude with the documentation of the already implemented program, which contains programming and installation documentation as well as the user manual.
+        <span class="emph">Abstract:</span> This thesis describes the development of a desktop application that should allow the user to organize their family tree. The existing solutions, such as MyHeritage or Family Historian, are analyzed first. The detailed specification of the program itself is subsequently performed, covering the list of requirements, processes, individual entities, and the solution concept. We conclude with the documentation of the already implemented program, which contains programming and installation documentation as well as the user manual.
       </p>
 
       <div class="flex flex-col gap-4 text-center mx-5">
@@ -68,14 +66,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </h2>
 
       <p>
-      Občas stihnu sepsat nějaké zápisky z přednášky a pokud stojí (aspoň trochu) za to, tak se tady budou nacházet. Veškeré texty lze najív v repozitáři na <a href="https://github.com/metury/notes" class="hover:text-blue-500 underline font-semibold">Github</a>.
+        During my studies at Charles University I managed to write down some notes. Perhaps they could be still useful.
       </p>
 
       <p>
-        Berte v potaz, že v poznámkách mohou být chyby. Jak už gramatické nebo i faktické.
+        Bare in mind that there are probably some mistakes. Also some notes are only in Czech.
       </p>
 
       <div class="flex flex-col gap-4 text-center mx-5">
+        <a href="https://github.com/metury/notes" class="btn-link">
+          Github Repository
+        </a>
         <a href="/matfyz/fpc.pdf" class="btn-file">
           Flows, paths and cuts
         </a>
@@ -96,6 +97,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </a>
         <a href="/matfyz/selected-chapters-kg.pdf" class="btn-file">
           Selected Chapters From Combinatorics
+        </a>
+        <a href="https://wiki.matfyz.cz/Home" class="btn-link">
+          Matfyz Wiki
         </a>
       </div>
     </div>
