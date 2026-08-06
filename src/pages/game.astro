@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Bears Game">
+  <main class="common">
+  <div class="standard">
+    <h1 class="header">Bears Game.</h1>
+    <p>How many bears are by the lake? Can you figure out the secret rule?</p>
+
+    <!-- 2x2 Dice Grid -->
+    <div id="dice-grid" class="grid grid-cols-2 gap-4 w-fit mx-auto mb-8 text-8xl leading-none text-blue-500 dark:text-blue-500">
+      <!-- Dice will be injected here by JavaScript -->
+    </div>
+
+    <!-- Game Controls -->
+    <div>
+      <div class="flex items-center justify-center gap-3">
+        <input 
+          type="number" 
+          id="guess-input" 
+          min="0" 
+          class="w-24 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="0"
+        />
+        <button 
+          id="guess-btn" 
+          class="px-6 py-2 bg-blue-600 hover:bg-blue-400 text-white font-medium rounded-lg transition-colors">
+          Guess
+        </button>
+      </div>
+
+      <p id="feedback" class="h-6 font-medium mt-4"></p>
+    </div>
+  </div>
+  </main>
+</BaseLayout>
+
+<script>
+  // Game Logic
+  const diceFaces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+  
+  // The rule: only 3s and 5s have "bears" (the dots around the center lake)
+  // 3 has 2 bears, 5 has 4 bears. All others have 0.
+  const bearCounts = { 1: 0, 2: 0, 3: 2, 4: 0, 5: 4, 6: 0 };
+  
+  let currentSolution = 0;
+
+  const diceGrid = document.getElementById('dice-grid');
+  const guessInput = document.getElementById('guess-input');
+  const guessBtn = document.getElementById('guess-btn');
+  const feedback = document.getElementById('feedback');
+
+  function rollDice() {
+    diceGrid.innerHTML = '';
+    currentSolution = 0;
+    
+    // Roll 4 dice for the 2x2 grid
+    for (let i = 0; i < 4; i++) {
+      const roll = Math.floor(Math.random() * 6) + 1;
+      currentSolution += bearCounts[roll];
+      
+      // Create die element
+      const dieElement = document.createElement('div');
+      dieElement.textContent = diceFaces[roll - 1];
+      // Add a small animation class
+      dieElement.className = "hover:scale-110 transition-transform cursor-default select-none"; 
+      diceGrid.appendChild(dieElement);
+    }
+  }
+
+  function handleGuess() {
+    const guess = parseInt(guessInput.value);
+    
+    if (isNaN(guess)) {
+      feedback.textContent = "Please enter a number!";
+      feedback.className = "h-6 font-medium mt-4 text-orange-500";
+      return;
+    }
+
+    if (guess === currentSolution) {
+      feedback.textContent = `Correct! There were ${currentSolution} bears. Rolling again...`;
+      feedback.className = "h-6 font-medium mt-4 text-green-600 dark:text-green-400";
+    } else {
+      feedback.textContent = "Not quite! Try again. Rolling again...";
+      feedback.className = "h-6 font-medium mt-4 text-red-600 dark:text-red-400";
+    }
+    guessInput.value = '';
+    // Briefly wait so they see they won, then roll again
+    setTimeout(() => {
+      feedback.textContent = '';
+      rollDice();
+    }, 2000);
+  }
+
+  // Event Listeners
+  guessBtn.addEventListener('click', handleGuess);
+  
+  // Allow pressing "Enter" in the input field
+  guessInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleGuess();
+  });
+
+  // Start the first game
+  rollDice();
+</script>
