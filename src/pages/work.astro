@@ -3,17 +3,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="My Work">
-  <main class="mt-16 sm:mt-24 pb-12">
+  <main class="common">
     <h1 class="header">
       My Work.
     </h1>
     
-    <div class="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+    <div class="standard">
       <p>
         I am a computer science PhD student.
       </p>
       
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-10 mb-4">
+      <h2 class="subheader">
         My Master Thesis
       </h2>
 
@@ -21,7 +21,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span class="emph">Abstract:</span> Cut problems in graph theory are extensively studied and well understood. However, cuts that partition graphs into components that are connected in a prescribed way, have received comparatively less attention. In this thesis, we formally define several connected cut problems, focusing on Minimum $k$-connected cut and Minimum $k$-connected cut with source problems. Given a graph $G=(V,E)$, and an interger $k$, the goal is to partition a vertex set $V$ into two subsets, $S$ and $V \setminus S$, such that the induced subgraph $G[S]$ is connected, the size of $S$ is exactly $k$, and the number of edges between $S$ and $V \setminus S$ is minimized. In the second problem, we are in addition given a source vertex $s\in V$ that has to be included in $S$. Our first result is a proof that both Minimum $k$-connected cut and Minimum $k$-connected cut with source problems are NP-complete. Additionally, we propose a bicriteria approximation algorithm for the Minimum $k$-connected cut with source problem. As a result, we also obtain a bicriteria approximation for the general Minimum $k$-connected cut problem.
       </p>
 
-      <div class="flex flex-col gap-4 text-center mx-5">
+      <div class="links">
         <a href="http://hdl.handle.net/20.500.11956/199974" class="btn-link">
           DSpace
         </a>
@@ -39,7 +39,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </a>
       </div>
 
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-10 mb-4">
+      <h2 class="subheader">
         My Bachelor Thesis
       </h2>
 
@@ -47,7 +47,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span class="emph">Abstract:</span> This thesis describes the development of a desktop application that should allow the user to organize their family tree. The existing solutions, such as MyHeritage or Family Historian, are analyzed first. The detailed specification of the program itself is subsequently performed, covering the list of requirements, processes, individual entities, and the solution concept. We conclude with the documentation of the already implemented program, which contains programming and installation documentation as well as the user manual.
       </p>
 
-      <div class="flex flex-col gap-4 text-center mx-5">
+      <div class="links">
         <a href="http://hdl.handle.net/20.500.11956/184411" class="btn-link">
           DSpace
         </a>
@@ -61,7 +61,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </a>
       </div>
 
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-10 mb-4">
+      <h2 class="subheader">
         Notes From Charles University
       </h2>
 
@@ -73,7 +73,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Bare in mind that there are probably some mistakes. Also some notes are only in Czech.
       </p>
 
-      <div class="flex flex-col gap-4 text-center mx-5">
+      <div class="links">
         <a href="https://github.com/metury/notes" class="btn-link">
           Github Repository
         </a>
