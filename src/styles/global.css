@@ -5,6 +5,10 @@
     @apply font-bold text-blue-500;
   }
 
+  .header{
+    @apply text-3xl sm:text-4xl font-extrabold tracking-tight mb-8 text-blue-500;
+  }
+
   .btn-link {
     @apply inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-medium;
   }
