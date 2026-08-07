@@ -120,7 +120,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       feedback.textContent = `Correct! There were ${currentSolution} bears. Rolling again...`;
       feedback.className = "h-6 font-medium mt-4 text-green-600 dark:text-green-400 text-center";
     } else {
-      feedback.textContent = "Not quite! Try again.";
+      feedback.textContent = `Not quite! There were ${currentSolution} bears. Try again.`;
       feedback.className = "h-6 font-medium mt-4 text-red-600 dark:text-red-400 text-center";
     }
     guessInput.value = '';
